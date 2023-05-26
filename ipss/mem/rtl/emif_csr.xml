@@ -1,0 +1,1579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component>
+  <memoryMaps>
+    <memoryMap>
+      <addressBlock>
+	<name>emif_csr</name>
+	<baseAddress>0x0</baseAddress>
+        <register>
+          <name>EMIF_DFH</name>
+          <addressOffset>0x62000</addressOffset>
+          <size>64</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>EMIF DFH</description>
+          <field>
+            <name>FeatureType</name>
+            <bitOffset>60</bitOffset>
+            <reset>0x3</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Feature Type = Private Feature</description>
+          </field>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>41</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>19</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>EOL</name>
+            <bitOffset>40</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>1</bitWidth>
+            <access>read-only</access>
+            <description>End of List</description>
+          </field>
+          <field>
+            <name>NextDfhOffset_H</name>
+            <bitOffset>16</bitOffset>
+            <reset>0xE000</reset>
+            <bitWidth>24</bitWidth>
+            <access>read-only</access>
+            <description>Next DFH Byte Offset</description>
+          </field>
+          <field>
+            <name>FeatureRevision</name>
+            <bitOffset>12</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Feature Revision</description>
+          </field>
+          <field>
+            <name>FeatureId</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x009</reset>
+            <bitWidth>12</bitWidth>
+            <access>read-only</access>
+            <description>Feature Id</description>
+          </field>
+        </register>
+        <register>
+          <name>EMIF_STATUS</name>
+          <addressOffset>0x62008</addressOffset>
+          <size>64</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>EMIF Calibration Status Register</description>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>8</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>56</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>CalFaliure</name>
+            <bitOffset>4</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>EMIF Calibration Failure</description>
+          </field>
+          <field>
+            <name>CalSuccess</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>EMIF Calibration Success</description>
+          </field>
+        </register>
+        <register>
+          <name>EMIF_CAPABILITY</name>
+          <addressOffset>0x62010</addressOffset>
+          <size>64</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>EMIF Capabliity Register</description>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>4</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>60</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>EMIFCap</name>
+            <bitOffset>0</bitOffset>
+            <reset>0xF</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>One-hot Memory Capability </description>
+          </field>
+        </register>
+        <register>
+          <name>MEM_SS_VERSION</name>
+          <addressOffset>0x68000</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Memory subsystem version register</description>
+          <field>
+            <name>MajorVersionNum</name>
+            <bitOffset>16</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>8</bitWidth>
+            <access>read-only</access>
+            <description>Major Version Number (MJR): Indicates the major version is "1"</description>
+          </field>
+          <field>
+            <name>MinorVersionNum</name>
+            <bitOffset>8</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>8</bitWidth>
+            <access>read-only</access>
+            <description>Minor Version Number (MNR): Indicates the minor version is "0"</description>
+          </field>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>8</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+        </register>
+        <register>
+          <name>MEM_SS_FEAT_LIST</name>
+          <addressOffset>0x68004</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Memory Subsystem Feature List</description>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>24</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>8</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>MemSSMemType</name>
+            <bitOffset>16</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>8</bitWidth>
+            <access>read-only</access>
+            <description>Memory Type - One-hot encoded: xxxx xxx1b = DDR4</description>
+          </field>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>2</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>14</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>UserIntfSupport</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>2</bitWidth>
+            <access>read-only</access>
+            <description>User Interface Support - 00b = AXI-4 support</description>
+          </field>
+        </register>
+        <register>
+          <name>MEM_SS_FEAT_LIST_2</name>
+          <addressOffset>0x68008</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Memory Subsystem Feature List 2</description>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>4</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>28</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>MemSSNumCh</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x4</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Number of DDR channels.  One-based counting</description>
+          </field>
+        </register>
+        <register>
+          <name>MEM_SS_SCRATCH</name>
+          <addressOffset>0x68020</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Memory Subsystem Scratch Register</description>
+          <field>
+            <name>Scratchpad</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Scratchpad register</description>
+          </field>
+        </register>
+        <register>
+          <name>MEM_SS_STATUS</name>
+          <addressOffset>0x68050</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Memory Subsystem Status Register</description>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>2</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>28</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>DecErr</name>
+            <bitOffset>1</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>1</bitWidth>
+            <access>read-only</access>
+            <description>This field is set to ‘1’ when Memory Sub-System returns AXI response DECERR</description>
+          </field>
+          <field>
+            <name>SlvErr</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>1</bitWidth>
+            <access>read-only</access>
+            <description>This field is set to ‘1’ when Memory Sub-System returns AXI response SLVERR</description>
+          </field>
+        </register>
+        <register>
+          <name>MEM_SS_CH0_ATTR</name>
+          <addressOffset>0x68100</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Memory Subsystem Status Register</description>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>28</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>2</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>AutoPrecharge</name>
+            <bitOffset>27</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>1</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "AUTO_PRECHARGE" parameter value</description>
+          </field>
+          <field>
+            <name>NumUserPools</name>
+            <bitOffset>24</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>3</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "NUM_USER_POOLS" parameter value</description>
+          </field>
+          <field>
+            <name>NumWriteCopies</name>
+            <bitOffset>20</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "NUM_WRITE_COPIES" parameter value</description>
+          </field>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>4</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>16</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>ReadyLatency</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x3</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "READY_LATENCY" parameter value</description>
+          </field>
+        </register>
+        <register>
+          <name>MEM_SS_CH1_ATTR</name>
+          <addressOffset>0x68108</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Memory Subsystem Status Register</description>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>28</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>2</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>AutoPrecharge</name>
+            <bitOffset>27</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>1</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "AUTO_PRECHARGE" parameter value</description>
+          </field>
+          <field>
+            <name>NumUserPools</name>
+            <bitOffset>24</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>3</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "NUM_USER_POOLS" parameter value</description>
+          </field>
+          <field>
+            <name>NumWriteCopies</name>
+            <bitOffset>20</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "NUM_WRITE_COPIES" parameter value</description>
+          </field>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>4</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>16</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>ReadyLatency</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x3</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "READY_LATENCY" parameter value</description>
+          </field>
+        </register>
+        <register>
+          <name>MEM_SS_CH2_ATTR</name>
+          <addressOffset>0x68110</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Memory Subsystem Status Register</description>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>28</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>2</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>AutoPrecharge</name>
+            <bitOffset>27</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>1</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "AUTO_PRECHARGE" parameter value</description>
+          </field>
+          <field>
+            <name>NumUserPools</name>
+            <bitOffset>24</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>3</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "NUM_USER_POOLS" parameter value</description>
+          </field>
+          <field>
+            <name>NumWriteCopies</name>
+            <bitOffset>20</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "NUM_WRITE_COPIES" parameter value</description>
+          </field>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>4</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>16</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>ReadyLatency</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x3</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "READY_LATENCY" parameter value</description>
+          </field>
+        </register>
+        <register>
+          <name>MEM_SS_CH3_ATTR</name>
+          <addressOffset>0x68118</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Memory Subsystem Status Register</description>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>28</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>2</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>AutoPrecharge</name>
+            <bitOffset>27</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>1</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "AUTO_PRECHARGE" parameter value</description>
+          </field>
+          <field>
+            <name>NumUserPools</name>
+            <bitOffset>24</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>3</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "NUM_USER_POOLS" parameter value</description>
+          </field>
+          <field>
+            <name>NumWriteCopies</name>
+            <bitOffset>20</bitOffset>
+            <reset>0x1</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "NUM_WRITE_COPIES" parameter value</description>
+          </field>
+          <field>
+            <name>Reserved</name>
+            <bitOffset>4</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>16</bitWidth>
+            <access>read-only</access>
+            <description>Reserved</description>
+          </field>
+          <field>
+            <name>ReadyLatency</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x3</reset>
+            <bitWidth>4</bitWidth>
+            <access>read-only</access>
+            <description>Reflects "READY_LATENCY" parameter value</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_START_CH0</name>
+          <addressOffset>0x69000</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Channel 0 Efficiency Monitor Start</description>
+          <field>
+            <name>EFFMON_START</name>
+            <bitOffset>1</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Write a “1” to enable efficiency monitor and write a “0” to disable.</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RD_COUNT_CH0</name>
+          <addressOffset>0x69004</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Efficiency Monitor Read Count</description>
+          <field>
+            <name>EFFMON_READ_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of read commands issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WR_COUNT_CH0</name>
+          <addressOffset>0x69008</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Efficiency Monitor Write Count</description>
+          <field>
+            <name>EFFMON_WRITE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of write commands issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CK_COUNT_CH0</name>
+          <addressOffset>0x6900C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Efficiency Monitor Cycle Counter</description>
+          <field>
+            <name>EFFMON_CYCLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of clock cycles after first command on interface</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_COUNT_SAT_CH0</name>
+          <addressOffset>0x69010</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Efficiency Monitor Cycle Counter Saturation</description>
+          <field>
+            <name>EFFMON_COUNTER_SAT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>"1" if EFFMON_CYCLE_COUNT  has saturated the max, otherwise "0"</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_MIN_CH0</name>
+          <addressOffset>0x69014</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Min. Read Latency</description>
+          <field>
+            <name>EFFMON_RDLAT_MIN</name>
+            <bitOffset>0</bitOffset>
+            <reset>0xFFFFFFFF</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Minimum read latency</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_MAX_CH0</name>
+          <addressOffset>0x69018</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Max. Read Latency</description>
+          <field>
+            <name>EFFMON_RDLAT_MAX</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Maximum read latency</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_TOTL_CH0</name>
+          <addressOffset>0x6901C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Total Read Latency (Lower 32b)</description>
+          <field>
+            <name>EFFMON_RDLAT_TOTAL_L</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Total Read Latency (lower 32 bits)</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_TOTH_CH0</name>
+          <addressOffset>0x69020</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Total Read Latency (Upper 32b)</description>
+          <field>
+            <name>EFFMON_RDLAT_TOTAL_H</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Total Read Latency (upper 32 bits)</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RVALID_CNT_CH0</name>
+          <addressOffset>0x69024</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Read Response Counter</description>
+          <field>
+            <name>EFFMON_RVALID_COUNTER</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of read valid signals issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_TRANSF_CNT_CH0</name>
+          <addressOffset>0x69028</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Transfer Counter</description>
+          <field>
+            <name>EFFMON_TRANSF_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where read/write are asserted or read valid is asserted</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WAIT_CNT_CH0</name>
+          <addressOffset>0x6902C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Backpressure Counter</description>
+          <field>
+            <name>EFFMON_CMD_WAIT_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where backpressure is high during command</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_NO_RVALID_CNT_CH0</name>
+          <addressOffset>0x69030</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Read Latency Counter</description>
+          <field>
+            <name>EFFMON_NO_RVALID_CNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where readdatavalid is low after a read has been issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_IDLE_CNT_CH0</name>
+          <addressOffset>0x69034</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Idle Command Counter</description>
+          <field>
+            <name>EFFMON_MASTER_IDLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where there is no read or write from the master after the first command (read or write) has been issued on the interface</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WR_IDLE_CNT_CH0</name>
+          <addressOffset>0x69038</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 0 Idle Write Burst Counter</description>
+          <field>
+            <name>EFFMON_WRIDLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles in a write burst where there is no write from master</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CLR_CH0</name>
+          <addressOffset>0x6903C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Efficiency Monitor Clear Status</description>
+          <field>
+            <name>EFFMON_STATUS_CLEAR</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Write "1" to clear all EFFMON status registers</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CK_CNT_MAX_CH0</name>
+          <addressOffset>0x69040</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Efficiency Monitor Cycle Counter Max.</description>
+          <field>
+            <name>EFFMON_CK_COUNT_MAX</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Cycle counter maximum</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_START_CH1</name>
+          <addressOffset>0x6A000</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Channel 1 Efficiency Monitor Start</description>
+          <field>
+            <name>EFFMON_START</name>
+            <bitOffset>1</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Write a “1” to enable efficiency monitor and write a “0” to disable.</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RD_COUNT_CH1</name>
+          <addressOffset>0x6A004</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Efficiency Monitor Read Count</description>
+          <field>
+            <name>EFFMON_READ_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of read commands issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WR_COUNT_CH1</name>
+          <addressOffset>0x6A008</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Efficiency Monitor Write Count</description>
+          <field>
+            <name>EFFMON_WRITE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of write commands issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CK_COUNT_CH1</name>
+          <addressOffset>0x6A00C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Efficiency Monitor Cycle Counter</description>
+          <field>
+            <name>EFFMON_CYCLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of clock cycles after first command on interface</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_COUNT_SAT_CH1</name>
+          <addressOffset>0x6A010</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Efficiency Monitor Cycle Counter Saturation</description>
+          <field>
+            <name>EFFMON_COUNTER_SAT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>"1" if EFFMON_CYCLE_COUNT  has saturated the max, otherwise "0"</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_MIN_CH1</name>
+          <addressOffset>0x6A014</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Min. Read Latency</description>
+          <field>
+            <name>EFFMON_RDLAT_MIN</name>
+            <bitOffset>0</bitOffset>
+            <reset>0xFFFFFFFF</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Minimum read latency</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_MAX_CH1</name>
+          <addressOffset>0x6A018</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Max. Read Latency</description>
+          <field>
+            <name>EFFMON_RDLAT_MAX</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Maximum read latency</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_TOTL_CH1</name>
+          <addressOffset>0x6A01C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Total Read Latency (Lower 32b)</description>
+          <field>
+            <name>EFFMON_RDLAT_TOTAL_L</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Total Read Latency (lower 32 bits)</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_TOTH_CH1</name>
+          <addressOffset>0x6A020</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Total Read Latency (Upper 32b)</description>
+          <field>
+            <name>EFFMON_RDLAT_TOTAL_H</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Total Read Latency (upper 32 bits)</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RVALID_CNT_CH1</name>
+          <addressOffset>0x6A024</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Read Response Counter</description>
+          <field>
+            <name>EFFMON_RVALID_COUNTER</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of read valid signals issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_TRANSF_CNT_CH1</name>
+          <addressOffset>0x6A028</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Transfer Counter</description>
+          <field>
+            <name>EFFMON_TRANSF_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where read/write are asserted or read valid is asserted</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WAIT_CNT_CH1</name>
+          <addressOffset>0x6A02C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Backpressure Counter</description>
+          <field>
+            <name>EFFMON_CMD_WAIT_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where backpressure is high during command</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_NO_RVALID_CNT_CH1</name>
+          <addressOffset>0x6A030</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Read Latency Counter</description>
+          <field>
+            <name>EFFMON_NO_RVALID_CNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where readdatavalid is low after a read has been issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_IDLE_CNT_CH1</name>
+          <addressOffset>0x6A034</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Idle Command Counter</description>
+          <field>
+            <name>EFFMON_MASTER_IDLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where there is no read or write from the master after the first command (read or write) has been issued on the interface</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WR_IDLE_CNT_CH1</name>
+          <addressOffset>0x6A038</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 1 Idle Write Burst Counter</description>
+          <field>
+            <name>EFFMON_WRIDLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles in a write burst where there is no write from master</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CLR_CH1</name>
+          <addressOffset>0x6A03C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Efficiency Monitor Clear Status</description>
+          <field>
+            <name>EFFMON_STATUS_CLEAR</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Write "1" to clear all EFFMON status registers</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CK_CNT_MAX_CH1</name>
+          <addressOffset>0x6A040</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Efficiency Monitor Cycle Counter Max.</description>
+          <field>
+            <name>EFFMON_CK_COUNT_MAX</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Cycle counter maximum</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_START_CH2</name>
+          <addressOffset>0x6B000</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Channel 2 Efficiency Monitor Start</description>
+          <field>
+            <name>EFFMON_START</name>
+            <bitOffset>1</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Write a “1” to enable efficiency monitor and write a “0” to disable.</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RD_COUNT_CH2</name>
+          <addressOffset>0x6B004</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Efficiency Monitor Read Count</description>
+          <field>
+            <name>EFFMON_READ_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of read commands issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WR_COUNT_CH2</name>
+          <addressOffset>0x6B008</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Efficiency Monitor Write Count</description>
+          <field>
+            <name>EFFMON_WRITE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of write commands issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CK_COUNT_CH2</name>
+          <addressOffset>0x6B00C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Efficiency Monitor Cycle Counter</description>
+          <field>
+            <name>EFFMON_CYCLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of clock cycles after first command on interface</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_COUNT_SAT_CH2</name>
+          <addressOffset>0x6B010</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Efficiency Monitor Cycle Counter Saturation</description>
+          <field>
+            <name>EFFMON_COUNTER_SAT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>"1" if EFFMON_CYCLE_COUNT  has saturated the max, otherwise "0"</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_MIN_CH2</name>
+          <addressOffset>0x6B014</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Min. Read Latency</description>
+          <field>
+            <name>EFFMON_RDLAT_MIN</name>
+            <bitOffset>0</bitOffset>
+            <reset>0xFFFFFFFF</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Minimum read latency</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_MAX_CH2</name>
+          <addressOffset>0x6B018</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Max. Read Latency</description>
+          <field>
+            <name>EFFMON_RDLAT_MAX</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Maximum read latency</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_TOTL_CH2</name>
+          <addressOffset>0x6B01C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Total Read Latency (Lower 32b)</description>
+          <field>
+            <name>EFFMON_RDLAT_TOTAL_L</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Total Read Latency (lower 32 bits)</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_TOTH_CH2</name>
+          <addressOffset>0x6B020</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Total Read Latency (Upper 32b)</description>
+          <field>
+            <name>EFFMON_RDLAT_TOTAL_H</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Total Read Latency (upper 32 bits)</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RVALID_CNT_CH2</name>
+          <addressOffset>0x6B024</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Read Response Counter</description>
+          <field>
+            <name>EFFMON_RVALID_COUNTER</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of read valid signals issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_TRANSF_CNT_CH2</name>
+          <addressOffset>0x6B028</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Transfer Counter</description>
+          <field>
+            <name>EFFMON_TRANSF_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where read/write are asserted or read valid is asserted</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WAIT_CNT_CH2</name>
+          <addressOffset>0x6B02C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Backpressure Counter</description>
+          <field>
+            <name>EFFMON_CMD_WAIT_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where backpressure is high during command</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_NO_RVALID_CNT_CH2</name>
+          <addressOffset>0x6B030</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Read Latency Counter</description>
+          <field>
+            <name>EFFMON_NO_RVALID_CNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where readdatavalid is low after a read has been issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_IDLE_CNT_CH2</name>
+          <addressOffset>0x6B034</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Idle Command Counter</description>
+          <field>
+            <name>EFFMON_MASTER_IDLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where there is no read or write from the master after the first command (read or write) has been issued on the interface</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WR_IDLE_CNT_CH2</name>
+          <addressOffset>0x6B038</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 2 Idle Write Burst Counter</description>
+          <field>
+            <name>EFFMON_WRIDLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles in a write burst where there is no write from master</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CLR_CH2</name>
+          <addressOffset>0x6B03C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Efficiency Monitor Clear Status</description>
+          <field>
+            <name>EFFMON_STATUS_CLEAR</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Write "1" to clear all EFFMON status registers</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CK_CNT_MAX_CH2</name>
+          <addressOffset>0x6B040</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Efficiency Monitor Cycle Counter Max.</description>
+          <field>
+            <name>EFFMON_CK_COUNT_MAX</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Cycle counter maximum</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_START_CH3</name>
+          <addressOffset>0x6C000</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Channel 3 Efficiency Monitor Start</description>
+          <field>
+            <name>EFFMON_START</name>
+            <bitOffset>1</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Write a “1” to enable efficiency monitor and write a “0” to disable.</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RD_COUNT_CH3</name>
+          <addressOffset>0x6C004</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Efficiency Monitor Read Count</description>
+          <field>
+            <name>EFFMON_READ_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of read commands issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WR_COUNT_CH3</name>
+          <addressOffset>0x6C008</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Efficiency Monitor Write Count</description>
+          <field>
+            <name>EFFMON_WRITE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of write commands issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CK_COUNT_CH3</name>
+          <addressOffset>0x6C00C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Efficiency Monitor Cycle Counter</description>
+          <field>
+            <name>EFFMON_CYCLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of clock cycles after first command on interface</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_COUNT_SAT_CH3</name>
+          <addressOffset>0x6C010</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Efficiency Monitor Cycle Counter Saturation</description>
+          <field>
+            <name>EFFMON_COUNTER_SAT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>"1" if EFFMON_CYCLE_COUNT  has saturated the max, otherwise "0"</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_MIN_CH3</name>
+          <addressOffset>0x6C014</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Min. Read Latency</description>
+          <field>
+            <name>EFFMON_RDLAT_MIN</name>
+            <bitOffset>0</bitOffset>
+            <reset>0xFFFFFFFF</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Minimum read latency</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_MAX_CH3</name>
+          <addressOffset>0x6C018</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Max. Read Latency</description>
+          <field>
+            <name>EFFMON_RDLAT_MAX</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Maximum read latency</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_TOTL_CH3</name>
+          <addressOffset>0x6C01C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Total Read Latency (Lower 32b)</description>
+          <field>
+            <name>EFFMON_RDLAT_TOTAL_L</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Total Read Latency (lower 32 bits)</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RLAT_TOTH_CH3</name>
+          <addressOffset>0x6C020</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Total Read Latency (Upper 32b)</description>
+          <field>
+            <name>EFFMON_RDLAT_TOTAL_H</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Total Read Latency (upper 32 bits)</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_RVALID_CNT_CH3</name>
+          <addressOffset>0x6C024</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Read Response Counter</description>
+          <field>
+            <name>EFFMON_RVALID_COUNTER</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of read valid signals issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_TRANSF_CNT_CH3</name>
+          <addressOffset>0x6C028</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Transfer Counter</description>
+          <field>
+            <name>EFFMON_TRANSF_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where read/write are asserted or read valid is asserted</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WAIT_CNT_CH3</name>
+          <addressOffset>0x6C02C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Backpressure Counter</description>
+          <field>
+            <name>EFFMON_CMD_WAIT_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where backpressure is high during command</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_NO_RVALID_CNT_CH3</name>
+          <addressOffset>0x6C030</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Read Latency Counter</description>
+          <field>
+            <name>EFFMON_NO_RVALID_CNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where readdatavalid is low after a read has been issued</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_IDLE_CNT_CH3</name>
+          <addressOffset>0x6C034</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Idle Command Counter</description>
+          <field>
+            <name>EFFMON_MASTER_IDLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles where there is no read or write from the master after the first command (read or write) has been issued on the interface</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_WR_IDLE_CNT_CH3</name>
+          <addressOffset>0x6C038</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-only</access>
+          <description>Channel 3 Idle Write Burst Counter</description>
+          <field>
+            <name>EFFMON_WRIDLE_COUNT</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-only</access>
+            <description>Number of cycles in a write burst where there is no write from master</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CLR_CH3</name>
+          <addressOffset>0x6C03C</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Efficiency Monitor Clear Status</description>
+          <field>
+            <name>EFFMON_STATUS_CLEAR</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Write "1" to clear all EFFMON status registers</description>
+          </field>
+        </register>
+        <register>
+          <name>EFFMON_CK_CNT_MAX_CH3</name>
+          <addressOffset>0x6C040</addressOffset>
+          <size>32</size>
+          <lock></lock>
+          <access>read-write</access>
+          <description>Efficiency Monitor Cycle Counter Max.</description>
+          <field>
+            <name>EFFMON_CK_COUNT_MAX</name>
+            <bitOffset>0</bitOffset>
+            <reset>0x0</reset>
+            <bitWidth>32</bitWidth>
+            <access>read-write</access>
+            <description>Cycle counter maximum</description>
+          </field>
+        </register>
+      </addressBlock>
+    </memoryMap>
+  </memoryMaps>
+</component>

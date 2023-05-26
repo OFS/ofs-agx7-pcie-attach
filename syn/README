@@ -1,0 +1,20 @@
+Folder Structure:
+
+├── README                     // This is current file
+├── scripts
+│   └── build_var_setup.sh     // This script is to setup env variables for OFS-N6001 build
+├── setup                      // Build setup files for OFS-N6001
+│   ├── README.md              // Refer the README in this section for details
+│   ├── ...                    // various setup files
+├── syn_top                    // D5005 Quartus build area with necessary files for build                                                           
+│   ├── ofs_top.qpf               // Quartus Project File (qpf) mentions about Quartus version and project revision
+│   ├── ofs_top.qsf                // Quartus Settings File (qsf) lists current project settings and entity level assignments 
+│   ├── ofs_top.stp                // Signal Tap file included in the ofs_top.qsf. This file can be modified as required
+│   ├── iofs_pr_afu.qsf            // PR AFU qsf file
+│   ├── iofs_pr_afu_sources.tcl    // AFU source file list
+│   ├── build_flash                // Scripts to build flash and bin files
+
+
+
+
+   

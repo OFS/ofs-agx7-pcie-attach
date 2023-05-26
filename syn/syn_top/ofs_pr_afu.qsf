@@ -1,0 +1,153 @@
+# Copyright (C) 2021-2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
+############################################################################################
+# FPGA Device
+############################################################################################
+
+set_global_assignment -name FAMILY Agilex
+set_global_assignment -name DEVICE AGFB014R24A2E2V
+
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 100
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "1.2 V"
+
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
+set_global_assignment -name RESERVE_DATA0_AFTER_CONFIGURATION "USE AS REGULAR IO"
+#todo: 
+set_global_assignment -name PRESERVE_UNUSED_XCVR_CHANNEL ON
+
+############################################################################################
+# Synthesis Options
+############################################################################################
+set_global_assignment -name TOP_LEVEL_ENTITY top
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name OPTIMIZATION_MODE "SUPERIOR PERFORMANCE"
+set_global_assignment -name OPTIMIZATION_TECHNIQUE SPEED
+set_global_assignment -name OPTIMIZE_POWER_DURING_SYNTHESIS OFF
+set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING OFF
+set_global_assignment -name ALLOW_REGISTER_RETIMING ON
+set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
+set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
+set_global_assignment -name MUX_RESTRUCTURE ON
+
+set_global_assignment -name LAST_QUARTUS_VERSION "22.3.0 SP0.31,0.35 Pro Edition"
+
+set_global_assignment -name FLOW_DISABLE_ASSEMBLER OFF
+set_global_assignment -name FLOW_ENABLE_INTERACTIVE_TIMING_ANALYZER OFF
+set_global_assignment -name SEED 3
+############################################################################################
+# PWR MGMT
+############################################################################################
+# todo
+set_global_assignment -name PWRMGT_DEVICE_ADDRESS_IN_PMBUS_SLAVE_MODE 3C
+set_global_assignment -name VID_OPERATION_MODE "PMBUS SLAVE"
+set_global_assignment -name PWRMGT_BUS_SPEED_MODE "100 KHZ"
+set_global_assignment -name PWRMGT_VOLTAGE_OUTPUT_FORMAT "LINEAR FORMAT"
+set_global_assignment -name PWRMGT_LINEAR_FORMAT_N "-12"
+
+############################################################################################
+# Configuration Interface
+############################################################################################
+# todo
+set_global_assignment -name AUTO_RESTART_CONFIGURATION OFF
+set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
+set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
+set_global_assignment -name STRATIXV_CONFIGURATION_SCHEME "AVST X8"
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name STRATIXII_CONFIGURATION_DEVICE AUTO
+set_global_assignment -name GENERATE_PR_RBF_FILE ON
+set_global_assignment -name ENABLE_ED_CRC_CHECK ON
+#set_global_assignment -name MINIMUM_SEU_INTERVAL 0
+set_global_assignment -name MINIMUM_SEU_INTERVAL 479
+#set_global_assignment -name ACTIVE_SERIAL_CLOCK AS_FREQ_100MHZ # Setting for Agilex DevKit
+set_global_assignment -name ACTIVE_SERIAL_CLOCK AS_FREQ_115MHZ_IOSC
+set_global_assignment -name DEVICE_INITIALIZATION_CLOCK OSC_CLK_1_125MHZ
+#set_global_assignment -name DEVICE_INITIALIZATION_CLOCK OSC_CLK_1_25MHZ
+#set_global_assignment -name DEVICE_INITIALIZATION_CLOCK INIT_INTOSC
+set_global_assignment -name USE_PWRMGT_SCL SDM_IO0
+#set_global_assignment -name USE_PWRMGT_SDA SDM_IO12 # This was setting for Agilex DevKit
+set_global_assignment -name USE_PWRMGT_SDA SDM_IO16
+#set_global_assignment -name USE_CONF_DONE SDM_IO16
+set_global_assignment -name USE_PWRMGT_ALERT SDM_IO12
+set_global_assignment -name USE_INIT_DONE SDM_IO5
+set_global_assignment -name USE_NCATTRIP SDM_IO9
+#set_global_assignment -name USE_HPS_COLD_RESET SDM_IO7
+#set_global_assignment -name HPS_INITIALIZATION "AFTER INIT_DONE"
+#set_global_assignment -name HPS_DAP_SPLIT_MODE "HPS PINS"
+#set_global_assignment -name HPS_DAP_SPLIT_MODE "SDM PINS"
+#set_global_assignment -name HPS_DAP_NO_CERTIFICATE on
+set_global_assignment -name GENERATE_RBF_FILE ON
+
+############################################################################################
+# Verilog Macros
+############################################################################################
+set_global_assignment -name VERILOG_MACRO "INCLUDE_DDR4"
+set_global_assignment -name VERILOG_MACRO "INCLUDE_MEM_TG"
+set_global_assignment -name VERILOG_MACRO "INCLUDE_PMCI"
+set_global_assignment -name VERILOG_MACRO "INCLUDE_PR"
+set_global_assignment -name VERILOG_MACRO "INCLUDE_HSSI"
+set_global_assignment -name VERILOG_MACRO "DISABLE_HE_HSSI_CRC"
+set_global_assignment -name VERILOG_MACRO "INCLUDE_PCIE_SS"
+#set_global_assignment -name VERILOG_MACRO "INCLUDE_MSIX"
+#set_global_assignment  -name VERILOG_MACRO "PU_MMIO"
+set_global_assignment -name VERILOG_MACRO "INCLUDE_REMOTE_STP"
+set_global_assignment -name VERILOG_MACRO "INCLUDE_HPS"
+
+############################################################################################
+#                          Timing Constraints                                              #
+############################################################################################
+
+# Timing constraints extracted from the FIM build
+set_global_assignment -name SDC_FILE ofs_top.out.sdc
+
+# Compute user clock frequency and generate timing reports during quartus_sta
+set_global_assignment -name TIMING_ANALYZER_REPORT_SCRIPT ofs_partial_reconfig/ofs_sta_report_script_pr.tcl
+
+
+############################################################################################
+# Assignments to suppress Quartus warnings that can be ignored
+############################################################################################
+
+set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/suppress_warning.tcl
+
+
+############################################################################################
+# PR assignments
+############################################################################################
+set_instance_assignment -name PARTITION green_region -to afu_top|port_gasket|pr_slot|afu_main
+set_instance_assignment -name QDB_FILE_PARTITION ofs_top.qdb -to | -entity top
+set_instance_assignment -name ENTITY_REBINDING afu_main -to afu_top|port_gasket|pr_slot|afu_main
+set_global_assignment -name REVISION_TYPE PR_IMPL
+    
+# M20K protection signal to PR region (required in Agilex)
+#set_instance_assignment -name M20K_CE_CONTROL_FOR_PR ON -to afu_top|port_gasket|pr_slot|afu_main|pr_m20k_ce_ctl_req
+
+
+# IP required in a PR build from the base build (created by the OFS
+# emit_project_ip.tcl script at the end of the FIM build)
+set_global_assignment -name SOURCE_TCL_SCRIPT_FILE fim_base_ip.tcl
+
+# Generate a GBS file at the end of the build
+set_global_assignment -name POST_FLOW_SCRIPT_FILE quartus_sh:ofs_partial_reconfig/gen_gbs.tcl
+
+############################################################################################
+#                          AFU design files                                                #
+############################################################################################
+
+# Ensure that variables such as BUILD_ROOT_REL are set (must be relative)
+set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/config_env.tcl
+
+##
+## *** Sources are specified in ofs_pr_afu_sources.tcl, not in this .qsf file, so     ***
+## *** that scripting can be used. In addition, the PR out-of-tree build construction ***
+## *** script depends on being able to replace the sources only in the .tcl file.     ***
+##
+set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ofs_pr_afu_sources.tcl
+
+############################################################################################
+# VAB Assignments 
+############################################################################################
+set_global_assignment -name ENABLE_MULTI_AUTHORITY ON
+ 
+

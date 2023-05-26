@@ -1,0 +1,3 @@
+[submodule "ofs-common"]
+	url = https://github.com/OFS/ofs-fim-common.git
+	path = ofs-common

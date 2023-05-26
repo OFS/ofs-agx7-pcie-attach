@@ -1,0 +1,403 @@
+[IpFileSettings]
+Family = Agilex
+Part = AGFB014R24A2E2V
+IpDeployFile = pcie_ss.sh
+IpFile = pcie_ss.ip
+OutputName = pcie_ss
+ComponentName = pcie_ss
+
+
+[core16_total_pf_count_hwtcl]
+Value = 5
+
+[core16_enable_multi_func_hwtcl]
+Value = 1
+
+[core16_ctrl_shadow_en_hwtcl]
+Value = 1
+
+[core16_comp_timeout_en_hwtcl]
+Value = 1
+
+[core16_enable_10bit_tag_support_intf_hwtcl]
+Value = 1
+
+;; ################
+;; PF0 Settings
+;; ################
+
+[core16_pf0_vf_count_hwtcl]
+Value = 3
+
+[core16_pf0_expansion_base_address_register_hwtcl]
+Value = Disabled
+
+[core16_pf0_sriov_vf_bar0_type_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf0_bar0_address_width_user_hwtcl]
+Value = 20
+
+[core16_virtual_pf0_msix_enable_user_hwtcl]
+Value = 1
+
+[core16_virtual_pf0_exvf_msix_cap_enable_hwtcl]
+Value = 1
+
+[core16_pf0_vf_acs_cap_enable_hwtcl]
+Value = 1
+
+[core16_exvf_msix_tablesize_pf0]
+Value = 4
+
+[core16_exvf_msixtable_offset_pf0]
+Value = 1536
+
+[core16_exvf_msixtable_bir_pf0]
+value = 4
+
+[core16_exvf_msixpba_offset_pf0]
+value = 1024
+
+[core16_exvf_msixpba_bir_pf0]
+Value = 4
+
+[core16_pf0_sriov_vf_device_id]
+Value = 48335
+
+[core16_pf0_bar4_type_user_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf0_bar4_address_width_user_hwtcl]
+Value = 14
+
+[core16_pf0_sriov_vf_bar0_address_width_hwtcl]
+Value = 20
+
+[core16_pf0_sriov_vf_bar4_type_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf0_sriov_vf_bar4_address_width_hwtcl]
+Value = 14
+
+[core16_pf0_pci_msix_table_size_hwtcl]
+Value = 6
+
+[core16_pf0_pci_msix_table_offset_hwtcl]
+Value = 1536
+
+[core16_pf0_pci_msix_bir_hwtcl]
+Value = 4
+
+[core16_pf0_pci_msix_pba_offset_hwtcl]
+Value = 1024
+
+[core16_pf0_pci_msix_pba_hwtcl]
+Value = 4
+
+[core16_pf0_pci_msix_table_size_vfcomm_cs2_hwtcl]
+Value = 4
+
+;; ################
+;; PF1 Settings
+;; ################
+
+[core16_pf1_vf_count_hwtcl]
+Value = 0
+
+[core16_pf1_expansion_base_address_register_hwtcl]
+Value = Disabled
+
+[core16_pf1_sriov_vf_bar0_type_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf1_bar0_address_width_user_hwtcl]
+Value = 12
+
+[core16_virtual_pf1_msix_enable_user_hwtcl]
+Value = 0
+
+[core16_virtual_pf1_exvf_msix_cap_enable_hwtcl]
+Value = 0
+
+[core16_pf1_vf_acs_cap_enable_hwtcl]
+Value = 1
+
+[core16_exvf_msix_tablesize_pf1]
+Value = 4
+
+[core16_exvf_msixtable_offset_pf1]
+Value = 1536
+
+[core16_exvf_msixtable_bir_pf1]
+value = 4
+
+[core16_exvf_msixpba_offset_pf1]
+value = 1024
+
+[core16_exvf_msixpba_bir_pf1]
+Value = 0
+
+[core16_pf1_sriov_vf_device_id]
+Value = 48335
+
+[core16_pf1_bar4_type_user_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf1_bar4_address_width_user_hwtcl]
+Value = 14
+
+[core16_pf1_sriov_vf_bar0_address_width_hwtcl]
+Value = 0
+
+[core16_pf1_sriov_vf_bar4_type_hwtcl]
+Value = Disabled
+
+[core16_pf1_sriov_vf_bar4_address_width_hwtcl]
+Value = 0
+
+[core16_pf1_pci_msix_table_size_hwtcl]
+Value = 0
+
+[core16_pf1_pci_msix_table_offset_hwtcl]
+Value = 0
+
+[core16_pf1_pci_msix_bir_hwtcl]
+Value = 0
+
+[core16_pf1_pci_msix_pba_offset_hwtcl]
+Value = 0
+
+[core16_pf1_pci_msix_pba_hwtcl]
+Value = 0
+
+[core16_pf1_pci_msix_table_size_vfcomm_cs2_hwtcl]
+Value = 0
+
+;; ################
+;; PF2 Settings
+;; ################
+
+[core16_pf2_vf_count_hwtcl]
+Value = 0
+
+[core16_pf2_expansion_base_address_register_hwtcl]
+Value = Disabled
+
+[core16_pf2_sriov_vf_bar0_type_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf2_bar0_address_width_user_hwtcl]
+Value = 12
+
+[core16_virtual_pf2_msix_enable_user_hwtcl]
+Value = 0
+
+[core16_virtual_pf2_exvf_msix_cap_enable_hwtcl]
+Value = 0
+
+[core16_pf2_vf_acs_cap_enable_hwtcl]
+Value = 1
+
+[core16_exvf_msix_tablesize_pf2]
+Value = 4
+
+[core16_exvf_msixtable_offset_pf2]
+Value = 1536
+
+[core16_exvf_msixtable_bir_pf2]
+value = 4
+
+[core16_exvf_msixpba_offset_pf2]
+value = 1024
+
+[core16_exvf_msixpba_bir_pf2]
+Value = 0
+
+[core16_pf2_sriov_vf_device_id]
+Value = 48335
+
+[core16_pf2_bar4_type_user_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf2_bar4_address_width_user_hwtcl]
+Value = 14
+
+[core16_pf2_sriov_vf_bar0_address_width_hwtcl]
+Value = 0
+
+[core16_pf2_sriov_vf_bar4_type_hwtcl]
+Value = Disabled
+
+[core16_pf2_sriov_vf_bar4_address_width_hwtcl]
+Value = 0
+
+[core16_pf2_pci_msix_table_size_hwtcl]
+Value = 0
+
+[core16_pf2_pci_msix_table_offset_hwtcl]
+Value = 0
+
+[core16_pf2_pci_msix_bir_hwtcl]
+Value = 0
+
+[core16_pf2_pci_msix_pba_offset_hwtcl]
+Value = 0
+
+[core16_pf2_pci_msix_pba_hwtcl]
+Value = 0
+
+[core16_pf2_pci_msix_table_size_vfcomm_cs2_hwtcl]
+Value = 0
+
+;; ################
+;; PF3 Settings
+;; ################
+
+[core16_pf3_vf_count_hwtcl]
+Value = 0
+
+[core16_pf3_expansion_base_address_register_hwtcl]
+Value = Disabled
+
+[core16_pf3_sriov_vf_bar0_type_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf3_bar0_address_width_user_hwtcl]
+Value = 12
+
+[core16_virtual_pf3_msix_enable_user_hwtcl]
+Value = 0
+
+[core16_virtual_pf3_exvf_msix_cap_enable_hwtcl]
+Value = 0
+
+[core16_pf3_vf_acs_cap_enable_hwtcl]
+Value = 1
+
+[core16_exvf_msix_tablesize_pf3]
+Value = 4
+
+[core16_exvf_msixtable_offset_pf3]
+Value = 1536
+
+[core16_exvf_msixtable_bir_pf3]
+value = 4
+
+[core16_exvf_msixpba_offset_pf3]
+value = 1024
+
+[core16_exvf_msixpba_bir_pf3]
+Value = 0
+
+[core16_pf3_sriov_vf_device_id]
+Value = 48335
+
+[core16_pf3_bar4_type_user_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf3_bar4_address_width_user_hwtcl]
+Value = 14
+
+[core16_pf3_sriov_vf_bar0_address_width_hwtcl]
+Value = 0
+
+[core16_pf3_sriov_vf_bar4_type_hwtcl]
+Value = Disabled
+
+[core16_pf3_sriov_vf_bar4_address_width_hwtcl]
+Value = 0
+
+[core16_pf3_pci_msix_table_size_hwtcl]
+Value = 0
+
+[core16_pf3_pci_msix_table_offset_hwtcl]
+Value = 0
+
+[core16_pf3_pci_msix_bir_hwtcl]
+Value = 0
+
+[core16_pf3_pci_msix_pba_offset_hwtcl]
+Value = 0
+
+[core16_pf3_pci_msix_pba_hwtcl]
+Value = 0
+
+[core16_pf3_pci_msix_table_size_vfcomm_cs2_hwtcl]
+Value = 0
+
+;; ################
+;; PF4 Settings
+;; ################
+
+[core16_pf4_vf_count_hwtcl]
+Value = 0
+
+[core16_pf4_expansion_base_address_register_hwtcl]
+Value = Disabled
+
+[core16_pf4_sriov_vf_bar0_type_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf4_bar0_address_width_user_hwtcl]
+Value = 12
+
+[core16_virtual_pf4_msix_enable_user_hwtcl]
+Value = 0
+
+[core16_virtual_pf4_exvf_msix_cap_enable_hwtcl]
+Value = 0
+
+[core16_pf4_vf_acs_cap_enable_hwtcl]
+Value = 1
+
+[core16_exvf_msix_tablesize_pf4]
+Value = 4
+
+[core16_exvf_msixtable_offset_pf4]
+Value = 1536
+
+[core16_exvf_msixtable_bir_pf4]
+value = 4
+
+[core16_exvf_msixpba_offset_pf4]
+value = 1024
+
+[core16_exvf_msixpba_bir_pf4]
+Value = 0
+
+[core16_pf4_sriov_vf_device_id]
+Value = 48335
+
+[core16_pf4_bar4_type_user_hwtcl]
+Value = 64-bit prefetchable memory
+
+[core16_pf4_bar4_address_width_user_hwtcl]
+Value = 14
+
+[core16_pf4_sriov_vf_bar0_address_width_hwtcl]
+Value = 0
+
+[core16_pf4_sriov_vf_bar4_type_hwtcl]
+Value = Disabled
+
+[core16_pf4_sriov_vf_bar4_address_width_hwtcl]
+Value = 0
+
+[core16_pf4_pci_msix_table_size_hwtcl]
+Value = 0
+
+[core16_pf4_pci_msix_table_offset_hwtcl]
+Value = 0
+
+[core16_pf4_pci_msix_bir_hwtcl]
+Value = 0
+
+[core16_pf4_pci_msix_pba_offset_hwtcl]
+Value = 0
+
+[core16_pf4_pci_msix_pba_hwtcl]
+Value = 0
+
+[core16_pf4_pci_msix_table_size_vfcomm_cs2_hwtcl]
+Value = 0

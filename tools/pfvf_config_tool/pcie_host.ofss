@@ -1,0 +1,23 @@
+[ProjectSettings]
+platform = n6001
+family = Agilex
+fim = base_x16
+Part = AGFB014R24A2E2V
+IpDeployFile = pcie_ss.sh
+IpFile = pcie_ss.ip
+OutputName = pcie_ss
+ComponentName = pcie_ss
+is_host = True
+
+[pf0]
+num_vfs = 3
+pg_enable = True
+
+[pf1]
+
+[pf2]
+
+[pf3]
+
+[pf4]
+

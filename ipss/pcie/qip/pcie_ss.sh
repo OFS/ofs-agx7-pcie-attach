@@ -1,0 +1,107 @@
+# Copyright (C) 2021-2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
+echo "debug_features_enablement_full=1" >quartus.ini
+ip-deploy --family=Agilex --part="AGFB014R24A2E2V" --output-name="pcie_ss" --component-name="pcie_ss" \
+    --search-path="$QUARTUS_ROOTDIR/../ip/altera/intel_pcie/ptile /**/*,$QUARTUS_ROOTDIR/../ip/altera/subsystems/pcie_ss/**/*,$" \
+	--component-parameter=g3_pld_clkfreq_user_hwtcl="250MHz" \
+	--component-parameter=g4_pld_clkfreq_user_hwtcl="400MHz" \
+	--component-parameter=pcie_link_en_hwtcl="1" \
+	--component-parameter=pcie_ss_func_mode_hwtcl="AXI-ST Data Mover" \
+	--component-parameter=pcie_ss_profile_hwtcl="Basic" \
+	--component-parameter=top_topology_hwtcl="Gen4 1x16" \
+	--component-parameter=total_pcie_intf_hwtcl="1" \
+	--component-parameter=virtual_rp_ep_mode_hwtcl="Native Endpoint" \
+	--component-parameter=ctrl_shadow_en_hwtcl="1" \
+	--component-parameter=comp_timeout_en_hwtcl="1" \
+	--component-parameter=pcie_link_en_hwtcl="1" \
+	--component-parameter=axi_st_clk_freq_user_hwtcl="400MHz" \
+	--component-parameter=core16_use_ast_parity_hwtcl="1" \
+	--component-parameter=core16_enable_power_mgnt_intf_hwtcl="1" \
+	--component-parameter=core16_enable_legacy_int_hwtcl="1" \
+	--component-parameter=core16_enable_cpl_timeout_hwtcl="1" \
+	--component-parameter=core16_enable_cii_hwtcl="1" \
+	--component-parameter=core16_enable_prs_event_hwtcl="1" \
+	--component-parameter=core16_enable_error_intf_hwtcl="1" \
+	--component-parameter=core16_enable_pld_warm_rst_rdy_hwtcl="1" \
+	--component-parameter=core16_user_mode_to_pld_in_use_hwtcl="1" \
+	--component-parameter=core16_pf0_gen3_eq_pset_req_vec_hwtcl="0x00000004" \
+	--component-parameter=core16_debug_toolkit_user_hwtcl="0" \
+	--component-parameter=core16_virtual_maxpayload_size_hwtcl="512 Bytes" \
+	--component-parameter=core16_cap_ext_tag_supp_user_hwtcl="1" \
+	--component-parameter=core16_enable_multi_func_hwtcl="1" \
+	--component-parameter=core16_total_pf_count_hwtcl="5" \
+	--component-parameter=core16_enable_sriov_hwtcl="1" \
+	--component-parameter=core16_pf0_vf_count_hwtcl="0" \
+	--component-parameter=core16_pf1_vf_count_hwtcl="1" \
+	--component-parameter=core16_pf2_vf_count_hwtcl="3" \
+	--component-parameter=core16_pf3_vf_count_hwtcl="0" \
+	--component-parameter=core16_pf4_vf_count_hwtcl="0" \
+	--component-parameter=core16_pf0_pcie_cap_port_num_hwtcl="1" \
+	--component-parameter=core16_cap_slot_clk_config_hwtcl="1" \
+	--component-parameter=core16_virtual_pf0_msi_enable_user_hwtcl="1" \
+	--component-parameter=core16_pf0_pci_msi_multiple_msg_cap_hwtcl="1" \
+	--component-parameter=core16_virtual_pf0_msix_enable_user_hwtcl="1" \
+	--component-parameter=core16_virtual_pf1_msix_enable_user_hwtcl="1" \
+	--component-parameter=core16_virtual_pf2_msix_enable_user_hwtcl="1" \
+	--component-parameter=core16_virtual_pf0_acs_cap_enable_hwtcl="1" \
+	--component-parameter=core16_virtual_pf1_acs_cap_enable_hwtcl="1" \
+	--component-parameter=core16_virtual_pf2_acs_cap_enable_hwtcl="1" \
+	--component-parameter=core16_virtual_pf3_acs_cap_enable_hwtcl="1" \
+	--component-parameter=core16_virtual_pf4_acs_cap_enable_hwtcl="1" \
+	--component-parameter=core16_pf1_vf_acs_cap_enable_hwtcl="1" \
+	--component-parameter=core16_pf2_vf_acs_cap_enable_hwtcl="1" \
+	--component-parameter=core16_pf0_bar0_address_width_user_hwtcl="19" \
+	--component-parameter=core16_pf0_bar0_type_user_hwtcl="64-bit prefetchable memory" \
+	--component-parameter=core16_pf1_bar0_address_width_user_hwtcl="12" \
+	--component-parameter=core16_pf1_bar0_type_user_hwtcl="64-bit prefetchable memory" \
+	--component-parameter=core16_pf1_sriov_vf_bar0_address_width_hwtcl="12" \
+	--component-parameter=core16_pf1_sriov_vf_bar0_type_hwtcl="64-bit prefetchable memory" \
+	--component-parameter=core16_pf2_bar0_address_width_user_hwtcl="18" \
+	--component-parameter=core16_pf2_bar0_type_user_hwtcl="64-bit prefetchable memory" \
+	--component-parameter=core16_pf2_sriov_vf_bar0_address_width_hwtcl="18" \
+	--component-parameter=core16_pf2_sriov_vf_bar0_type_hwtcl="64-bit prefetchable memory" \
+	--component-parameter=core16_pf3_bar0_address_width_user_hwtcl="12" \
+	--component-parameter=core16_pf3_bar0_type_user_hwtcl="64-bit prefetchable memory" \
+	--component-parameter=core16_pf4_bar0_address_width_user_hwtcl="12" \
+	--component-parameter=core16_pf4_bar0_type_user_hwtcl="64-bit prefetchable memory" \
+	--component-parameter=core16_pf0_pci_type0_vendor_id_hwtcl="0x00008086" \
+	--component-parameter=core16_pf0_pci_type0_device_id_hwtcl="0x0000bcce" \
+	--component-parameter=core16_pf0_revision_id_hwtcl="0x00000001" \
+	--component-parameter=core16_pf0_class_code_hwtcl="0x00120000" \
+	--component-parameter=core16_pf0_subsys_vendor_id_hwtcl="0x00008086" \
+	--component-parameter=core16_pf0_subsys_dev_id_hwtcl="0x00000000" \
+	--component-parameter=core16_pf1_pci_type0_vendor_id_hwtcl="0x00008086" \
+	--component-parameter=core16_pf1_pci_type0_device_id_hwtcl="0x0000bcce" \
+	--component-parameter=core16_pf1_revision_id_hwtcl="0x00000000" \
+	--component-parameter=core16_pf1_class_code_hwtcl="0x00120000" \
+	--component-parameter=core16_pf1_subsys_vendor_id_hwtcl="0x00008086" \
+	--component-parameter=core16_pf1_subsys_dev_id_hwtcl="0x00000000" \
+    --component-parameter=core16_pf1_sriov_vf_device_id="0x0000bccf" \
+	--component-parameter=core16_exvf_subsysid_pf1="0x00000000" \
+	--component-parameter=core16_pf2_pci_type0_vendor_id_hwtcl="0x00008086" \
+	--component-parameter=core16_pf2_pci_type0_device_id_hwtcl="0x0000bcce" \
+	--component-parameter=core16_pf2_revision_id_hwtcl="0x00000000" \
+	--component-parameter=core16_pf2_class_code_hwtcl="0x00120000" \
+	--component-parameter=core16_pf2_subsys_vendor_id_hwtcl="0x00008086" \
+	--component-parameter=core16_pf2_subsys_dev_id_hwtcl="0x00000000" \
+	--component-parameter=core16_pf2_sriov_vf_device_id="0x0000bccf" \
+	--component-parameter=core16_exvf_subsysid_pf2="0x00000000" \
+	--component-parameter=core16_pf3_pci_type0_vendor_id_hwtcl="0x00008086" \
+	--component-parameter=core16_pf3_pci_type0_device_id_hwtcl="0x0000bcce" \
+	--component-parameter=core16_pf3_revision_id_hwtcl="0x00000000" \
+	--component-parameter=core16_pf3_class_code_hwtcl="0x00120000" \
+	--component-parameter=core16_pf3_subsys_vendor_id_hwtcl="0x00008086" \
+	--component-parameter=core16_pf3_subsys_dev_id_hwtcl="0x00000000" \
+	--component-parameter=core16_pf4_pci_type0_vendor_id_hwtcl="0x00008086" \
+	--component-parameter=core16_pf4_pci_type0_device_id_hwtcl="0x0000bcce" \
+	--component-parameter=core16_pf4_revision_id_hwtcl="0x00000000" \
+	--component-parameter=core16_pf4_class_code_hwtcl="0x00120000" \
+	--component-parameter=core16_pf4_subsys_vendor_id_hwtcl="0x00008086" \
+	--component-parameter=core16_pf4_subsys_dev_id_hwtcl="0x00000000" \
+	--component-parameter=core16_pf0_pci_msix_table_size_hwtcl="4" \
+	--component-parameter=core16_hip_reconfig_user_hwtcl="1" \
+	--component-parameter=core16_hip_reconfig_hwtcl="1" 
+qsys-generate pcie_ss.ip --pro --simulation --simulator=MODELSIM --simulator=VCS --simulator=VCSMX\
+    --search-path="$QUARTUS_ROOTDIR/../ip/altera/intel_pcie/ptile /**/*,$QUARTUS_ROOTDIR/../ip/altera/subsystems/pcie_ss/**/*,$"
+ 
