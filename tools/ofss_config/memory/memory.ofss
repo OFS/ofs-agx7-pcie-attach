@@ -1,0 +1,6 @@
+[ip]
+type = memory
+
+[settings]
+output_name = mem_ss_fm
+preset = n6001

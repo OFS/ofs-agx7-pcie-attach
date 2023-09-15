@@ -1,0 +1,75 @@
+
+How to setup UVM TB and run sumulation for UVM Testcase for QSFP UNIT TB - AXI-ST 512 bit data width
+
+Initial Setup:
+  1)  Get a Bash shell (e.g. xterm)
+  2)  Go to ./applications.fpga.ofs.reference-fims
+For Internal Customers:
+  3)  source env_not_shipped/n6001/env.sh
+  4)  To enable VERDI/FSDB ,env_not_shipped/n6001/env_verdi.sh (default VPD will be created)
+For External Customers:
+  3)  Set all tool paths vcs, python etc. Please make sure Tool versions used are as follows:
+      VCS : vcsmx/T-2022.06-SP1-1
+      VERDI: T-2022.06-SP1-1
+      Python : python/3.7.7
+      SNPS VIP Portfolio Version : vip_Q-2020.03A
+      PCIe VIP : Q-2020.03
+      AXI VIP : Q-2020.03
+      Ethernet VIP : Q-2020.03
+  4)  Set the required environment and directory Structure variables (as shown below)
+      export OFS_ROOTDIR=<pwd>
+      export QUARTUS_HOME=<Quartus Installation path upto /quartus>
+      export QUARTUS_INSTALL_DIR=$QUARTUS_HOME
+      export IMPORT_IP_ROOTDIR=$QUARTUS_HOME/../ip
+      export VERDIR=$OFS_ROOTDIR/verification
+      export VIPDIR=$VERDIR
+      export DESIGNWARE_HOME=<VIP installation path>
+      export EMAIL_LIST=$OFS_ROOTDIR/<email_list.f file path>
+
+How to Run UVM Testcases with QSFP UNIT TESTBENCH?:
+1)  cd $VERDIR/unit_tb/qsfp_controller/scripts
+2)	For compiling,building RTL & TB, execute: “gmake -f Makefile_VCS.mk qsfp_build_all <DUMP=1>”
+3)	For run, execute: “gmake -f Makefile_VCS.mk qsfp_run TESTNAME=qsfp_init_test <DUMP=1> <SEED=<seed number>>”
+    To get the list of tests, refer to $VERDIR/unit_tb/qsfp_controller/tests
+4)	Results are created in a sim directory ($VERDIR/unit_tb/qsfp_controller/sim)
+
+**Note: For three testcases: qsfp_backpress_dut_test,qsfp_poller_reset_test,qsfp_i2c_poller_disable_test  a switch CFG_RAND should be added for the qsfp_run command
+        Ex:  "gmake -f Makefile_VCS.mk qsfp_run TESTNAME=qsfp_backpress_dut_test <DUMP=1> <CFG_RAND=1> "
+        CFG_RAND Switch is added to initialize QSFP Memory in TB for those scenarios where AXI Write doesn't happen to QSFP Module .
+
+**Note: Step 2 Compiles IPs and subsystems from scratch instead of using precompiled versions.
+               This step can be skipped if there is no change in Quartus generated files from the previous build.
+
+**Note: To clean previous build and sim files, Run "gmake -f Makefile_VCS.mk clean" command.
+
+
+**Note: SIM directory can be deleted if any database corruption occurs.
+
+How to Run UVM Regressions?:
+
+** usage : python regress_run.py --help
+
+ -l, --local Run regression locally, or run it on Farm. (Default:False)
+ -n[N], --n_procs [N] Maximum number of processes/UVM tests to run in parallel when run locally. This has no effect on Farm run. (Default #CPUs-1: 11)
+ -p [{adp}], --plat [{adp}] HW platform for regression test. (Default: adp)
+ -k [{test_pkg}], --pack [{test_pkg}] Test suite to run during regression. (Default:test_pkg)
+ -s [{vcs}], --sim [{vcs}] Simulator used for regression test. (Default: vcs)
+ -c , --cov Code coverage used for regression, if any. (Default:ral_cov)
+ -e --email_list Sends the regression results on email provided in list (Default : It will send it to regression Owner)
+
+1)  cd $VERDIR/unit_tb/qsfp_controller/scripts  
+
+###run locally, with 8 processes, for adp platform, using top_pkg set of tests, using VCS with code coverage.  
+python regress_run.py -l -n 8 -c -e
+
+###Same as above, but run on Intel Farm (no --local):   
+python regress_run.py -c -e
+
+###Running script using defaults: run on Farm, adp platform, using top_pkg set of tests, using VCS and sends result to owner with no code coverage
+python regress_run.py 
+
+2)  Results are created in a sim directory ($VERDIR/unit_tb/qsfp_controller/sim) with individual testcase log dir
+
+
+**Note: Each testcase runs with random seeds in regression.
+
