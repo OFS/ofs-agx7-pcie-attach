@@ -1,0 +1,437 @@
+plan "TOP LEVEL TEST PLAN";
+  feature "PO TESTS";
+    feature "P0.1";
+      description = "MMIO targeting PF0(ST2MM, FME, PMCI, QSFP, HSSI SS), PF1, PF2,PF3, PF4, PF1.VF1, PF1.VF2";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+      endmeasure
+    endfeature
+    feature "P0.2";
+      description = "CSR accesses";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+      endmeasure
+    endfeature
+    feature "P0.3";
+      description = "CSR accesses";
+    endfeature
+    feature "P0.4";
+      description = "DFH walking";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+      endmeasure
+    endfeature
+    feature "P0.5";
+      description = "CSR accesses";
+    endfeature
+    feature "P0.6";
+      description = "Loopback mode.  Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0","group: $unit::ofs_coverage::HE_LBK.LBK_testmode";
+      endmeasure
+    endfeature
+    feature "P0.7";
+      description = "CSR accesses";
+    endfeature
+    feature "P0.8";
+      description = "CSR accesses";
+    endfeature
+    feature "P0.9";
+      description = "CSR accesses";
+    endfeature
+    feature "P0.11";
+      description = "CSR accesses";
+    endfeature
+    feature "P0.12";
+      description = "Loopback mode.  Randomize num_lines, addresses, req_len";
+    endfeature
+    feature "P0.13";
+      description = "Apply FLR Reset for PF0 and deassert.\nInitiate MMIO transactions for all PFs. Make sure all completions are sent/received and no pending transations are seen. Apply FLR Reset for PF0 and deassert. Initiate mmio access and ensure all PFs CSR access are working fine";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::AXI_TX_COMPL";
+      endmeasure
+    endfeature
+    feature "P0.14";
+      description = "Apply FLR Reset for PF2 and deassert.\nInitiate MMIO transactions for all PFs. Make sure all completions are sent/received and no pending transations are seen. Apply FLR Reset for PF2 and deassert. Initiate mmio access and ensure all PFs CSR access are working fine";
+    endfeature
+    feature "P0.15";
+      description = "Apply FLR Reset for PF3 and deassert.\nInitiate MMIO transactions for all PFs. Make sure all completions are sent/received and no pending transations are seen. Apply FLR Reset for PF3 and deassert. Initiate mmio access and ensure all PFs CSR access are working fine";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+      endmeasure
+    endfeature
+    feature "P0.17";
+      description = "Apply FLR Reset for PF0_VF0 and deassert.";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+      endmeasure
+    endfeature
+    feature "P0.18";
+      description = "Apply FLR Reset for PF0_VF1 and deassert.";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+      endmeasure
+    endfeature
+    feature "P0.19";
+      description = "Apply FLR Reset for PF0_VF2 and deassert.";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+      endmeasure
+    endfeature
+    feature "P0.20";
+      description = "Apply FLR Reset for PF1_VF0 and deassert.";
+    endfeature
+    feature "P0.21";
+      description = "CSR accesses";
+    endfeature
+    feature "P0.22";
+      description = "CSR accesses";
+    endfeature
+    feature "P0.23";
+      description = "CSR accesses";
+    endfeature
+    feature "P0.24";
+      description = "CSR access";
+    endfeature
+    feature "P0.25";
+      description = "CSR access";
+    endfeature
+    feature "P0.26";
+      description = "CSR access";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::EMIF_CHANNEL";
+      endmeasure
+    endfeature
+  endfeature
+  feature "ALPHA TESTS";
+    feature "A-1";
+      description = "Stressing MMIO on PF/VF Mux/Demux with non-blocking MMIO reads";
+    endfeature
+    feature "A-2";
+      description = "Stressing MMIO on PF/VF Mux/Demux";
+    endfeature
+    feature "A-3";
+      description = "MMIO acccess to unimplemented addresses";
+    endfeature
+    feature "A-4";
+      description = "64-bit bar addess for MMIO";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::AXI_TX_COMPL";
+      endmeasure
+    endfeature
+    feature "A-5";
+      description = "32-bit bar addess for MMIO";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::AXI_TX_COMPL","group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+      endmeasure
+    endfeature
+    feature "A-6";
+      description = "Random length  mmio Write";
+    endfeature
+    feature "A-7";
+      description = "Random length  mmio Write";
+    endfeature
+    feature "A-8";
+      description = "Random length  mmio Write";
+    endfeature
+    feature "A-9";
+      description = "Random length in mmio Read";
+    endfeature
+    feature "A-10";
+      description = "Read only mode. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a","group: $unit::ofs_coverage::HE_LBK.LBK_testmode";
+      endmeasure
+    endfeature
+    feature "A-11";
+      description = "Write only mode. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_LBK.LBK_testmode";
+      endmeasure
+    endfeature
+    feature "A-12";
+      description = "Read/Write mode. 50/50. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_LBK.LBK_tput","group: $unit::ofs_coverage::HE_LBK.LBK_testmode";
+      endmeasure
+    endfeature
+    feature "A-13";
+      description = "Multiple iterations of he_lpb_seq with STOP HE-LB in middle.";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+      endmeasure
+    endfeature
+    feature "A-14";
+      description = "Multiple iterations of he_lpb_seq with soft reset HE-LB in middle.";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+      endmeasure
+    endfeature
+    feature "A-15";
+      description = "FLR is applied after HE_LPBK transcation and cheked the register status";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]";
+      endmeasure
+    endfeature
+    feature "A-16";
+      description = "Continuous mode/LPBK mode, random num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_LBK.LBK_con_mode";
+      endmeasure
+    endfeature
+    feature "A-17";
+      description = "Read only mode/ Continuous mode. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a","group: $unit::ofs_coverage::HE_LBK.LBK_con_mode_testmode";
+      endmeasure
+    endfeature
+    feature "A-18";
+      description = "Continuous mode, Read/Write mode. 50/50. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_LBK.LBK_con_mode_testmode";
+      endmeasure
+    endfeature
+    feature "A-19";
+      description = "Write only mode/Continuous mode. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_LBK.LBK_con_mode_testmode";
+      endmeasure
+    endfeature
+    feature "A-20";
+      description = "Read only mode. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_MEM.MEM_testmode";
+      endmeasure
+    endfeature
+    feature "A-21";
+      description = "Write only mode. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_MEM.MEM_testmode";
+      endmeasure
+    endfeature
+    feature "A-22";
+      description = "Read/Write mode. 50/50. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_MEM.MEM_tput","group: $unit::ofs_coverage::HE_MEM.MEM_testmode";
+      endmeasure
+    endfeature
+    feature "A-23";
+      description = "Multiple iterations of he_lpb_seq with STOP HE-LB in middle.";
+    endfeature
+    feature "A-24";
+      description = "Multiple iterations of he_lpb_seq with soft reset HE-LB in middle.";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0";
+      endmeasure
+    endfeature
+    feature "A-25";
+      description = "FLR is applied after HE_MEM transcation and cheked the register status";
+    endfeature
+    feature "A-26";
+      description = "Continuous mode/LPBK mode, random num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_MEM.MEM_con_mode";
+      endmeasure
+    endfeature
+    feature "A-27";
+      description = "Read only mode/Continuous mode. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_MEM.MEM_con_mode_testmode";
+      endmeasure
+    endfeature
+    feature "A-28";
+      description = "Write only mode/Continuous mode. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_MEM.MEM_con_mode_testmode";
+      endmeasure
+    endfeature
+    feature "A-29";
+      description = "Continuous mode, Read/Write mode. 50/50. Randomize num_lines, addresses, req_len";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_MEM.MEM_con_mode_testmode";
+      endmeasure
+    endfeature
+    feature "A-30";
+      description = "Enable all HEs and randomize modes";
+    endfeature
+    feature "A-31";
+      description = "shorter simpler version of random test for turn-in sanity check";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_001";
+      endmeasure
+    endfeature
+    feature "A-32";
+      description = "Loopback mode. 128 CLs, req_len = 1CL, random addresses.";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a","group: $unit::ofs_coverage::HE_LBK.LBK_reqlen";
+      endmeasure
+    endfeature
+    feature "A-33";
+      description = "Loopback mode. 128 CLs, req_len = 2CL, random addresses.";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a","group: $unit::ofs_coverage::HE_LBK.LBK_reqlen";
+      endmeasure
+    endfeature
+    feature "A-34";
+      description = "Loopback mode. 128 CLs, req_len = 4CL, random addresses.";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a","group: $unit::ofs_coverage::HE_LBK.LBK_reqlen";
+      endmeasure
+    endfeature
+    feature "A-35";
+      description = "Loopback mode. 128 CLs, req_len = 1CL, random addresses.";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_MEM.MEM_reqlen";
+      endmeasure
+    endfeature
+    feature "A-36";
+      description = "Loopback mode. 128 CLs, req_len = 2CL, random addresses.";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_MEM.MEM_reqlen";
+      endmeasure
+    endfeature
+    feature "A-37";
+      description = "Loopback mode. 128 CLs, req_len = 4CL, random addresses.";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::HE_MEM.MEM_reqlen";
+      endmeasure
+    endfeature
+    feature "A-38";
+      description = "Send back to back traffic with 25G speed on HSSI TX Port0  lanes using Traffic generator registers";
+    endfeature
+    feature "A-39";
+      description = "Send back to back traffic with 25G speed on HSSI TX Port1  lanes using Traffic generator registers";
+    endfeature
+    feature "A-40";
+      description = "Send back to back traffic with 25G speed on HSSI TX Port2  lanes using Traffic generator registers";
+    endfeature
+    feature "A-41";
+      description = "Send back to back traffic with 25G speed on HSSI TX Port3  lanes using Traffic generator registers";
+    endfeature
+    feature "A-42";
+      description = "Send back to back traffic with 25G speed on HSSI TX Port4  lanes using Traffic generator registers";
+    endfeature
+    feature "A-43";
+      description = "Send back to back traffic with 25G speed on HSSI TX Port5  lanes using Traffic generator registers";
+    endfeature
+    feature "A-44";
+      description = "Send back to back traffic with 25G speed on HSSI TX Port6  lanes using Traffic generator registers";
+    endfeature
+    feature "A-45";
+      description = "Send back to back traffic with 25G speed on HSSI TX Port7  lanes using Traffic generator registers";
+    endfeature
+    feature "A-54";
+      description = "Sending back to back ethernet data traffic with 25G speed on HSSI RX Port0-7 lanes using Ethernet VIPs";
+    endfeature
+    feature "A-58";
+      description = "HE-LB; ReqLen = 1CL; 1024 CLs; Read only mode";
+    endfeature
+    feature "A-59";
+      description = "HE-LB; ReqLen = 2CL; 1024 CLs; Read only mode";
+    endfeature
+    feature "A-60";
+      description = "HE-LB; ReqLen = 4CL; 1024 CLs; Read only mode";
+    endfeature
+    feature "A-61";
+      description = "HE-LB; ReqLen = 1CL; 1024 CLs; Write only mode";
+    endfeature
+    feature "A-62";
+      description = "HE-LB; ReqLen = 2CL; 1024 CLs; Write only mode";
+    endfeature
+    feature "A-63";
+      description = "HE-LB; ReqLen = 4CL; 1024 CLs; Write only mode";
+    endfeature
+    feature "A-64";
+      description = "HE-LB; ReqLen = 1CL; 1024 CLs; Thruput mode";
+    endfeature
+    feature "A-65";
+      description = "HE-LB; ReqLen = 2CL; 1024 CLs; Thruput mode";
+    endfeature
+    feature "A-66";
+      description = "HE-LB; ReqLen = 4CL; 1024 CLs; Thruput mode";
+    endfeature
+    feature "A-67";
+      description = "1. Initiate transactions to all the supported PF/VF from PCIE VIP and ensure that traffic is sent to all blocks of the AFU.\n2. Ensure that CE/HE-LB/HE-MEM/HSSI/BPF/FME are seeing traffic .\n3. Ensure that HE-LB/HE-MEM/CE sends DMWR/DMRD requests to PCIE VIP\n4. Ensure the Mux/DeMux blocks is able to handle the traffic based on the PF's/VF's and proper muxing/demuxing happens.";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag","group: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0","group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+      endmeasure
+    endfeature
+    feature "A-68";
+      description = "vendor specific messaging capability";
+    endfeature
+    feature "A-69";
+      description = "Vendor specific messaging capability";
+    endfeature
+    feature "A-70";
+      description = "Perform AXI4 Lite transaction to write to HPS_RDY [bit 4] of CSR_HPS2HOST_RSP register.\n2. Program the descriptors (CSR_SRC_ADDR, CSR_DST_ADDR, CSR_DATA_SIZE).\n     a) CSR_DATA_SIZE will be programmed as 1KB-1MB\n3. Program CSR_HOST2CE_MRD_START.MRD_START  to ‘1’                                  \n4. Poll the CSR_CE2HOST_STATUS.CE_DMA_STS to see the status of first data chunk. Expected value is 0x01 during the DMA transfer.\n5. if success (0x10), reprogram descriptor\nNote: Read CSR_HOST2CE_MRD_START register and ensure it is zero before reprogramming the descriptor.\n6.  Redo steps to program descriptors and status check.\n7.  Compare the data send by copy engine to the ACE lite interface\n8. Once complete data chunk is successfully transferred, check CSR_CE2HOST_STATUS.CE_DMA_STS is set to 1, if not error is reported.\n9. Ensure the data integrity check is done in scoreboard";
+    endfeature
+  endfeature
+  feature "BETA TESTS";
+    feature "B-7";
+      description = "FME interrupt request using RAS ERROR assertion";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+      endmeasure
+    endfeature
+    feature "B-8";
+      description = "FME Interrupt request using FME ERROR assertion";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+      endmeasure
+    endfeature
+    feature "B-9";
+      description = "FME interrupt request using RAS ERROR and FME ERROR assertion";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+      endmeasure
+    endfeature
+    feature "B-10";
+      description = "Single User interrupt request from HE MEM";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::INTR_VECTOR.TX_user_vector";
+      endmeasure
+    endfeature
+    feature "B-11";
+      description = "Back to back multiple User interrupt request from HE MEM";
+    endfeature
+    feature "B-12";
+      description = "Mix interrupt testcase to send multiple FME and User interrupt request simultaneously";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+      endmeasure
+    endfeature
+    feature "B-15";
+      description = "Vendor specific messaging capability";
+    endfeature
+    feature "B-16";
+      description = "Vendor specific messaging capability";
+    endfeature
+    feature "B-17";
+      description = "Checks for different PCIe Protocol error generation (upstram/downstream) and check the clear mechanism of AFU for these detected protocol errors.\n1. Apply the error.\n2. Wait 5us 1us\n3. Set the port reset bit true and then false again (within 1us) (You will not be able to perform a read-modify-write because F’s will be retuened on resds. Write a 0x5 to set and a 0x4 to clear).\n4. Wait 124us 135us (or 7.5us 28us if MMIO_TIMEOUT_CYCLES is 512.)\n5. Read bit 31 of the AFU_INTF_ERROR, BlockingTraffic. If it is set it means that we did not wait long enough in step 4.\n6. Read the AFU_INTF_ERROR  register, Be sure only the expected error(s) are set.\n7. Read the AFU_INTF_FIRST_ERROR  CSR. Be sure only one error bit is set and it is the expected one.\n8. Clear the errors in the AFU_INTF_ERROR  CSR by writing one to the bits that are set.\n9. Read the AFU_INTF_FIRST_ERROR  CSR. Be sure all bits are cleared";
+      measure Group Measure_1;
+        source="group: $unit::ofs_coverage::AXI_TX_COMPL";
+      endmeasure
+    endfeature
+    feature "B-18";
+      description = "Test covers the flow which covers one back for agilex variant\nCovers the traffic generator test flow as mentioned in HAS";
+    endfeature
+    feature "B-21";
+      description = "Genrate CRCCAT error and Fabric Fatal Error";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+      endmeasure
+    endfeature
+    feature "B-22";
+      description = "Genrate No_fatal ,warning Error";
+      measure Group Measure_1;
+        source="group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+      endmeasure
+    endfeature
+    feature "B-23";
+      description = "TestCase is added to cover the TM_AVST_RX_ERR Register";
+    endfeature
+    feature "B-25";
+      description = "Accessing the pcie_csr registers from host; from PMCI it is already covered in n6000_pmci_pciess_csr";
+    endfeature
+  endfeature
+endplan

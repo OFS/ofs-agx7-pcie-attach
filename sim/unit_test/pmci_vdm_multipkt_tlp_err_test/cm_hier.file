@@ -1,0 +1,6 @@
+begin
+  line+tgl+cond+fsm+branch  -tree top_tb.DUT.pcie_wrapper 0
+end
+begin
+  line+tgl+cond+fsm+branch  -tree top_tb.bmc_m10 0
+end

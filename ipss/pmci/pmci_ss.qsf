@@ -1,0 +1,30 @@
+# Copyright (C) 2021-2022 Intel Corporation
+# SPDX-License-Identifier: MIT
+
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 21.3.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "06:59:59  OCTOBER 04, 2021"
+set_global_assignment -name LAST_QUARTUS_VERSION "22.3.0 SP0.26 Pro Edition"
+set_global_assignment -name TOP_LEVEL_ENTITY pmci_ss
+set_global_assignment -name FAMILY Agilex
+set_global_assignment -name DEVICE AGFB014R24A2E2V
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_s10_mailbox_client_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_pxeboot_optrom_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_axi_bridge_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_axi_bridge_1.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_clock_in.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_mctp_pcievdm_ctrlr_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_nios2_gen2_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_pmci_csr_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_avmms_2_spim_bridge_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_reset_in.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_spi_slave_to_avalon_mm_master_bridge_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_intel_generic_serial_flash_interface_top_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_onchip_memory2_1.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_onchip_memory2_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_flash_burst_master_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_ncsi_ctrlr_0.ip
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_timer_0.ip
+set_global_assignment -name QSYS_FILE pmci_ss.qsys
+set_global_assignment -name IP_FILE ip/pmci_ss/pmci_ss_stratix10_asd_0.ip
+set_global_assignment -name PWRMGT_VOLTAGE_OUTPUT_FORMAT "LINEAR FORMAT"
+set_global_assignment -name PWRMGT_LINEAR_FORMAT_N "-12"

@@ -1,0 +1,9 @@
+[ip]
+type = ofs
+
+[settings]
+platform = n6000
+family = agilex
+fim = base_x16
+part = AGFB014R24A2E2V
+device_id = 6000

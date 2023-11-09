@@ -1,0 +1,8 @@
+[ip]
+type = hssi
+
+[settings]
+output_name = hssi_ss
+num_channels = 2
+data_rate = 200GAUI-4
+preset = 200g-fseries-dk

@@ -1,0 +1,15 @@
+{
+   "version": 1,
+   "afu-image": {
+      "power": 0,
+      "accelerator-clusters":
+         [
+            {
+               "name": "ofs_pr_default",
+               "total-contexts": 1,
+               "accelerator-type-uuid": "222baa4c-0ab8-4574-bf74-aa35b945a223"
+            }
+         ]
+   }
+}
+

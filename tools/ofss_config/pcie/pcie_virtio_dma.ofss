@@ -1,0 +1,24 @@
+[ip]
+type = pcie
+
+[settings]
+output_name = pcie_ss
+
+[pf0]
+num_vfs = 3
+bar0_address_width = 20
+vf_bar0_address_width = 20
+
+[pf1]
+num_vfs = 6
+bar0_address_width = 20
+vf_bar0_address_width = 20
+pci_type0_vendor_id = 0x0001af4 
+pci_type0_device_id = 0x00001000
+revision_id = 0x00000000
+class_code = 0x00020000
+subsys_vendor_id = 0x00008086
+subsys_dev_id = 0x00000001
+sriov_vf_device_id = 0x00001000
+exvf_subsysid = 0x00000001
+

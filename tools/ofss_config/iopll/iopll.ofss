@@ -1,0 +1,9 @@
+[ip]
+type = iopll
+
+[settings]
+output_name = sys_pll
+instance_name = iopll_0
+
+[p_clk]
+freq = 470

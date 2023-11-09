@@ -1,0 +1,131 @@
+# Copyright (C) 2021-2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
+############################################################################################
+# FPGA Device
+############################################################################################
+
+set_global_assignment -name FAMILY Agilex
+set_global_assignment -name DEVICE AGFB014R24A2E2V
+
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 100
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "1.2 V"
+
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
+set_global_assignment -name RESERVE_DATA0_AFTER_CONFIGURATION "USE AS REGULAR IO"
+
+############################################################################################
+# Preserve unused XCVR channels
+############################################################################################
+#To preserve unused xcvr channels add the QSF assignment 
+#set_instance_assignment -name PRESERVE_UNUSED_XCVR_CHANNEL ON -to <pin_name>' 
+#for each unused channel that will be used in future.
+#Refer E-Tile PHY user guide
+
+############################################################################################
+# Synthesis Options
+############################################################################################
+set_global_assignment -name TOP_LEVEL_ENTITY top
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name OPTIMIZATION_MODE "SUPERIOR PERFORMANCE"
+set_global_assignment -name OPTIMIZATION_TECHNIQUE SPEED
+set_global_assignment -name OPTIMIZE_POWER_DURING_SYNTHESIS OFF
+set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING OFF
+set_global_assignment -name ALLOW_REGISTER_RETIMING ON
+set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
+set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
+set_global_assignment -name MUX_RESTRUCTURE ON
+
+set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF -to rst_n_sys_afu
+set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF -to rst_n_sys_mem
+set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF -to rst_n_sys_pcie
+
+set_global_assignment -name LAST_QUARTUS_VERSION "22.3.0 SP0.31,0.35 Pro Edition"
+
+set_global_assignment -name FLOW_DISABLE_ASSEMBLER OFF
+set_global_assignment -name FLOW_ENABLE_INTERACTIVE_TIMING_ANALYZER OFF
+set_global_assignment -name SEED 1
+
+############################################################################################
+# PWR MGMT
+############################################################################################
+# todo
+set_global_assignment -name PWRMGT_DEVICE_ADDRESS_IN_PMBUS_SLAVE_MODE 3C
+set_global_assignment -name VID_OPERATION_MODE "PMBUS SLAVE"
+set_global_assignment -name PWRMGT_BUS_SPEED_MODE "100 KHZ"
+set_global_assignment -name PWRMGT_VOLTAGE_OUTPUT_FORMAT "LINEAR FORMAT"
+set_global_assignment -name PWRMGT_LINEAR_FORMAT_N "-12"
+
+############################################################################################
+# Configuration Interface
+############################################################################################
+# todo
+set_global_assignment -name AUTO_RESTART_CONFIGURATION OFF
+set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
+set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
+set_global_assignment -name STRATIXV_CONFIGURATION_SCHEME "AVST X8"
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name STRATIXII_CONFIGURATION_DEVICE AUTO
+set_global_assignment -name GENERATE_PR_RBF_FILE ON
+set_global_assignment -name ENABLE_ED_CRC_CHECK ON
+#set_global_assignment -name MINIMUM_SEU_INTERVAL 0
+set_global_assignment -name MINIMUM_SEU_INTERVAL 479
+#set_global_assignment -name ACTIVE_SERIAL_CLOCK AS_FREQ_100MHZ # Setting for Agilex DevKit
+set_global_assignment -name ACTIVE_SERIAL_CLOCK AS_FREQ_115MHZ_IOSC
+set_global_assignment -name DEVICE_INITIALIZATION_CLOCK OSC_CLK_1_125MHZ
+#set_global_assignment -name DEVICE_INITIALIZATION_CLOCK OSC_CLK_1_25MHZ
+#set_global_assignment -name DEVICE_INITIALIZATION_CLOCK INIT_INTOSC
+set_global_assignment -name USE_PWRMGT_SCL SDM_IO0
+#set_global_assignment -name USE_PWRMGT_SDA SDM_IO12 # This was setting for Agilex DevKit
+set_global_assignment -name USE_PWRMGT_SDA SDM_IO16
+#set_global_assignment -name USE_CONF_DONE SDM_IO16
+set_global_assignment -name USE_PWRMGT_ALERT SDM_IO12
+set_global_assignment -name USE_INIT_DONE SDM_IO5
+set_global_assignment -name USE_NCATTRIP SDM_IO9
+#set_global_assignment -name USE_HPS_COLD_RESET SDM_IO7
+#set_global_assignment -name HPS_INITIALIZATION "AFTER INIT_DONE"
+#set_global_assignment -name HPS_DAP_SPLIT_MODE "HPS PINS"
+#set_global_assignment -name HPS_DAP_SPLIT_MODE "SDM PINS"
+#set_global_assignment -name HPS_DAP_NO_CERTIFICATE on
+set_global_assignment -name GENERATE_RBF_FILE ON
+
+set_global_assignment -name GENERATE_COMPRESSED_SOF ON
+
+############################################################################################
+# Verilog Macros
+############################################################################################
+#set_global_assignment -name VERILOG_MACRO "INCLUDE_DDR4"             # Includes the MEM SS and the AXI-MM datapath
+set_global_assignment -name VERILOG_MACRO "INCLUDE_PMCI"             # Includes PMCI SS in the fim
+set_global_assignment -name VERILOG_MACRO "INCLUDE_PR"               # INCLUDE_PR removes PR IP instatiation in port_gasket. To disable PR, remove INCLUDE_PR & pr_assignments.tcl from .qsf  
+set_global_assignment -name VERILOG_MACRO "INCLUDE_HSSI"             # Includes HSSI SS and HE-HSSI logic into the design
+set_global_assignment -name VERILOG_MACRO "DISABLE_HE_HSSI_CRC"      # Disables CRC generation from HE-HSSI traffic generation
+set_global_assignment -name VERILOG_MACRO "INCLUDE_PCIE_SS"          # Instantiates the PCIE SS (Gen4) when enabled, else instantiates PCIE Gen3 (should only be disabled in unit test sim only).   
+#set_global_assignment -name VERILOG_MACRO "INCLUDE_HPS"              # Includes Hard Processor System in the fim
+#set_global_assignment -name VERILOG_MACRO "INCLUDE_UART"             # Includes Soft UART accessible from PCIe
+#At most one of INCLUDE_REMOTE_STP and INCLUDE_JTAG_PR_STP should be
+# set. If both are defined, JTAG-based SignalTap takes precedence.
+# Remote STP uses mmlink. JTAG_PR_STP is on node 0 of the FPGA chain.
+set_global_assignment -name VERILOG_MACRO "INCLUDE_REMOTE_STP"       # Includes Remote SignalTap support in PR Region
+#set_global_assignment -name VERILOG_MACRO "INCLUDE_JTAG_PR_STP"      # Includes JTAG-based SignalTap via programming cable in the PR region
+set_global_assignment -name VERILOG_MACRO "INCLUDE_CPR"               # Enable Cross Port Routing
+
+# Compile time Verilog Macros
+set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../../../shared_config/compile_flags.tcl
+
+############################################################################################
+# Design Files
+############################################################################################
+
+# Ensure that variables such as BUILD_ROOT_REL are set (must be relative)
+set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/config_env.tcl
+
+# RTL and IP files use BUILD_ROOT_REL env variable, which is set only after config_env.tcl is evaluated. 
+# Move global assignment into separate tcl file to ensure availability of BUILD_ROOT_REL after evaluation.
+set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ofs_top_sources.tcl
+
+
+############################################################################################
+# VAB Assignments 
+############################################################################################
+set_global_assignment -name ENABLE_MULTI_AUTHORITY ON

@@ -1,0 +1,8 @@
+[ip]
+type = hssi
+
+[settings]
+output_name = hssi_ss
+num_channels = 1
+data_rate = 400GAUI-8
+preset = 400g-fseries-dk

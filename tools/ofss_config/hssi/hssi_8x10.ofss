@@ -1,0 +1,7 @@
+[ip]
+type = hssi
+
+[settings]
+output_name = hssi_ss
+num_channels = 8
+data_rate = 10GbE

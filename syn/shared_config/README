@@ -1,0 +1,8 @@
+Tcl scrips here import RTL and other IP into a FIM build or into an AFU partial
+reconfiguration (PR) build. The majority of the scripts are used only during
+a FIM base build. Scripts with the name *afu_if* import interfaces and packages
+describing data structures passed to AFUs and are used during PR synthesis
+as well.
+
+Only sources that describe an AFU interface and are required for PR builds
+should be listed in *afu_if*.tcl files.
