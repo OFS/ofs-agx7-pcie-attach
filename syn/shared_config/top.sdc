@@ -44,7 +44,6 @@ set_clock_groups -asynchronous -group {altera_reserved_tck}
 set_clock_groups -asynchronous -group {sys_pll|iopll_0_clk_sys}
 set_clock_groups -asynchronous -group {sys_pll|iopll_0_clk_sys} -group { pcie_wrapper|pcie_ss_top|*|pcie_ss|*|inst|inst|maib_and_tile|xcvr_hip_native|rx_ch15}
 set_clock_groups -asynchronous -group {sys_pll|iopll_0_clk_100m } -group {pcie_wrapper|pcie_ss_top|*|pcie_ss|*|intel_pcie_*_ast_qhip|rx_clkout|ch5}
-set_clock_groups -asynchronous -group {altera_int_osc_clk} -group {pcie_wrapper|pcie_ss_top|*|pcie_ss|*|intel_pcie_*_ast_qhip|rx_clkout|ch5}
 set_clock_groups -asynchronous -group {sys_pll|iopll_0_clk_100m } -group {pcie_wrapper|pcie_ss_top|*|pcie_ss|*|intel_pcie_rtile_ast_qhip_pld_clkout_slow}
 set_clock_groups -asynchronous -group {pcie_wrapper|pcie_ss_top|*|pcie_ss|avmm_clock0} -group {pcie_wrapper|pcie_ss_top|*|pcie_ss|*|inst|inst|maib_and_tile|xcvr_hip_native|rx_ch15}
 set_clock_groups -asynchronous -group {sys_pll|iopll_0_clk_100m} -group {pcie_wrapper|pcie_ss_top|*|pcie_ss|*|inst|inst|maib_and_tile|xcvr_hip_native|rx_ch15}
