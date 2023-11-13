@@ -282,13 +282,15 @@ def generate_package(pf_enabled_list, num_vfs_per_pf):
     # Here is the pfvf_type_t definition and setup for flr_type_t
     #-------------------------------------------------------------
     flr_type_defs = []
+    pfvf_type_defs = []
     line = "   typedef enum {\n"
-    file_out_pfvf.write(line)
+    pfvf_type_defs.append(line)
     flr_type_defs.append(line)
     last_pf_index = -1
     last_vf_index = -1
     pfvf_attr_defs = []
     flr_attr_defs  = []
+    num_funcs = 0
     if (len(pf_enabled_list) > 0):
         for i in range(len(pf_enabled_list)):
             if (pf_enabled_list[i] == '1'):
@@ -300,18 +302,21 @@ def generate_package(pf_enabled_list, num_vfs_per_pf):
     if ((len(pf_enabled_list) > 0) and (last_pf_index >= 0)):
         for i in range(len(pf_enabled_list)):
             if (pf_enabled_list[i] == '1'):
+                num_funcs += 1
+                line = f"      PF{i}"
+                line_pfvf_attr = f"      PF{i}:     '{{3'd{i}, 11'd0, 1'b0, 64'h{pf_base_address_section[3]:04x}_{pf_base_address_section[2]:04x}_{pf_base_address_section[1]:04x}_{pf_base_address_section[0]:04x}}}"
+                line_flr_attr  = f"      PF{i}:     '{{3'd{i}, 11'd0, 1'b0}}"
                 if ((i == last_pf_index) and (last_vf_index < 0)):
-                    line = f"      PF{i}\n"
-                    file_out_pfvf.write(line)
-                    flr_type_defs.append(line)
-                    pfvf_attr_defs.append(f"      PF{i}:     '{{3'd{i}, 11'd0, 1'b0, 64'h{pf_base_address_section[3]:04x}_{pf_base_address_section[2]:04x}_{pf_base_address_section[1]:04x}_{pf_base_address_section[0]:04x}}}\n")
-                    flr_attr_defs.append(f"      PF{i}:     '{{3'd{i}, 11'd0, 1'b0}}\n")
+                    line_end = "\n"
                 else:
-                    line = f"      PF{i},\n"
-                    file_out_pfvf.write(line)
-                    flr_type_defs.append(line)
-                    pfvf_attr_defs.append(f"      PF{i}:     '{{3'd{i}, 11'd0, 1'b0, 64'h{pf_base_address_section[3]:04x}_{pf_base_address_section[2]:04x}_{pf_base_address_section[1]:04x}_{pf_base_address_section[0]:04x}}},\n")
-                    flr_attr_defs.append(f"      PF{i}:     '{{3'd{i}, 11'd0, 1'b0}},\n")
+                    line_end = ",\n"
+                line = line + line_end
+                line_pfvf_attr = line_pfvf_attr  + line_end
+                line_flr_attr  = line_flr_attr   + line_end
+                pfvf_type_defs.append(line)
+                flr_type_defs.append(line)
+                pfvf_attr_defs.append(line_pfvf_attr)
+                flr_attr_defs.append(line_flr_attr)
                 pf_base_address += pf_base_offset
                 pf_base_address_section = section_addr(pf_base_address)
     if ((len(num_vfs_per_pf) > 0) and (last_vf_index >= 0)):
@@ -319,33 +324,34 @@ def generate_package(pf_enabled_list, num_vfs_per_pf):
             if (num_vfs_per_pf[i] != '0'):
                 if (num_vfs_per_pf[i].isdigit()):
                     for j in range(int(num_vfs_per_pf[i])):
+                        num_funcs += 1
+                        line = f"      PF{i}_VF{j}"
+                        line_pfvf_attr = f"      PF{i}_VF{j}: '{{3'd{i}, 11'd{j}, 1'b1, 64'h{vf_base_address_section[3]:04x}_{vf_base_address_section[2]:04x}_{vf_base_address_section[1]:04x}_{vf_base_address_section[0]:04x}}}" 
+                        line_flr_attr  = f"      PF{i}_VF{j}: '{{3'd{i}, 11'd{j}, 1'b1}}"
                         if ((i == last_vf_index) and (j == int(num_vfs_per_pf[i])-1)):
-                            line = f"      PF{i}_VF{j},\n"
-                            file_out_pfvf.write(line)
-                            flr_type_defs.append(line)
-                            pfvf_attr_defs.append(f"      PF{i}_VF{j}: '{{3'd{i}, 11'd{j}, 1'b1, 64'h{vf_base_address_section[3]:04x}_{vf_base_address_section[2]:04x}_{vf_base_address_section[1]:04x}_{vf_base_address_section[0]:04x}}}\n")
-                            flr_attr_defs.append(f"      PF{i}_VF{j}: '{{3'd{i}, 11'd{j}, 1'b1}}\n")
+                            line_end = "\n"
                         else:
-                            line = f"      PF{i}_VF{j},\n"
-                            file_out_pfvf.write(line)
-                            flr_type_defs.append(line)
-                            pfvf_attr_defs.append(f"      PF{i}_VF{j}: '{{3'd{i}, 11'd{j}, 1'b1, 64'h{vf_base_address_section[3]:04x}_{vf_base_address_section[2]:04x}_{vf_base_address_section[1]:04x}_{vf_base_address_section[0]:04x}}},\n")
-                            flr_attr_defs.append(f"      PF{i}_VF{j}: '{{3'd{i}, 11'd{j}, 1'b1}},\n")
+                            line_end = ",\n"
+                        line = line + line_end
+                        line_pfvf_attr = line_pfvf_attr  + line_end
+                        line_flr_attr  = line_flr_attr   + line_end
+                        pfvf_type_defs.append(line)
+                        flr_type_defs.append(line)
+                        pfvf_attr_defs.append(line_pfvf_attr)
+                        flr_attr_defs.append(line_flr_attr)
                         vf_base_address += vf_base_offset
                         vf_base_address_section = section_addr(vf_base_address)
                 else:
                     logger.error(f"ERROR: Value for number of VFs for PF{i} is not a number: {num_vfs_per_pf[i]}.")
-    line = f"      FUNC_MAX\n"
-    file_out_pfvf.write(line)
-    flr_type_defs.append(line)
-    file_out_pfvf.write("   } pfvf_type_t;\n")
-    file_out_pfvf.write("\n")
+    file_out_pfvf.writelines(pfvf_type_defs)
+    file_out_pfvf.write("   } pfvf_type_t;\n\n")
+    file_out_pfvf.write(f"   localparam NUM_OF_PFVF_FUNCTIONS = {num_funcs};\n\n")
     #-------------------------------------------------------------
     # Here is the flr_type_t definition
     #-------------------------------------------------------------
     file_out_flr.writelines(flr_type_defs)
-    file_out_flr.write("   } flr_type_t;\n")
-    file_out_flr.write("\n")
+    file_out_flr.write("   } flr_type_t;\n\n")
+    file_out_flr.write(f"   localparam NUM_OF_FLR_FUNCTIONS = {num_funcs};\n\n")
     #-------------------------------------------------------------
     # Here is the pfvf_attr_struct definition
     #-------------------------------------------------------------

@@ -453,7 +453,7 @@ task main_test;
 
       @(posedge clk iff (rst_n === 1'b1));
       repeat (20) @(posedge clk);
-      for (test_pfvf_type_index = uint32_t'(pfvf_def_pkg::PF0); test_pfvf_type_index < uint32_t'(pfvf_def_pkg::FUNC_MAX); test_pfvf_type_index += 32'd1)
+      for (test_pfvf_type_index = uint32_t'(pfvf_def_pkg::PF0); test_pfvf_type_index < uint32_t'(pfvf_def_pkg::NUM_OF_PFVF_FUNCTIONS); test_pfvf_type_index += 32'd1)
       begin
          host_bfm_top.host_bfm.set_pfvf_setting(pfvf_type_t'(test_pfvf_type_index));
          $sformat(test_name,"test_pf%0d_vf%0d_vfa%b_access", host_bfm_top.host_bfm.get_pf(), host_bfm_top.host_bfm.get_vf(), host_bfm_top.host_bfm.get_vf_active());

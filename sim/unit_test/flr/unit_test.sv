@@ -238,7 +238,7 @@ task main_test;
       $display("Entering FLR Test.");
       @(posedge clk iff (rst_n === 1'b1));
       repeat (20) @(posedge clk);
-      for (test_flr_type_index = uint32_t'(flr_def_pkg::PF0); test_flr_type_index < uint32_t'(flr_def_pkg::FUNC_MAX); test_flr_type_index += 32'd1)
+      for (test_flr_type_index = uint32_t'(flr_def_pkg::PF0); test_flr_type_index < uint32_t'(flr_def_pkg::NUM_OF_FLR_FUNCTIONS); test_flr_type_index += 32'd1)
       begin
          host_flr_top.flr_manager.send_flr(flr_type_t'(test_flr_type_index));
          flr = host_flr_top.flr_manager.flrs[$];
