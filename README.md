@@ -35,15 +35,16 @@ This is the OFS Agilex 7 PCIe Attach FPGA development top-level directory. This 
     ```bash
         ./ofs-common/scripts/common/syn/build_top.sh -p --ofss tools/ofss_config/iseries-dk.ofss,tools/ofss_config/hssi/hssi_8x25_ftile.ofss iseries-dk work_iseries-dk
     ```
-	```
+
    - Compiling the iseries-dk for Ethernet 200G design configuration requires .ofss for changing the .ip configuration
     ```bash
         ./ofs-common/scripts/common/syn/build_top.sh -p --ofss tools/ofss_config/iseries-dk.ofss,tools/ofss_config/hssi/hssi_2x200_ftile.ofss iseries-dk work_iseries-dk_200
     ```
+
    - Compiling the iseries-dk Ethernet 400G design configuration requires .ofss for changing the .ip configuration
     ```bash
         ./ofs-common/scripts/common/syn/build_top.sh -p --ofss tools/ofss_config/iseries-dk.ofss,tools/ofss_config/hssi/hssi_1x400_ftile.ofss iseries-dk work_iseries-dk_400
-
+    ```
 ## Directories
 
 ### Evaluation Scripts (***eval\_scripts***)

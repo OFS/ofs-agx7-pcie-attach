@@ -1,6 +1,0 @@
-[include]
-"$OFS_ROOTDIR"/tools/ofss_config/fseries-dk_base.ofss
-"$OFS_ROOTDIR"/tools/ofss_config/pcie/pcie_host.ofss
-"$OFS_ROOTDIR"/tools/ofss_config/iopll/iopll.ofss
-"$OFS_ROOTDIR"/tools/ofss_config/memory/memory_ftile.ofss
-"$OFS_ROOTDIR"/tools/ofss_config/hssi/hssi_1x400_ftile.ofss
