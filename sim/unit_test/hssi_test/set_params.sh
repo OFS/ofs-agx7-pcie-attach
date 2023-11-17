@@ -36,24 +36,32 @@ if [ -f $OFS_ROOTDIR/sim/scripts/generated_ftile_macros.f ]; then
   cp -f ${QUARTUS_ROOTDIR}/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/nios2_smg_regfile.hex $SIM_DIR
   cp -f ${QUARTUS_ROOTDIR}/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/rst_ctrl_dram.hex $SIM_DIR
   cp -f ${QUARTUS_ROOTDIR}/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/rst_ctrl_iram.hex $SIM_DIR
+ 
+
+  cp -f  ${OFS_ROOTDIR}/ofs-common/src/common/he_hssi/pkt_client_mac_seg/alt_f_hw_pkt_gen_rom_init.400G_SEG.hex $SIM_DIR
+  cp -f  ${OFS_ROOTDIR}/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.400G_SEG.hex $SIM_DIR
+  cp -f  ${OFS_ROOTDIR}/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.200G_SEG.hex $SIM_DIR
+
+  cp -f  ${OFS_ROOTDIR}/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.200G.hex $SIM_DIR
+  cp -f  ${OFS_ROOTDIR}/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.400G.hex $SIM_DIR
+  cp -f  ${OFS_ROOTDIR}/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.hex $SIM_DIR
+  cp -f  ${OFS_ROOTDIR}/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.200G.hex $SIM_DIR
+  cp -f  ${OFS_ROOTDIR}/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.400G.hex $SIM_DIR
+  cp -f  ${OFS_ROOTDIR}/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.hex $SIM_DIR
+
+
+if [ -d ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk ]; then
+  cp ${OFS_ROOTDIR}/sim/scripts/qip_gen_iseries-dk/syn/board/iseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y0_n0.mif $SIM_DIR
   cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x393_y0_n0.mif $SIM_DIR
   cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y166_n0.mif $SIM_DIR
- 
   cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y166_n0.mif $SIM_DIR
-
-  cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/alt_f_hw_pkt_gen_rom_init.400G_SEG.hex $SIM_DIR
-  cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.400G_SEG.hex $SIM_DIR
-  cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.200G_SEG.hex $SIM_DIR
-
-  cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.200G.hex $SIM_DIR
-  cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.400G.hex $SIM_DIR
-  cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.hex $SIM_DIR
-  cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.200G.hex $SIM_DIR
-  cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.400G.hex $SIM_DIR
-  cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.hex $SIM_DIR
-
 fi
-
 if [ -d ${OFS_ROOTDIR}/sim/scripts/qip_gen_iseries-dk ]; then
-   ${OFS_ROOTDIR}/sim/scripts/qip_gen_iseries-dk/syn/board/iseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y0_n0.mif $SIM_DIR
+  cp ${OFS_ROOTDIR}/sim/scripts/qip_gen_iseries-dk/syn/board/iseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y0_n0.mif $SIM_DIR
+  cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_iseries-dk/syn/board/iseries-dk/syn_top/support_logic/ofs_top__z1577b_x393_y0_n0.mif $SIM_DIR
+  cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_iseries-dk/syn/board/iseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y166_n0.mif $SIM_DIR
+  cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_iseries-dk/syn/board/iseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y166_n0.mif $SIM_DIR
 fi
+
+fi
+
