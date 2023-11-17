@@ -71,6 +71,11 @@ parameter MAX_TEST = 100;
 parameter TIMEOUT = 10.0ms;
 parameter RP_MAX_TAGS = 64;
 
+`ifdef ETH_10G
+    `define ETH_10_OR_25G
+`elsif ETH_25G
+  `define ETH_10_OR_25G
+`endif
 typedef struct packed {
    logic result;
    logic [1024*8-1:0] name;
@@ -995,7 +1000,7 @@ task wait_for_hssi_to_ready;
                end
             
                if(port_status.tx_lanes_stable & !port_status_prev.tx_lanes_stable) begin
-                  @(posedge top_tb.DUT.hssi_wrapper.hssi_ss.o_p0_clk_pll);
+                  // @(posedge top_tb.DUT.hssi_wrapper.hssi_ss.o_p0_clk_pll);
                   $display ("INFO:%t	Port %0d - TX enabled", $time, port);
                end
 
@@ -1019,12 +1024,85 @@ task wait_for_all_eop_done;
    logic [31:0]        pkt_cnt;
    begin
       pkt_cnt = 32'h0;
+`ifdef ETH_10_OR_25G
       while (pkt_cnt < num_pkt) begin
 	      @(posedge top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_sop_traffic_ctrl_inst.GenBrdg[0].axis_to_avst_bridge_inst.avst_rx_st.rx.eop);
          @(posedge top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_sop_traffic_ctrl_inst.GenBrdg[0].axis_to_avst_bridge_inst.avst_rx_st.clk);
          pkt_cnt=pkt_cnt+1;
       end
+`endif
       $display("INFO:%t	- RX EOP count is %d", $time, pkt_cnt);
+   end
+endtask
+task traffic_200G_400G;
+   input logic  access32;
+   logic [63:0] tx_cnt;
+   logic [63:0] rx_cnt;
+   logic [31:0] tx_cnt_lsb;
+   logic [31:0] tx_cnt_msb;
+   logic [31:0] rx_cnt_lsb;
+   logic [31:0] rx_cnt_msb;
+   begin
+      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF1);
+      host_bfm_top.host_bfm.set_bar(4'd0);
+      //---------------------------------------------------------------------------
+      // Traffic Controller Configuration
+      //---------------------------------------------------------------------------
+      $display("T:%8d INFO: write mailbox",$time);
+     `ifdef INCLUDE_HSSI_PORT_12
+      host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'h1); // select hssi[1] TG
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0004, 32'h1); // HW_TEST_LOOP_CNT =1 default
+     //Setting ROM end address.  HW_TEST_ROM_ADDR[15:0] - Rom packet data start addr ;HW_TEST_ROM_ADDR[31:16] - Rom packet data end address
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h1F00); 
+      // Clearing status regs and counter values - bit 7 =1 (clear status reg) and bit 8 =1 (clear counter)
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h180); 
+      // Resetting the hw_pc_cntrl to default 
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h0);
+      // writing hw_pc_cntrl 1 to start the TG 
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h1); 
+      `endif
+      // port8 
+      host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'h0);// select hssi[0] TG
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0004, 32'h1); // HW_TEST_LOOP_CNT =1 default
+      //Setting ROM end address.  HW_TEST_ROM_ADDR[15:0] - Rom packet data start addr ;HW_TEST_ROM_ADDR[31:16] - Rom packet data end address
+      `ifndef ETH_400G
+              write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h1F00); 
+              `else
+              write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h1700);
+              `endif
+      // Clearing status regs and counter values - bit 7 =1 (clear status reg) and bit 8 =1 (clear counter)
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h180); 
+      // Resetting the hw_pc_cntrl to default 
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h0);
+      // writing hw_pc_cntrl 1 to start the TG 
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h1);
+              #500000
+              // Stop the TG 
+              write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h0);
+              #2000
+              // Take snapshot of counters (bit 6 =1)
+              write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h40);
+      //---------------------------------------------------------------------------
+      // Read Monitor statistics
+      //---------------------------------------------------------------------------
+      $display("T:%8d INFO: read mailbox 1",$time);
+      // reading TX SOP 
+      read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0020, tx_cnt_lsb);
+      read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0024, tx_cnt_msb);
+      tx_cnt = {tx_cnt_msb, tx_cnt_lsb};
+      $display("T:%8d INFO: read mailbox 2",$time);
+      // reading TX SOP 
+      read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0038, rx_cnt_lsb);
+      read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h003C, rx_cnt_msb);
+      rx_cnt = {rx_cnt_msb, rx_cnt_lsb};
+      if (tx_cnt != rx_cnt) begin
+         incr_err_count();
+         $display("\nError: Received good packets does not match Transmitted packets on Port-%0d !\n",0);
+         $display("Number of Packets \tSent: %0d\n \tReceived: %0d",tx_cnt,rx_cnt);
+      end else begin
+         $display("INFO: Number of Packets \tSent: %0d\n \tReceived: %0d",tx_cnt,rx_cnt);
+      end
+      host_bfm_top.host_bfm.revert_to_last_pfvf_setting();
    end
 endtask
 
@@ -1103,12 +1181,11 @@ task traffic_100G;
       `ifdef INCLUDE_HSSI_PORT_4
       //WRITE32(ADDR32, AFU_PORT_SEL_ADDR, 0,  HEH_VA, HEH_PF, HEH_VF, 32'h1);
       host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'h1);
-      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h1010, 32'h5E);
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h1010, 32'h1E);
       `endif
 
-      //WRITE32(ADDR32, AFU_PORT_SEL_ADDR, 0,  HEH_VA, HEH_PF, HEH_VF, 32'h0);
       host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'h0);
-      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h1010, 32'h54);
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h1010, 32'h14);
 
       #500000
       //---------------------------------------------------------------------------
@@ -1120,6 +1197,42 @@ task traffic_100G;
       $display("T:%8d INFO: read mailbox 2",$time);
       read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h1015, rx_cnt);
       if (tx_cnt[30:0] != rx_cnt) begin
+         incr_err_count();
+         $display("\nError: Received good packets does not match Transmitted packets on Port-%0d !\n",0);
+         $display("Number of Packets \tSent: %0d\n \tReceived: %0d",tx_cnt,rx_cnt);
+      end else begin
+         $display("INFO: Number of Packets \tSent: %0d\n \tReceived: %0d",tx_cnt,rx_cnt);
+      end
+      host_bfm_top.host_bfm.revert_to_last_pfvf_setting();
+   end
+endtask
+// HSSI Traffic test for 200G variant
+task traffic_200G;
+   input logic  access32;
+   logic [31:0] tx_cnt;
+   logic [31:0] rx_cnt;
+   begin
+      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF1);
+      host_bfm_top.host_bfm.set_bar(4'd0);
+      //---------------------------------------------------------------------------
+      // Traffic Controller Configuration
+      //---------------------------------------------------------------------------
+      $display("T:%8d INFO: write mailbox",$time);
+      //WRITE32(ADDR32, AFU_PORT_SEL_ADDR, 0,  HEH_VA, HEH_PF, HEH_VF, 32'h1);
+      host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'h1);
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h1010, 32'h5E);
+      //WRITE32(ADDR32, AFU_PORT_SEL_ADDR, 0,  HEH_VA, HEH_PF, HEH_VF, 32'h0);
+      host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'h0);
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h1010, 32'h54);
+      #500000
+      //---------------------------------------------------------------------------
+      // Read Monitor statistics
+      //---------------------------------------------------------------------------
+      $display("T:%8d INFO: read mailbox 1",$time);
+      read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h1009, tx_cnt);
+      $display("T:%8d INFO: read mailbox 2",$time);
+      read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h1015, rx_cnt);
+      if (tx_cnt != rx_cnt) begin
          incr_err_count();
          $display("\nError: Received good packets does not match Transmitted packets on Port-%0d !\n",0);
          $display("Number of Packets \tSent: %0d\n \tReceived: %0d",tx_cnt,rx_cnt);
@@ -1249,14 +1362,20 @@ task traffic_test;
       // Wait for ready before starting the test
       $display("T:%8d INFO: Wait for reset done",$time);
       wait_for_reset_done();
+      wait(&(top_tb.DUT.hssi_wrapper.tx_pll_locked[NUM_ETH_CHANNELS-1:0]));
       $display("T:%8d INFO: Wait for hssi ready",$time);
       wait_for_hssi_to_ready();
 
-      `ifdef ETH_100G
+      `ifdef ETH_200G
+      $display("T:%8d INFO: Running eth 200g",$time);
+      traffic_200G_400G(access32);
+      `elsif ETH_400G
+      $display("T:%8d INFO: Running eth 400g",$time);
+      traffic_200G_400G(access32);
+      `elsif ETH_100G
       $display("T:%8d INFO: Running eth 100g",$time);
       traffic_100G(access32);
-      `else
-      $display("T:%8d INFO: Running eth 10g",$time);
+      `else      $display("T:%8d INFO: Running eth 10g",$time);
       traffic_10G_25G(access32);
       `endif
 

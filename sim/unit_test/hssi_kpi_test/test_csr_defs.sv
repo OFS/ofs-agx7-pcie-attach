@@ -120,6 +120,10 @@ package test_csr_defs;
    parameter HSSI_FEATURE_VAL               = 32'h0000_0005;
    parameter HSSI_IF_ATTR_VAL               = 32'h0024_301B;
    parameter HSSI_PORT_STATUS_VAL           = 32'h0000_009D;
+   `elsif ETH_200G
+   parameter HSSI_FEATURE_VAL               = 32'h0004_4005;
+   parameter HSSI_IF_ATTR_VAL               = 32'h0024_101D;
+   parameter HSSI_PORT_STATUS_VAL           = 32'h0000_0000;
    `else
    parameter HSSI_FEATURE_VAL               = 32'h0000_3FD1;
    parameter HSSI_IF_ATTR_VAL               = 32'h0024_2415;
