@@ -199,51 +199,16 @@ virtual class PacketHeader; // Abstract Base Class
 
    // Class Methods
    virtual function void set_pf_vf(pfvf_type_t setting);
+      // NOTE: Changing the PF/VF here does not change the state of the Host
+      // as in the commented out line immediately below.  This must be done
+      // with the BFM object.  This will only change the packet's state.
+      // New packets will change via the pf_vf_route.
       //this.pf_vf_route.set_env(setting);
       this.last_pf_vf_setting = this.pf_vf_setting;
       this.pf_vf_setting = setting;
-      case(setting)
-         PF0: begin
-            this.pf = 3'd0;
-            this.vf = 11'd0;
-            this.vf_active = 1'b0;
-         end
-         PF1: begin
-            this.pf = 3'd1;
-            this.vf = 11'd0;
-            this.vf_active = 1'b0;
-         end
-         PF2: begin
-            this.pf = 3'd2;
-            this.vf = 11'b0;
-            this.vf_active = 1'b0;
-         end
-         PF3: begin
-            this.pf = 3'd3;
-            this.vf = 11'd0;
-            this.vf_active = 1'b0;
-         end
-         PF4: begin
-            this.pf = 3'd4;
-            this.vf = 11'd0;
-            this.vf_active = 1'b0;
-         end
-         PF0_VF0: begin
-            this.pf = 3'd0;
-            this.vf = 11'd0;
-            this.vf_active = 1'b1;
-         end
-         PF0_VF1: begin
-            this.pf = 3'd0;
-            this.vf = 11'd1;
-            this.vf_active = 1'b1;
-         end
-         PF0_VF2: begin
-            this.pf = 3'd0;
-            this.vf = 11'd2;
-            this.vf_active = 1'b1;
-         end
-      endcase
+      this.pf  = pfvf_def_pkg::pfvf_attr[setting].pfn;
+      this.vf  = pfvf_def_pkg::pfvf_attr[setting].vfn;
+      this.vf_active = pfvf_def_pkg::pfvf_attr[setting].vfa;
       map_fields();
    endfunction
 

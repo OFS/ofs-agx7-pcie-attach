@@ -320,7 +320,7 @@ def generate_package(pf_enabled_list, num_vfs_per_pf):
                 if (num_vfs_per_pf[i].isdigit()):
                     for j in range(int(num_vfs_per_pf[i])):
                         if ((i == last_vf_index) and (j == int(num_vfs_per_pf[i])-1)):
-                            line = f"      PF{i}_VF{j}\n"
+                            line = f"      PF{i}_VF{j},\n"
                             file_out_pfvf.write(line)
                             flr_type_defs.append(line)
                             pfvf_attr_defs.append(f"      PF{i}_VF{j}: '{{3'd{i}, 11'd{j}, 1'b1, 64'h{vf_base_address_section[3]:04x}_{vf_base_address_section[2]:04x}_{vf_base_address_section[1]:04x}_{vf_base_address_section[0]:04x}}}\n")
@@ -335,6 +335,9 @@ def generate_package(pf_enabled_list, num_vfs_per_pf):
                         vf_base_address_section = section_addr(vf_base_address)
                 else:
                     logger.error(f"ERROR: Value for number of VFs for PF{i} is not a number: {num_vfs_per_pf[i]}.")
+    line = f"      FUNC_MAX\n"
+    file_out_pfvf.write(line)
+    flr_type_defs.append(line)
     file_out_pfvf.write("   } pfvf_type_t;\n")
     file_out_pfvf.write("\n")
     #-------------------------------------------------------------
