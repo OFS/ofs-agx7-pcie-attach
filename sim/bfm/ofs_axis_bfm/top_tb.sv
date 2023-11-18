@@ -41,7 +41,7 @@ initial begin
 end
 initial begin
         // #20us;
-         #5us;
+         #1us;
         force {top_tb.DUT.sys_pll.locked} = 1'b1;
         force top_tb.DUT.sys_pll.outclk_0 = outclk_0; 
         force top_tb.DUT.sys_pll.outclk_1 = outclk_1; 

@@ -102,7 +102,7 @@ package test_csr_defs;
    // HSSI Wrapper Register Values
    // ******************************************************************************************
    localparam NUM_ETH_CHANNELS     = `OFS_FIM_IP_CFG_HSSI_SS_NUM_ETH_PORTS;
-   parameter HSSI_WRAP_STATUS_VAL  = (NUM_ETH_CHANNELS==4)? 64'h0000000f000f000f : (NUM_ETH_CHANNELS==2)? 64'h0000000300030003 : 64'h000000FF00FF00FF;
+   parameter HSSI_WRAP_STATUS_VAL  = (NUM_ETH_CHANNELS==4)? 64'h0000000f000f000f : (NUM_ETH_CHANNELS==2)? 64'h0000000300030003 : (NUM_ETH_CHANNELS==1)? 64'h0000000100010001 : 64'h000000FF00FF00FF;
    // ******************************************************************************************
    // HSSI SS IP Register Values
    // ******************************************************************************************
