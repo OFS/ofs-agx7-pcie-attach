@@ -1053,7 +1053,8 @@ task traffic_200G_400G;
       host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'h1); // select hssi[1] TG
       write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0004, 32'h1); // HW_TEST_LOOP_CNT =1 default
      //Setting ROM end address.  HW_TEST_ROM_ADDR[15:0] - Rom packet data start addr ;HW_TEST_ROM_ADDR[31:16] - Rom packet data end address
-      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h1F00); 
+
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h02FF_0000); 
       // Clearing status regs and counter values - bit 7 =1 (clear status reg) and bit 8 =1 (clear counter)
       write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h180); 
       // Resetting the hw_pc_cntrl to default 
@@ -1065,11 +1066,16 @@ task traffic_200G_400G;
       host_bfm_top.host_bfm.write32(AFU_PORT_SEL_ADDR, 32'h0);// select hssi[0] TG
       write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0004, 32'h1); // HW_TEST_LOOP_CNT =1 default
       //Setting ROM end address.  HW_TEST_ROM_ADDR[15:0] - Rom packet data start addr ;HW_TEST_ROM_ADDR[31:16] - Rom packet data end address
-      `ifndef ETH_400G
+      /*`ifndef ETH_400G
               write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h1F00); 
               `else
               write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h1700);
-              `endif
+              `endif */
+      `ifndef ETH_400G
+              write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h02FF_0000); 
+              `else
+              write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h0191_0000);
+     
       // Clearing status regs and counter values - bit 7 =1 (clear status reg) and bit 8 =1 (clear counter)
       write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h180); 
       // Resetting the hw_pc_cntrl to default 
