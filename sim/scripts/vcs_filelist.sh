@@ -47,17 +47,3 @@ $PCIE_RTL_FILELIST"
 
 # Default AFU
 BASE_AFU_SRC="-F $OFS_ROOTDIR/sim/scripts/rtl_afu_default.f"
-
-if [ ! -z "$AFU_WITH_PIM" ]; then
-  # Construct the simulation build environment for the target AFU. A common
-  # script can be used for UVM and unit tests on all targets. The script
-  # will generate a simulator include file afu_with_pim/afu_sim_files.list.
-  $OFS_ROOTDIR/ofs-common/scripts/common/sim/ofs_pim_sim_setup.sh \
-      -t ${PWD}/afu_with_pim \
-      -b adp \
-      -f base_x16 \
-      "${AFU_WITH_PIM}"
-
-  # Load AFU and PIM sources into simulation
-  BASE_AFU_SRC="-F afu_with_pim/afu_sim_files.list"
-fi
