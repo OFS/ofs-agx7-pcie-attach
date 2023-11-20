@@ -6,7 +6,7 @@ This is the OFS Agilex 7 PCIe Attach FPGA development top-level directory. This 
 * n6001 
    - Default .ip parameters are based on n6001 design
     ```bash
-        ./ofs-common/scripts/common/syn/build_top.sh -p n6001 work_n6001
+        ./ofs-common/scripts/common/syn/build_top.sh -p --ofss tools/ofss_config/n6001.ofss,tools/ofss_config/hssi/hssi_8x25.ofss n6001 work_n6001
     ```
    - Additionally, n6001 fim supports reconfiguring the .ip via .ofss flow. For
      example to change hssi config, pass the .ofss files below. 

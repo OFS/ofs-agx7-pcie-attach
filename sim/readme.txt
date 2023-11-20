@@ -16,7 +16,7 @@ Initial Setup:
    In order to do this, run the following steps
     a. Got to $OFS_ROOTDIR/ofs-common/scripts/common/sim
     b  Run the script "sh gen_sim_files.sh <target>" 
-	for n6001 8x25G default configuration 	-"gen_sim_files.sh n6001"
+	for n6001 8x25G default configuration 	-"gen_sim_files.sh --ofss $OFS_ROOTDIR/tools/ofss_config/n6001.ofss,tools/ofss_config/hssi/hssi_8x25.ofss n6001"
 
 
         for fseries-dk 8x25G configuration	- "gen_sim_files.sh --ofss $OFS_ROOTDIR/tools/ofss_config/fseries-dk.ofss fseries-dk"
