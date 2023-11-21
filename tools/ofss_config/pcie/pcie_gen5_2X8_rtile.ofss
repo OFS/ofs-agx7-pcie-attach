@@ -1,7 +1,0 @@
-[ip]
-type = pcie
-
-[settings]
-output_name = pcie_ss
-preset = iseries-dk-gen5
-

@@ -33,7 +33,7 @@ set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF -to rst_n_sys_afu
 set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF -to rst_n_sys_mem
 set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF -to rst_n_sys_pcie
 
-set_global_assignment -name LAST_QUARTUS_VERSION "23.2.0 Pro Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "23.3.0 Pro Edition"
 
 set_global_assignment -name FLOW_DISABLE_ASSEMBLER OFF
 set_global_assignment -name FLOW_ENABLE_INTERACTIVE_TIMING_ANALYZER OFF
