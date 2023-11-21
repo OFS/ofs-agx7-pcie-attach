@@ -139,13 +139,17 @@ package test_csr_defs;
    parameter HSSI_PORT_STATUS_VAL           = 32'h0000_0000;
    localparam HSSI_IN_USE_ATT_VAR           = 32'h0084_0414;
 `elsif ETH_100G
-   parameter HSSI_FEATURE_VAL               = 32'h0000_0445;
+   parameter HSSI_FEATURE_VAL               = 32'h0004_4449;
    parameter HSSI_PORT_STATUS_VAL           = 32'h0000_0000;
    localparam HSSI_IN_USE_ATT_VAR           = 32'h0024_101B;
 `elsif ETH_200G
    parameter HSSI_FEATURE_VAL               = 32'h0004_4005;
    parameter HSSI_PORT_STATUS_VAL           = 32'h0000_0000;
    localparam HSSI_IN_USE_ATT_VAR           = 32'h0024_101D;
+`elsif ETH_400G
+   parameter HSSI_FEATURE_VAL               = 32'h0000_4003;
+   parameter HSSI_PORT_STATUS_VAL           = 32'h0000_0000;
+   localparam HSSI_IN_USE_ATT_VAR           = 32'h0024_1420;
 `else
    parameter HSSI_FEATURE_VAL               = 32'h0000_3fd1;
    parameter HSSI_PORT_STATUS_VAL           = 32'h0000_0000;
