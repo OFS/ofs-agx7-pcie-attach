@@ -83,6 +83,12 @@ VLOG_OPT += +define+SYNOPSYS_SV
 ifdef FTILE_SIM
 VLOG_OPT += +define+FTILE_SIM +define+IP7581SERDES_UX_SIMSPEED
 VLOG_OPT += +define+INCLUDE_FTILE
+ifdef ETH_200G
+VLOG_OPT += +define+ETH_200G
+endif
+ifdef ETH_400G
+VLOG_OPT += +define+ETH_400G
+endif
 VLOG_OPT += +define+TOP_LEVEL_ENTITY_INSTANCE_PATH=tb_top.DUT
 VLOG_OPT += +define+QUARTUS_ENABLE_DPI_FORCE
 VLOG_OPT += +define+SPEC_FORCE
@@ -276,7 +282,13 @@ cmplib_adp:
 ifdef FTILE_SIM
 #Temporary FIX to avoid calibration hang,changed interface value to 2 in file ipss/mem/qip/presets/mem_presets.qprs (#MR https://github.com/intel-innersource/applications.fpga.ofs.reference-fims/pull/1027)
 	#@grep -l 'name="NUM_OF_PHYSICAL_INTERFACES" value="3"' $(OFS_ROOTDIR)/ipss/mem/qip/presets/mem_presets.qprs | xargs sed -i 's/name="NUM_OF_PHYSICAL_INTERFACES" value="3"/name="NUM_OF_PHYSICAL_INTERFACES" value="2"/g'
-	sh "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh  --ofss "$(OFS_ROOTDIR)"/tools/ofss_config/fseries-dk.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_8x25_ftile.ofss fseries-dk
+       ifeq ($(ETH_200G),1)
+	sh "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh  --ofss "$(OFS_ROOTDIR)"/tools/ofss_config/fseries-dk.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_2x200_ftile.ofss fseries-dk
+       else ifeq ($(ETH_400G),1)
+	sh "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh  --ofss "$(OFS_ROOTDIR)"/tools/ofss_config/fseries-dk.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_1x400_ftile.ofss fseries-dk	
+       else
+        sh "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh  --ofss "$(OFS_ROOTDIR)"/tools/ofss_config/fseries-dk.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_8x25_ftile.ofss fseries-dk
+       endif
 	cp -f "$(QIP_DIR)"/synopsys/vcsmx/synopsys_sim.setup ../ip_libraries/
 	cd ../ip_libraries && "$(QIP_DIR)"/synopsys/vcsmx/vcsmx_setup.sh SKIP_SIM=1 SKIP_ELAB=1 USER_DEFINED_COMPILE_OPTIONS=-v2005 QSYS_SIMDIR="$(QIP_DIR)" QUARTUS_INSTALL_DIR=$(QUARTUS_HOME)  USER_DEFINED_COMPILE_OPTIONS="+define+IP7581SERDES_UX_SIMSPEED+define+TIMESCALE_EN+define+RTLSIM+define+INTC_FUNCTIONAL+define+SSM_SEQUENCE+define+SPEC_FORCE+define+IP7581SERDES_UXS2T1R1PGD_PIPE_SPEC_FORCE+define+IP7581SERDES_UXS2T1R1PGD_PIPE_SIMULATION+define+IP7581SERDES_UXS2T1R1PGD_PIPE_FAST_SIM+define+SRC_SPEC_SPEED_UP+define+__SRC_TEST__"
 	cd ../ip_libraries/&& sh "$(OFS_ROOTDIR)"/sim/scripts/ip_flist.sh 
@@ -385,7 +397,13 @@ ifndef TEST_DIR
 	$(error undefined TESTNAME)
 else
 ifdef FTILE_SIM
-	cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(VERIF_SCRIPTS_DIR)/FTILE_HEX/*.hex . && cp -f $(VERIF_SCRIPTS_DIR)/FTILE_HEX/*.mif . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)
+ifeq ($(ETH_200G),1)
+	cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/nios2_smg_regfile.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/rst_ctrl_dram.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/rst_ctrl_iram.hex . && cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x393_y0_n0.mif . && cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y166_n0.mif . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.400G_SEG.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.200G_SEG.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.200G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.400G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.200G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.400G.hex . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)
+else ifeq ($(ETH_400G),1)
+	cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/nios2_smg_regfile.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/rst_ctrl_dram.hex . && cp -f $(QUARTUS_ROOTDIR)/libraries/megafunctions/f_tile_soft_reset_ctlr_ip_v1/rst_ctrl_iram.hex . && cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x393_y0_n0.mif . && cp -f ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/support_logic/ofs_top__z1577b_x5_y166_n0.mif . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.400G_SEG.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/eth_f_hw_pkt_gen_rom_init.200G_SEG.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.200G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_ctrl.400G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.200G.hex . && cp -f  ${OFS_ROOTDIR}/sim/scripts/qip_gen_fseries-dk/ofs-common/src/common/he_hssi/pkt_client_mac_seg/init_file_data.400G.hex . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)	
+else
+        cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(VERIF_SCRIPTS_DIR)/FTILE_HEX/*.hex . && cp -f $(VERIF_SCRIPTS_DIR)/FTILE_HEX/*.mif . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)
+endif 
 else
 ifdef INCLUDE_CVL
 	cd $(VERDIR)/sim && mkdir $(TEST_DIR) && cd $(TEST_DIR) && cp -f ../*.hex . && cp -f $(OFS_ROOTDIR)/ofs-common/src/common/fme_id_rom/fme_id.mif . && cp -f $(VERIF_SCRIPTS_DIR)/fme_id.ver . && cp -f $(OFS_ROOTDIR)/sim/scripts/qip_gen/ofs-common/src/fpga_family/agilex/user_clock/qph_user_clk_iopll_reconfig/altera_iopll_reconfig_1940/sim/recalibration.mif . && cp -f $(VERIF_SCRIPTS_DIR)/recalibration.ver . && cp -f $(VERDIR)/sim/serdes.firmware.rom . && ../simv $(SIMV_OPT) $(SIMV_OPT_EXTRA)

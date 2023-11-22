@@ -115,8 +115,17 @@ class he_hssi_tx_lpbk_seq extends base_seq;
         `else
            wait_for_hssi_to_ready(len);
          `endif
-
-         traffic_10G_25G(len);
+      
+      `ifdef ETH_200G
+        $display("T:%8d INFO: Running eth 200g",$time);
+        traffic_200G_400G(len);
+      `elsif ETH_400G
+        $display("T:%8d INFO: Running eth 400g",$time);
+        traffic_200G_400G(len);
+      `else     
+	$display("T:%8d INFO: Running eth 10g",$time);
+        traffic_10G_25G(len);
+      `endif
 
 	`uvm_info(get_name(), "Exiting sequence...", UVM_LOW)
     endtask : body
@@ -390,12 +399,65 @@ task wait_for_f_tile_hssi_to_ready;
        mmio_read32 (.addr_(addr), .data_(rdata));
       $display("INFO:%t	Port %0d - EHIP RX Block Status bit is %d and EHIP Ready Bit is %d", $time, 7,rdata[4],rdata[0]);
       `endif
+      `ifdef INCLUDE_HSSI_PORT_8
+      //port-8
+      fork begin
+        //$display ("INFO:%t	Port %0d - Waiting for EHIP READY", $time,8);
+        //wait(tb_top.DUT.hssi_wrapper.hssi_ss.hssi_ss.U_hssi_ss_ip_wrapper.o_p0_ehip_ready == 1);
+        //wait(tb_top.DUT.hssi_wrapper.hssi_ss.hssi_ss.U_hssi_ss_ip_wrapper.o_p0_ehip_ready == 1);
+        //$display ("INFO:%t	Port %0d - EHIP READY is 1", $time,8);
+        $display ("INFO:%t	Port %0d - Waiting for EHIP RX Block Lock", $time,8);
+        wait (tb_top.DUT.hssi_wrapper.hssi_ss.hssi_ss.U_eth_f_inst_p8.eth_f_top_p8.sip_inst.o_rx_block_lock  === 1'b1);
+        $display ("INFO:%t	Port %0d - EHIP RX Block Lock  is high", $time,8);
+        $display ("INFO:%t	Port %0d - Waiting for RX PCS Ready", $time, 8);
+        while (tb_top.DUT.hssi_wrapper.hssi_ss.hssi_ss.U_eth_f_inst_p8.eth_f_top_p8.sip_inst.o_rx_pcs_ready !== 1'b1) @(negedge tb_top.DUT.hssi_wrapper.hssi_ss.app_ss_lite_clk);
+        $display ("INFO:%t	Port %0d - RX deskew locked", $time, 8);
+        $display ("INFO:%t	Port %0d - RX lane aligmnent locked", $time, 8);
+        $display ("INFO:%t	Port %0d - Waiting for TX Lanes Stable", $time, 8);
+        wait (tb_top.DUT.hssi_wrapper.hssi_ss.hssi_ss.U_eth_f_inst_p8.eth_f_top_p8.sip_inst.o_tx_lanes_stable === 1'b1);
+        @(posedge tb_top.DUT.hssi_wrapper.hssi_ss.o_p8_clk_pll);
+        $display ("INFO:%t	Port %0d - TX enabled", $time, 8);
+      end
+      join_none
+      wait fork;
+
+       addr = tb_cfg0.PF0_BAR0+HSSI_BASE_ADDR+'h000e0; //HSSI_PORT8_STATUS
+       mmio_read32 (.addr_(addr), .data_(rdata));
+      $display("INFO:%t	Port %0d - EHIP RX Block Status bit is %d and EHIP Ready Bit is %d", $time, 8,rdata[4],rdata[0]);
+
+      `endif
+      `ifdef INCLUDE_HSSI_PORT_12
+      // Port-12
+      fork begin
+       // $display ("INFO:%t	Port %0d - Waiting for EHIP READY", $time,12);
+       // wait(tb_top.DUT.hssi_wrapper.hssi_ss.hssi_ss.U_hssi_ss_ip_wrapper.o_p1_ehip_ready == 1);
+       // $display ("INFO:%t	Port %0d - EHIP READY is 1", $time,12);
+        $display ("INFO:%t	Port %0d - Waiting for EHIP RX Block Lock", $time,12);
+        wait (tb_top.DUT.hssi_wrapper.hssi_ss.hssi_ss.U_eth_f_inst_p12.eth_f_top_p12.sip_inst.o_rx_block_lock  === 1'b1);
+        $display ("INFO:%t	Port %0d - EHIP RX Block Lock  is high", $time,12);
+        $display ("INFO:%t	Port %0d - Waiting for RX PCS Ready", $time, 12);
+        while (tb_top.DUT.hssi_wrapper.hssi_ss.hssi_ss.U_eth_f_inst_p12.eth_f_top_p12.sip_inst.o_rx_pcs_ready !== 1'b1) @(negedge tb_top.DUT.hssi_wrapper.hssi_ss.app_ss_lite_clk);
+        $display ("INFO:%t	Port %0d - RX deskew locked", $time, 12);
+        $display ("INFO:%t	Port %0d - RX lane aligmnent locked", $time, 12);
+        $display ("INFO:%t	Port %0d - Waiting for TX Lanes Stable", $time, 12);
+        wait (tb_top.DUT.hssi_wrapper.hssi_ss.hssi_ss.U_eth_f_inst_p12.eth_f_top_p12.sip_inst.o_tx_lanes_stable === 1'b1);
+        @(posedge tb_top.DUT.hssi_wrapper.hssi_ss.o_p12_clk_pll);
+        $display ("INFO:%t	Port %0d - TX enabled", $time, 12);
+      end
+      join_none
+      wait fork;
+       addr = tb_cfg0.PF0_BAR0+HSSI_BASE_ADDR+'he4; //HSSI_PORT12_STATUS
+       mmio_read32 (.addr_(addr), .data_(rdata));
+      $display("INFO:%t	Port %0d - EHIP RX Block Status bit is %d and EHIP Ready Bit is %d", $time, 12,rdata[4],rdata[0]);
+
+      `endif
       #5us;
       // Check rx pcs ready, tx lane stable and pll lock by reading register
       
    end
 endtask
 `endif
+
 task wait_for_reset_done;
    bit [63:0]   wdata, rdata, mask, addr;     
    bit[63:0] expdata;
@@ -649,6 +711,97 @@ task wait_for_hssi_to_ready;
    end
 endtask
 `endif
+
+task traffic_200G_400G;
+   input int len;
+   logic [63:0] wdata;
+   logic [63:0] addr;
+   logic [63:0] tx_cnt;
+   logic [63:0] rx_cnt;
+   logic [31:0] tx_cnt_lsb;
+   logic [31:0] tx_cnt_msb;
+   logic [31:0] rx_cnt_lsb;
+   logic [31:0] rx_cnt_msb;
+   logic [63:0] cur_pf_table;
+   begin
+      //---------------------------------------------------------------------------
+      // Traffic Controller Configuration
+      //---------------------------------------------------------------------------
+      $display("T:%8d INFO: write mailbox",$time);
+
+     if(len==1)begin
+     `ifdef INCLUDE_HSSI_PORT_12
+      wdata =   32'h1;
+      addr = tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CH_SEL;
+      mmio_write32(.addr_(addr), .data_(wdata)); // select hssi[1] TG
+
+      write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0004, 32'h1); // HW_TEST_LOOP_CNT =1 default
+     //Setting ROM end address.  HW_TEST_ROM_ADDR[15:0] - Rom packet data start addr ;HW_TEST_ROM_ADDR[31:16] - Rom packet data end address
+      write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h1F00); 
+      // Clearing status regs and counter values - bit 7 =1 (clear status reg) and bit 8 =1 (clear counter)
+      write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h180); 
+      // Resetting the hw_pc_cntrl to default 
+      write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h0);
+      // writing hw_pc_cntrl 1 to start the TG 
+      write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h1); 
+      `endif
+     end
+
+     if(len==0)begin
+      // port8 
+      wdata =   32'h0;
+      addr = tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CH_SEL;
+      mmio_write32(.addr_(addr), .data_(wdata));// select hssi[0] TG
+      write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0004, 32'h1); // HW_TEST_LOOP_CNT =1 default
+            
+      //Setting ROM end address.  HW_TEST_ROM_ADDR[15:0] - Rom packet data start addr ;HW_TEST_ROM_ADDR[31:16] - Rom packet data end address
+      `ifndef ETH_400G
+              write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h1F00); 
+       `else
+              write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h1700);
+       `endif
+      
+      // Clearing status regs and counter values - bit 7 =1 (clear status reg) and bit 8 =1 (clear counter)
+      write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h180); 
+      // Resetting the hw_pc_cntrl to default 
+      write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h0);
+      // writing hw_pc_cntrl 1 to start the TG 
+      write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h1);
+     end
+
+              #5000
+
+              // Stop the TG 
+              write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h0);
+              #2000
+              // Take snapshot of counters (bit 6 =1)
+              write_mailbox(tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h40);
+
+      //---------------------------------------------------------------------------
+      // Read Monitor statistics
+      //---------------------------------------------------------------------------
+
+      $display("T:%8d INFO: read mailbox 1",$time);
+      // reading TX SOP 
+      read_mailbox(cur_pf_table, 0, tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0020, tx_cnt_lsb);
+      read_mailbox(cur_pf_table, 0, tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0024, tx_cnt_msb);
+
+      tx_cnt = {tx_cnt_msb, tx_cnt_lsb};
+
+      $display("T:%8d INFO: read mailbox 2",$time);
+      // reading TX SOP 
+      read_mailbox(cur_pf_table, 0, tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h0038, rx_cnt_lsb);
+      read_mailbox(cur_pf_table, 0, tb_cfg0.PF0_VF1_BAR0+HE_HSSI_BASE_ADDR+TRAFFIC_CTRL_CMD_ADDR, 32'h003C, rx_cnt_msb);
+      rx_cnt = {rx_cnt_msb, rx_cnt_lsb};
+
+      if (tx_cnt != rx_cnt) begin
+         $display("\nError: Received good packets does not match Transmitted packets on Port-%0d !\n",0);
+         $display("Number of Packets \tSent: %0d\n \tReceived: %0d",tx_cnt,rx_cnt);
+      end else begin
+         $display("INFO: Number of Packets \tSent: %0d\n \tReceived: %0d",tx_cnt,rx_cnt);
+      end
+   end
+endtask
 
 task traffic_10G_25G;
    input int len;

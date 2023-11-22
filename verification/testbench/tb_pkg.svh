@@ -128,13 +128,11 @@
     `include "seq_lib.svh"
     `include "tb_env.svh"
     `include "test_top_pkg.svh"
-   `ifdef n6000_100G
-    `include "tx_pkg_100G.svh"
-    `include "rx_pkg_100G.svh"
-   `else
     `include "tx_pkg.svh"
+    `include "tx_pkg_100G_200G.svh"
+    `include "tx_pkg_400G.svh"
     `include "rx_pkg.svh"
-   `endif
+    `include "rx_pkg_100G.svh"
 
 
     `include "tb_ethernet/clk_defines.sv"

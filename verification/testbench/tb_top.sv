@@ -318,6 +318,7 @@ module tb_top;
          genvar j;
          for( j=0; j<ofs_fim_eth_plat_if_pkg::NUM_ETH_LANES; j++) begin
              assign hssi_if[j].rx_p = hssi_if[j].tx_p;
+	     assign hssi_if[j].rx_n = hssi_if[j].tx_n;
          end
       `endif
      
@@ -414,7 +415,7 @@ module tb_top;
     `ifdef SIM_MODE
       initial begin
         // #20us;
-         #5us;
+         #1us;
         force {tb_top.DUT.sys_pll.locked} = 1'b1;
 
         force tb_top.DUT.sys_pll.outclk_0 = outclk_0; 

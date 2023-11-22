@@ -54,6 +54,12 @@ How to Run UVM Testcases with N6001 F_TILE platform?:
 **Note: To run he_hssi_rx_lpbk_25G_10G_test testcases:  a switch TEST_LPBK=1 should be added for the build and run command
         Ex:  "gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <TEST_LPBK=1> <FTILE_SIM=1> && gmake -f Makefile_VCS.mk run TESTNAME=he_hssi_rx_lpbk_25G_10G_test <DUMP=1> <DEBUG=1> <TEST_LPBK=1> <SEED=<seed number>> <FTILE_SIM=1>"
 
+**Note: To run tx pkg tests for FTILE 200G: a switch ETH_200G=1 should be added for the build and run command along with FTILE_SIM=1
+        Ex:  "gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <ETH_200G=1> <FTILE_SIM=1> && gmake -f Makefile_VCS.mk run TESTNAME=he_hssi_tx_lpbk_P0_test <DUMP=1> <DEBUG=1> <ETH_200G=1> <SEED=<seed number>> <FTILE_SIM=1>"
+
+**Note: To run tx pkg tests for FTILE 400G: a switch ETH_200G=1 should be added for the build and run command along with FTILE_SIM=1
+        Ex:  "gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <ETH_400G=1> <FTILE_SIM=1> && gmake -f Makefile_VCS.mk run TESTNAME=he_hssi_tx_lpbk_P0_test <DUMP=1> <DEBUG=1> <ETH_400G=1> <SEED=<seed number>> <FTILE_SIM=1>"
+
 **Note: Step 2 Compiles IPs and subsystems from scratch instead of using precompiled versions.
                This step can be skipped if there is no change in Quartus generated files from the previous build.
 
@@ -84,7 +90,7 @@ How to Run UVM Regressions?:
  -l, --local Run regression locally, or run it on Farm. (Default:False)
  -n[N], --n_procs [N] Maximum number of processes/UVM tests to run in parallel when run locally. This has no effect on Farm run. (Default #CPUs-1: 11)
  -p [{adp}], --plat [{adp}] HW platform for regression test. (Default: adp)
- -k [{top_pkg,test_pkg,test_long_pkg,hssi_tx_pkg,hssi_tx_pkg_100G,rx_pkg,rx_pkg_100G}], --pack [{top_pkg,test_pkg,test_long_pkg,hssi_tx_pkg,hssi_tx_pkg_100G,rx_pkg,rx_pkg_100G}] Test suite to run during regression. (Default:top_pkg)
+ -k [{top_pkg,test_pkg,test_long_pkg,hssi_tx_pkg,hssi_tx_pkg_100G_200G,rx_pkg,rx_pkg_100G}], --pack [{top_pkg,test_pkg,test_long_pkg,hssi_tx_pkg,hssi_tx_pkg_100G_200G,hssi_tx_pkg_400G,rx_pkg,rx_pkg_100G}] Test suite to run during regression. (Default:top_pkg)
  -s [{vcs}], --sim [{vcs}] Simulator used for regression test. (Default: vcs)
  -c [{none,ral_cov,fun_cov}], --cov [{none,ral_cov,fun_cov}] Code coverage used for regression, if any. (Default:none)
  -e --email_list Sends the regression results on email provided in list (Default : It will send it to regression Owner)

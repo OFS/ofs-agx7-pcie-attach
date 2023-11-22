@@ -297,8 +297,10 @@ def set_top_list_of_tests(package):
         top_list_of_tests = rootdir + "/verification/tests/rx_pkg.svh"
     elif (package == 'rx_pkg_100G'):
         top_list_of_tests = rootdir + "/verification/tests/rx_pkg_100G.svh"
-    elif (package == 'hssi_tx_pkg_100G'):
-        top_list_of_tests = rootdir + "/verification/tests/tx_pkg_100G.svh"
+    elif (package == 'hssi_tx_pkg_100G_200G'):
+        top_list_of_tests = rootdir + "/verification/tests/tx_pkg_100G_200G.svh"
+    elif (package == 'hssi_tx_pkg_400G'):
+        top_list_of_tests = rootdir + "/verification/tests/tx_pkg_400G.svh"
     else:
         top_list_of_tests = rootdir + "/verification/tests/tx_pkg.svh"
     return top_list_of_tests
@@ -782,6 +784,10 @@ def build_sim_env(platform, coverage, simulator, package, tile, fims):
         fim = "n6000_25G=1"
     elif(fims=='n6000_10G'):
         fim = "n6000_10G=1"
+    elif(fims=='ETH_200G'):
+        fim  = "FTILE_SIM=1 ETH_200G=1"
+    elif(fims=='ETH_400G'):
+        fim = "FTILE_SIM=1 ETH_400G=1"
     else:
         fim = ""
        
@@ -813,7 +819,7 @@ def build_sim_env(platform, coverage, simulator, package, tile, fims):
                 cmplib_command_line = f"gmake -f {makefile} {cmplib} {tile_sim} {fim} COV_FUNCTIONAL=1 TEST_LPBK=1"
                 build_command_line  = f"gmake -f {makefile} {build} {tile_sim} {fim} DEBUG=1 COV_FUNCTIONAL=1 TEST_LPBK=1"
             elif (package == 'rx_pkg_100G'):
-                #cmplib_command_line = f"gmake -f {makefile} {cmplib} {tile_sim} {fim} COV_FUNCTIONAL=1 TEST_LPBK=1"
+                cmplib_command_line = f"gmake -f {makefile} {cmplib} {tile_sim} {fim} COV_FUNCTIONAL=1 TEST_LPBK=1"
                 build_command_line  = f"gmake -f {makefile} {build} {tile_sim} {fim} DEBUG=1 COV_FUNCTIONAL=1 TEST_LPBK=1"
             else:
                 cmplib_command_line = f"gmake -f {makefile} {cmplib} {tile_sim} {fim} COV_FUNCTIONAL=1"
@@ -954,6 +960,10 @@ def sim_process(index, test, test_dir_top, platform, coverage, simulator, packag
         fim = "n6000_25G=1"
     elif(fims=='n6000_10G'):
         fim = "n6000_10G=1"
+    elif(fims=='ETH_200G'):
+        fim  = "FTILE_SIM=1 ETH_200G=1"
+    elif(fims=='ETH_400G'):
+        fim = "FTILE_SIM=1 ETH_400G=1"
     else:
         fim = ""
 
@@ -1053,6 +1063,10 @@ def sim_farm_process(index, test, test_dir_top, platform, coverage, simulator, p
         fim = "n6000_25G=1"
     elif(fims=='n6000_10G'):
         fim = "n6000_10G=1"
+    elif(fims=='ETH_200G'):
+        fim  = "FTILE_SIM=1 ETH_200G=1"
+    elif(fims=='ETH_400G'):
+        fim = "FTILE_SIM=1 ETH_400G=1"
     else:
         fim = ""
 
@@ -1206,10 +1220,10 @@ if __name__ == "__main__":
     parser.add_argument('-l', '--local', dest='run_regression_locally', action='store_true', help='Run regression locally, or run it on Farm.  (Default: %(default)s)')
     parser.add_argument('-n', '--n_procs', dest='max_parallel_running_process_count', type=check_positive_process_count, metavar='N', nargs='?', default=multiprocessing.cpu_count()-1, help='Maximum number of processes/UVM tests to run in parallel when run locally.  This has no effect on Farm run.  (Default #CPUs-1: %(default)s)')
     parser.add_argument('-p', '--plat', dest='platform', type=str, nargs='?', default='adp', choices=['adp'], help='HW platform for regression test.  (Default: %(default)s)')
-    parser.add_argument('-k', '--pack', dest='package', type=str, nargs='?', default='top_pkg', choices=['top_pkg','test_pkg','test_long_pkg','hssi_tx_pkg','hssi_tx_pkg_100G','rx_pkg','rx_pkg_100G'], help='Test suite to run during regression.  (Default: %(default)s)')
+    parser.add_argument('-k', '--pack', dest='package', type=str, nargs='?', default='top_pkg', choices=['top_pkg','test_pkg','test_long_pkg','hssi_tx_pkg','hssi_tx_pkg_100G_200G','hssi_tx_pkg_400G','rx_pkg','rx_pkg_100G'], help='Test suite to run during regression.  (Default: %(default)s)')
     parser.add_argument('-s', '--sim', dest='simulator', type=str, nargs='?', default='vcs', choices=['vcs','msim'], help='Simulator used for regression test.  (Default: %(default)s)')
     parser.add_argument('-t', '--tile', dest='tile', type=str, nargs='?', default='ptile', choices=['ptile','ftile'], help='Tile used for regression test.  (Default: %(default)s)')
-    parser.add_argument('-f', '--fims', dest='fims', type=str, nargs='?', default='n6001', choices=['n6001','n6000_100G','n6000_25G','n6000_10G'], help='select fims.  (Default: %(default)s)')
+    parser.add_argument('-f', '--fims', dest='fims', type=str, nargs='?', default='n6001', choices=['n6001','n6000_100G','n6000_25G','n6000_10G','ETH_200G','ETH_400G'], help='select fims.  (Default: %(default)s)')
     parser.add_argument('-c', '--cov', dest='coverage', type=str, nargs='?', default='none', choices=['none','ral_cov','fun_cov'], help='Code coverage used for regression, if any.  (Default: %(default)s)')
     parser.add_argument('-b', '--bypass', dest='bypass_library_build', action='store_true', help='Bypass/skip the IP/library build step.  Do this if you have already built your library and do not want to waste time doing it again.  (Default: %(default)s)')
     parser.add_argument('-e', '--email_list', dest='email_list', action='store_true', help='To send mail to multiple receipients')
