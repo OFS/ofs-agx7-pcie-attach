@@ -22,7 +22,8 @@ package test_csr_defs;
    parameter AFU_ID_H_ADDR                       = 32'h40010;
    parameter AFU_PORT_SEL_ADDR                   = 32'h40040;
    parameter AFU_SCRATCH_ADDR                    = 32'h40048;
-   parameter AFU_UNUSED_ADDR                     = 32'h40058;
+   parameter AFU_400G_TG_EN                      = 32'h40058;
+   parameter AFU_UNUSED_ADDR                     = 32'h40060;
 
    // ******************************************************************************************
    // AFU Register Default Values

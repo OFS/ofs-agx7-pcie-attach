@@ -235,6 +235,33 @@ begin
 end
 endtask
 
+// Test 32-bit CSR access to TG enable register 
+task test_400g_tg_en_access_32;
+   output logic       result;
+   input e_addr_mode  addr_mode;
+   input logic [63:0] addr;
+   input logic [31:0] data;
+   input logic [31:0] expected;
+   logic [31:0] scratch;
+   logic error;
+   cpl_status_t cpl_status;
+begin
+   result = 1'b1;
+
+   host_bfm_top.host_bfm.write32(addr, data);
+   host_bfm_top.host_bfm.read32_with_completion_status(addr, scratch, error, cpl_status);
+
+   if (error) begin
+       $display("\nERROR: Completion is returned with unsuccessful status.\n");
+       incr_err_count();
+       result = 1'b0;
+   end else if (scratch !== expected) begin
+       $display("\nERROR: Expected 32'h1 to be returned for AFU_400G_TG_EN register, actual:0x%x\n",scratch);    
+       incr_err_count();
+       result = 1'b0;
+   end 
+end
+endtask
 
 // 32-bit transaction to exercise ch-1
 task test_csr_access_32_ch1;
@@ -713,6 +740,33 @@ begin
 end
 endtask
 
+// Test 64-bit CSR access to TG enable register
+task test_400g_tg_en_access_64;
+   output logic       result;
+   input e_addr_mode  addr_mode;
+   input logic [63:0] addr;
+   input logic [63:0] data;
+   input logic [63:0] expected;
+   logic [63:0] scratch;
+   logic error;
+   cpl_status_t cpl_status;
+begin
+   result = 1'b1;
+
+   host_bfm_top.host_bfm.write64(addr, data);
+   host_bfm_top.host_bfm.read64_with_completion_status(addr, scratch, error, cpl_status);
+
+   if (error) begin
+       $display("\nERROR: Completion is returned with unsuccessful status.\n");
+       incr_err_count();
+       result = 1'b0;
+   end else if (scratch !== expected) begin
+       $display("\nERROR: Expected 64'h0 to be returned for AFU_400G_TG_EN register, actual:0x%x\n",scratch);
+       incr_err_count();
+       result = 1'b0;
+   end
+end
+endtask
 
 // Test 32-bit data access with 64b address
 task test_csr_access_32_addr64;
@@ -789,16 +843,31 @@ begin
    $display("TAM: 10");
    test_csr_access_32_addr64(result, ADDR64, AFU_SCRATCH_ADDR, 'hAFC0_0007);
    $display("TAM: 11");
+
+   // Test AFU_400_TG_EN
+   `ifdef ETH_400G
+      test_400g_tg_en_access_32(result, addr_mode, AFU_400G_TG_EN, 'hF00D_0001, 'h1);
+      $display("TAM: 12");
+      test_400g_tg_en_access_64(result, addr_mode, AFU_400G_TG_EN, 'hF00D_0003_F00D_0002, 'h1);
+      $display("TAM: 13");
+   `else
+      // Test illegal memory read returns CPL
+      test_400g_tg_en_access_32(result, addr_mode, AFU_UNUSED_ADDR, 'hF00D_0001, 'h0);
+      $display("TAM: 12");
+      test_unused_csr_access_64(result, addr_mode, AFU_UNUSED_ADDR, 'hF00D_0003_F00D_0002, 'h0);
+      $display("TAM: 13");
+   `endif
+
    // Test illegal memory read returns CPL
    test_unused_csr_access_32(result, addr_mode, AFU_UNUSED_ADDR, 'hF00D_0001);
-   $display("TAM: 12");
-   test_unused_csr_access_64(result, addr_mode, AFU_UNUSED_ADDR, 'hF00D_0003_F00D_0002);
-   $display("TAM: 13");
-
-   post_test_util(old_test_err_count);
    $display("TAM: 14");
-   host_bfm_top.host_bfm.revert_to_last_pfvf_setting();
+   test_unused_csr_access_64(result, addr_mode, AFU_UNUSED_ADDR, 'hF00D_0003_F00D_0002);
    $display("TAM: 15");
+   
+   post_test_util(old_test_err_count);
+   $display("TAM: 16");
+   host_bfm_top.host_bfm.revert_to_last_pfvf_setting();
+   $display("TAM: 17");
 end
 endtask
 
