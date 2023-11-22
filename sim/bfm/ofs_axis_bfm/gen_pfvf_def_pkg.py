@@ -81,31 +81,13 @@ def get_rootdir():
 # skipping the package generation.
 #----------------------------------------------------------------
 def get_config_file():
-    n6001_pattern  = r'n6001@commit'
-    f2000x_pattern  = r'f2000x@commit'
-    found_n6001 = re.search(n6001_pattern, rootdir)
-    found_f2000x = re.search(f2000x_pattern, rootdir)
     config_file_name = "ofs_ip_cfg_pcie_ss.vh"
-    if (found_n6001):
-        if (os.path.exists(os.path.join(rootdir, 'sim/scripts/qip_gen_n6000'))):
-            config_file_path = rootdir + "/sim/scripts/qip_gen_n6000/syn/board/n6000/syn_top/ofs_ip_cfg_db"
-            config_file = config_file_path + "/" + config_file_name
-        elif (os.path.exists(os.path.join(rootdir, 'sim/scripts/qip_gen_fseries-dk'))):
-            config_file_path = rootdir + "/sim/scripts/qip_gen_fseries-dk/syn/board/fseries-dk/syn_top/ofs_ip_cfg_db"
-            config_file = config_file_path + "/" + config_file_name
-        elif (os.path.exists(os.path.join(rootdir, 'sim/scripts/qip_gen_iseries-dk'))):
-            config_file_path = rootdir + "/sim/scripts/qip_gen_iseries-dk/syn/board/iseries-dk/syn_top/ofs_ip_cfg_db"
-            config_file = config_file_path + "/" + config_file_name
-        else:
-            config_file_path = rootdir + "/sim/scripts/qip_gen_n6001/syn/board/n6001/syn_top/ofs_ip_cfg_db"
-            config_file = config_file_path + "/" + config_file_name
-    else:
-        if (found_f2000x):
-            config_file_path = rootdir + "/sim/scripts/qip_gen_f2000x/syn/syn_top/ofs_ip_cfg_db"
-            config_file = config_file_path + "/" + config_file_name
-        else: 
-            logger.info(f">>> Project not n6001 nor f2000x: Skipping PF/VF and FLR package generation in script {os.path.basename(__file__)}")
-            sys.exit(0)
+    board_path = f"{rootdir}/sim/scripts/qip_gen/quartus_proj_dir/ofs_ip_cfg_db"
+    config_file = board_path + "/" + config_file_name
+    if (not(os.path.isfile(config_file))):
+        logger.info(f">>> Warning: Failed to find configuration file {config_file}.")
+        logger.info(f">>> If this build does not have a configuration file, then this is okay and PF/VF & FLR definition generation will be skipped.")
+        sys.exit(0)
     return config_file
 
 
