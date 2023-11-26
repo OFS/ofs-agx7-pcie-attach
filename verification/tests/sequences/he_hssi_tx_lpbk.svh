@@ -124,6 +124,9 @@ class he_hssi_tx_lpbk_seq extends base_seq;
         traffic_200G_400G(len);
       `else     
 	$display("T:%8d INFO: Running eth 10g",$time);
+      `uvm_info("body","Waiting for 400us as PCS_READY is not stable yet", UVM_LOW);
+         #400us;
+        `uvm_info("body","Wait Done initiate the traffic", UVM_LOW);
         traffic_10G_25G(len);
       `endif
 

@@ -36,7 +36,8 @@ task body();
         bit [63:0]         wdata, rdata,regdata,rw_bits,exp_data,rdata_s;
         bit [15:0] req_id;
         logic[63:0] addr;
-        time dly_after_err  = 5us; 
+        //time dly_after_err  = 5us; 
+        time dly_after_err  = 12us; 
         time dly_rst_window = 1us;
         time dly_before_read =30us; //512 timout cycle instead of 28us wating for 30us
 
