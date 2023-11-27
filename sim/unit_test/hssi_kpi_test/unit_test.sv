@@ -1075,7 +1075,7 @@ task traffic_200G_400G;
               write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h02FF_0000); 
               `else
               write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0008, 32'h0191_0000);
-     
+      `endif
       // Clearing status regs and counter values - bit 7 =1 (clear status reg) and bit 8 =1 (clear counter)
       write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h180); 
       // Resetting the hw_pc_cntrl to default 

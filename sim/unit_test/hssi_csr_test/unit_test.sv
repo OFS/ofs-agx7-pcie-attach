@@ -854,7 +854,7 @@ begin
       // Test illegal memory read returns CPL
       test_400g_tg_en_access_32(result, addr_mode, AFU_UNUSED_ADDR, 'hF00D_0001, 'h0);
       $display("TAM: 12");
-      test_unused_csr_access_64(result, addr_mode, AFU_UNUSED_ADDR, 'hF00D_0003_F00D_0002, 'h0);
+      test_400g_tg_en_access_64(result, addr_mode, AFU_UNUSED_ADDR, 'hF00D_0003_F00D_0002, 'h0);
       $display("TAM: 13");
    `endif
 

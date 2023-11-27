@@ -12,6 +12,19 @@
 `define __TEST_CSR_DEFS__
 `include "ofs_ip_cfg_db.vh"
 
+import top_cfg_pkg::*;
+
+`ifdef ETH_10G
+  `define ETH_10_OR_25G
+`elsif ETH_25G
+  `define ETH_10_OR_25G
+`endif
+
+`ifdef ETH_200G
+   `define ETH_200G_OR_400G
+`elsif ETH_400G
+  `define ETH_200G_OR_400G
+`endif
 
 package test_csr_defs;
 
@@ -147,18 +160,37 @@ package test_csr_defs;
    parameter TG_RANDOM_SEED1_ADDR           = 64'h0000_0000_0000_000B;
    parameter TG_RANDOM_SEED2_ADDR           = 64'h0000_0000_0000_000C;
    parameter TG_PKT_LEN_ADDR                = 64'h0000_0000_0000_000D;
+   
+   `ifdef ETH_10_OR_25G
    parameter TG_START_TS_ADDR               = 64'h0000_0000_0000_00F4;
    parameter TG_END_TS_ADDR                 = 64'h0000_0000_0000_00F5;
-   
+   `elsif ETH_100G
+   parameter TG_START_TS_ADDR               = 64'h0000_0000_0000_001F;
+   parameter TG_END_TS_ADDR                 = 64'h0000_0000_0000_0021;
+   `elsif ETH_200G_OR_400G 
+   parameter TG_START_TS_ADDR               = 64'h0000_0000_0000_0050;
+   parameter TG_END_TS_ADDR                 = 64'h0000_0000_0000_0058;
+   `endif
+
+
    parameter TM_NUM_PKT_ADDR                = 64'h0000_0000_0000_0100;
    parameter TM_PKT_GOOD_ADDR               = 64'h0000_0000_0000_0101;
    parameter TM_PKT_BAD_ADDR                = 64'h0000_0000_0000_0102;
    parameter TM_BYTE_CNT0_ADDR              = 64'h0000_0000_0000_0103;
    parameter TM_BYTE_CNT1_ADDR              = 64'h0000_0000_0000_0104;
    parameter TM_AVST_RX_ERR_ADDR            = 64'h0000_0000_0000_0107;
+
+   `ifdef ETH_10_OR_25G 
    parameter TM_START_TS_ADDR               = 64'h0000_0000_0000_010B;
    parameter TM_END_TS_ADDR                 = 64'h0000_0000_0000_010C;
-   
+   `elsif ETH_100G
+   parameter TM_START_TS_ADDR               = 64'h0000_0000_0000_0023;
+   parameter TM_END_TS_ADDR                 = 64'h0000_0000_0000_0025;
+   `elsif ETH_200G_OR_400G 
+   parameter TM_START_TS_ADDR               = 64'h0000_0000_0000_0050;
+   parameter TM_END_TS_ADDR                 = 64'h0000_0000_0000_0058;
+   `endif
+
    parameter LOOPBACK_EN_ADDR               = 64'h0000_0000_0000_0200;
 
    // ******************************************************************************************

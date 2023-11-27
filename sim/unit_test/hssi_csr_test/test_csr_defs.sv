@@ -136,11 +136,13 @@ package test_csr_defs;
 `endif
 
 `ifdef ETH_10G 	
-   parameter HSSI_FEATURE_VAL               = 32'h003F_FFE1;
+   parameter HSSI_FEATURE_VAL               = 32'h0000_3FD1;
    parameter HSSI_PORT_STATUS_VAL           = 32'h0000_0000;
-   localparam HSSI_IN_USE_ATT_VAR           = 32'h0084_0414;
+   localparam HSSI_IN_USE_ATT_VAR           = 32'h0004_0414;
 `elsif ETH_100G
-   parameter HSSI_FEATURE_VAL               = 32'h0004_4449;
+   parameter HSSI_FEATURE_VAL = (`OFS_FIM_IP_CFG_HSSI_SS_NUM_ETH_PORTS == 2) ? 32'h0000_0445 : 
+                                (`OFS_FIM_IP_CFG_HSSI_SS_NUM_ETH_PORTS == 4) ? 32'h0004_4449 : 
+                                32'h0000_0000;
    parameter HSSI_PORT_STATUS_VAL           = 32'h0000_0000;
    localparam HSSI_IN_USE_ATT_VAR           = 32'h0024_101B;
 `elsif ETH_200G
@@ -152,7 +154,7 @@ package test_csr_defs;
    parameter HSSI_PORT_STATUS_VAL           = 32'h0000_0000;
    localparam HSSI_IN_USE_ATT_VAR           = 32'h0024_1420;
 `else
-   parameter HSSI_FEATURE_VAL               = 32'h0000_3fd1;
+   parameter HSSI_FEATURE_VAL               = 32'h0000_3FD1;
    parameter HSSI_PORT_STATUS_VAL           = 32'h0000_0000;
    localparam HSSI_IN_USE_ATT_VAR           = 32'h0024_0415;
 `endif
