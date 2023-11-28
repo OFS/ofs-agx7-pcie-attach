@@ -210,10 +210,6 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
                         mutex_tag_manager.put();
                         t.set_packet_tag(packet_tag);
                      end
-                     else
-                     begin
-                        t.set_packet_tag(10'd0);
-                     end
                      t.set_request_sent();
                      p = t.request_packet;
                      rx_req_packet_gap_delay_queue.put_packet(p.get_request_delay(),p.get_gap(),p); // Put at delay and gap between outgoing packets.
@@ -358,8 +354,8 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
                         begin
                            cpld = tx_inbound_completion_packet_queue.pop_front();
                            //------------- Debug -------------------
-                           $display("HOST BFM, TX: PU CplD Found:");
-                           cpld.print_packet();
+                           //$display("HOST BFM, TX: PU CplD Found:");
+                           //cpld.print_packet();
                            //------------- Debug -------------------
                            matched = 1'b0;
                            mutex_mmio_rx_req_active_transaction_queue.get();
@@ -476,12 +472,12 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
                               );
                               puc.set_data(read_buf);
                               p = puc;
-                              mutex_axis_send_rx_req.get();
-                              axis_send_rx_req.put_packet_in_send_queue(p);
-                              mutex_axis_send_rx_req.put();
-                              mutex_mmio_rx_req_packet_history_queue.get();
-                              mmio_rx_req_packet_history_queue.push_back(p);
-                              mutex_mmio_rx_req_packet_history_queue.put();
+                              mutex_axis_send_rx.get();
+                              axis_send_rx.put_packet_in_send_queue(p);
+                              mutex_axis_send_rx.put();
+                              mutex_dm_rx_packet_history_queue.get();
+                              dm_rx_packet_history_queue.push_back(p);
+                              mutex_dm_rx_packet_history_queue.put();
                            end // If - End of READ
                            else
                            begin
@@ -536,12 +532,12 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
                                        );
                                        puc.set_data(result);
                                        p = puc;
-                                       mutex_axis_send_rx_req.get();
-                                       axis_send_rx_req.put_packet_in_send_queue(p);
-                                       mutex_axis_send_rx_req.put();
-                                       mutex_mmio_rx_req_packet_history_queue.get();
-                                       mmio_rx_req_packet_history_queue.push_back(p);
-                                       mutex_mmio_rx_req_packet_history_queue.put();
+                                       mutex_axis_send_rx.get();
+                                       axis_send_rx.put_packet_in_send_queue(p);
+                                       mutex_axis_send_rx.put();
+                                       mutex_dm_rx_packet_history_queue.get();
+                                       dm_rx_packet_history_queue.push_back(p);
+                                       mutex_dm_rx_packet_history_queue.put();
                                     end  // If - END of FETCH_ADD
                                     else
                                     begin
@@ -564,12 +560,12 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
                                           );
                                           puc.set_data(result);
                                           p = puc;
-                                          mutex_axis_send_rx_req.get();
-                                          axis_send_rx_req.put_packet_in_send_queue(p);
-                                          mutex_axis_send_rx_req.put();
-                                          mutex_mmio_rx_req_packet_history_queue.get();
-                                          mmio_rx_req_packet_history_queue.push_back(p);
-                                          mutex_mmio_rx_req_packet_history_queue.put();
+                                          mutex_axis_send_rx.get();
+                                          axis_send_rx.put_packet_in_send_queue(p);
+                                          mutex_axis_send_rx.put();
+                                          mutex_dm_rx_packet_history_queue.get();
+                                          dm_rx_packet_history_queue.push_back(p);
+                                          mutex_dm_rx_packet_history_queue.put();
                                        end  // If - END of SWAP
                                        else
                                        begin
@@ -601,12 +597,12 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
                                              );
                                              puc.set_data(result);
                                              p = puc;
-                                             mutex_axis_send_rx_req.get();
-                                             axis_send_rx_req.put_packet_in_send_queue(p);
-                                             mutex_axis_send_rx_req.put();
-                                             mutex_mmio_rx_req_packet_history_queue.get();
-                                             mmio_rx_req_packet_history_queue.push_back(p);
-                                             mutex_mmio_rx_req_packet_history_queue.put();
+                                             mutex_axis_send_rx.get();
+                                             axis_send_rx.put_packet_in_send_queue(p);
+                                             mutex_axis_send_rx.put();
+                                             mutex_dm_rx_packet_history_queue.get();
+                                             dm_rx_packet_history_queue.push_back(p);
+                                             mutex_dm_rx_packet_history_queue.put();
                                           end  // If - END of CAS
                                        end // Else - CAS Top
                                     end // Else - SWAP Top
@@ -938,12 +934,12 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
                               );
                               puc.set_data(read_buf);
                               p = puc;
-                              mutex_axis_send_rx_req.get();
-                              axis_send_rx_req.put_packet_in_send_queue(p);
-                              mutex_axis_send_rx_req.put();
-                              mutex_mmio_rx_req_packet_history_queue.get();
-                              mmio_rx_req_packet_history_queue.push_back(p);
-                              mutex_mmio_rx_req_packet_history_queue.put();
+                              mutex_axis_send_rx.get();
+                              axis_send_rx.put_packet_in_send_queue(p);
+                              mutex_axis_send_rx.put();
+                              mutex_dm_rx_packet_history_queue.get();
+                              dm_rx_packet_history_queue.push_back(p);
+                              mutex_dm_rx_packet_history_queue.put();
                            end // If - End of READ
                            else
                            begin
@@ -998,12 +994,12 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
                                        );
                                        puc.set_data(result);
                                        p = puc;
-                                       mutex_axis_send_rx_req.get();
-                                       axis_send_rx_req.put_packet_in_send_queue(p);
-                                       mutex_axis_send_rx_req.put();
-                                       mutex_mmio_rx_req_packet_history_queue.get();
-                                       mmio_rx_req_packet_history_queue.push_back(p);
-                                       mutex_mmio_rx_req_packet_history_queue.put();
+                                       mutex_axis_send_rx.get();
+                                       axis_send_rx.put_packet_in_send_queue(p);
+                                       mutex_axis_send_rx.put();
+                                       mutex_dm_rx_packet_history_queue.get();
+                                       dm_rx_packet_history_queue.push_back(p);
+                                       mutex_dm_rx_packet_history_queue.put();
                                     end  // If - END of FETCH_ADD
                                     else
                                     begin
@@ -1026,12 +1022,12 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
                                           );
                                           puc.set_data(result);
                                           p = puc;
-                                          mutex_axis_send_rx_req.get();
-                                          axis_send_rx_req.put_packet_in_send_queue(p);
-                                          mutex_axis_send_rx_req.put();
-                                          mutex_mmio_rx_req_packet_history_queue.get();
-                                          mmio_rx_req_packet_history_queue.push_back(p);
-                                          mutex_mmio_rx_req_packet_history_queue.put();
+                                          mutex_axis_send_rx.get();
+                                          axis_send_rx.put_packet_in_send_queue(p);
+                                          mutex_axis_send_rx.put();
+                                          mutex_dm_rx_packet_history_queue.get();
+                                          dm_rx_packet_history_queue.push_back(p);
+                                          mutex_dm_rx_packet_history_queue.put();
                                        end  // If - END of SWAP
                                        else
                                        begin
@@ -1063,12 +1059,12 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
                                              );
                                              puc.set_data(result);
                                              p = puc;
-                                             mutex_axis_send_rx_req.get();
-                                             axis_send_rx_req.put_packet_in_send_queue(p);
-                                             mutex_axis_send_rx_req.put();
-                                             mutex_mmio_rx_req_packet_history_queue.get();
-                                             mmio_rx_req_packet_history_queue.push_back(p);
-                                             mutex_mmio_rx_req_packet_history_queue.put();
+                                             mutex_axis_send_rx.get();
+                                             axis_send_rx.put_packet_in_send_queue(p);
+                                             mutex_axis_send_rx.put();
+                                             mutex_dm_rx_packet_history_queue.get();
+                                             dm_rx_packet_history_queue.push_back(p);
+                                             mutex_dm_rx_packet_history_queue.put();
                                           end  // If - END of CAS
                                        end // Else - CAS Top
                                     end // Else - SWAP Top
@@ -1813,6 +1809,7 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
       input bit  [7:0] msg_code,
       input bit [31:0] lower_msg,
       input bit [31:0] upper_msg,
+      input packet_tag_t tag,
       ref byte_array_t msg_data
 
    );
@@ -1839,6 +1836,7 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
             .length_dw(length_dw)
          );
          mt.set_pf_vf(this.get_pfvf_setting());
+         mt.request_packet.set_tag(tag);
          mt.request_packet.set_data(msg_data);
          t = mt;
          mutex_mmio_rx_req_input_transaction_queue.get();

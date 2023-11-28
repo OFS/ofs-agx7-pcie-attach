@@ -173,6 +173,7 @@ virtual class HostBFM;
       input bit  [7:0] msg_code,
       input bit [31:0] lower_msg,
       input bit [31:0] upper_msg,
+      input packet_tag_t tag,
       ref byte_array_t msg_data
    );
    pure virtual task send_vdm(
