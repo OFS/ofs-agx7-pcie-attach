@@ -277,7 +277,7 @@ assign rst_n_csr = rst_n_100m;
 // is done by the dummy module. It has its own DFH GUID and implements a couple of registers.
 //-----------------------------------------------------------------------------------------------
 dummy_csr #(
-   .FEAT_ID          (12'h00f),
+   .FEAT_ID          (12'h000),
    .FEAT_VER         (4'h1),
    .NEXT_DFH_OFFSET  (fabric_width_pkg::bpf_hssi_slv_next_dfh_offset),
    .END_OF_LIST      (fabric_width_pkg::bpf_hssi_slv_eol)
@@ -288,7 +288,7 @@ dummy_csr #(
 );
 
 dummy_csr #(
-   .FEAT_ID          (12'h13),
+   .FEAT_ID          (12'h00),
    .FEAT_VER         (4'h0),
    .NEXT_DFH_OFFSET  (fabric_width_pkg::bpf_qsfp0_slv_next_dfh_offset),
    .END_OF_LIST      (fabric_width_pkg::bpf_qsfp0_slv_eol)
@@ -299,7 +299,7 @@ dummy_csr #(
 );
 
 dummy_csr #(
-   .FEAT_ID          (12'h13),
+   .FEAT_ID          (12'h00),
    .FEAT_VER         (4'h0),
    .NEXT_DFH_OFFSET  (fabric_width_pkg::bpf_qsfp1_slv_next_dfh_offset),
    .END_OF_LIST      (fabric_width_pkg::bpf_qsfp1_slv_eol)

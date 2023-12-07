@@ -8,8 +8,11 @@
 // Define the parameters used in PF/VF MUX module.
 //
 // This reference implementation routes every function (PFs and VFs) to
-// unique ports. PF0 VFs are routed to the port gasket. All PFs and
-// VFs on ports other than PF0 are routed to the static region.
+// unique ports. PF0 VFs are routed to the port gasket when enabled else PF1
+// is routed to the Port Gasket. All PFs and VFs on ports other than PF0 
+// are routed to the static region when VFs are enabled on PF0.
+// All PFs and VFs on ports other than PF0 and PF1 
+// are routed to the static region when VFs are disabled on PF0.
 //
 // FIM developers may change the routing policy by replacing the routing
 // table generated here. In general, the table only needs to be changed
@@ -43,6 +46,12 @@ package top_cfg_pkg;
    // Vector with number of VFs per PF
    localparam int   PF_NUM_VFS_VEC[MAX_PF_NUM+1] = '{ `OFS_FIM_IP_CFG_PCIE_SS_NUM_VFS_VEC };
 
+   `ifdef OFS_FIM_IP_CFG_PCIE_SS_PF0_NUM_VFS
+      localparam PG_VFS = `OFS_FIM_IP_CFG_PCIE_SS_PF0_NUM_VFS;
+   `else
+      localparam PG_VFS = 0;
+   `endif
+
 
    // =====================================================================
    //                Static region PF/VF MUX routing table
@@ -60,41 +69,50 @@ package top_cfg_pkg;
    // and generate a workload-specific table here. The table could be generated
    // either with a different function or with static initializers.
 
-   // Request a shared port for PF0 VFs
+   // Request a shared port for PF0 VFs when VFs are enabled
+   // else request port for PF1.
    localparam ENABLE_PG_SHARED_VF = (PF_NUM_VFS_VEC[0] > 0);
 
    // Number of ports in AFU top: 
-   // PF0 : ST2MM (OFS management), PF0VF : Port Gasket, PF1+ : static-region afu
-   localparam NUM_TOP_PORTS = int'(PF_ENABLED_VEC[0]) + (PF_NUM_VFS_VEC[0] > 0) + (MAX_PF_NUM > 0);
+   // PF0  : ST2MM (OFS management)
+   // PF0VF: When VFs are enabled on PF0 or PF1 when VFs are disabled on PF0 : Port Gasket
+   // Port Gasket is always instantiated either with PF0VFs or PF1.
+   // PF1+ : When VFs are enabled on PF0 or PF2+ when VFs are disabled on PF0 : static-region afu
+   localparam NUM_TOP_PORTS = int'(PF_ENABLED_VEC[0]) + 1 + (ENABLE_PG_SHARED_VF ? (MAX_PF_NUM > 0) : (MAX_PF_NUM > 1));
 
    // Number of ports in the static-region AFU block:
-   //  - A port for each non-PF0 function
-   localparam NUM_SR_PORTS = FIM_NUM_PF + FIM_NUM_VF - int'(PF_ENABLED_VEC[0]) - PF_NUM_VFS_VEC[0];
+   //  - A port for each non-PF0 function when VFs are enabled on PF0 or
+   //  - A port for each non-PF0 and non-PF1 function when VFs are not enabled
+   //  on PF0
+   localparam NUM_SR_PORTS = FIM_NUM_PF + FIM_NUM_VF - int'(PF_ENABLED_VEC[0]) - ((PF_NUM_VFS_VEC[0] > 0 ) ? (PF_NUM_VFS_VEC[0]) : (PF_ENABLED_VEC[1])) ;
+
+   // PG mux parameters
+   // routing PF0 VFs when VFs are enabled on PF0 or
+   // routing PF1 when VFs are disabled on PF0
+   localparam PG_NUM_PORT = (PG_VFS > 0) ? PG_VFS : 1;
+
 
    `include "pf_vf_mux_default_rtable.vh"
 
 
    // =====================================================================
    //               Port gasket PF/VF MUX routing table
-   // =====================================================================
-
-   // PG mux parameters -- routing just the PF0 VFs
-   localparam PG_NUM_PORT = `OFS_FIM_IP_CFG_PCIE_SS_PF0_NUM_VFS;
-
+   // ===================================================================== 
    // Port gasket routing table data structure
    localparam PG_NUM_RTABLE_ENTRIES = PG_NUM_PORT;
    typedef pf_vf_mux_pkg::t_pfvf_rtable_entry [PG_NUM_RTABLE_ENTRIES-1:0] t_prr_pf_vf_entry_info;
    localparam t_prr_pf_vf_entry_info PG_PF_VF_RTABLE = get_prr_pf_vf_entry_info();
    localparam PG_AFU_NUM_PORTS = PG_NUM_PORT;
 
-   // The routing table in the port gasket is simple. It is just a
-   // straight vector of the PF0 VFs.
+   // The routing table in the port gasket is a
+   // straight vector of PF0 VFs when enabled or PF1
+   // when VFs on PF0 are disabled.
    function automatic t_prr_pf_vf_entry_info get_prr_pf_vf_entry_info();
       t_prr_pf_vf_entry_info map;
       for (int p = 0; p < PG_AFU_NUM_PORTS; p = p + 1) begin
-         map[p].pf        = 0;
+         map[p].pf        = (PG_VFS > 0 ) ? 0 : 1; // pf0-vfs or pf1
    	 map[p].vf        = p;
-         map[p].vf_active = 1;
+         map[p].vf_active = (PG_VFS > 0 ) ? 1 : 0; // pf0-vfs or pf1
          map[p].pfvf_port = p;
       end
       return map;

@@ -74,10 +74,10 @@ module fim_afu_instances # (
 `ifdef USE_NULL_HE_LB
 localparam HLB_PID = -1;
 `else
-localparam HLB_PID = 1; 
+localparam HLB_PID = (top_cfg_pkg::PG_VFS > 0) ? 1 : 0; 
 `endif
-localparam VIO_PID = 2; 
-localparam HPS_PID = 3; 
+localparam VIO_PID = (top_cfg_pkg::PG_VFS > 0) ? 2 : 1; 
+localparam HPS_PID = (top_cfg_pkg::PG_VFS > 0) ? 3 : 2; 
 
 localparam TDATA_WIDTH = afu_axi_rx_a_if.DATA_W;
 localparam TUSER_WIDTH = afu_axi_rx_a_if.USER_W;

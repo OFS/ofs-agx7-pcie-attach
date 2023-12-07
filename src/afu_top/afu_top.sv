@@ -347,6 +347,7 @@ assign mx2fn_rx_b_port[PF0_MGMT_PID].tready = 1'b1;
 
 // FLR has no meaning for PF0 management, but must propagate to VFs in pg_afu
 logic pf0_flr_rst_n;
+logic pg_flr_rst_n;
 flr_rst_mgr #(
    .NUM_PF (1),
    .NUM_VF (0),
@@ -360,7 +361,8 @@ flr_rst_mgr #(
    .pcie_flr_rsp (afu_flr_rsp[PF0_MGMT_PID]),
    .pf_flr_rst_n (pf0_flr_rst_n)
 );
-   
+
+assign pg_flr_rst_n = (top_cfg_pkg::PG_VFS > 0) ? pf0_flr_rst_n : 1'b1;
 //-----------------------------------------------------------------------------------------------
 // Static Region (SR) AFU (fim_afu_instances)
 //-----------------------------------------------------------------------------------------------
@@ -447,7 +449,7 @@ port_gasket #(
    .rst_n_csr          (rst_n_csr),             // Reset from hip on csr clk
 
    // FLR interface
-   .pg_pf_flr_rst_n    (pf0_flr_rst_n),
+   .pg_pf_flr_rst_n    (pg_flr_rst_n),
    .flr_req            (afu_flr_req[PG_SHARED_VF_PID]),
    .flr_rsp            (afu_flr_rsp[PG_SHARED_VF_PID]),
 
