@@ -603,7 +603,7 @@ pmci_wrapper #(
 `else
    // dummy csr slv if incase PMCI is not used
    dummy_csr #(
-      .FEAT_ID          (12'h012),
+      .FEAT_ID          (12'h000),
       .FEAT_VER         (4'h1),
       //.NEXT_DFH_OFFSET  (24'h1000),
       .NEXT_DFH_OFFSET  (fabric_width_pkg::bpf_pmci_slv_next_dfh_offset),
@@ -1168,9 +1168,9 @@ assign host_uart_if.ri_n = 1'b0;
       .csr_lite_if (bpf_emif_slv_if)
    );
 `else
-   // Placeholder logic incase HSSI is not used
+   // Placeholder logic incase MEM SS is not used
    dummy_csr #(
-      .FEAT_ID          (12'h009),
+      .FEAT_ID          (12'h000),
       .FEAT_VER         (4'h1),
       .NEXT_DFH_OFFSET  (fabric_width_pkg::bpf_emif_slv_next_dfh_offset),
       .END_OF_LIST      (fabric_width_pkg::bpf_emif_slv_eol)

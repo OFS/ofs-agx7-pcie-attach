@@ -91,19 +91,19 @@ import pg_csr_pkg::*;
       dfh_values[GLBL_ERROR_DFH_IDX] = 64'h3_00000_xxxxxx_1004;
       dfh_values[GLBL_ERROR_DFH_IDX][39:16] = fabric_width_pkg::fme_csr_glbl_error;
 
-      dfh_values[QSFP0_DFH_IDX]      = 64'h3_00000_xxxxxx_0013;
+      dfh_values[QSFP0_DFH_IDX]      = 64'h3_00000_xxxxxx_0000;
       dfh_values[QSFP0_DFH_IDX][39:16] = fabric_width_pkg::bpf_qsfp0_slv_next_dfh_offset;
 
-      dfh_values[QSFP1_DFH_IDX]      = 64'h3_00000_xxxxxx_0013;
+      dfh_values[QSFP1_DFH_IDX]      = 64'h3_00000_xxxxxx_0000;
       dfh_values[QSFP1_DFH_IDX][39:16] = fabric_width_pkg::bpf_qsfp1_slv_next_dfh_offset;
 
-      dfh_values[HSSI_DFH_IDX]       = 64'h3_00000_xxxxxx_100f;
+      dfh_values[HSSI_DFH_IDX]       = 64'h3_00000_xxxxxx_1000;
       dfh_values[HSSI_DFH_IDX][39:16] = fabric_width_pkg::bpf_hssi_slv_next_dfh_offset;
 
-      dfh_values[EMIF_DFH_IDX]       = 64'h3_00000_xxxxxx_1009;
+      dfh_values[EMIF_DFH_IDX]       = 64'h3_00000_xxxxxx_1000;
       dfh_values[EMIF_DFH_IDX][39:16] = fabric_width_pkg::bpf_emif_slv_next_dfh_offset;
 
-      dfh_values[PMCI_DFH_IDX]       = 64'h3_00000_xxxxxx_1012;
+      dfh_values[PMCI_DFH_IDX]       = 64'h3_00000_xxxxxx_1000;
       dfh_values[PMCI_DFH_IDX][39:16] = fabric_width_pkg::bpf_pmci_slv_next_dfh_offset;
 
       dfh_values[ST2MM_DFH_IDX]      = 64'h3_00000_xxxxxx_0014;
@@ -115,7 +115,7 @@ import pg_csr_pkg::*;
       dfh_values[PG_PR_DFH_IDX]      = 64'h3_00000_xxxxxx_1005;
       dfh_values[PG_PR_DFH_IDX][39:16] = fabric_width_pkg::port_pg_pr_dfh;
 
-      dfh_values[PG_PORT_DFH_IDX]     = 64'h4_00000_xxxxxx_1001;
+      dfh_values[PG_PORT_DFH_IDX]     = 64'h4_00000_xxxxxx_2001;
       dfh_values[PG_PORT_DFH_IDX][39:16] = pg_csr_pkg::FME_CSR_FME_PR_NEXT_DFH_OFFSET;
 
       dfh_values[PG_USER_CLK_DFH_IDX] = 64'h3_00000_xxxxxx_1014;
