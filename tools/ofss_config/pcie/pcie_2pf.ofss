@@ -5,7 +5,8 @@ type = pcie
 output_name = pcie_ss
 
 [pf0]
-num_vfs = 1
 bar0_address_width = 20
-vf_bar0_address_width = 20
+
+[pf1]
+bar0_address_width = 20
 
