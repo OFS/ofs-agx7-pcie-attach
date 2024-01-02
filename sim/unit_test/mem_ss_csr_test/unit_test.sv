@@ -497,9 +497,8 @@ task main_test;
 
      `ifdef INCLUDE_DDR4
       wait(top_tb.DUT.mem_ss_top.mem_ss_cal_success[0] == 1'b1);
-     `endif
       test_emif_calibration ( test_result );
-
+     `endif
 
    end
 endtask

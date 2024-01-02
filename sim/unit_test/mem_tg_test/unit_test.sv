@@ -840,13 +840,11 @@ task main_test;
       // wait for cal
      `ifdef INCLUDE_DDR4
       wait(top_tb.DUT.mem_ss_top.mem_ss_cal_success[0] == 1'b1);
-     `endif
-
+ 
       test_emif_calibration ( test_result );
    
       host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF2);
 
-    `ifdef INCLUDE_DDR4
       test_afu_mmio (test_result); 
       for(itr=0; itr < NUM_TEST_ITER; itr = itr+1) begin
          $display("\nRunning write only test... \n");

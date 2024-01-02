@@ -341,15 +341,13 @@ task main_test;
       host_bfm_top.host_bfm.set_pfvf_setting(PF0);
       // wait for mem_ss rst ack
       `ifdef INCLUDE_DDR4
-      wait(top_tb.DUT.mem_ss_top.mem_ss_rst_ack_n == 1'b0);
-      `endif
+      wait(top_tb.DUT.mem_ss_top.mem_ss_rst_ack_n == 1'b0); 
 
       // wiat for cal
-      `ifdef INCLUDE_DDR4
       wait(top_tb.DUT.mem_ss_top.mem_ss_cal_success[0] == 1'b1);
-      `endif
+   
       test_emif_calibration ( test_result );
-
+      `endif
 
    end
 endtask
