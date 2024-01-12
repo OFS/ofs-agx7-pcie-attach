@@ -85,7 +85,7 @@ import pg_csr_pkg::*;
       dfh_values[THERM_MNGM_DFH_IDX] = 64'h3_00000_xxxxxx_0001;
       dfh_values[THERM_MNGM_DFH_IDX][39:16] = fme_csr_pkg::FME_CSR_THERM_MNGM_NEXT_DFH_OFFSET;
 
-      dfh_values[GLBL_PERF_DFH_IDX]  = 64'h3_00000_xxxxxx_0007;
+      dfh_values[GLBL_PERF_DFH_IDX]  = 64'h3_00000_xxxxxx_0000;
       dfh_values[GLBL_PERF_DFH_IDX][39:16] = fme_csr_pkg::FME_CSR_GLBL_PERF_NEXT_DFH_OFFSET;
 
       dfh_values[GLBL_ERROR_DFH_IDX] = 64'h3_00000_xxxxxx_1004;
