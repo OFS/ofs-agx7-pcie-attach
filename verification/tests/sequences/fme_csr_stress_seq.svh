@@ -271,10 +271,10 @@ class fme_csr_stress_seq extends base_seq;
         `ifdef COV tb_env0.fme_regs.GLBL_PERF_DFH.cg_vals.sample();`endif
         rw_bits = 'h00000000ffffC0fB;
         wdata = rw_bits & wdata;
-        if(rdata !== 'h3000000010000007  )
-            `uvm_error(get_name(), $psprintf("Data mismatch 64! Register = %0s, Exp = %0h, Act = %0h", "GLBL_PERF_DFH",'h3000000010000007 , rdata))
+        if(rdata !== 'h3000000010000000  )
+            `uvm_error(get_name(), $psprintf("Data mismatch 64! Register = %0s, Exp = %0h, Act = %0h", "GLBL_PERF_DFH",'h3000000010000000 , rdata))
         else
-            `uvm_info(get_name(), $psprintf("Data match 64! Register = %0s, data = %0h","GLBL_PERF_DFH",'h3000000010000007 , rdata), UVM_LOW)
+            `uvm_info(get_name(), $psprintf("Data match 64! Register = %0s, data = %0h","GLBL_PERF_DFH",'h3000000010000000 , rdata), UVM_LOW)
      
        // Write and Read to DUMMY_3008
 

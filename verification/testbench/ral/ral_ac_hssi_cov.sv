@@ -1253,7 +1253,7 @@ class ral_reg_ac_hssi_HSSI_PORT_7_ATTR extends uvm_reg;
 	endfunction
 endclass : ral_reg_ac_hssi_HSSI_PORT_7_ATTR
 
-`ifdef INCLUDE_CVL
+`ifdef ENABLE_8_TO_15_PORTS
 
 class ral_reg_ac_hssi_HSSI_PORT_8_ATTR extends uvm_reg;
 	rand uvm_reg_field Reserved;
@@ -3585,7 +3585,7 @@ class ral_reg_ac_hssi_HSSI_PORT_7_STATUS extends uvm_reg;
 	endfunction
 endclass : ral_reg_ac_hssi_HSSI_PORT_7_STATUS
 
-`ifdef INCLUDE_CVL
+`ifdef ENABLE_8_TO_15_PORTS
 
 class ral_reg_ac_hssi_HSSI_PORT_8_STATUS extends uvm_reg;
 	rand uvm_reg_field Reserved;
@@ -5351,7 +5351,7 @@ class ral_block_ac_hssi extends uvm_reg_block;
 	rand ral_reg_ac_hssi_HSSI_PORT_5_ATTR HSSI_PORT_5_ATTR;
 	rand ral_reg_ac_hssi_HSSI_PORT_6_ATTR HSSI_PORT_6_ATTR;
 	rand ral_reg_ac_hssi_HSSI_PORT_7_ATTR HSSI_PORT_7_ATTR;
-        `ifdef INCLUDE_CVL
+        `ifdef ENABLE_8_TO_15_PORTS
 	rand ral_reg_ac_hssi_HSSI_PORT_8_ATTR HSSI_PORT_8_ATTR;
 	rand ral_reg_ac_hssi_HSSI_PORT_9_ATTR HSSI_PORT_9_ATTR;
 	rand ral_reg_ac_hssi_HSSI_PORT_10_ATTR HSSI_PORT_10_ATTR;
@@ -5375,7 +5375,7 @@ class ral_block_ac_hssi extends uvm_reg_block;
 	rand ral_reg_ac_hssi_HSSI_PORT_5_STATUS HSSI_PORT_5_STATUS;
 	rand ral_reg_ac_hssi_HSSI_PORT_6_STATUS HSSI_PORT_6_STATUS;
 	rand ral_reg_ac_hssi_HSSI_PORT_7_STATUS HSSI_PORT_7_STATUS;
-        `ifdef INCLDUE_CVL
+        `ifdef ENABLE_8_TO_15_PORTS
 	rand ral_reg_ac_hssi_HSSI_PORT_8_STATUS HSSI_PORT_8_STATUS;
 	rand ral_reg_ac_hssi_HSSI_PORT_9_STATUS HSSI_PORT_9_STATUS;
 	rand ral_reg_ac_hssi_HSSI_PORT_10_STATUS HSSI_PORT_10_STATUS;
@@ -5524,7 +5524,7 @@ class ral_block_ac_hssi extends uvm_reg_block;
 	uvm_reg_field HSSI_PORT_7_ATTR_DataBusWidth;
 	uvm_reg_field HSSI_PORT_7_ATTR_ReadyLatency;
 	uvm_reg_field HSSI_PORT_7_ATTR_Profile;
-        `ifdef INCLUDE_CVL
+        `ifdef ENABLE_8_TO_15_PORTS
        	rand uvm_reg_field HSSI_PORT_8_ATTR_Reserved;
 	uvm_reg_field HSSI_PORT_8_ATTR_PtpEnable;
 	uvm_reg_field HSSI_PORT_8_ATTR_AnltEnable;
@@ -5827,7 +5827,7 @@ class ral_block_ac_hssi extends uvm_reg_block;
 	uvm_reg_field HSSI_PORT_7_STATUS_CDRLock;
 	uvm_reg_field HSSI_PORT_7_STATUS_RxHiBER;
 	uvm_reg_field HSSI_PORT_7_STATUS_EHIPReady;
-        `ifdef INCLUDE_CVL
+        `ifdef ENABLE_8_TO_15_PORTS
 	rand uvm_reg_field HSSI_PORT_8_STATUS_Reserved;
 	uvm_reg_field HSSI_PORT_8_STATUS_EHIP_TX_PLL_LOCKED;
 	uvm_reg_field HSSI_PORT_8_STATUS_TX_PLL_LOCKED;
@@ -6288,7 +6288,7 @@ class ral_block_ac_hssi extends uvm_reg_block;
 		this.HSSI_PORT_7_ATTR_DataBusWidth = this.HSSI_PORT_7_ATTR.DataBusWidth;
 		this.HSSI_PORT_7_ATTR_ReadyLatency = this.HSSI_PORT_7_ATTR.ReadyLatency;
 		this.HSSI_PORT_7_ATTR_Profile = this.HSSI_PORT_7_ATTR.Profile;
-      `ifdef INCLUDE_CVL
+      `ifdef ENABLE_8_TO_15_PORTS
       this.HSSI_PORT_8_ATTR = ral_reg_ac_hssi_HSSI_PORT_8_ATTR::type_id::create("HSSI_PORT_8_ATTR",,get_full_name());
       this.HSSI_PORT_8_ATTR.configure(this, null, "");
       this.HSSI_PORT_8_ATTR.build();
@@ -6679,7 +6679,7 @@ class ral_block_ac_hssi extends uvm_reg_block;
 		this.HSSI_PORT_7_STATUS_CDRLock = this.HSSI_PORT_7_STATUS.CDRLock;
 		this.HSSI_PORT_7_STATUS_RxHiBER = this.HSSI_PORT_7_STATUS.RxHiBER;
 		this.HSSI_PORT_7_STATUS_EHIPReady = this.HSSI_PORT_7_STATUS.EHIPReady;
-      `ifdef INCLUDE_CVL
+      `ifdef ENABLE_8_TO_15_PORTS
       this.HSSI_PORT_8_STATUS = ral_reg_ac_hssi_HSSI_PORT_8_STATUS::type_id::create("HSSI_PORT_8_STATUS",,get_full_name());
       this.HSSI_PORT_8_STATUS.configure(this, null, "");
       this.HSSI_PORT_8_STATUS.build();

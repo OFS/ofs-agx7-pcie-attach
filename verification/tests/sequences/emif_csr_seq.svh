@@ -42,10 +42,14 @@ class emif_csr_seq extends base_seq;
     	`uvm_info(get_name(), "Entering emif_csr_seq...", UVM_LOW)
          mem_dfh  = tb_cfg0.PF0_BAR0;
          rdata = '0;
+	`ifdef  INCLUDE_DDR4
      	 while(rdata[11:0] != EMIF_FEAT_ID) begin
          	mem_dfh = mem_dfh + rdata[39:16];
         	 mmio_read64(.addr_(mem_dfh), .data_(rdata));
          end
+	`else
+          m_regs_a["EMIF_DFH"] = "EMIF_DFH";
+	`endif
 
 	 m_regs_a["EMIF_STATUS"] = "EMIF_STATUS_REG";
 	 m_regs_a["EMIF_CAPABILITY"] = "EMIF_CAPABILITY_REG";
@@ -92,6 +96,8 @@ class emif_csr_seq extends base_seq;
          check_reset_value(m_regs_m,m_regs_b,r_a_array);
 	 m_regs_m[1] = tb_env0.emif_regs.get_reg_by_name("EMIF_CAPABILITY");
          r_a_array["EMIF_CAPABILITY"] = 64'h0000_0000_0000_0000;
+         m_regs_m[2] = tb_env0.emif_regs.get_reg_by_name("EMIF_DFH");	 
+         r_a_array["EMIF_DFH"] = 64'h3000_0000_b000_1000;
 	 check_reset_value(m_regs_m,m_regs_b,r_a_array);
      `endif 
      `uvm_info(get_name(), "Exiting  emif_csr_seq...", UVM_LOW)

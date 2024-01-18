@@ -32,7 +32,7 @@ class MMIOInsufficientData_seq extends base_seq;
      uvm_status_e       status;
      uvm_reg_data_t     reg_data;
      int                timeout;
-      time dly_after_err  = 5us; //1us causuing error 
+      time dly_after_err  = 15us; //1us causuing error 
       time dly_rst_window = 1us;
       time dly_before_read =30us; //512 timout cycle instead of 28us wating for 30us
      logic[63:0] addr;

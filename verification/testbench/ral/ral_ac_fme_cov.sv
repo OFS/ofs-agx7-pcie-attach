@@ -1141,7 +1141,7 @@ class ral_reg_ac_fme_GLBL_PERF_DFH extends uvm_reg;
       option.weight = 1;
     }
 		FeatureID_value : coverpoint FeatureID.value { //Added by script default bin //Added by script default bin
-      bins default_value = { 'h7 };
+      bins default_value = { 'h0 };
       option.weight = 1;
     }
 	endgroup : cg_vals
@@ -1164,7 +1164,7 @@ class ral_reg_ac_fme_GLBL_PERF_DFH extends uvm_reg;
       this.FeatureRev = uvm_reg_field::type_id::create("FeatureRev",,get_full_name());
       this.FeatureRev.configure(this, 4, 12, "RO", 0, 4'h0, 1, 0, 0);
       this.FeatureID = uvm_reg_field::type_id::create("FeatureID",,get_full_name());
-      this.FeatureID.configure(this, 12, 0, "RO", 0, 12'h7, 1, 0, 0);
+      this.FeatureID.configure(this, 12, 0, "RO", 0, 12'h0, 1, 0, 0);
    endfunction: build
 
 	`uvm_object_utils(ral_reg_ac_fme_GLBL_PERF_DFH)

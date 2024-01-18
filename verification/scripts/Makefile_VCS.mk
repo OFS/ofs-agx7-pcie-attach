@@ -49,16 +49,16 @@ endif
 #VLOG_OPT += +define+DISABLE_AFU_MAIN #Remove afu_main() ref from UVM TB for PIM AFU testing
 VLOG_OPT += +define+IGNORE_DF_SIM_EXIT  
 ifeq ($(n6000_10G),1)
-VLOG_OPT += +define+INCLUDE_CVL +define+ETH_10G +define+SIM_SERIAL +define+INCLUDE_PCIE_SS +define+INCLUDE_TOD +define+n6000_10G #Includes CVL by passthrough logic
+VLOG_OPT += +define+INCLUDE_CVL +define+ENABLE_8_TO_15_PORTS +define+ETH_10G +define+SIM_SERIAL +define+INCLUDE_PCIE_SS +define+INCLUDE_TOD +define+n6000_10G #Includes CVL by passthrough logic
 VLOG_OPT += +define+SVT_ETHERNET
 VLOG_OPT += +define+SVT_ETHERNET_DEBUG_BUS_ENABLE
 else ifeq ($(n6000_25G),1)
-VLOG_OPT += +define+INCLUDE_CVL +define+ETH_25G +define+SIM_SERIAL +define+INCLUDE_PCIE_SS +define+INCLUDE_TOD +define+n6000_25G #Includes CVL by passthrough logic
+VLOG_OPT += +define+INCLUDE_CVL +define+ENABLE_8_TO_15_PORTS +define+ETH_25G +define+SIM_SERIAL +define+INCLUDE_PCIE_SS +define+INCLUDE_TOD +define+n6000_25G #Includes CVL by passthrough logic
 VLOG_OPT += +define+SVT_ETHERNET
 VLOG_OPT += +define+SVT_ETHERNET_DEBUG_BUS_ENABLE
 else ifeq ($(n6000_100G),1)
 #VLOG_OPT += +define+INCLUDE_CVL +define+ETH_100G +define+SIM_SERIAL +define+INCLUDE_PCIE_SS +define+INCLUDE_TOD +define+n6000_100G #Includes CVL by passthrough logic
-VLOG_OPT += +define+INCLUDE_CVL +define+ETH_100G +define+SIM_SERIAL +define+INCLUDE_PCIE_SS +define+n6000_100G #Includes CVL by passthrough logic
+VLOG_OPT += +define+INCLUDE_CVL +define+ENABLE_8_TO_15_PORTS +define+ETH_100G +define+SIM_SERIAL +define+INCLUDE_PCIE_SS +define+n6000_100G #Includes CVL by passthrough logic
 VLOG_OPT += +define+SVT_ETHERNET
 VLOG_OPT += +define+SVT_ETHERNET_DEBUG_BUS_ENABLE
 else
@@ -84,10 +84,10 @@ ifdef FTILE_SIM
 VLOG_OPT += +define+FTILE_SIM +define+IP7581SERDES_UX_SIMSPEED
 VLOG_OPT += +define+INCLUDE_FTILE
 ifdef ETH_200G
-VLOG_OPT += +define+ETH_200G
+VLOG_OPT += +define+ETH_200G +define+ENABLE_8_TO_15_PORTS
 endif
 ifdef ETH_400G
-VLOG_OPT += +define+ETH_400G
+VLOG_OPT += +define+ETH_400G +define+ENABLE_8_TO_15_PORTS
 endif
 VLOG_OPT += +define+TOP_LEVEL_ENTITY_INSTANCE_PATH=tb_top.DUT
 VLOG_OPT += +define+QUARTUS_ENABLE_DPI_FORCE

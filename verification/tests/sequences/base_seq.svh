@@ -408,6 +408,8 @@ class base_seq extends uvm_sequence;
          begin wdata[0] = 1'b1;
           mmio_write64 (.addr_(addr), .data_(wdata));
           `uvm_info(get_name(), $psprintf("Reset is asserted PORT_CONTROL = %0h", wdata), UVM_LOW)
+          while(!rdata[4])  mmio_read64  (.addr_(addr), .data_(rdata));      
+         `uvm_info(get_name(), $psprintf("SOFT_RESET_ACK is SET = %0h", rdata), UVM_LOW)
          end
        end
   endtask 

@@ -127,7 +127,7 @@ class pmci_fme_csr_seq extends base_seq;
     rd_tx_register(address,exp_data); 
 	
 	address =  FME_BASE_ADDR + 18'h3000;
-    exp_data =64'h3000000010000007;
+    exp_data =64'h3000000010000000;
     `uvm_info(get_name(), $psprintf("Reading from GLBL_PERF_DFH Register"), UVM_LOW)
     rd_tx_register(address,exp_data); 
 

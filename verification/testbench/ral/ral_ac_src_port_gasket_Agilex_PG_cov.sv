@@ -1031,7 +1031,7 @@ class ral_reg_ac_src_port_gasket_Agilex_PG_PORT_DFH extends uvm_reg;
       this.NextDfhOffset = uvm_reg_field::type_id::create("NextDfhOffset",,get_full_name());
       this.NextDfhOffset.configure(this, 24, 16, "RO", 0, 24'h1000, 1, 0, 1);
       this.AfuMajVersion = uvm_reg_field::type_id::create("AfuMajVersion",,get_full_name());
-      this.AfuMajVersion.configure(this, 4, 12, "RO", 0, 4'h1, 1, 0, 0);
+      this.AfuMajVersion.configure(this, 4, 12, "RO", 0, 4'h2, 1, 0, 0);
       this.CorefimVersion = uvm_reg_field::type_id::create("CorefimVersion",,get_full_name());
       this.CorefimVersion.configure(this, 12, 0, "RO", 0, 12'h1, 1, 0, 0);
    endfunction: build
