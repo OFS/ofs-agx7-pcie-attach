@@ -7,7 +7,7 @@
 package packet_class_pkg; 
 
 import host_bfm_types_pkg::*;
-import pfvf_def_pkg::*;
+import pfvf_class_pkg::*;
 import pfvf_status_class_pkg::*;
 
 //------------------------------------------------------------------------------
@@ -122,18 +122,24 @@ typedef enum bit [7:0] {
 // to facilitate polymorphism.
 //------------------------------------------------------------------------------
 
-virtual class PacketHeader; // Abstract Base Class
+virtual class PacketHeader #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+); // Abstract Base Class
 
    // Data Members
    protected packet_format_t packet_format;
    protected packet_header_op_t packet_header_op;
-   protected PFVFRouting pf_vf_route; // Singleton object for PCIe setting
+   protected PFVFRouting#(pf_type, vf_type, pf_list, vf_list) pf_vf_route; // Singleton object for PCIe setting
    protected bit  [3:0] bar;
    protected bit  [4:0] slot;
-   protected bit  [2:0] pf;
-   protected bit [10:0] vf;
-   protected bit        vf_active;
-   protected pfvf_type_t pf_vf_setting, last_pf_vf_setting;
+   //protected bit  [2:0] pf;
+   //protected bit [10:0] vf;
+   //protected bit        vf_active;
+   protected pfvf_struct pf_vf_setting, last_pf_vf_setting;
+   protected PFVFClass#(pf_type, vf_type, pf_list, vf_list) pfvf;
    protected uint32_t          request_delay;  // In clock AXI-ST Bus cycles - delay for outgoing request packets.
    protected uint32_t          completion_delay;  // In clock AXI-ST Bus cycles.
    protected uint32_t          gap;  // In clock AXI-ST Bus cycles - minimum distance between outgoing request packets..
@@ -183,14 +189,16 @@ virtual class PacketHeader; // Abstract Base Class
       this.prefix = '0;
       this.prefix_type = '0;
       this.prefix_present = '0;
-      this.pf_vf_route = PFVFRouting::get(); // Singleton object for PCIe setting.
+      this.pf_vf_route = PFVFRouting#(pf_type, vf_type, pf_list, vf_list)::get(); // Singleton object for PCIe setting.
       this.bar  = pf_vf_route.get_bar();
       this.slot = pf_vf_route.get_slot();
-      this.pf   = pf_vf_route.get_pf();
-      this.vf   = pf_vf_route.get_vf();
-      this.vf_active = pf_vf_route.get_vfa();
+      //this.pf   = pf_vf_route.get_pf();
+      //this.vf   = pf_vf_route.get_vf();
+      //this.vf_active = pf_vf_route.get_vfa();
       this.pf_vf_setting = pf_vf_route.get_env();
       this.last_pf_vf_setting = pf_vf_route.get_env();
+      this.pfvf = new(0,0,0);
+      this.pfvf.set_pfvf_from_struct(pf_vf_setting);
       this.request_delay = 0;
       this.completion_delay = 65;
       this.gap = 5;
@@ -198,31 +206,34 @@ virtual class PacketHeader; // Abstract Base Class
   
 
    // Class Methods
-   virtual function void set_pf_vf(pfvf_type_t setting);
+   virtual function void set_pf_vf(pfvf_struct setting);
       // NOTE: Changing the PF/VF here does not change the state of the Host
       // as in the commented out line immediately below.  This must be done
       // with the BFM object.  This will only change the packet's state.
       // New packets will change via the pf_vf_route.
       //this.pf_vf_route.set_env(setting);
-      this.last_pf_vf_setting = this.pf_vf_setting;
-      this.pf_vf_setting = setting;
-      this.pf  = pfvf_def_pkg::pfvf_attr[setting].pfn;
-      this.vf  = pfvf_def_pkg::pfvf_attr[setting].vfn;
-      this.vf_active = pfvf_def_pkg::pfvf_attr[setting].vfa;
-      map_fields();
+      if (this.pfvf.set_pfvf_from_struct(setting))
+      begin
+         this.last_pf_vf_setting = this.pf_vf_setting;
+         this.pf_vf_setting = setting;
+         map_fields();
+      end
    endfunction
 
 
    virtual function void revert_to_last_pfvf_setting();
-      pfvf_type_t tmp_setting;
-      tmp_setting = this.pf_vf_setting;
-      this.pf_vf_setting = this.last_pf_vf_setting;
-      this.last_pf_vf_setting = tmp_setting;
-      this.set_pf_vf(this.pf_vf_setting);
+      pfvf_struct tmp_setting;
+      if (this.pfvf.set_pfvf_from_struct(this.last_pf_vf_setting))
+      begin
+         tmp_setting = this.pf_vf_setting;
+         this.pf_vf_setting = this.last_pf_vf_setting;
+         this.last_pf_vf_setting = tmp_setting;
+         map_fields();
+      end
    endfunction
 
 
-   virtual function pfvf_type_t get_pf_vf();
+   virtual function pfvf_struct get_pf_vf();
       return this.pf_vf_setting;
    endfunction
       
@@ -610,17 +621,17 @@ virtual class PacketHeader; // Abstract Base Class
 
 
    virtual function bit [2:0] get_pf_num();
-      return this.pf;
+      return this.pfvf.get_pf_field();
    endfunction
 
 
    virtual function bit [10:0] get_vf_num();
-      return this.vf;
+      return this.pfvf.get_vf_field();
    endfunction
 
 
    virtual function bit get_vf_active();
-      return this.vf_active;
+      return this.pfvf.get_vfa();
    endfunction
 
 
@@ -1001,7 +1012,12 @@ endclass : PacketHeader
 // headers as well as extracting the desired bit fields from received packets.
 //------------------------------------------------------------------------------
 
-class PacketHeaderUnknown extends PacketHeader;
+class PacketHeaderUnknown #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketHeader#(pf_type, vf_type, pf_list, vf_list);
 
    //Data Members
    protected int payload_length;
@@ -1163,7 +1179,12 @@ endclass : PacketHeaderUnknown
 // writes which drive most of the simulation unit tests.
 //------------------------------------------------------------------------------
 
-class PacketHeaderPUMemReq extends PacketHeader;
+class PacketHeaderPUMemReq #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketHeader#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
    protected uint64_t   address;
@@ -1212,7 +1233,7 @@ class PacketHeaderPUMemReq extends PacketHeader;
          header_dw[3] = '0;  // Blank Field for 3DW Addressing
       end
       header_dw[4] = {2'b00, prefix_present, prefix_type, prefix};
-      header_dw[5] = {7'b0000000, 1'b0, slot, bar, vf_active, vf, pf};
+      header_dw[5] = {7'b0000000, 1'b0, slot, bar, pfvf.get_vfa(), pfvf.get_vf_field(), pfvf.get_pf_field()};
       header_dw[6] = '0; // Reserved Fields
       header_dw[7] = '0; // Reserved Fields
       header_bytes = {<<8{{<<32{header_dw}}}}; // Streaming Operator -- streaming DWs to bytes, little endian.
@@ -1220,6 +1241,10 @@ class PacketHeaderPUMemReq extends PacketHeader;
 
 
    virtual protected function void assign_fields();
+      bit local_vfa;
+      bit  [2:0] local_pf;
+      bit [10:0] local_vf;
+      pfvf_struct local_pfvf;
       {fmt_type, tag[9], tc, tag[8], attr[2], ln, th, td, ep, attr[1:0], at, length_dw} = header_dw[0];
       fmt = tlp_fmt_t'(fmt_type[7:5]);
       tlp_type = fmt_type[4:0];
@@ -1246,7 +1271,11 @@ class PacketHeaderPUMemReq extends PacketHeader;
          {address[31:2], ph} = header_dw[2];
       end
       {prefix_present, prefix_type, prefix} = header_dw[4][29:0];
-      {slot, bar, vf_active, vf, pf} = header_dw[5][23:0];
+      {slot, bar, local_vfa, local_vf, local_pf} = header_dw[5][23:0];
+      local_pfvf.pfn = local_pf;
+      local_pfvf.vfn = local_vf;
+      local_pfvf.vfa = local_vfa;
+      pfvf.set_pfvf_from_struct(local_pfvf);
    endfunction
 
 
@@ -1557,7 +1586,12 @@ endclass : PacketHeaderPUMemReq
 //In all of the Atomic operations, the original data at the targeted memory location is returned back to the requester with a completion packet.
 //------------------------------------------------------------------------------
 
-class PacketHeaderPUAtomic extends PacketHeaderPUMemReq;
+class PacketHeaderPUAtomic #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketHeaderPUMemReq#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
    protected packet_header_atomic_op_t packet_header_atomic_op;
@@ -1594,6 +1628,10 @@ class PacketHeaderPUAtomic extends PacketHeaderPUMemReq;
 
 
    virtual protected function void assign_fields();
+      bit local_vfa;
+      bit  [2:0] local_pf;
+      bit [10:0] local_vf;
+      pfvf_struct local_pfvf;
       {fmt_type, tag[9], tc, tag[8], attr[2], ln, th, td, ep, attr[1:0], at, length_dw} = header_dw[0];
       fmt = tlp_fmt_t'(fmt_type[7:5]);
       tlp_type = fmt_type[4:0];
@@ -1619,7 +1657,11 @@ class PacketHeaderPUAtomic extends PacketHeaderPUMemReq;
          {address[31:2], ph} = header_dw[2];
       end
       {prefix_present, prefix_type, prefix} = header_dw[4][29:0];
-      {slot, bar, vf_active, vf, pf} = header_dw[5][23:0];
+      {slot, bar, local_vfa, local_vf, local_pf} = header_dw[5][23:0];
+      local_pfvf.pfn = local_pf;
+      local_pfvf.vfn = local_vf;
+      local_pfvf.vfa = local_vfa;
+      pfvf.set_pfvf_from_struct(local_pfvf);
    endfunction
 
 
@@ -1849,7 +1891,12 @@ endclass : PacketHeaderPUAtomic
 // payload allowed by PCI Express.
 //------------------------------------------------------------------------------
 
-class PacketHeaderPUCompletion extends PacketHeaderPUMemReq;
+class PacketHeaderPUCompletion #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketHeaderPUMemReq#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
    protected data_present_type_t cpl_data_type;
@@ -1893,7 +1940,7 @@ class PacketHeaderPUCompletion extends PacketHeaderPUMemReq;
       header_dw[2] = {completer_id, tag[7:0], 1'b0, lower_address};
       header_dw[3] = '0;  // Blank Field
       header_dw[4] = {2'b00, prefix_present, prefix_type, prefix};
-      header_dw[5] = {7'b0000000, 1'b0, this.slot, this.bar, this.vf_active, this.vf, this.pf};
+      header_dw[5] = {7'b0000000, 1'b0, this.slot, this.bar, this.pfvf.get_vfa(), this.pfvf.get_vf_field(), this.pfvf.get_pf_field()};
       header_dw[6] = '0; // Reserved Fields
       header_dw[7] = '0; // Reserved Fields
       header_bytes = {<<8{{<<32{header_dw}}}}; // Streaming Operator -- streaming DWs to bytes, little endian.
@@ -1901,13 +1948,21 @@ class PacketHeaderPUCompletion extends PacketHeaderPUMemReq;
 
 
    virtual protected function void assign_fields();
+      bit local_vfa;
+      bit  [2:0] local_pf;
+      bit [10:0] local_vf;
+      pfvf_struct local_pfvf;
       {fmt_type, tag[9], tc, tag[8], attr[2], ln, th, td, ep, attr[1:0], at, length_dw} = header_dw[0];
       {requester_id, cpl_status, bcm, byte_count} = header_dw[1];
       completer_id = header_dw[2][31:16];
       tag[7:0] = header_dw[2][15:8];
       lower_address = header_dw[2][6:0];
       {prefix_present, prefix_type, prefix} = header_dw[4][29:0];
-      {slot, bar, vf_active, vf, pf} = header_dw[5][23:0];
+      {slot, bar, local_vfa, local_vf, local_pf} = header_dw[5][23:0];
+      local_pfvf.pfn = local_pf;
+      local_pfvf.vfn = local_vf;
+      local_pfvf.vfa = local_vfa;
+      pfvf.set_pfvf_from_struct(local_pfvf);
    endfunction
 
 
@@ -2178,7 +2233,12 @@ endclass : PacketHeaderPUCompletion
 // interfaces more robust and interchangeable in operation.
 //------------------------------------------------------------------------------
 
-class PacketHeaderDMMemReq extends PacketHeader;
+class PacketHeaderDMMemReq #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketHeader#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
    protected uint64_t host_address;
@@ -2228,7 +2288,7 @@ class PacketHeaderDMMemReq extends PacketHeader;
       header_dw[2] = host_address[63:32];
       header_dw[3] = {host_address[31:2], ph};
       header_dw[4] = {2'b00, prefix_present, prefix_type, prefix};
-      header_dw[5] = {7'b0000000, mm_mode, this.slot, 4'b0000, this.vf_active, this.vf, this.pf};
+      header_dw[5] = {7'b0000000, mm_mode, this.slot, 4'b0000, this.pfvf.get_vfa(), this.pfvf.get_vf_field(), this.pfvf.get_pf_field()};
       if (mm_mode)
       begin
          header_dw[6] = local_address[63:32];
@@ -2244,12 +2304,20 @@ class PacketHeaderDMMemReq extends PacketHeader;
 
 
    virtual protected function void assign_fields();
+      bit local_vfa;
+      bit  [2:0] local_pf;
+      bit [10:0] local_vf;
+      pfvf_struct local_pfvf;
       {fmt_type, tag[9], tc, tag[8], attr[2], ln, th, td, ep, attr[1:0], at, length[11:2]} = header_dw[0];
       {host_address[1:0], length[23:12], length[1:0], tag[7:0]} = header_dw[1][31:8];
       host_address[63:32] = header_dw[2];
       {host_address[31:2], ph} = header_dw[3];
       {prefix_present, prefix_type, prefix} = header_dw[4][29:0];
-      {mm_mode, slot, bar, vf_active, vf, pf} = header_dw[5][24:0];
+      {mm_mode, slot, bar, local_vfa, local_vf, local_pf} = header_dw[5][24:0];
+      local_pfvf.pfn = local_pf;
+      local_pfvf.vfn = local_vf;
+      local_pfvf.vfa = local_vfa;
+      pfvf.set_pfvf_from_struct(local_pfvf);
       if (mm_mode)
       begin
          local_address[63:32] = header_dw[6];
@@ -2523,7 +2591,12 @@ endclass : PacketHeaderDMMemReq
 // interfaces more robust and interchangeable in operation.
 //------------------------------------------------------------------------------
 
-class PacketHeaderDMCompletion extends PacketHeaderDMMemReq;
+class PacketHeaderDMCompletion #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketHeaderDMMemReq#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
    protected cpl_status_t cpl_status;
@@ -2568,7 +2641,7 @@ class PacketHeaderDMCompletion extends PacketHeaderDMMemReq;
          header_dw[3] = {tag, fc, 1'b0, length[13:12], length[1:0], lower_address[23:14], lower_address[13:8]};
       end
       header_dw[4] = {2'b00, prefix_present, prefix_type, prefix};
-      header_dw[5] = {7'b0000000, mm_mode, this.slot, 4'b0000, this.vf_active, this.vf, this.pf};
+      header_dw[5] = {7'b0000000, mm_mode, this.slot, 4'b0000, this.pfvf.get_vfa(), this.pfvf.get_vf_field(), this.pfvf.get_pf_field()};
       if (mm_mode)
       begin
          header_dw[6] = local_address[63:32];
@@ -2584,6 +2657,10 @@ class PacketHeaderDMCompletion extends PacketHeaderDMMemReq;
 
 
    virtual protected function void assign_fields();
+      bit local_vfa;
+      bit  [2:0] local_pf;
+      bit [10:0] local_vf;
+      pfvf_struct local_pfvf;
       fmt_type = tlp_fmt_type_t'(header_dw[0][31:24]);
       tc       = header_dw[0][22:20];
       {attr[2],ln, th, td, ep, attr[1:0]}  = header_dw[0][18:12];
@@ -2601,7 +2678,11 @@ class PacketHeaderDMCompletion extends PacketHeaderDMMemReq;
          {length[13:12], length[1:0], lower_address[23:14], lower_address[13:8]} = header_dw[3][19:0];
       end
       {prefix_present, prefix_type, prefix} = header_dw[4][29:0];
-      {mm_mode, slot, bar, vf_active, vf, pf} = header_dw[5][24:0];
+      {mm_mode, slot, bar, local_vfa, local_vf, local_pf} = header_dw[5][24:0];
+      local_pfvf.pfn = local_pf;
+      local_pfvf.vfn = local_vf;
+      local_pfvf.vfa = local_vfa;
+      pfvf.set_pfvf_from_struct(local_pfvf);
       if (mm_mode)
       begin
          local_address[63:32] = header_dw[6];
@@ -2806,7 +2887,12 @@ endclass : PacketHeaderDMCompletion
 // format the header takes.
 //------------------------------------------------------------------------------
 
-class PacketHeaderMsg extends PacketHeader;
+class PacketHeaderMsg #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketHeader#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
    protected data_present_type_t data_present;
@@ -2847,7 +2933,7 @@ class PacketHeaderMsg extends PacketHeader;
       header_dw[2] = lower_msg;
       header_dw[3] = upper_msg;
       header_dw[4] = {2'b00, prefix_present, prefix_type, prefix};
-      header_dw[5] = {7'b0000000, 1'b0, this.slot, this.bar, this.vf_active, this.vf, this.pf};
+      header_dw[5] = {7'b0000000, 1'b0, this.slot, this.bar, this.pfvf.get_vfa(), this.pfvf.get_vf_field(), this.pfvf.get_pf_field()};
       header_dw[6] = '0; // Reserved Fields
       header_dw[7] = '0; // Reserved Fields
       header_bytes = {<<8{{<<32{header_dw}}}}; // Streaming Operator -- streaming DWs to bytes, little endian.
@@ -2855,6 +2941,10 @@ class PacketHeaderMsg extends PacketHeader;
 
 
    virtual protected function void assign_fields();
+      bit local_vfa;
+      bit  [2:0] local_pf;
+      bit [10:0] local_vf;
+      pfvf_struct local_pfvf;
       {fmt_type, tag[9], tc, tag[8], attr[2], ln, th, td, ep, attr[1:0], at, length_dw} = header_dw[0];
       {requester_id, tag[7:0], msg_code} = header_dw[1];
       fmt = tlp_fmt_t'(fmt_type[7:5]);
@@ -2887,7 +2977,11 @@ class PacketHeaderMsg extends PacketHeader;
       lower_msg = header_dw[2];
       upper_msg = header_dw[3];
       {prefix_present, prefix_type, prefix} = header_dw[4][29:0];
-      {slot, bar, vf_active, vf, pf} = header_dw[5][23:0];
+      {slot, bar, local_vfa, local_vf, local_pf} = header_dw[5][23:0];
+      local_pfvf.pfn = local_pf;
+      local_pfvf.vfn = local_vf;
+      local_pfvf.vfa = local_vfa;
+      pfvf.set_pfvf_from_struct(local_pfvf);
    endfunction
 
 
@@ -3111,7 +3205,12 @@ endclass : PacketHeaderMsg
 // header classes.
 //------------------------------------------------------------------------------
 
-class PacketHeaderVDM extends PacketHeader;
+class PacketHeaderVDM #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketHeader#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
    protected data_present_type_t data_present;
@@ -3180,7 +3279,7 @@ class PacketHeaderVDM extends PacketHeader;
       //header_dw[3] = upper_msg;
       header_dw[3] = {4'b0000, mctp_header_version, destination_endpoint_id, source_endpoint_id, som, eom, packet_sequence_number, tag_owner, msg_tag};
       header_dw[4] = {2'b00, prefix_present, prefix_type, prefix};
-      header_dw[5] = {7'b0000000, 1'b0, slot, bar, vf_active, vf, pf};
+      header_dw[5] = {7'b0000000, 1'b0, slot, bar, pfvf.get_vfa(), pfvf.get_vf_field(), pfvf.get_pf_field()};
       header_dw[6] = '0; // Reserved Fields
       header_dw[7] = '0; // Reserved Fields
       header_bytes = {<<8{{<<32{header_dw}}}}; // Streaming Operator -- streaming DWs to bytes, little endian.
@@ -3188,6 +3287,10 @@ class PacketHeaderVDM extends PacketHeader;
 
 
    virtual protected function void assign_fields();
+      bit local_vfa;
+      bit  [2:0] local_pf;
+      bit [10:0] local_vf;
+      pfvf_struct local_pfvf;
       {fmt_type, tag[9], tc, tag[8], attr[2], ln, th, td, ep, attr[1:0], at, length_dw} = header_dw[0];
       //{requester_id, tag[7:0], msg_code} = header_dw[1];
       requester_id = header_dw[1][31:16];
@@ -3224,7 +3327,11 @@ class PacketHeaderVDM extends PacketHeader;
       //upper_msg = header_dw[3];
       {mctp_header_version, destination_endpoint_id, source_endpoint_id, som, eom, packet_sequence_number, tag_owner, msg_tag} = header_dw[3][27:0];
       {prefix_present, prefix_type, prefix} = header_dw[4][29:0];
-      {slot, bar, vf_active, vf, pf} = header_dw[5][23:0];
+      {slot, bar, local_vfa, local_vf, local_pf} = header_dw[5][23:0];
+      local_pfvf.pfn = local_pf;
+      local_pfvf.vfn = local_vf;
+      local_pfvf.vfa = local_vfa;
+      pfvf.set_pfvf_from_struct(local_pfvf);
    endfunction
 
 
@@ -3552,10 +3659,15 @@ class PacketHeaderVDM extends PacketHeader;
 endclass : PacketHeaderVDM
 
 
-virtual class Packet;  // Abstract Base Class
+virtual class Packet #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+);  // Abstract Base Class
 
    // Data Members
-   protected PacketHeader packet_header;
+   protected PacketHeader#(pf_type, vf_type, pf_list, vf_list) packet_header;
    //protected bit [7:0] payload [];  // Data Payload Array
    protected byte_t payload [];  // Data Payload Array
    protected bit [7:0] header_bytes[]; // Header Data in bytes, little endian.
@@ -3713,7 +3825,7 @@ virtual class Packet;  // Abstract Base Class
    //---------------------------------------------------------
    // Class Methods -- Packet Header Access via Encapsulation
    //---------------------------------------------------------
-   virtual function void set_pf_vf(pfvf_type_t setting);
+   virtual function void set_pf_vf(pfvf_struct setting);
       this.packet_header.set_pf_vf(setting);
    endfunction
 
@@ -3723,7 +3835,7 @@ virtual class Packet;  // Abstract Base Class
    endfunction
 
 
-   virtual function pfvf_type_t get_pf_vf();
+   virtual function pfvf_struct get_pf_vf();
       return this.packet_header.get_pf_vf();
    endfunction
 
@@ -4306,7 +4418,7 @@ virtual class Packet;  // Abstract Base Class
 
 
    virtual function bit packets_equal(
-      input Packet p2
+      input Packet#(pf_type, vf_type, pf_list, vf_list) p2
    );
       int i; 
       bit match = 1'b1;
@@ -4365,10 +4477,15 @@ virtual class Packet;  // Abstract Base Class
 endclass : Packet
 
 
-class PacketUnknown extends Packet;
+class PacketUnknown #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends Packet #(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   protected PacketHeaderUnknown packet_header_unknown;
+   protected PacketHeaderUnknown#(pf_type, vf_type, pf_list, vf_list) packet_header_unknown;
 
    // Constructor for PacketUnknown 
    function new(
@@ -4461,10 +4578,15 @@ class PacketUnknown extends Packet;
 endclass : PacketUnknown
 
 
-class PacketPUMemReq extends Packet;
+class PacketPUMemReq #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends Packet #(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   protected PacketHeaderPUMemReq packet_header_pu_mem_req;
+   protected PacketHeaderPUMemReq#(pf_type, vf_type, pf_list, vf_list) packet_header_pu_mem_req;
 
    // Constructor for PacketPUMemReq 
    function new(
@@ -4568,10 +4690,15 @@ class PacketPUMemReq extends Packet;
 endclass : PacketPUMemReq 
 
 
-class PacketPUAtomic extends PacketPUMemReq;
+class PacketPUAtomic #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketPUMemReq #(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   protected PacketHeaderPUAtomic packet_header_pu_atomic;
+   protected PacketHeaderPUAtomic#(pf_type, vf_type, pf_list, vf_list) packet_header_pu_atomic;
 
    // Constructor for PacketPUAtomic 
    function new(
@@ -4600,10 +4727,15 @@ class PacketPUAtomic extends PacketPUMemReq;
 endclass : PacketPUAtomic 
 
 
-class PacketPUCompletion extends PacketPUMemReq;
+class PacketPUCompletion #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketPUMemReq #(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   protected PacketHeaderPUCompletion packet_header_pu_completion;
+   protected PacketHeaderPUCompletion#(pf_type, vf_type, pf_list, vf_list) packet_header_pu_completion;
 
    // Constructor for PacketPUCompletion 
    function new(
@@ -4638,10 +4770,15 @@ class PacketPUCompletion extends PacketPUMemReq;
 endclass : PacketPUCompletion 
 
 
-class PacketDMMemReq extends Packet;
+class PacketDMMemReq #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends Packet #(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   protected PacketHeaderDMMemReq packet_header_dm_mem_req;
+   protected PacketHeaderDMMemReq#(pf_type, vf_type, pf_list, vf_list) packet_header_dm_mem_req;
 
    // Constructor for PacketDMMemReq 
    function new(
@@ -4743,10 +4880,15 @@ class PacketDMMemReq extends Packet;
 endclass : PacketDMMemReq 
 
 
-class PacketDMCompletion extends PacketDMMemReq;
+class PacketDMCompletion #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketDMMemReq #(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   protected PacketHeaderDMCompletion packet_header_dm_completion;
+   protected PacketHeaderDMCompletion#(pf_type, vf_type, pf_list, vf_list) packet_header_dm_completion;
 
    // Constructor for PacketDMCompletion 
    function new(
@@ -4778,11 +4920,15 @@ class PacketDMCompletion extends PacketDMMemReq;
 endclass : PacketDMCompletion
 
 
-class PacketPUMsg extends Packet;
+class PacketPUMsg #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends Packet #(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   //protected PacketHeaderPUMemReq packet_header_pu_mem_req;
-   protected PacketHeaderMsg packet_header_msg;
+   protected PacketHeaderMsg#(pf_type, vf_type, pf_list, vf_list) packet_header_msg;
 
    // Constructor
    function new(
@@ -4888,10 +5034,15 @@ class PacketPUMsg extends Packet;
 endclass : PacketPUMsg
 
 
-class PacketPUVDM extends Packet;
+class PacketPUVDM #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends Packet#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   protected PacketHeaderVDM packet_header_vdm;
+   protected PacketHeaderVDM#(pf_type, vf_type, pf_list, vf_list) packet_header_vdm;
 
    // Constructor
    function new(
@@ -4927,18 +5078,18 @@ class PacketPUVDM extends Packet;
       int bytes_needed_to_complete_word;
       int word_x4_remainder;
       int last_data_index;
-      $display(">>> SD: set_data_buf.size(): %0d", set_data_buf.size());
+      //$display(">>> SD: set_data_buf.size(): %0d", set_data_buf.size());
       word_x4_remainder = (set_data_buf.size() % 4);
-      $display(">>> SD: word_x4_remainder: %0d", word_x4_remainder);
+      //$display(">>> SD: word_x4_remainder: %0d", word_x4_remainder);
       if (word_x4_remainder > 0)
       begin
          bytes_needed_to_complete_word = 4 - word_x4_remainder;
-         $display(">>> SD 1: bytes_needed_to_complete_word: %0d", bytes_needed_to_complete_word);
+         //$display(">>> SD 1: bytes_needed_to_complete_word: %0d", bytes_needed_to_complete_word);
       end
       else
       begin
          bytes_needed_to_complete_word = 0;
-         $display(">>> SD 2: bytes_needed_to_complete_word: %0d", bytes_needed_to_complete_word);
+         //$display(">>> SD 2: bytes_needed_to_complete_word: %0d", bytes_needed_to_complete_word);
       end
       payload = new[(set_data_buf.size() + bytes_needed_to_complete_word)];
       for (int i = 0; i < set_data_buf.size(); i++)

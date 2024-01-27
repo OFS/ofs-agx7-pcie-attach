@@ -23,7 +23,14 @@ package host_axis_receive_class_pkg;
       RECEIVE_DM_COMPLETE
    } host_axis_receive_sm_state_t;
 
-class HostAXISReceive #(int RECEIVE_TUSER_WIDTH, int RECEIVE_TDATA_WIDTH);
+class HostAXISReceive #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0},
+   int RECEIVE_TUSER_WIDTH, 
+   int RECEIVE_TDATA_WIDTH
+);
 
    // Local Parameters
     localparam BUS_WIDTH = (host_bfm_types_pkg::TDATA_WIDTH)/8;
@@ -38,16 +45,16 @@ class HostAXISReceive #(int RECEIVE_TUSER_WIDTH, int RECEIVE_TDATA_WIDTH);
    protected byte_t data_queue[$]; // Queue of data bytes received.
 
    // Packet Object Handles
-   protected Packet p;
-   protected Packet q[$];
-   protected PacketPUMemReq pumr;
-   protected PacketPUAtomic pua;
-   protected PacketPUCompletion puc;
-   protected PacketDMMemReq dmmr;
-   protected PacketDMCompletion dmc;
-   protected PacketUnknown pu;
-   protected PacketPUMsg pmsg;
-   protected PacketPUVDM pvdm;
+   protected Packet            #(pf_type, vf_type, pf_list, vf_list) p;
+   protected Packet            #(pf_type, vf_type, pf_list, vf_list) q[$];
+   protected PacketPUMemReq    #(pf_type, vf_type, pf_list, vf_list) pumr;
+   protected PacketPUAtomic    #(pf_type, vf_type, pf_list, vf_list) pua;
+   protected PacketPUCompletion#(pf_type, vf_type, pf_list, vf_list) puc;
+   protected PacketDMMemReq    #(pf_type, vf_type, pf_list, vf_list) dmmr;
+   protected PacketDMCompletion#(pf_type, vf_type, pf_list, vf_list) dmc;
+   protected PacketUnknown     #(pf_type, vf_type, pf_list, vf_list) pu;
+   protected PacketPUMsg       #(pf_type, vf_type, pf_list, vf_list) pmsg;
+   protected PacketPUVDM       #(pf_type, vf_type, pf_list, vf_list) pvdm;
 
 
    virtual pcie_ss_axis_if #(
@@ -75,7 +82,7 @@ class HostAXISReceive #(int RECEIVE_TUSER_WIDTH, int RECEIVE_TDATA_WIDTH);
    endfunction
 
 
-   function Packet get_packet_in_receive_queue();
+   function Packet#(pf_type, vf_type, pf_list, vf_list) get_packet_in_receive_queue();
       return this.q.pop_front;
    endfunction
 

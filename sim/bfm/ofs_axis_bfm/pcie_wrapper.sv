@@ -71,10 +71,9 @@ import ofs_fim_pcie_hdr_def::*;
    output pcie_ss_axis_pkg::t_axis_pcie_flr    axi_st_flr_req,
    input  pcie_ss_axis_pkg::t_axis_pcie_flr    axi_st_flr_rsp
 );  
-
-pcie_ss_axis_if          axi_st_rxreq_if_dummy ();   // MMIO (when PCIe SS completions are sorted)
-pcie_ss_axis_if           axi_st_rx_if_dummy ();      // Host memory read completions
-pcie_ss_axis_if             axi_st_tx_if_dummy ();      // Any FPGA to host command or completion
+pcie_ss_axis_if axi_st_rxreq_if_dummy ();   // MMIO (when PCIe SS completions are sorted)
+pcie_ss_axis_if axi_st_rx_if_dummy ();      // Host memory read completions
+pcie_ss_axis_if axi_st_tx_if_dummy ();      // Any FPGA to host command or completion
 pcie_ss_axis_pkg::t_axis_pcie_flr    axi_st_flr_rsp_dummy;
 
 t_axis_pcie         axis_tx;
@@ -88,7 +87,6 @@ t_pcie_tag_mode     tag_mode_sync;
 
 ofs_fim_axi_lite_if #(.AWADDR_WIDTH(20), .ARADDR_WIDTH(20), .WDATA_WIDTH(32), .RDATA_WIDTH(32)) ss_csr_lite_if();
 ofs_fim_axi_lite_if #(.AWADDR_WIDTH(20), .ARADDR_WIDTH(20), .WDATA_WIDTH(32), .RDATA_WIDTH(32)) ss_csr_lite_if_dummy();
-
 
 always_comb begin
    axis_tx.tvalid = axi_st_tx_if.tvalid;
@@ -166,10 +164,12 @@ pcie_ss_axis_mux #(
 );
 
 
-`ifdef FTILE_SIM
+`ifdef INCLUDE_PCIE_SS
    import ofs_fim_if_pkg::*;
 
    t_sideband_from_pcie   pcie_p2c_sideband;
+   assign pcie_linkup = pcie_p2c_sideband.pcie_linkup;
+   assign pcie_rx_err_code = pcie_p2c_sideband.pcie_chk_rx_err_code;
 
    pcie_ss_top #(
       .PCIE_LANES       (ofs_fim_cfg_pkg::PCIE_LANES),
@@ -190,15 +190,15 @@ pcie_ss_axis_mux #(
       .pin_pcie_rx_p                  (                           ),
       .pin_pcie_rx_n                  (                           ),
       .p0_ss_app_st_txreq_tready      (                           ),
-      .p0_app_ss_st_txreq_tvalid      (   1'b0                    ),
-      .p0_app_ss_st_txreq_tdata       (     'b0                   ),
-      .p0_app_ss_st_txreq_tlast       (     'b0                   ),
+      .p0_app_ss_st_txreq_tvalid      (     1'b0                  ),
+      .p0_app_ss_st_txreq_tdata       (      'b0                  ),
+      .p0_app_ss_st_txreq_tlast       (      'b0                  ),
       .axi_st_rxreq_if                (axi_st_rxreq_if_dummy      ),
-      .p0_ss_app_st_ctrlshadow_tvalid (         ),
-      .p0_ss_app_st_ctrlshadow_tdata  (         ),
+      .p0_ss_app_st_ctrlshadow_tvalid (                           ),
+      .p0_ss_app_st_ctrlshadow_tdata  (                           ),
       .axi_st_rx_if                   (axi_st_rx_if_dummy         ),
       .axi_st_tx_if                   (axi_st_tx_if_dummy         ),
-      .ss_csr_lite_if                 ( ss_csr_lite_if_dummy      ),
+      .ss_csr_lite_if                 (ss_csr_lite_if_dummy       ),
       .flr_req_if                     (                           ),
       .flr_rsp_if                     (axi_st_flr_rsp_dummy       ),
       .reset_status                   (                           ),
@@ -212,52 +212,113 @@ pcie_ss_axis_mux #(
    assign axi_st_tx_if_dummy.tvalid =  1'b0;
    assign axi_st_flr_rsp_dummy.tvalid = 1'b0;  
 
+`else
+//-------------------------------------------------------------------------------
+// Used only for Unit sim testing.  For f2000x designs, code generates
+// a 'pcie_top' using the scope for the package import that will be unique for
+// that block, whether it is a host- or soc-oriented block.
+//-------------------------------------------------------------------------------
+generate
+   if (SOC_ATTACH)
+   begin
+      import ofs_fim_if_pkg::*;
+      t_sideband_from_pcie   pcie_p2c_sideband;
+      assign pcie_linkup = pcie_p2c_sideband.pcie_linkup;
+      assign pcie_rx_err_code = pcie_p2c_sideband.pcie_chk_rx_err_code;
+
+      pcie_top #(
+         .PCIE_LANES       (16),
+         .NUM_PF           (ofs_fim_pcie_pkg::NUM_PF),
+         .NUM_VF           (ofs_fim_pcie_pkg::NUM_VF),
+         .MAX_NUM_VF       (ofs_fim_pcie_pkg::MAX_NUM_VF),
+         .SOC_ATTACH       (SOC_ATTACH),
+         .PF_ENABLED_VEC_T (pfvf_def_pkg_soc::PF_ENABLED_SOC_VEC_T),
+         .PF_ENABLED_VEC   (pfvf_def_pkg_soc::PF_ENABLED_SOC_VEC),
+         .PF_NUM_VFS_VEC_T (pfvf_def_pkg_soc::PF_NUM_VFS_SOC_VEC_T),
+         .PF_NUM_VFS_VEC   (pfvf_def_pkg_soc::PF_NUM_VFS_SOC_VEC),
+         .MM_ADDR_WIDTH    (MM_ADDR_WIDTH),
+         .MM_DATA_WIDTH    (MM_DATA_WIDTH),
+         .FEAT_ID          (12'h020),
+         .FEAT_VER         (4'h0),
+         .NEXT_DFH_OFFSET  (24'h1000),
+         .END_OF_LIST      (1'b0)  
+      ) pcie_top_soc (
+         .fim_clk               (fim_clk                    ),
+         .fim_rst_n             (fim_rst_n                  ),
+         .csr_clk               (csr_clk                    ),
+         .csr_rst_n             (csr_rst_n                  ),
+         .ninit_done            (ninit_done                 ),
+         .reset_status          (reset_status               ),                 
+         .pin_pcie_refclk0_p    (pin_pcie_refclk0_p         ),
+         .pin_pcie_refclk1_p    (pin_pcie_refclk1_p         ),
+         .pin_pcie_in_perst_n   (pin_pcie_in_perst_n        ),   // connected to HIP
+         .pin_pcie_rx_p         (pin_pcie_rx_p              ),
+         .pin_pcie_rx_n         (pin_pcie_rx_n              ),
+         .pin_pcie_tx_p         (pin_pcie_tx_p              ),                
+         .pin_pcie_tx_n         (pin_pcie_tx_n              ),                
+         .axi_st_rx_if          (axi_st_rx_if               ),
+         .axi_st_tx_if          (axi_st_tx_committed        ),
+         .axi_st_txreq_if       (axi_st_txreq_if            ),
+         .axi_st_rxreq_if       (rxreq_arb_in[0]            ),
+         .csr_lite_if           (ss_csr_lite_if             ),
+         .flr_req_if            (axi_st_flr_req             ),
+         .flr_rsp_if            (axi_st_flr_rsp             ),
+         .cpl_timeout_if        (axis_cpl_timeout           ),
+         .pcie_p2c_sideband     (pcie_p2c_sideband          )
+      );
+   end
+   else
+   begin
+      import ofs_fim_if_pkg::*;
+      t_sideband_from_pcie   pcie_p2c_sideband;
+      assign pcie_linkup = pcie_p2c_sideband.pcie_linkup;
+      assign pcie_rx_err_code = pcie_p2c_sideband.pcie_chk_rx_err_code;
+
+      pcie_top #(
+         .PCIE_LANES       (16),
+         .NUM_PF           (ofs_fim_pcie_pkg::NUM_PF),
+         .NUM_VF           (ofs_fim_pcie_pkg::NUM_VF),
+         .MAX_NUM_VF       (ofs_fim_pcie_pkg::MAX_NUM_VF),
+         .SOC_ATTACH       (SOC_ATTACH),
+         .PF_ENABLED_VEC_T (pfvf_def_pkg_host::PF_ENABLED_HOST_VEC_T),
+         .PF_ENABLED_VEC   (pfvf_def_pkg_host::PF_ENABLED_HOST_VEC),
+         .PF_NUM_VFS_VEC_T (pfvf_def_pkg_host::PF_NUM_VFS_HOST_VEC_T),
+         .PF_NUM_VFS_VEC   (pfvf_def_pkg_host::PF_NUM_VFS_HOST_VEC),
+         .MM_ADDR_WIDTH    (MM_ADDR_WIDTH),
+         .MM_DATA_WIDTH    (MM_DATA_WIDTH),
+         .FEAT_ID          (12'h020),
+         .FEAT_VER         (4'h0),
+         .NEXT_DFH_OFFSET  (24'h1000),
+         .END_OF_LIST      (1'b0)  
+      ) pcie_top_host (
+         .fim_clk               (fim_clk                    ),
+         .fim_rst_n             (fim_rst_n                  ),
+         .csr_clk               (csr_clk                    ),
+         .csr_rst_n             (csr_rst_n                  ),
+         .ninit_done            (ninit_done                 ),
+         .reset_status          (reset_status               ),                 
+         .pin_pcie_refclk0_p    (pin_pcie_refclk0_p         ),
+         .pin_pcie_refclk1_p    (pin_pcie_refclk1_p         ),
+         .pin_pcie_in_perst_n   (pin_pcie_in_perst_n        ),   // connected to HIP
+         .pin_pcie_rx_p         (pin_pcie_rx_p              ),
+         .pin_pcie_rx_n         (pin_pcie_rx_n              ),
+         .pin_pcie_tx_p         (pin_pcie_tx_p              ),                
+         .pin_pcie_tx_n         (pin_pcie_tx_n              ),                
+         .axi_st_rx_if          (axi_st_rx_if               ),
+         .axi_st_tx_if          (axi_st_tx_committed        ),
+         .axi_st_txreq_if       (axi_st_txreq_if            ),
+         .axi_st_rxreq_if       (rxreq_arb_in[0]            ),
+         .csr_lite_if           (ss_csr_lite_if             ),
+         .flr_req_if            (axi_st_flr_req             ),
+         .flr_rsp_if            (axi_st_flr_rsp             ),
+         .cpl_timeout_if        (axis_cpl_timeout           ),
+         .pcie_p2c_sideband     (pcie_p2c_sideband          )
+      );
+   end
+endgenerate
 `endif
 
-   //Used only for Unit sim testing
-import ofs_fim_if_pkg::*;
-t_sideband_from_pcie   pcie_p2c_sideband;
-assign pcie_linkup = pcie_p2c_sideband.pcie_linkup;
-assign pcie_rx_err_code = pcie_p2c_sideband.pcie_chk_rx_err_code;
-
-pcie_top #(
-   .PCIE_LANES       (16),
-   .NUM_PF           (ofs_fim_pcie_pkg::NUM_PF),
-   .NUM_VF           (ofs_fim_pcie_pkg::NUM_VF),
-   .MAX_NUM_VF       (ofs_fim_pcie_pkg::MAX_NUM_VF),
-   .MM_ADDR_WIDTH    (MM_ADDR_WIDTH),
-   .MM_DATA_WIDTH    (MM_DATA_WIDTH),
-   .FEAT_ID          (12'h020),
-   .FEAT_VER         (4'h0),
-   .NEXT_DFH_OFFSET  (24'h1000),
-   .END_OF_LIST      (1'b0)  
-) pcie_top (
-   .fim_clk               (fim_clk                    ),
-   .fim_rst_n             (fim_rst_n                  ),
-   .csr_clk               (csr_clk                    ),
-   .csr_rst_n             (csr_rst_n                  ),
-   .ninit_done            (ninit_done                 ),
-   .reset_status          (reset_status               ),                 
-   .pin_pcie_refclk0_p    (pin_pcie_refclk0_p         ),
-   .pin_pcie_refclk1_p    (pin_pcie_refclk1_p         ),
-   .pin_pcie_in_perst_n   (pin_pcie_in_perst_n        ),   // connected to HIP
-   .pin_pcie_rx_p         (pin_pcie_rx_p              ),
-   .pin_pcie_rx_n         (pin_pcie_rx_n              ),
-   .pin_pcie_tx_p         (pin_pcie_tx_p              ),                
-   .pin_pcie_tx_n         (pin_pcie_tx_n              ),                
-   .axi_st_rx_if          (axi_st_rx_if               ),
-   .axi_st_tx_if          (axi_st_tx_committed        ),
-   .axi_st_txreq_if       (axi_st_txreq_if            ),
-   .axi_st_rxreq_if       (rxreq_arb_in[0]            ),
-   .csr_lite_if           (ss_csr_lite_if             ),
-   .flr_req_if            (axi_st_flr_req             ),
-   .flr_rsp_if            (axi_st_flr_rsp             ),
-   .cpl_timeout_if        (axis_cpl_timeout           ),
-   .pcie_p2c_sideband     (pcie_p2c_sideband          )
-
-);
-
-`ifdef FTILE_SIM
+`ifdef INCLUDE_PCIE_SS
 always_ff@(posedge csr_clk) begin
    if(~csr_rst_n) begin
       ctrl_shdw_reg.tvalid               <= '0;

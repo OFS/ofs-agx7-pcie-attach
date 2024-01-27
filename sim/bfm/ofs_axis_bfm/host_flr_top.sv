@@ -7,29 +7,39 @@
 
 import pcie_ss_axis_pkg::t_flr_func;
 import pcie_ss_axis_pkg::t_axis_pcie_flr;
+import host_bfm_types_pkg::*;
 
-module host_flr_top(
+module host_flr_top #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+)(
    input logic clk,
    input logic rst_n,
    output t_axis_pcie_flr flr_req_if,
    input  t_axis_pcie_flr flr_rsp_if
 );
 
-import host_bfm_types_pkg::*;
-import flr_def_pkg::*;
+import pfvf_class_pkg::*;
 import host_flr_class_pkg::*;
 
 //---------------------------------------------------------
 // Concrete BFM Class Definition
 //---------------------------------------------------------
-class HostFLRManagerConcrete extends host_flr_class_pkg::HostFLRManager;
+class HostFLRManagerConcrete #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends host_flr_class_pkg::HostFLRManager#(pf_type, vf_type, pf_list, vf_list);
 
    function new();
       super.new();
    endfunction
 
    virtual task run_send_flr_reqs();
-      HostFLREvent flr;
+      HostFLREvent #(pf_type, vf_type, pf_list, vf_list) flr;
       $timeformat(-9, 3, "ns", 4);
       @(posedge clk iff (rst_n === 1'b1));
       forever begin
@@ -43,7 +53,7 @@ class HostFLRManagerConcrete extends host_flr_class_pkg::HostFLRManager;
                host_flr_top.flr_req_if.tdata.pf   = flr.get_pf();
                host_flr_top.flr_req_if.tdata.vf   = flr.get_vf();
                host_flr_top.flr_req_if.tdata.vf_active = flr.get_vf_active();
-               $display("Sending PCIe FLR with FLR ID: %0d for %-s at time: %0t", flr.get_flr_id(), flr.get_flr_type_name(), flr.get_flr_time_requested());
+               $display("Sending PCIe FLR with FLR ID: %0d for PF:%0d, VF:%0d, VFA:%B at time: %0t", flr.get_flr_id(), flr.get_pf(), flr.get_vf(), flr.get_vf_active(), flr.get_flr_time_requested());
                flr.print_flr_event();
             end
             else
@@ -60,9 +70,9 @@ class HostFLRManagerConcrete extends host_flr_class_pkg::HostFLRManager;
 
 
    virtual task run_receive_flr_rsps();
-      HostFLREvent flr, first_flr_match;
+      HostFLREvent#(pf_type, vf_type, pf_list, vf_list) flr, first_flr_match;
       uint32_t setting_index;
-      flr_type_t flr_type;
+      pfvf_struct flr_type;
       uint64_t flr_id;
       bit matched;
       $timeformat(-9, 3, "ns", 4);
@@ -70,20 +80,9 @@ class HostFLRManagerConcrete extends host_flr_class_pkg::HostFLRManager;
       forever begin
          @(negedge clk)
          begin
-            if (host_flr_top.flr_rsp_if.tvalid === 1'b1) 
+            if (host_flr_top.flr_rsp_if.tvalid === 1'b1)
             begin
-               if (host_flr_top.flr_rsp_if.tdata.vf_active == 1'b0)
-               begin
-                  setting_index =  uint32_t'(flr_def_pkg::PF0);
-                  setting_index += uint32_t'(host_flr_top.flr_rsp_if.tdata.pf);
-                  flr_type = flr_type_t'(setting_index);
-               end
-               else
-               begin
-                  setting_index =  uint32_t'(flr_def_pkg::PF0_VF0);
-                  setting_index += uint32_t'(host_flr_top.flr_rsp_if.tdata.vf);
-                  flr_type = flr_type_t'(setting_index);
-               end
+               flr_type = '{host_flr_top.flr_rsp_if.tdata.pf, host_flr_top.flr_rsp_if.tdata.vf, host_flr_top.flr_rsp_if.tdata.vf_active};
                flr = new(flr_type);
                flr.flr_requested(); // To set "requested" bit prior to matching response with request.
                flr.flr_responded(); // Setting proper "responded" bit and receive time
@@ -105,7 +104,7 @@ class HostFLRManagerConcrete extends host_flr_class_pkg::HostFLRManager;
                            if (flrs[i].get_flr_id() == flr_id)
                            begin
                               flrs[i].flr_responded();
-                              $display("Matching FLR Response with FLR ID: %0d for %-s requested time %0t, responded time: %0t.", flrs[i].get_flr_id(), flrs[i].get_flr_type_name(), flrs[i].get_flr_time_requested(), flrs[i].get_flr_time_responded());
+                              $display("Matching FLR Response with FLR ID: %0d for PF:%0d  VF:%0d  VFA:%b requested time %0t, responded time: %0t.", flrs[i].get_flr_id(), flrs[i].get_pf(), flrs[i].get_vf(), flrs[i].get_vf_active(), flrs[i].get_flr_time_requested(), flrs[i].get_flr_time_responded());
                               matched = 1'b1;
                            end // Found ID Match
                         end // If (!matched)
@@ -114,7 +113,7 @@ class HostFLRManagerConcrete extends host_flr_class_pkg::HostFLRManager;
                   else // No matches to search.
                   begin
                      flr_unmatched_response_queue.push_back(flr);
-                     $display("FLR ERROR: FLR Response with type %-s at time %0t was not matched with a FLR Request in the Queue.", flr.get_flr_type_name(), flr.get_flr_time_responded());
+                     $display("FLR ERROR: FLR Response with type PF:%0d  VF:%0d  VFA:%B at time %0t was not matched with a FLR Request in the Queue.", flr.get_pf(), flr.get_vf(), flr.get_vf_active(), flr.get_flr_time_responded());
                   end
                end // While loop processing responses.
             end // If there is a response to process.
@@ -127,7 +126,7 @@ endclass
 //--------------------------------------------------------------
 // Host BFM Class Object Declaration using Concrete Extension
 //--------------------------------------------------------------
-HostFLRManagerConcrete flr_manager;
+HostFLRManagerConcrete#(pf_type, vf_type, pf_list, vf_list) flr_manager;
 
 //------------------------------------------------------------------------
 //  Launch FLR Manager logic for FLR Requests/Responses.

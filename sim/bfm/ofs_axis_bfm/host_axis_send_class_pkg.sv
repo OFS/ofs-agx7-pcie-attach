@@ -23,7 +23,14 @@ package host_axis_send_class_pkg;
       SEND_DM_COMPLETE
    } host_axis_send_sm_state_t;
 
-class HostAXISSend #(int SEND_TUSER_WIDTH, int SEND_TDATA_WIDTH);
+class HostAXISSend #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0},
+   int SEND_TUSER_WIDTH, 
+   int SEND_TDATA_WIDTH
+);
 
    // Local Parameters
     localparam BUS_WIDTH = (SEND_TDATA_WIDTH)/8;
@@ -38,8 +45,8 @@ class HostAXISSend #(int SEND_TUSER_WIDTH, int SEND_TDATA_WIDTH);
     protected bit       lane_used[BUS_WIDTH]; // Fixed Array of bits arranged by bus width indicating which byte lanes are being used.
 
     // Packet Object Handles
-    protected Packet p;
-    protected Packet q[$];
+    protected Packet#(pf_type, vf_type, pf_list, vf_list) p;
+    protected Packet#(pf_type, vf_type, pf_list, vf_list) q[$];
 
    virtual pcie_ss_axis_if #(
       //.USER_W(host_bfm_types_pkg::TUSER_WIDTH),
@@ -68,7 +75,7 @@ class HostAXISSend #(int SEND_TUSER_WIDTH, int SEND_TDATA_WIDTH);
    endfunction
 
 
-   function void put_packet_in_send_queue(input Packet p);
+   function void put_packet_in_send_queue(input Packet#(pf_type, vf_type, pf_list, vf_list) p);
       this.q.push_back(p);
    endfunction
 

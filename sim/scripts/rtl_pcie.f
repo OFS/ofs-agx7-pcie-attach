@@ -23,6 +23,8 @@ $OFS_ROOTDIR/ofs-common/src/fpga_family/agilex/pcie_ss/pcie_err_checker.sv
 $OFS_ROOTDIR/ofs-common/src/fpga_family/agilex/pcie_ss/pcie_ss_csr_if.sv
 $OFS_ROOTDIR/ofs-common/src/fpga_family/agilex/pcie_ss/pcie_ss_if.sv
 $OFS_ROOTDIR/ofs-common/src/fpga_family/agilex/pcie_ss/pcie_top.sv
+$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pcie_top_host.sv
+$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pcie_top_soc.sv
 $OFS_ROOTDIR/ofs-common/src/fpga_family/agilex/pcie_ss/pcie_ss_top.sv
 $OFS_ROOTDIR/ofs-common/src/fpga_family/agilex/pcie_ss/pcie_wrapper.sv
 $OFS_ROOTDIR/ofs-common/src/fpga_family/agilex/pcie_ss/axi_s_adapter.sv

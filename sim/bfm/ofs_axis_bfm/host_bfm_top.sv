@@ -4,7 +4,15 @@
 //---------------------------------------------------------
 // Top-level module for the AXI-ST BFM
 //---------------------------------------------------------
-module host_bfm_top(
+
+import host_bfm_types_pkg::*;
+
+module host_bfm_top # (
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) (
     pcie_ss_axis_if.source axis_rx,
     pcie_ss_axis_if.source axis_rx_req,
     pcie_ss_axis_if.sink   axis_tx,
@@ -57,18 +65,34 @@ semaphore mutex_tx_req_inbound_message_queue;
 // AXI-ST Interface Class Object Declarations
 //---------------------------------------------------------
 HostAXISSend #(
+   .pf_type(pf_type),
+   .vf_type(vf_type),
+   .pf_list(pf_list),
+   .vf_list(vf_list),
    .SEND_TUSER_WIDTH(host_bfm_types_pkg::TUSER_WIDTH),
    .SEND_TDATA_WIDTH(host_bfm_types_pkg::TDATA_WIDTH)
 ) axis_send_rx_req;
 HostAXISSend #(
+   .pf_type(pf_type),
+   .vf_type(vf_type),
+   .pf_list(pf_list),
+   .vf_list(vf_list),
    .SEND_TUSER_WIDTH(host_bfm_types_pkg::TUSER_WIDTH),
    .SEND_TDATA_WIDTH(host_bfm_types_pkg::TDATA_WIDTH)
 ) axis_send_rx;
 HostAXISReceive #(
+   .pf_type(pf_type),
+   .vf_type(vf_type),
+   .pf_list(pf_list),
+   .vf_list(vf_list),
    .RECEIVE_TUSER_WIDTH(host_bfm_types_pkg::TUSER_WIDTH),
    .RECEIVE_TDATA_WIDTH(host_bfm_types_pkg::TDATA_WIDTH)
 ) axis_receive_tx;
 HostAXISReceive #(
+   .pf_type(pf_type),
+   .vf_type(vf_type),
+   .pf_list(pf_list),
+   .vf_list(vf_list),
    .RECEIVE_TUSER_WIDTH(host_bfm_types_pkg::TUSER_WIDTH),
    .RECEIVE_TDATA_WIDTH(host_bfm_types_pkg::HDR_WIDTH)
 ) axis_receive_tx_req;
@@ -81,37 +105,37 @@ HostAXISReceive #(
 //------------------------------------------------------------------------
 // MMIO Packet Queues - RX_REQ Interface
 //------------------------------------------------------------------------
-Packet mmio_rx_req_packet_queue[$];
-Packet mmio_rx_req_packet_history_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) mmio_rx_req_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) mmio_rx_req_packet_history_queue[$];
 
 
 //-----------------------------------------
 // Data Mover Packet Queues - RX Interface
 //-----------------------------------------
-Packet dm_rx_packet_queue[$];
-Packet dm_rx_packet_history_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) dm_rx_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) dm_rx_packet_history_queue[$];
 
 
 //--------------------------------------------
 // Mixed Traffic Packet Queues - TX Interface
 //--------------------------------------------
-Packet tx_inbound_completion_packet_queue[$];
-Packet tx_inbound_completion_nonmatched_packet_queue[$];
-Packet tx_inbound_request_packet_queue[$];
-Packet tx_inbound_message_queue[$];
-Packet tx_inbound_dm_completion_packet_queue[$];
-Packet tx_inbound_dm_request_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_inbound_completion_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_inbound_completion_nonmatched_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_inbound_request_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_inbound_message_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_inbound_dm_completion_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_inbound_dm_request_packet_queue[$];
 
 
 //------------------------------------------------
 // Mixed Traffic Packet Queues - TX_REQ Interface
 //------------------------------------------------
-Packet tx_req_inbound_completion_packet_queue[$];
-Packet tx_req_inbound_completion_nonmatched_packet_queue[$];
-Packet tx_req_inbound_request_packet_queue[$];
-Packet tx_req_inbound_message_queue[$];
-Packet tx_req_inbound_dm_completion_packet_queue[$];
-Packet tx_req_inbound_dm_request_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_req_inbound_completion_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_req_inbound_completion_nonmatched_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_req_inbound_request_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_req_inbound_message_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_req_inbound_dm_completion_packet_queue[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) tx_req_inbound_dm_request_packet_queue[$];
 
 
 //-------------------------------------------------------------------------------
@@ -124,10 +148,10 @@ Packet tx_req_inbound_dm_request_packet_queue[$];
 //       - Swap
 //       - Compare-and-Swap (CAS)
 //-------------------------------------------------------------------------------
-Transaction         transaction;
-ReadTransaction     read_transaction;
-WriteTransaction    write_transaction;
-AtomicTransaction   atomic_transaction;
+Transaction      #(pf_type, vf_type, pf_list, vf_list) transaction;
+ReadTransaction  #(pf_type, vf_type, pf_list, vf_list) read_transaction;
+WriteTransaction #(pf_type, vf_type, pf_list, vf_list) write_transaction;
+AtomicTransaction#(pf_type, vf_type, pf_list, vf_list) atomic_transaction;
 
 
 //------------------------------------------------------------------------
@@ -135,11 +159,11 @@ AtomicTransaction   atomic_transaction;
 //    transaction handles of type "Transaction" so that different 
 //    transaction types can exist in queue (polymorphism).
 //------------------------------------------------------------------------
-Transaction mmio_rx_req_input_transaction_queue[$];
-Transaction mmio_rx_req_active_transaction_queue[$];
-Transaction mmio_rx_req_completed_transaction_queue[$];
-Transaction mmio_rx_req_errored_transaction_queue[$];
-Transaction mmio_rx_req_history_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) mmio_rx_req_input_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) mmio_rx_req_active_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) mmio_rx_req_completed_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) mmio_rx_req_errored_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) mmio_rx_req_history_transaction_queue[$];
 
 
 //------------------------------------------------------------------------
@@ -152,15 +176,20 @@ TagManager tag_manager;
 //---------------------------------------------------------
 // Concrete BFM Class Definition
 //---------------------------------------------------------
-class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
+class HostBFMConcrete #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends host_bfm_class_pkg::HostBFM#(pf_type, vf_type, pf_list, vf_list);
 
    function new();
       super.new();
    endfunction
 
    virtual task run_rx_req();
-      Packet p;
-      Transaction t;
+      Packet#(pf_type, vf_type, pf_list, vf_list) p;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
       packet_tag_t packet_tag;
       packet_header_op_t packet_op;
       uint64_t debug_address;
@@ -258,12 +287,12 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
 
 
    virtual task run_tx();
-      Packet p;
-      Packet cpld;
-      Packet req;
-      PacketPUCompletion puc;
-      PacketDMCompletion dmc;
-      Transaction t;
+      Packet#(pf_type, vf_type, pf_list, vf_list) p;
+      Packet#(pf_type, vf_type, pf_list, vf_list) cpld;
+      Packet#(pf_type, vf_type, pf_list, vf_list) req;
+      PacketPUCompletion#(pf_type, vf_type, pf_list, vf_list) puc;
+      PacketDMCompletion#(pf_type, vf_type, pf_list, vf_list) dmc;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
       packet_tag_t       packet_tag;
       packet_header_op_t packet_op;
       packet_header_atomic_op_t packet_atomic_op;
@@ -722,12 +751,12 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
 
 
    virtual task run_tx_req();
-      Packet p;
-      Packet cpld;
-      Packet req;
-      PacketPUCompletion puc;
-      PacketDMCompletion dmc;
-      Transaction t;
+      Packet#(pf_type, vf_type, pf_list, vf_list) p;
+      Packet#(pf_type, vf_type, pf_list, vf_list) cpld;
+      Packet#(pf_type, vf_type, pf_list, vf_list) req;
+      PacketPUCompletion#(pf_type, vf_type, pf_list, vf_list) puc;
+      PacketDMCompletion#(pf_type, vf_type, pf_list, vf_list) dmc;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
       packet_tag_t       packet_tag;
       packet_header_op_t packet_op;
       packet_header_atomic_op_t packet_atomic_op;
@@ -1203,7 +1232,7 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
 
 
    virtual task run_rx();
-      Packet p;
+      Packet#(pf_type, vf_type, pf_list, vf_list) p;
       packet_tag_t packet_tag;
       packet_header_op_t packet_op;
       $timeformat(-9, 3, "ns", 4);
@@ -1259,10 +1288,10 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
       input uint64_t      address,
       output logic [31:0] data
    );
-      Transaction t;
-      Transaction found_queue[$];
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) found_queue[$];
       uint64_t found_transaction_number;
-      ReadTransaction rt;
+      ReadTransaction#(pf_type, vf_type, pf_list, vf_list) rt;
       bit found, timeout;
       realtime time_start, time_elapsed, time_limit;
       string access_source  = "BFM Read32 Method";
@@ -1344,10 +1373,10 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
       output logic        error,
       output cpl_status_t cpl_status
    );
-      Transaction t;
-      Transaction found_queue[$];
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) found_queue[$];
       uint64_t found_transaction_number;
-      ReadTransaction rt;
+      ReadTransaction#(pf_type, vf_type, pf_list, vf_list) rt;
       bit found, timeout;
       realtime time_start, time_elapsed, time_limit;
       string access_source  = "BFM Read32 with Completion Result Method";
@@ -1439,10 +1468,10 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
       input uint64_t      address,
       output logic [63:0] data
    );
-      Transaction t;
-      Transaction found_queue[$];
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) found_queue[$];
       uint64_t found_transaction_number;
-      ReadTransaction rt;
+      ReadTransaction#(pf_type, vf_type, pf_list, vf_list) rt;
       bit found, timeout;
       realtime time_start, time_elapsed, time_limit;
       string access_source  = "BFM Read64 Method";
@@ -1519,10 +1548,10 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
       output logic        error,
       output cpl_status_t cpl_status
    );
-      Transaction t;
-      Transaction found_queue[$];
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) found_queue[$];
       uint64_t found_transaction_number;
-      ReadTransaction rt;
+      ReadTransaction#(pf_type, vf_type, pf_list, vf_list) rt;
       bit found, timeout;
       realtime time_start, time_elapsed, time_limit;
       string access_source  = "BFM Read64 with Completion Result Method";
@@ -1630,10 +1659,10 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
       output logic         error,
       output cpl_status_t  cpl_status
    );
-      Transaction t;
-      Transaction found_queue[$];
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) found_queue[$];
       uint64_t found_transaction_number;
-      ReadTransaction rt;
+      ReadTransaction#(pf_type, vf_type, pf_list, vf_list) rt;
       bit found, timeout;
       realtime time_start, time_elapsed, time_limit;
       string access_source  = "BFM Read Data Method";
@@ -1721,8 +1750,8 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
       input uint64_t address,
       input logic [31:0] data
    );
-      Transaction t;
-      WriteTransaction wt;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
+      WriteTransaction#(pf_type, vf_type, pf_list, vf_list) wt;
       byte_t write_data[];
       string access_source  = "BFM Write32 Method";
       string parray;
@@ -1763,8 +1792,8 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
       input uint64_t    address,
       input logic [63:0] data
    );
-      Transaction t;
-      WriteTransaction wt;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
+      WriteTransaction#(pf_type, vf_type, pf_list, vf_list) wt;
       byte_t write_data[];
       string access_source  = "BFM Write64 Method";
       string parray;
@@ -1813,8 +1842,8 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
       ref byte_array_t msg_data
 
    );
-      Transaction t;
-      SendMsgTransaction mt;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
+      SendMsgTransaction#(pf_type, vf_type, pf_list, vf_list) mt;
       bit [9:0] length_dw;
       string access_source  = "BFM Send MSG Method";
       //string parray;
@@ -1860,8 +1889,8 @@ class HostBFMConcrete extends host_bfm_class_pkg::HostBFM;
       ref byte_array_t msg_data
 
    );
-      Transaction t;
-      SendVDMTransaction vt;
+      Transaction#(pf_type, vf_type, pf_list, vf_list) t;
+      SendVDMTransaction#(pf_type, vf_type, pf_list, vf_list) vt;
       bit [9:0] length_dw;
       string access_source  = "BFM Send VDM Method";
       //string parray;
@@ -1901,13 +1930,18 @@ endclass
 //--------------------------------------------------------------
 // Host BFM Class Object Declaration using Concrete Extension
 //--------------------------------------------------------------
-HostBFMConcrete host_bfm;
+HostBFMConcrete#(pf_type, vf_type, pf_list, vf_list) host_bfm;
 
 
 //---------------------------------------------------------
 // Concrete Packet Delay Queue Class Definition for TX_REQ
 //---------------------------------------------------------
-class PacketDelayQueueTXREQ extends packet_delay_class_pkg::PacketDelayQueue;
+class PacketDelayQueueTXREQ #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends packet_delay_class_pkg::PacketDelayQueue#(pf_type, vf_type, pf_list, vf_list);
 
    function new();
       super.new();
@@ -1944,7 +1978,12 @@ endclass
 //-------------------------------------------------------------
 // Concrete Packet Delay Gap Queue Class Definition for RX_REQ
 //-------------------------------------------------------------
-class PacketGapDelayQueueRXREQ extends packet_delay_class_pkg::PacketGapDelayQueue;
+class PacketGapDelayQueueRXREQ #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends packet_delay_class_pkg::PacketGapDelayQueue#(pf_type, vf_type, pf_list, vf_list);
 
    function new();
       super.new();
@@ -1992,8 +2031,8 @@ endclass
 //------------------------------------------------
 // Mixed Traffic Packet Queues - TX_REQ Interface
 //------------------------------------------------
-PacketDelayQueueTXREQ    tx_req_packet_delay_queue; // Packet Delay Queue in TX_REQ to slow down completions to RX.
-PacketGapDelayQueueRXREQ rx_req_packet_gap_delay_queue; // Packet Delay Gap Queue in RX_REQ to spread out register accesses coming from BFM.
+PacketDelayQueueTXREQ#(pf_type, vf_type, pf_list, vf_list) tx_req_packet_delay_queue; // Packet Delay Queue in TX_REQ to slow down completions to RX.
+PacketGapDelayQueueRXREQ#(pf_type, vf_type, pf_list, vf_list) rx_req_packet_gap_delay_queue; // Packet Delay Gap Queue in RX_REQ to spread out register accesses coming from BFM.
 
 //------------------------------------------------------------------------
 //  Access Mutex Initialization

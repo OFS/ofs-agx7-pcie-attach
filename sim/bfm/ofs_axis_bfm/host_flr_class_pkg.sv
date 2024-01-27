@@ -7,32 +7,38 @@
 package host_flr_class_pkg; 
 
 import host_bfm_types_pkg::*;
-import flr_def_pkg::*;
+import pfvf_class_pkg::*;
 import pcie_ss_axis_pkg::t_flr_func;
 import pcie_ss_axis_pkg::t_axis_pcie_flr;
-//import pfvf_def_pkg::*;
 
 
-class HostFLREvent;
+class HostFLREvent #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+);
 
    // Data Members
    protected static uint64_t master_flr_id = 0;
    protected uint64_t flr_id = 0;
    protected bit  [4:0] slot;
-   protected bit  [2:0] pf;
-   protected bit [10:0] vf;
-   protected bit        vf_active;
+   //protected bit  [2:0] pf;
+   //protected bit [10:0] vf;
+   //protected bit        vf_active;
    protected bit        requested;
    protected realtime   request_time;
    protected bit        responded;
    protected realtime   respond_time;
-   protected flr_type_t flr_type;
+   protected pfvf_struct  flr_type;
+   protected PFVFClass#(pf_type, vf_type, pf_list, vf_list) flr_pfvf;
 
 
    // Constructor
    function new(
-      input flr_type_t flr_type
+      input pfvf_struct flr_type
    );
+      this.flr_pfvf = new(flr_type.pfn, flr_type.vfn, flr_type.vfa);
       this.master_flr_id += 1;
       this.flr_id = this.master_flr_id;
       this.flr_type = flr_type;
@@ -44,10 +50,12 @@ class HostFLREvent;
 
 
    // Methods
-   function void set_flr(flr_type_t flr_type);
-      this.pf        = flr_attr[flr_type].pfn;
-      this.vf        = flr_attr[flr_type].vfn;
-      this.vf_active = flr_attr[flr_type].vfa;
+   /* function void set_flr(pfvf_type_t flr_type); */
+   /*    this.pf        = pfvf_attr[flr_type].pfn; */
+   /*    this.vf        = pfvf_attr[flr_type].vfn; */
+   /*    this.vf_active = pfvf_attr[flr_type].vfa; */
+   function void set_flr(pfvf_struct flr_type);
+      this.flr_pfvf.set_pfvf_from_struct(flr_type);
    endfunction
 
 
@@ -57,17 +65,17 @@ class HostFLREvent;
 
 
    function bit [2:0] get_pf();
-      return this.pf;
+      return this.flr_pfvf.get_pf_field();
    endfunction
 
 
    function bit [10:0] get_vf();
-      return this.vf;
+      return this.flr_pfvf.get_vf_field();
    endfunction
 
 
    function bit get_vf_active();
-      return this.vf_active;
+      return this.flr_pfvf.get_vfa;
    endfunction
 
 
@@ -115,25 +123,25 @@ class HostFLREvent;
    endfunction
 
 
-   function flr_type_t get_flr_type();
+   function pfvf_struct get_flr_type();
       return this.flr_type;
    endfunction
 
 
-   function string get_flr_type_name();
-      return this.flr_type.name();
-   endfunction
+   /* function string get_flr_type_name(); */
+   /*    return this.flr_type.name(); */
+   /* endfunction */
 
 
    function void print_flr_event();
       $display("");
       if (this.requested)
       begin
-         $display(">>> FLR EVENT: FLR ID: %0d for %-s sent at time: %0t.", this.flr_id, this.flr_type.name(), this.request_time);
+         $display(">>> FLR EVENT: FLR ID: %0d for PF:%0d  VF:%0d  VFA:%B sent at time: %0t.", this.flr_id, this.get_pf(), this.get_vf(), this.get_vf_active(), this.request_time);
       end
       else
       begin
-         $display(">>> FLR EVENT: FLR ID: %0d for %-s.  Request has not yet been sent.", this.flr_id, this.flr_type.name());
+         $display(">>> FLR EVENT: FLR ID: %0d for PF:%0d  VF:%0d  VFA:%B.  Request has not yet been sent.", this.flr_id, this.get_pf(), this.get_vf(), this.get_vf_active());
       end
       $display("               Request Status.: %-s", this.requested ? "SENT" : "PENDING");
       if (this.requested)
@@ -141,9 +149,9 @@ class HostFLREvent;
          $display("               Request Time...: %0t", this.request_time);
       end
       $display("               Slot...........: %0d", this.slot);
-      $display("               PF.............: %0d", this.pf);
-      $display("               VF.............: %0d", this.vf);
-      $display("               VF Active......: %-s", this.vf_active ? "ACTIVE" : "PF ONLY");
+      $display("               PF.............: %0d", this.get_pf());
+      $display("               VF.............: %0d", this.get_vf);
+      $display("               VF Active......: %-s", this.get_vf_active ? "ACTIVE" : "PF ONLY");
       $display("               Response Status: %-s", this.responded ? "RECEIVED" : "WAITING");
       if (this.responded)
       begin
@@ -156,15 +164,20 @@ class HostFLREvent;
 endclass: HostFLREvent
 
 
-virtual class HostFLRManager;
+virtual class HostFLRManager #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+);
 
    // Data Members
-   HostFLREvent flr;
-   HostFLREvent flr_send_queue[$];
-   HostFLREvent flr_response_queue[$];
-   HostFLREvent flr_search_queue[$];
-   HostFLREvent flr_unmatched_response_queue[$];
-   HostFLREvent flrs[$];
+   HostFLREvent#(pf_type, vf_type, pf_list, vf_list) flr;
+   HostFLREvent#(pf_type, vf_type, pf_list, vf_list) flr_send_queue[$];
+   HostFLREvent#(pf_type, vf_type, pf_list, vf_list) flr_response_queue[$];
+   HostFLREvent#(pf_type, vf_type, pf_list, vf_list) flr_search_queue[$];
+   HostFLREvent#(pf_type, vf_type, pf_list, vf_list) flr_unmatched_response_queue[$];
+   HostFLREvent#(pf_type, vf_type, pf_list, vf_list) flrs[$];
 
    // Constructor
    function new();
@@ -172,7 +185,7 @@ virtual class HostFLRManager;
 
 
    // Methods
-   virtual function send_flr(flr_type_t flr_type);
+   virtual function send_flr(pfvf_struct flr_type);
       flr = new(flr_type);
       flr.flr_requested();
       flr_send_queue.push_back(flr);

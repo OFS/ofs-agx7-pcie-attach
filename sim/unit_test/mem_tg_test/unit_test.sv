@@ -3,15 +3,23 @@
 //---------------------------------------------------------
 // Test module for the simulation. 
 //---------------------------------------------------------
-module unit_test(
+
+import host_bfm_types_pkg::*;
+
+module unit_test #(
+   parameter SOC_ATTACH = 0,
+   parameter type pf_type = default_pfs, 
+   parameter pf_type pf_list = '{1'b1}, 
+   parameter type vf_type = default_vfs, 
+   parameter vf_type vf_list = '{0}
+)(
    input logic clk,
    input logic rst_n,
    input logic csr_clk,
    input logic csr_rst_n
 );
 
-import host_bfm_types_pkg::*;
-import pfvf_def_pkg::*;
+import pfvf_class_pkg::*;
 import host_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
@@ -34,33 +42,37 @@ import test_csr_defs::*;
 //---------------------------------------------------------
 // Packet Handles and Storage
 //---------------------------------------------------------
-Packet p;
-PacketPUMemReq pumr;
-PacketPUAtomic pua;
-PacketPUCompletion puc;
-PacketDMMemReq dmmr;
-PacketDMCompletion dmc;
-PacketUnknown pu;
+Packet            #(pf_type, vf_type, pf_list, vf_list) p;
+PacketPUMemReq    #(pf_type, vf_type, pf_list, vf_list) pumr;
+PacketPUAtomic    #(pf_type, vf_type, pf_list, vf_list) pua;
+PacketPUCompletion#(pf_type, vf_type, pf_list, vf_list) puc;
+PacketDMMemReq    #(pf_type, vf_type, pf_list, vf_list) dmmr;
+PacketDMCompletion#(pf_type, vf_type, pf_list, vf_list) dmc;
+PacketUnknown     #(pf_type, vf_type, pf_list, vf_list) pu;
 
-Packet q[$];
-Packet qr[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) q[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) qr[$];
 
 
 //---------------------------------------------------------
 // Transaction Handles and Storage
 //---------------------------------------------------------
-Transaction       t;
-ReadTransaction   rt;
-WriteTransaction  wt;
-AtomicTransaction at;
+Transaction      #(pf_type, vf_type, pf_list, vf_list) t;
+ReadTransaction  #(pf_type, vf_type, pf_list, vf_list) rt;
+WriteTransaction #(pf_type, vf_type, pf_list, vf_list) wt;
+AtomicTransaction#(pf_type, vf_type, pf_list, vf_list) at;
 
-Transaction tx_transaction_queue[$];
-Transaction tx_active_transaction_queue[$];
-Transaction tx_completed_transaction_queue[$];
-Transaction tx_errored_transaction_queue[$];
-Transaction tx_history_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_active_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_completed_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_errored_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_history_transaction_queue[$];
 
 
+//---------------------------------------------------------
+// PFVF Structs 
+//---------------------------------------------------------
+pfvf_struct pfvf;
 
 //---------------------------------------------------------
 //  BEGIN: Test Tasks and Utilities
@@ -161,7 +173,8 @@ begin
    PORT_CONTROL = 32'h71000 + 32'h38;
    //De-assert Port Reset 
    $display("\nDe-asserting Port Reset...");
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+   pfvf = '{0,0,0}; // Set PFVF to PF0
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    host_bfm_top.host_bfm.read64(PORT_CONTROL, scratch);
    wdata = scratch[31:0];
    wdata[0] = 1'b0;
@@ -382,7 +395,8 @@ task test_emif_calibration;
    logic 	dfh_found;
 begin
    print_test_header("test_emif_calibration");
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+   pfvf = '{0,0,0}; // Set PFVF to PF0
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    // EMIF DFH discovery and check
    dfh_addr = DFH_START_OFFSET;
    dfh = '0;
@@ -595,7 +609,8 @@ begin
    result      = 1'b1;
    addr_mode   = ADDR32;
 
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF2);
+   pfvf = '{0,2,1}; // Set PFVF to PF0-VF2
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
 
    
    host_bfm_top.host_bfm.read64_with_completion_status(MEM_TG_CTRL_ADDR, mem_capability, error, cpl_status);
@@ -733,7 +748,8 @@ task mem_tg_fail_test;
    } tg_stat_bit;
    //localparam NUM_TG = top_tb.DUT.afu_top.port_gasket.pr_slot.afu_main.NUM_MEM_CH;;
 begin
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF2);
+   pfvf = '{0,2,1}; // Set PFVF to PF0-VF2
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    print_test_header("mem_tg_fail_test");
    old_test_err_count = get_err_count();
    result      = 1'b1;
@@ -835,7 +851,8 @@ task main_test;
       $display("Entering MEM-TG Test.");
       host_bfm_top.host_bfm.set_mmio_mode(PU_METHOD_TRANSACTION);
       host_bfm_top.host_bfm.set_dm_mode(DM_AUTO_TRANSACTION);
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF2);
+      pfvf = '{0,2,1}; // Set PFVF to PF0-VF2
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
 
       // wait for cal
      `ifdef INCLUDE_DDR4
@@ -843,8 +860,8 @@ task main_test;
  
       test_emif_calibration ( test_result );
    
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF2);
-
+      pfvf = '{0,2,1}; // Set PFVF to PF0-VF2
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       test_afu_mmio (test_result); 
       for(itr=0; itr < NUM_TEST_ITER; itr = itr+1) begin
          $display("\nRunning write only test... \n");

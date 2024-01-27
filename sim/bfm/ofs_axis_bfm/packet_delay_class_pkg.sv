@@ -19,18 +19,23 @@ import packet_class_pkg::*;
 // waiting to be sent according to a clock defined in the Packet Delay Queue.
 //------------------------------------------------------------------------------
 
-class PacketDelay;
+class PacketDelay #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+);
    protected static uint64_t master_delay_id = 0;
    protected uint64_t        delay_id;
    protected uint32_t        delay;
    protected uint32_t        delay_remaining;
-   Packet                    p;
+   Packet#(pf_type, vf_type, pf_list, vf_list) p;
    protected realtime        start_time;
 
 
    function new(
       input uint32_t delay,
-      input Packet p
+      input Packet#(pf_type, vf_type, pf_list, vf_list) p
    );
       this.master_delay_id += 1;
       this.delay_id = master_delay_id;
@@ -100,7 +105,13 @@ class PacketDelay;
 endclass: PacketDelay
 
 
-class PacketGapDelay extends PacketDelay;
+class PacketGapDelay #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends PacketDelay#(pf_type, vf_type, pf_list, vf_list);
+
    protected uint32_t delay_requested;
    protected uint32_t gap;
    protected uint32_t gap_requested;
@@ -112,7 +123,7 @@ class PacketGapDelay extends PacketDelay;
       input uint32_t gap,
       input uint32_t last_packet_delay_remaining,
       input uint32_t sent_gap_counter,
-      input Packet p
+      input Packet#(pf_type, vf_type, pf_list, vf_list) p
    );
       super.new(
          .delay(delay),
@@ -191,9 +202,14 @@ class PacketGapDelay extends PacketDelay;
 endclass: PacketGapDelay
 
 
-virtual class PacketDelayQueue;
-   protected PacketDelay  pd_queue[$];
-   protected PacketDelay  pd_search[$];
+virtual class PacketDelayQueue #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+);
+   protected PacketDelay #(pf_type, vf_type, pf_list, vf_list) pd_queue[$];
+   protected PacketDelay #(pf_type, vf_type, pf_list, vf_list) pd_search[$];
    protected semaphore    mutex_queue;
 
 
@@ -235,9 +251,9 @@ virtual class PacketDelayQueue;
    endfunction
 
 
-   virtual function Packet get_packet();
+   virtual function Packet#(pf_type, vf_type, pf_list, vf_list) get_packet();
       uint64_t    found_delay_id;
-      PacketDelay found_pd;
+      PacketDelay#(pf_type, vf_type, pf_list, vf_list) found_pd;
       //mutex_queue.get();
       pd_search = pd_queue.find() with (item.ready_to_send());
       if (pd_search.size > 0)
@@ -257,9 +273,9 @@ virtual class PacketDelayQueue;
 
    virtual function void put_packet(
       input uint32_t delay,
-      input Packet p
+      input Packet#(pf_type, vf_type, pf_list, vf_list) p
    );
-      PacketDelay pdl;
+      PacketDelay#(pf_type, vf_type, pf_list, vf_list) pdl;
       pdl = new(delay,p);
       //mutex_queue.get();
       pd_queue.push_back(pdl);
@@ -299,10 +315,15 @@ virtual class PacketDelayQueue;
 endclass: PacketDelayQueue
 
 
-virtual class PacketGapDelayQueue;
+virtual class PacketGapDelayQueue #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+);
    protected uint32_t        sent_gap_counter;
-   protected PacketGapDelay  pd_queue[$];
-   protected PacketGapDelay  pd_search[$];
+   protected PacketGapDelay#(pf_type, vf_type, pf_list, vf_list) pd_queue[$];
+   protected PacketGapDelay#(pf_type, vf_type, pf_list, vf_list) pd_search[$];
    protected semaphore       mutex_queue;
 
 
@@ -345,9 +366,9 @@ virtual class PacketGapDelayQueue;
    endfunction
 
 
-   virtual function Packet get_packet();
+   virtual function Packet#(pf_type, vf_type, pf_list, vf_list) get_packet();
       uint64_t       found_delay_id;
-      PacketGapDelay found_pd;
+      PacketGapDelay#(pf_type, vf_type, pf_list, vf_list) found_pd;
       //mutex_queue.get();
       pd_search = pd_queue.find() with (item.ready_to_send());
       if (pd_search.size > 0)
@@ -368,9 +389,9 @@ virtual class PacketGapDelayQueue;
    virtual function void put_packet(
       input uint32_t delay,
       input uint32_t gap,
-      input Packet p
+      input Packet#(pf_type, vf_type, pf_list, vf_list) p
    );
-      PacketGapDelay pdl;
+      PacketGapDelay#(pf_type, vf_type, pf_list, vf_list) pdl;
       uint32_t last_packet_delay_remaining;
       uint32_t max_delay_remaining;
       pd_search = pd_queue.find() with (item.not_ready_to_send());

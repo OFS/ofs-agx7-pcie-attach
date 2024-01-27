@@ -4,15 +4,23 @@
 //---------------------------------------------------------
 // Test module for the simulation. 
 //---------------------------------------------------------
-module test_host_bfm(
+//
+import host_bfm_types_pkg::*;
+
+module test_host_bfm#(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+)(
     pcie_ss_axis_if.sink   axis_rx_req,
     pcie_ss_axis_if.sink   axis_rx,
     pcie_ss_axis_if.source axis_tx,
     pcie_ss_axis_if.source axis_tx_req
 );
 
-import host_bfm_types_pkg::*;
-import pfvf_def_pkg::*;
+//import host_bfm_types_pkg::*;
+import pfvf_class_pkg::*;
 import host_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
@@ -31,18 +39,34 @@ host_axis_receive_sm_state_t local_sm_rx_req, local_next_rx_req;
 // Send and Receive Blocks
 //---------------------------------------------------------
 HostAXISSend #(
+   .pf_type(pf_type),
+   .vf_type(vf_type),
+   .pf_list(pf_list),
+   .vf_list(vf_list),
    .SEND_TUSER_WIDTH(host_bfm_types_pkg::TUSER_WIDTH),
    .SEND_TDATA_WIDTH(host_bfm_types_pkg::TDATA_WIDTH)
 ) axis_send_tx;
 HostAXISSend #( 
+   .pf_type(pf_type),
+   .vf_type(vf_type),
+   .pf_list(pf_list),
+   .vf_list(vf_list),
    .SEND_TUSER_WIDTH(host_bfm_types_pkg::TUSER_WIDTH),
    .SEND_TDATA_WIDTH(host_bfm_types_pkg::HDR_WIDTH)
 ) axis_send_tx_req;
 HostAXISReceive #(
+   .pf_type(pf_type),
+   .vf_type(vf_type),
+   .pf_list(pf_list),
+   .vf_list(vf_list),
    .RECEIVE_TUSER_WIDTH(host_bfm_types_pkg::TUSER_WIDTH),
    .RECEIVE_TDATA_WIDTH(host_bfm_types_pkg::TDATA_WIDTH)
 ) axis_receive_rx_req;
 HostAXISReceive #(
+   .pf_type(pf_type),
+   .vf_type(vf_type),
+   .pf_list(pf_list),
+   .vf_list(vf_list),
    .RECEIVE_TUSER_WIDTH(host_bfm_types_pkg::TUSER_WIDTH),
    .RECEIVE_TDATA_WIDTH(host_bfm_types_pkg::TDATA_WIDTH)
 ) axis_receive_rx;
@@ -51,18 +75,23 @@ HostAXISReceive #(
 //---------------------------------------------------------
 //  Packet Handles and Storage
 //---------------------------------------------------------
-Packet p, p1, p2;
-PacketPUMemReq pumr;
-PacketPUAtomic pua;
-PacketPUCompletion puc;
-PacketDMMemReq dmmr;
-PacketDMCompletion dmc;
-PacketUnknown pu;
-PacketPUMsg pmsg;
-PacketPUVDM pvdm;
+Packet            #(pf_type, vf_type, pf_list, vf_list) p, p1, p2;
+PacketPUMemReq    #(pf_type, vf_type, pf_list, vf_list) pumr;
+PacketPUAtomic    #(pf_type, vf_type, pf_list, vf_list) pua;
+PacketPUCompletion#(pf_type, vf_type, pf_list, vf_list) puc;
+PacketDMMemReq    #(pf_type, vf_type, pf_list, vf_list) dmmr;
+PacketDMCompletion#(pf_type, vf_type, pf_list, vf_list) dmc;
+PacketUnknown     #(pf_type, vf_type, pf_list, vf_list) pu;
+PacketPUMsg       #(pf_type, vf_type, pf_list, vf_list) pmsg;
+PacketPUVDM       #(pf_type, vf_type, pf_list, vf_list) pvdm;
 
-Packet q[$];
-Packet qr[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) q[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) qr[$];
+
+//---------------------------------------------------------
+// PFVF Structs.
+//---------------------------------------------------------
+pfvf_struct pfvf, pfvf2;
 
 //---------------------------------------------------------
 // Return data queue.
@@ -72,18 +101,18 @@ return_data_t return_data;
 //---------------------------------------------------------
 // Transaction Handles and Storage
 //---------------------------------------------------------
-Transaction       t;
-ReadTransaction   rt;
-WriteTransaction  wt;
-AtomicTransaction at;
-SendMsgTransaction mt;
-SendVDMTransaction vt;
+Transaction       #(pf_type, vf_type, pf_list, vf_list) t;
+ReadTransaction   #(pf_type, vf_type, pf_list, vf_list) rt;
+WriteTransaction  #(pf_type, vf_type, pf_list, vf_list) wt;
+AtomicTransaction #(pf_type, vf_type, pf_list, vf_list) at;
+SendMsgTransaction#(pf_type, vf_type, pf_list, vf_list) mt;
+SendVDMTransaction#(pf_type, vf_type, pf_list, vf_list) vt;
 
-Transaction tx_transaction_queue[$];
-Transaction tx_active_transaction_queue[$];
-Transaction tx_completed_transaction_queue[$];
-Transaction tx_errored_transaction_queue[$];
-Transaction tx_history_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_active_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_completed_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_errored_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_history_transaction_queue[$];
 
 
 //---------------------------------------------------------
@@ -165,7 +194,6 @@ bit [23:0] prefix, prefix_read;
 bit  [4:0] prefix_type, prefix_type_read;
 bit        prefix_present, prefix_present_read;
 bit  [4:0] slot_num, slot_num_read;
-pfvf_type_t pfvf_type, pfvf_type_read;
 
 // Var Fields for Completion
 bit bcm, bcm_read;
@@ -286,11 +314,11 @@ begin
    $timeformat(-9, 3, "ns", 4);
    run_pu_packet_sim      = 1'b0;
    run_pu_transaction_sim = 1'b0;
-   run_pu_method_sim      = 1'b1;
+   run_pu_method_sim      = 1'b0;
    run_dm_packet_sim      = 1'b0;
    run_dm_auto_sim        = 1'b0;
    run_msg_transaction_sim = 1'b0;
-   run_msg_method_sim      = 1'b0;
+   run_msg_method_sim      = 1'b1;
    @(posedge axis_rx.clk iff (axis_rx.rst_n === 1'b1));
    repeat (10) @(posedge axis_rx.clk);
    //----------- Write Packet #1 -------------------
@@ -298,7 +326,9 @@ begin
    begin
       host_bfm_top.host_bfm.set_mmio_mode(PU_PACKET);
       host_bfm_top.host_bfm.set_dm_mode(DM_PACKET);
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+      //pfvf = new(0,0,0);
+      pfvf = '{0,0,0};
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       $display("Beginning Simulation with Write to Host Memory.");
       addr = 64'h1234_5678_9abc_0000;
       tag = 10'h000;
@@ -790,7 +820,9 @@ begin
    begin
       host_bfm_top.host_bfm.set_mmio_mode(PU_PACKET);
       host_bfm_top.host_bfm.set_dm_mode(DM_PACKET);
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF2);
+      //pfvf.set_pfvf(0,2,1);
+      pfvf = '{0,2,1};
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       //----------- DM Write #1 -------------------
       packet_header_op = WRITE;
       tag = 10'h000;
@@ -1071,7 +1103,7 @@ begin
       @(posedge axis_rx_req.clk iff (host_bfm_top.mmio_rx_req_completed_transaction_queue.size() > 0));
       $display("We got our completed transaction!");
       host_bfm_top.mutex_mmio_rx_req_completed_transaction_queue.get();
-      t = host_bfm_top.mmio_rx_req_completed_transaction_queue.pop_front();
+      //t = host_bfm_top.mmio_rx_req_completed_transaction_queue.pop_front();
       t = host_bfm_top.mmio_rx_req_completed_transaction_queue.pop_front();
       host_bfm_top.mutex_mmio_rx_req_completed_transaction_queue.put();
       $display("Completion Info:");
@@ -1164,7 +1196,9 @@ begin
    begin
       host_bfm_top.host_bfm.set_mmio_mode(PU_METHOD_TRANSACTION);
       host_bfm_top.host_bfm.set_dm_mode(DM_AUTO_TRANSACTION);
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF2);
+      //pfvf.set_pfvf(0,2,1);
+      pfvf = '{0,2,1};
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       //-----------------------------------------------------
       //  Start with 64-bit
       //-----------------------------------------------------
@@ -1279,7 +1313,9 @@ begin
       $display("-----------------------------------------------");
       address = 64'h0000_0000_0800_0204;
       data32 = 32'hcafe_babe;
-      host_bfm_top.host_bfm.set_pfvf_setting(PF1);
+      //pfvf.set_pfvf(1,0,0);
+      pfvf = '{1,0,0};
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       fork
          host_bfm_top.host_bfm.write32(address, data32);
       join_none
@@ -1516,6 +1552,7 @@ begin
          .msg_code(8'b1000_1000),
          .lower_msg(32'hA5A5_6969),
          .upper_msg(32'h7777_8888),
+         .tag('0),
          .msg_data(msg_buf)
       );
       while (!axis_receive_rx_req.packet_available())

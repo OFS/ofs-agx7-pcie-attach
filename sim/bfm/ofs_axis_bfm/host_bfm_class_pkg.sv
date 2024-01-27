@@ -7,7 +7,6 @@
 package host_bfm_class_pkg; 
 
    import host_bfm_types_pkg::*;
-   import pfvf_def_pkg::*;
    import pfvf_status_class_pkg::*;
    import packet_class_pkg::*;
    import host_transaction_class_pkg::*;
@@ -32,12 +31,17 @@ package host_bfm_class_pkg;
 //------------------------------------------------------------------------------
 // CLASS DEFINITIONS
 //------------------------------------------------------------------------------
-virtual class HostBFM;
+virtual class HostBFM #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+);
 
    // Data Members
    protected mmio_mode_t mmio_mode;
    protected dm_mode_t   dm_mode;
-   protected PFVFRouting pf_vf_route; // Singleton object for PCIe setting.
+   protected PFVFRouting#(pf_type, vf_type, pf_list, vf_list) pf_vf_route; // Singleton object for PCIe setting.
 
 
    // Constructor
@@ -47,7 +51,7 @@ virtual class HostBFM;
       this.mmio_mode = PU_METHOD_TRANSACTION;
       //this.dm_mode   = DM_PACKET;
       this.dm_mode   = DM_AUTO_TRANSACTION;
-      this.pf_vf_route = PFVFRouting::get(); // Singletom object for PCIe setting.
+      this.pf_vf_route = PFVFRouting#(pf_type, vf_type, pf_list, vf_list)::get(); // Singletom object for PCIe setting.
    endfunction
 
 
@@ -76,12 +80,13 @@ virtual class HostBFM;
    endfunction
 
 
-   virtual function void set_pfvf_setting(pfvf_type_t setting);
+   //virtual function void set_pfvf_setting(pfvf_type_t setting);
+   virtual function void set_pfvf_setting(pfvf_struct setting);
       this.pf_vf_route.set_env(setting);
    endfunction
 
 
-   virtual function pfvf_type_t get_pfvf_setting();
+   virtual function pfvf_struct get_pfvf_setting();
       return this.pf_vf_route.get_env();
    endfunction
 

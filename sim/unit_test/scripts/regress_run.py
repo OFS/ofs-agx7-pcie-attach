@@ -301,24 +301,24 @@ def create_test_list():
 
 
 def pmci_problem_test_filter():
-    pmci_problem_tests = (
-    )
+    # pmci_problem_tests = (
+    # )
     filtered_test_list = []
-    looping_list = list_of_tests.copy() # Iteration on list_of_tests with test removal results in skipped tests.  Use a copy for looping.
-    logger.debug(f">>> Filtering PMCI Problematic Tests into their own list.")
-    for test in looping_list:
-        for pmci_test in pmci_problem_tests:
-            if (test == pmci_test):
-                filtered_test_list.append(test)
-                list_of_tests.remove(test)
-                logger.debug(f"    Removing test {test} from main list and adding to PMCI list.")
-    logger.debug(f"List of standard tests({len(list_of_tests)}):")
-    for test in list_of_tests:
-        logger.debug(f"     {test}")
-    logger.debug(f"List of PMCI tests({len(filtered_test_list)}):")
-    for pmci_test in filtered_test_list:
-        logger.debug(f"     {pmci_test}")
-    logger.debug(f">>> Filtering PMCI Problematic Tests complete...")
+    # looping_list = list_of_tests.copy() # Iteration on list_of_tests with test removal results in skipped tests.  Use a copy for looping.
+    # logger.debug(f">>> Filtering PMCI Problematic Tests into their own list.")
+    # for test in looping_list:
+    #     for pmci_test in pmci_problem_tests:
+    #         if (test == pmci_test):
+    #             filtered_test_list.append(test)
+    #             list_of_tests.remove(test)
+    #             logger.debug(f"    Removing test {test} from main list and adding to PMCI list.")
+    # logger.debug(f"List of standard tests({len(list_of_tests)}):")
+    # for test in list_of_tests:
+    #     logger.debug(f"     {test}")
+    # logger.debug(f"List of PMCI tests({len(filtered_test_list)}):")
+    # for pmci_test in filtered_test_list:
+    #     logger.debug(f"     {pmci_test}")
+    # logger.debug(f">>> Filtering PMCI Problematic Tests complete...")
     return filtered_test_list
 
 

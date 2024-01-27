@@ -3,15 +3,23 @@
 //---------------------------------------------------------
 // Test module for the simulation. 
 //---------------------------------------------------------
-module unit_test(
+
+import host_bfm_types_pkg::*;
+
+module unit_test #(
+   parameter SOC_ATTACH = 0,
+   parameter type pf_type = default_pfs, 
+   parameter pf_type pf_list = '{1'b1}, 
+   parameter type vf_type = default_vfs, 
+   parameter vf_type vf_list = '{0}
+)(
    input logic clk,
    input logic rst_n,
    input logic csr_clk,
    input logic csr_rst_n
 );
 
-import host_bfm_types_pkg::*;
-import pfvf_def_pkg::*;
+import pfvf_class_pkg::*;
 import host_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
@@ -34,36 +42,42 @@ import test_csr_defs::*;
 //---------------------------------------------------------
 // Packet Handles and Storage
 //---------------------------------------------------------
-Packet p;
-PacketPUMemReq pumr;
-PacketPUAtomic pua;
-PacketPUCompletion puc;
-PacketDMMemReq dmmr;
-PacketDMCompletion dmc;
-PacketUnknown pu;
-PacketPUMsg pmsg;
-PacketPUVDM pvdm;
+Packet            #(pf_type, vf_type, pf_list, vf_list) p;
+PacketPUMemReq    #(pf_type, vf_type, pf_list, vf_list) pumr;
+PacketPUAtomic    #(pf_type, vf_type, pf_list, vf_list) pua;
+PacketPUCompletion#(pf_type, vf_type, pf_list, vf_list) puc;
+PacketDMMemReq    #(pf_type, vf_type, pf_list, vf_list) dmmr;
+PacketDMCompletion#(pf_type, vf_type, pf_list, vf_list) dmc;
+PacketUnknown     #(pf_type, vf_type, pf_list, vf_list) pu;
+PacketPUMsg       #(pf_type, vf_type, pf_list, vf_list) pmsg;
+PacketPUVDM       #(pf_type, vf_type, pf_list, vf_list) pvdm;
 
 
-Packet q[$];
-Packet qr[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) q[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) qr[$];
 
 
 //---------------------------------------------------------
 // Transaction Handles and Storage
 //---------------------------------------------------------
-Transaction       t;
-ReadTransaction   rt;
-WriteTransaction  wt;
-AtomicTransaction at;
-SendMsgTransaction mt;
-SendVDMTransaction vt;
+Transaction       #(pf_type, vf_type, pf_list, vf_list) t;
+ReadTransaction   #(pf_type, vf_type, pf_list, vf_list) rt;
+WriteTransaction  #(pf_type, vf_type, pf_list, vf_list) wt;
+AtomicTransaction #(pf_type, vf_type, pf_list, vf_list) at;
+SendMsgTransaction#(pf_type, vf_type, pf_list, vf_list) mt;
+SendVDMTransaction#(pf_type, vf_type, pf_list, vf_list) vt;
 
-Transaction tx_transaction_queue[$];
-Transaction tx_active_transaction_queue[$];
-Transaction tx_completed_transaction_queue[$];
-Transaction tx_errored_transaction_queue[$];
-Transaction tx_history_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_active_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_completed_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_errored_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_history_transaction_queue[$];
+
+
+//---------------------------------------------------------
+// PFVF Structs 
+//---------------------------------------------------------
+pfvf_struct pfvf;
 
 byte_t msg_buf[];
 byte_t vdm_buf[];
@@ -168,7 +182,8 @@ begin
    PORT_CONTROL = 32'h71000 + 32'h38;
    //De-assert Port Reset 
    $display("\nDe-asserting Port Reset...");
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+   pfvf = '{0,0,0}; // Set PFVF to PF0
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    host_bfm_top.host_bfm.read64(PORT_CONTROL, scratch);
    wdata = scratch[31:0];
    wdata[0] = 1'b0;
@@ -1029,7 +1044,8 @@ task main_test;
       $display("Entering PMCI VDM Multi-Packet TLP Error Test.");
       host_bfm_top.host_bfm.set_mmio_mode(PU_METHOD_TRANSACTION);
       host_bfm_top.host_bfm.set_dm_mode(DM_AUTO_TRANSACTION);
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+      pfvf = '{0,0,0}; // Set PFVF to PF0
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
 
       test_multipkt_vdm_tlp_err_test (test_result);
    end

@@ -8,13 +8,16 @@
 // Top level module of PCIe subsystem.
 //
 //-----------------------------------------------------------------------------
+`ifndef __PFVF_SWITCH_HOST__
+`define __PFVF_SWITCH_HOST__
+`endif
 
 `include "fpga_defines.vh"
 import ofs_fim_if_pkg::*;
 import ofs_fim_pcie_pkg::*;
 import host_bfm_types_pkg::*;
 
-module pcie_top # (
+module pcie_top_host # (
    parameter            PCIE_LANES           = 16,
    parameter            NUM_PF               = 1,
    parameter            NUM_VF               = 1,
@@ -111,20 +114,8 @@ begin
    reset_status = 1'b0;
 end
 
-// Debug
-initial
-begin
-   dump_pfvf_params(PF_ENABLED_VEC, PF_NUM_VFS_VEC);
-end
-
 // Connections to Host BFM via AXI-ST Streaming Interfaces
-host_bfm_top #(
-   //.SOC_ATTACH       (SOC_ATTACH),
-   .pf_type (PF_ENABLED_VEC_T),
-   .pf_list (PF_ENABLED_VEC),
-   .vf_type (PF_NUM_VFS_VEC_T),
-   .vf_list (PF_NUM_VFS_VEC)
-) host_bfm_top (
+host_bfm_top host_bfm_top(
    .axis_rx_req(axi_st_rxreq_if),
    .axis_tx(axi_st_tx_if),
    .axis_rx(axi_st_rx_if),
@@ -133,13 +124,7 @@ host_bfm_top #(
 
 
 // Connections to Function-Level Reset (FLR) Manager
-host_flr_top #(
-   //.SOC_ATTACH       (SOC_ATTACH),
-   .pf_type(PF_ENABLED_VEC_T),
-   .pf_list(PF_ENABLED_VEC),
-   .vf_type(PF_NUM_VFS_VEC_T),
-   .vf_list(PF_NUM_VFS_VEC)
-) host_flr_top (
+host_flr_top host_flr_top(
    .clk(csr_clk),
    .rst_n(csr_rst_n),
    .flr_req_if(flr_req_if),
@@ -147,13 +132,7 @@ host_flr_top #(
 );
 
 // Instantiation of Unit Test
-unit_test #(
-   .SOC_ATTACH(SOC_ATTACH),
-   .pf_type(PF_ENABLED_VEC_T),
-   .pf_list(PF_ENABLED_VEC),
-   .vf_type(PF_NUM_VFS_VEC_T),
-   .vf_list(PF_NUM_VFS_VEC)
-) unit_test (
+host_unit_test host_unit_test(
    .clk(fim_clk),
    .rst_n(fim_rst_n),
    .csr_clk(csr_clk),

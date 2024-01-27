@@ -3,16 +3,23 @@
 //---------------------------------------------------------
 // Test module for the simulation. 
 //---------------------------------------------------------
-module unit_test(
+
+import host_bfm_types_pkg::*;
+
+module unit_test #(
+   parameter SOC_ATTACH = 0,
+   parameter type pf_type = default_pfs, 
+   parameter pf_type pf_list = '{1'b1}, 
+   parameter type vf_type = default_vfs, 
+   parameter vf_type vf_list = '{0}
+)(
    input logic clk,
    input logic rst_n,
    input logic csr_clk,
    input logic csr_rst_n
 );
 
-import host_bfm_types_pkg::*;
-import pfvf_def_pkg::*;
-import flr_def_pkg::*;
+import pfvf_class_pkg::*;
 import host_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
@@ -24,6 +31,11 @@ import host_bfm_class_pkg::*;
 import host_flr_class_pkg::*;
 import test_csr_defs::*;
 
+
+//---------------------------------------------------------
+// PFVF Structs 
+//---------------------------------------------------------
+pfvf_struct pfvf;
 
 //---------------------------------------------------------
 //  BEGIN: Test Tasks and Utilities
@@ -130,7 +142,8 @@ begin
    PORT_CONTROL = 32'h71000 + 32'h38;
    //De-assert Port Reset 
    $display("\nDe-asserting Port Reset...");
-   host_bfm_top.host_bfm.set_pfvf_setting(pfvf_def_pkg::PF0);
+   pfvf = '{0,0,0};
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    host_bfm_top.host_bfm.read64(PORT_CONTROL, scratch);
    wdata = scratch[31:0];
    wdata[0] = 1'b0;
@@ -230,17 +243,20 @@ task main_test;
    output logic test_result;
 
    string test_name;
-   uint32_t test_flr_type_index;
-   HostFLREvent flr;
+   PFVFClass#(pf_type, vf_type, pf_list, vf_list) test_flr;
+   pfvf_struct test_flr_type;
+   HostFLREvent#(pf_type, vf_type, pf_list, vf_list) flr;
    logic [31:0] old_test_err_count;
 
    begin
       $display("Entering FLR Test.");
       @(posedge clk iff (rst_n === 1'b1));
       repeat (20) @(posedge clk);
-      for (test_flr_type_index = uint32_t'(flr_def_pkg::PF0); test_flr_type_index < uint32_t'(flr_def_pkg::NUM_OF_FLR_FUNCTIONS); test_flr_type_index += 32'd1)
+      test_flr = new(0,0,0);
+      test_flr.get_pfvf_first(test_flr_type);
+      do
       begin
-         host_flr_top.flr_manager.send_flr(flr_type_t'(test_flr_type_index));
+         host_flr_top.flr_manager.send_flr(test_flr_type);
          flr = host_flr_top.flr_manager.flrs[$];
          $sformat(test_name,"test_pf%0d_vf%0d_vfa%b_flr", flr.get_pf(), flr.get_vf(), flr.get_vf_active());
          print_test_header(test_name, flr.get_vf_active(), flr.get_pf(), flr.get_vf());
@@ -250,7 +266,7 @@ task main_test;
             @(posedge clk);
          end
          post_test_util(old_test_err_count);
-      end
+      end while (test_flr.get_pfvf_next(test_flr_type));
       $display(">>> All Sent FLRs <<<");
       host_flr_top.flr_manager.print_all_sent_flrs();
       $display("");

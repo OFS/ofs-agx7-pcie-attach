@@ -8,28 +8,26 @@
 // Top level module of PCIe subsystem.
 //
 //-----------------------------------------------------------------------------
+`ifndef __PFVF_SWITCH_SOC__
+`define __PFVF_SWITCH_SOC__
+`endif
 
 `include "fpga_defines.vh"
 import ofs_fim_if_pkg::*;
+import pfvf_def_pkg_soc::*;
 import ofs_fim_pcie_pkg::*;
-import host_bfm_types_pkg::*;
 
-module pcie_top # (
-   parameter            PCIE_LANES           = 16,
-   parameter            NUM_PF               = 1,
-   parameter            NUM_VF               = 1,
-   parameter            MAX_NUM_VF           = 1,
-   parameter            SOC_ATTACH           = 0,
-   parameter type       PF_ENABLED_VEC_T     = default_pfs,
-   parameter PF_ENABLED_VEC_T PF_ENABLED_VEC = '{1'b1},
-   parameter type       PF_NUM_VFS_VEC_T     = default_vfs,
-   parameter PF_NUM_VFS_VEC_T PF_NUM_VFS_VEC = '{0},
-   parameter            MM_ADDR_WIDTH        = 19,
-   parameter            MM_DATA_WIDTH        = 64,
-   parameter bit [11:0] FEAT_ID              = 12'h0,
-   parameter bit [3:0]  FEAT_VER             = 4'h0,
-   parameter bit [23:0] NEXT_DFH_OFFSET      = 24'h1000,
-   parameter bit        END_OF_LIST          = 1'b0
+module pcie_top_soc # (
+   parameter            PCIE_LANES      = 16,
+   parameter            NUM_PF          = 1,
+   parameter            NUM_VF          = 1,
+   parameter            MAX_NUM_VF      = 1,
+   parameter            MM_ADDR_WIDTH   = 19,
+   parameter            MM_DATA_WIDTH   = 64,
+   parameter bit [11:0] FEAT_ID         = 12'h0,
+   parameter bit [3:0]  FEAT_VER        = 4'h0,
+   parameter bit [23:0] NEXT_DFH_OFFSET = 24'h1000,
+   parameter bit        END_OF_LIST     = 1'b0
 ) (
    input  logic                    fim_clk,
    input  logic                    fim_rst_n,
@@ -111,20 +109,8 @@ begin
    reset_status = 1'b0;
 end
 
-// Debug
-initial
-begin
-   dump_pfvf_params(PF_ENABLED_VEC, PF_NUM_VFS_VEC);
-end
-
 // Connections to Host BFM via AXI-ST Streaming Interfaces
-host_bfm_top #(
-   //.SOC_ATTACH       (SOC_ATTACH),
-   .pf_type (PF_ENABLED_VEC_T),
-   .pf_list (PF_ENABLED_VEC),
-   .vf_type (PF_NUM_VFS_VEC_T),
-   .vf_list (PF_NUM_VFS_VEC)
-) host_bfm_top (
+host_bfm_top soc_bfm_top(
    .axis_rx_req(axi_st_rxreq_if),
    .axis_tx(axi_st_tx_if),
    .axis_rx(axi_st_rx_if),
@@ -133,13 +119,7 @@ host_bfm_top #(
 
 
 // Connections to Function-Level Reset (FLR) Manager
-host_flr_top #(
-   //.SOC_ATTACH       (SOC_ATTACH),
-   .pf_type(PF_ENABLED_VEC_T),
-   .pf_list(PF_ENABLED_VEC),
-   .vf_type(PF_NUM_VFS_VEC_T),
-   .vf_list(PF_NUM_VFS_VEC)
-) host_flr_top (
+host_flr_top soc_flr_top(
    .clk(csr_clk),
    .rst_n(csr_rst_n),
    .flr_req_if(flr_req_if),
@@ -147,13 +127,7 @@ host_flr_top #(
 );
 
 // Instantiation of Unit Test
-unit_test #(
-   .SOC_ATTACH(SOC_ATTACH),
-   .pf_type(PF_ENABLED_VEC_T),
-   .pf_list(PF_ENABLED_VEC),
-   .vf_type(PF_NUM_VFS_VEC_T),
-   .vf_list(PF_NUM_VFS_VEC)
-) unit_test (
+soc_unit_test soc_unit_test(
    .clk(fim_clk),
    .rst_n(fim_rst_n),
    .csr_clk(csr_clk),

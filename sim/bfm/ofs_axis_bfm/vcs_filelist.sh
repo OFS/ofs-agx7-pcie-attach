@@ -10,8 +10,9 @@ BFM_DIR=$(readlink -f ${SCRIPT_DIR})
 
 BFM_SRC="+incdir+$BFM_DIR \
 $BFM_DIR/host_bfm_types_pkg.sv \
-$BFM_DIR/pfvf_def_pkg.sv \
-$BFM_DIR/flr_def_pkg.sv \
+$BFM_DIR/pfvf_def_pkg_host.sv \
+$BFM_DIR/pfvf_def_pkg_soc.sv \
+$BFM_DIR/pfvf_class_pkg.sv \
 $BFM_DIR/pfvf_status_class_pkg.sv \
 $BFM_DIR/packet_class_pkg.sv \
 $BFM_DIR/packet_delay_class_pkg.sv \
@@ -24,4 +25,5 @@ $BFM_DIR/host_bfm_class_pkg.sv \
 $BFM_DIR/host_bfm_top.sv \
 $BFM_DIR/host_flr_class_pkg.sv \
 $BFM_DIR/host_flr_top.sv \
+$BFM_DIR/pcie_top.sv \
 $BFM_DIR/top_tb.sv"

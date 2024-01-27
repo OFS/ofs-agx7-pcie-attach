@@ -7,7 +7,6 @@
 package host_transaction_class_pkg; 
 
 import host_bfm_types_pkg::*;
-import pfvf_def_pkg::*;
 import pfvf_status_class_pkg::*;
 import packet_class_pkg::*;
 
@@ -43,7 +42,12 @@ parameter MASTER_GAP_DELAY_DEFAULT = 5;
 // single queue and process them all the same way using base class handles.
 //------------------------------------------------------------------------------
 
-virtual class Transaction;
+virtual class Transaction #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+);
 
    // Data Members
    protected transactor_type_t transactor_type;
@@ -72,8 +76,8 @@ virtual class Transaction;
    //------------------------------------------------------
    // Stuff for Derived Classes, but have to include method
    // definitions here:
-   Packet request_packet;
-   Packet completion_queue[$];
+   Packet#(pf_type, vf_type, pf_list, vf_list) request_packet;
+   Packet#(pf_type, vf_type, pf_list, vf_list) completion_queue[$];
    //------------------------------------------------------
 
 
@@ -121,7 +125,7 @@ virtual class Transaction;
    endfunction
 
 
-   virtual function void set_pf_vf(pfvf_type_t setting);
+   virtual function void set_pf_vf(pfvf_struct setting);
       this.request_packet.set_pf_vf(setting);
    endfunction
 
@@ -131,7 +135,7 @@ virtual class Transaction;
    endfunction
 
 
-   virtual function pfvf_type_t get_pf_vf();
+   virtual function pfvf_struct get_pf_vf();
       return this.request_packet.get_pf_vf();
    endfunction
 
@@ -370,7 +374,7 @@ virtual class Transaction;
 
 
    virtual function void add_completion(
-      input Packet completion 
+      input Packet#(pf_type, vf_type, pf_list, vf_list) completion 
    );
       completion_queue.push_back(completion);
       calc_sum_of_completion_bytes();
@@ -472,10 +476,15 @@ endclass: Transaction
 
 
 
-class ReadTransaction extends Transaction;
+class ReadTransaction #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends Transaction#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   PacketPUMemReq       read_request_packet;
+   PacketPUMemReq#(pf_type, vf_type, pf_list, vf_list) read_request_packet;
    
 
    // Constructor
@@ -669,10 +678,15 @@ class ReadTransaction extends Transaction;
 endclass : ReadTransaction
 
 
-class WriteTransaction extends ReadTransaction;
+class WriteTransaction #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends ReadTransaction#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   PacketPUMemReq       write_request_packet;
+   PacketPUMemReq#(pf_type, vf_type, pf_list, vf_list) write_request_packet;
    
 
    // Constructor
@@ -765,10 +779,15 @@ class WriteTransaction extends ReadTransaction;
 endclass : WriteTransaction
 
 
-class AtomicTransaction extends ReadTransaction;
+class AtomicTransaction #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends ReadTransaction#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   PacketPUAtomic atomic_request_packet;
+   PacketPUAtomic#(pf_type, vf_type, pf_list, vf_list) atomic_request_packet;
    
 
    // Constructor
@@ -917,11 +936,15 @@ class AtomicTransaction extends ReadTransaction;
 endclass : AtomicTransaction
 
 
-class SendMsgTransaction extends Transaction;
+class SendMsgTransaction #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends Transaction#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   //PacketPUMemReq       read_request_packet;
-   PacketPUMsg msg_packet;
+   PacketPUMsg#(pf_type, vf_type, pf_list, vf_list) msg_packet;
    
 
    // Constructor
@@ -1074,11 +1097,15 @@ class SendMsgTransaction extends Transaction;
 endclass : SendMsgTransaction
 
 
-class SendVDMTransaction extends Transaction;
+class SendVDMTransaction #(
+   type pf_type = default_pfs, 
+   type vf_type = default_vfs, 
+   pf_type pf_list = '{1'b1}, 
+   vf_type vf_list = '{0}
+) extends Transaction#(pf_type, vf_type, pf_list, vf_list);
 
    // Data Members
-   //PacketPUMemReq       read_request_packet;
-   PacketPUVDM vdm_packet;
+   PacketPUVDM#(pf_type, vf_type, pf_list, vf_list) vdm_packet;
    
 
    // Constructor

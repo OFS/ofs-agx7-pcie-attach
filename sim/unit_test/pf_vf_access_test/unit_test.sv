@@ -3,15 +3,23 @@
 //---------------------------------------------------------
 // Test module for the simulation. 
 //---------------------------------------------------------
-module unit_test(
+
+import host_bfm_types_pkg::*;
+
+module unit_test #(
+   parameter SOC_ATTACH = 0,
+   parameter type pf_type = default_pfs, 
+   parameter pf_type pf_list = '{1'b1}, 
+   parameter type vf_type = default_vfs, 
+   parameter vf_type vf_list = '{0}
+)(
    input logic clk,
    input logic rst_n,
    input logic csr_clk,
    input logic csr_rst_n
 );
 
-import host_bfm_types_pkg::*;
-import pfvf_def_pkg::*;
+import pfvf_class_pkg::*;
 import host_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
@@ -34,33 +42,37 @@ import test_csr_defs::*;
 //---------------------------------------------------------
 // Packet Handles and Storage
 //---------------------------------------------------------
-Packet p;
-PacketPUMemReq pumr;
-PacketPUAtomic pua;
-PacketPUCompletion puc;
-PacketDMMemReq dmmr;
-PacketDMCompletion dmc;
-PacketUnknown pu;
+Packet            #(pf_type, vf_type, pf_list, vf_list) p;
+PacketPUMemReq    #(pf_type, vf_type, pf_list, vf_list) pumr;
+PacketPUAtomic    #(pf_type, vf_type, pf_list, vf_list) pua;
+PacketPUCompletion#(pf_type, vf_type, pf_list, vf_list) puc;
+PacketDMMemReq    #(pf_type, vf_type, pf_list, vf_list) dmmr;
+PacketDMCompletion#(pf_type, vf_type, pf_list, vf_list) dmc;
+PacketUnknown     #(pf_type, vf_type, pf_list, vf_list) pu;
 
-Packet q[$];
-Packet qr[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) q[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) qr[$];
 
 
 //---------------------------------------------------------
 // Transaction Handles and Storage
 //---------------------------------------------------------
-Transaction       t;
-ReadTransaction   rt;
-WriteTransaction  wt;
-AtomicTransaction at;
+Transaction      #(pf_type, vf_type, pf_list, vf_list) t;
+ReadTransaction  #(pf_type, vf_type, pf_list, vf_list) rt;
+WriteTransaction #(pf_type, vf_type, pf_list, vf_list) wt;
+AtomicTransaction#(pf_type, vf_type, pf_list, vf_list) at;
 
-Transaction tx_transaction_queue[$];
-Transaction tx_active_transaction_queue[$];
-Transaction tx_completed_transaction_queue[$];
-Transaction tx_errored_transaction_queue[$];
-Transaction tx_history_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_active_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_completed_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_errored_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_history_transaction_queue[$];
 
 
+//---------------------------------------------------------
+// PFVF Structs 
+//---------------------------------------------------------
+pfvf_struct pfvf;
 
 //---------------------------------------------------------
 //  BEGIN: Test Tasks and Utilities
@@ -328,7 +340,8 @@ begin
    PORT_CONTROL = 32'h71000 + 32'h38;
    //De-assert Port Reset 
    $display("\nDe-asserting Port Reset...");
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+   pfvf = '{0,0,0}; // Set PFVF to PF0
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    host_bfm_top.host_bfm.read64(PORT_CONTROL, scratch);
    wdata = scratch[31:0];
    wdata[0] = 1'b0;
@@ -428,7 +441,8 @@ end
 task main_test;
    output logic test_result;
    string    test_name;
-   uint32_t  test_pfvf_type_index;
+   pfvf_struct test_pfvf_type_index;
+   PFVFClass#(pf_type, vf_type, pf_list, vf_list) pfvf;
    uint64_t  scratchpad_lookup [uint128_t];
    uint64_t  address;
    uint64_t  guid_high, guid_low;
@@ -437,6 +451,7 @@ task main_test;
    cpl_status_t cpl_status;
    logic [31:0] old_test_err_count;
    begin
+      pfvf = new(0,0,0); // Create PFVF Object with starting value of PF0-VF0
       scratchpad_lookup = '{ uint128_t'(test_csr_defs::FME_GUID)     : FME_SCRATCH_ADDR,
 		                       uint128_t'(test_csr_defs::HE_LB_GUID)   : HE_LB_SCRATCH_ADDR,
                              uint128_t'(test_csr_defs::HE_MEM_GUID)  : HE_MEM_SCRATCH_ADDR,
@@ -453,9 +468,10 @@ task main_test;
 
       @(posedge clk iff (rst_n === 1'b1));
       repeat (20) @(posedge clk);
-      for (test_pfvf_type_index = uint32_t'(pfvf_def_pkg::PF0); test_pfvf_type_index < uint32_t'(pfvf_def_pkg::NUM_OF_PFVF_FUNCTIONS); test_pfvf_type_index += 32'd1)
+      pfvf.get_pfvf_first(test_pfvf_type_index);
+      do
       begin
-         host_bfm_top.host_bfm.set_pfvf_setting(pfvf_type_t'(test_pfvf_type_index));
+         host_bfm_top.host_bfm.set_pfvf_setting(test_pfvf_type_index);
          $sformat(test_name,"test_pf%0d_vf%0d_vfa%b_access", host_bfm_top.host_bfm.get_pf(), host_bfm_top.host_bfm.get_vf(), host_bfm_top.host_bfm.get_vf_active());
          print_test_header(test_name, host_bfm_top.host_bfm.get_pf(), host_bfm_top.host_bfm.get_vf(), host_bfm_top.host_bfm.get_vf_active());
          address = 'h08;
@@ -496,7 +512,7 @@ task main_test;
                end
             end
          end
-      end
+      end while (pfvf.get_pfvf_next(test_pfvf_type_index)); // Get next PFVF until we run out.
 
       repeat (10) @(posedge clk);
    end

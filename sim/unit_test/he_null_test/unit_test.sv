@@ -3,15 +3,23 @@
 //---------------------------------------------------------
 // Test module for the simulation. 
 //---------------------------------------------------------
-module unit_test(
+
+import host_bfm_types_pkg::*;
+
+module unit_test #(
+   parameter SOC_ATTACH = 0,
+   parameter type pf_type = default_pfs, 
+   parameter pf_type pf_list = '{1'b1}, 
+   parameter type vf_type = default_vfs, 
+   parameter vf_type vf_list = '{0}
+)(
    input logic clk,
    input logic rst_n,
    input logic csr_clk,
    input logic csr_rst_n
 );
 
-import host_bfm_types_pkg::*;
-import pfvf_def_pkg::*;
+import pfvf_class_pkg::*;
 import host_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
@@ -34,33 +42,37 @@ import test_csr_defs::*;
 //---------------------------------------------------------
 // Packet Handles and Storage
 //---------------------------------------------------------
-Packet p;
-PacketPUMemReq pumr;
-PacketPUAtomic pua;
-PacketPUCompletion puc;
-PacketDMMemReq dmmr;
-PacketDMCompletion dmc;
-PacketUnknown pu;
+Packet            #(pf_type, vf_type, pf_list, vf_list) p;
+PacketPUMemReq    #(pf_type, vf_type, pf_list, vf_list) pumr;
+PacketPUAtomic    #(pf_type, vf_type, pf_list, vf_list) pua;
+PacketPUCompletion#(pf_type, vf_type, pf_list, vf_list) puc;
+PacketDMMemReq    #(pf_type, vf_type, pf_list, vf_list) dmmr;
+PacketDMCompletion#(pf_type, vf_type, pf_list, vf_list) dmc;
+PacketUnknown     #(pf_type, vf_type, pf_list, vf_list) pu;
 
-Packet q[$];
-Packet qr[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) q[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) qr[$];
 
 
 //---------------------------------------------------------
 // Transaction Handles and Storage
 //---------------------------------------------------------
-Transaction       t;
-ReadTransaction   rt;
-WriteTransaction  wt;
-AtomicTransaction at;
+Transaction      #(pf_type, vf_type, pf_list, vf_list) t;
+ReadTransaction  #(pf_type, vf_type, pf_list, vf_list) rt;
+WriteTransaction #(pf_type, vf_type, pf_list, vf_list) wt;
+AtomicTransaction#(pf_type, vf_type, pf_list, vf_list) at;
 
-Transaction tx_transaction_queue[$];
-Transaction tx_active_transaction_queue[$];
-Transaction tx_completed_transaction_queue[$];
-Transaction tx_errored_transaction_queue[$];
-Transaction tx_history_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_active_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_completed_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_errored_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_history_transaction_queue[$];
 
 
+//---------------------------------------------------------
+// PFVF Structs 
+//---------------------------------------------------------
+pfvf_struct pfvf;
 
 //---------------------------------------------------------
 //  BEGIN: Test Tasks and Utilities
@@ -350,42 +362,48 @@ begin
    $display("\n---------------------------------------");
    $display("Test CSR access to HE-MEM-NULL (PF0-VF0)");
    $display("---------------------------------------\n");
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF0);
+      pfvf = '{0,0,1}; // Set PFVF to PF0-VF0
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       test_csr_access_64(result, addr_mode, HE_NULL_SCRATCHPAD, 'h1111_2222_3333_4444);
       test_csr_access_32(result, addr_mode, HE_NULL_SCRATCHPAD, 'haa05_05aa);   
    
    $display("\n---------------------------------------");
    $display("Test CSR access to HE-HSSI (PF0-VF1)");
    $display("---------------------------------------\n");
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF1);
+      pfvf = '{0,1,1}; // Set PFVF to PF0-VF1
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       test_csr_access_64(result, addr_mode, HE_NULL_SCRATCHPAD, 'h1111_2222_3333_4444);
       test_csr_access_32(result, addr_mode, HE_NULL_SCRATCHPAD, 'haa06_06aa);   
 
    $display("\n---------------------------------------");
    $display("Test CSR access to MEM-TG (PF0-VF2)");
    $display("---------------------------------------\n");
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF2);
+      pfvf = '{0,2,1}; // Set PFVF to PF0-VF2
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       test_csr_access_64(result, addr_mode, HE_NULL_SCRATCHPAD, 'h1111_2222_3333_4444);
       test_csr_access_32(result, addr_mode, HE_NULL_SCRATCHPAD, 'haa07_07aa);
    
    $display("\n---------------------------------------");
    $display("Test CSR access to PF1)");
    $display("---------------------------------------\n");
-      host_bfm_top.host_bfm.set_pfvf_setting(PF1);
+      pfvf = '{1,0,0}; // Set PFVF to PF1
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       test_csr_access_64(result, addr_mode, HE_NULL_SCRATCHPAD, 'h1111_2222_3333_4444);
       test_csr_access_32(result, addr_mode, HE_NULL_SCRATCHPAD, 'haa02_02aa);   
       
    $display("\n---------------------------------------");
    $display("Test CSR access to HE-LB (PF2)");
    $display("---------------------------------------\n");
-      host_bfm_top.host_bfm.set_pfvf_setting(PF2);
+      pfvf = '{2,0,0}; // Set PFVF to PF2
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       test_csr_access_64(result, addr_mode, HE_NULL_SCRATCHPAD, 'h1111_2222_3333_4444);
       test_csr_access_32(result, addr_mode, HE_NULL_SCRATCHPAD, 'haa04_04aa);   
    
    $display("\n---------------------------------------");
    $display("Test CSR access to VIRTIO-LB (PF3)");
    $display("---------------------------------------\n");
-      host_bfm_top.host_bfm.set_pfvf_setting(PF3);
+      pfvf = '{3,0,0}; // Set PFVF to PF3
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       test_csr_read_64(result, addr_mode, VIRTIO_DFH, 64'h1000010000000000); 
 
       test_csr_read_64(result, addr_mode, VIRTIO_GUID_L, 64'hB9AB_EFBD_90B9_70C4);
@@ -405,7 +423,8 @@ begin
    $display("\n---------------------------------------");
    $display("Test CSR access to HPS (PF4) CE-NULL");
    $display("---------------------------------------\n");
-      host_bfm_top.host_bfm.set_pfvf_setting(PF4);
+      pfvf = '{4,0,0}; // Set PFVF to PF4
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       test_csr_access_64(result, addr_mode, HE_NULL_SCRATCHPAD, 'h1111_2222_3333_4444);
       test_csr_access_32(result, addr_mode, HE_NULL_SCRATCHPAD, 'haa09_09aa);   
       
@@ -435,7 +454,8 @@ begin
    addr_mode = ADDR32;
 
    // AFU CSR
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+   pfvf = '{0,0,0}; // Set PFVF to PF0
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    host_bfm_top.host_bfm.set_bar(4'd2);
    test_csr_access_32(result, addr_mode, 64'h41000, 'hAFC0_0001);   
    test_csr_access_64(result, addr_mode, 64'h41020, 'hAFC0_0003_AFC0_0002);  
@@ -495,15 +515,15 @@ task test_mmio_burst;
    logic [63:0] scratch;
    logic [1:0]  status;
    logic [31:0] old_test_err_count;
-   Transaction t, rtc;
+   Transaction     #(pf_type, vf_type, pf_list, vf_list) t, rtc;
    uint64_t rtc_num;
-   WriteTransaction wt, wtc;
+   WriteTransaction#(pf_type, vf_type, pf_list, vf_list) wt, wtc;
    uint64_t wtc_num;
-   WriteTransaction wt_queue[$];
-   WriteTransaction wt_match_queue[$];
-   ReadTransaction  rt;
-   Transaction  rt_queue[$];
-   Transaction  rt_match_queue[$];
+   WriteTransaction#(pf_type, vf_type, pf_list, vf_list) wt_queue[$];
+   WriteTransaction#(pf_type, vf_type, pf_list, vf_list) wt_match_queue[$];
+   ReadTransaction #(pf_type, vf_type, pf_list, vf_list) rt;
+   Transaction     #(pf_type, vf_type, pf_list, vf_list) rt_queue[$];
+   Transaction     #(pf_type, vf_type, pf_list, vf_list) rt_match_queue[$];
    string access_source;
    bit [3:0] first_dw_be = 4'b1111;
    bit [3:0] last_dw_be  = 4'b1111;
@@ -649,7 +669,8 @@ begin
    PORT_CONTROL = 32'h71000 + 32'h38;
    //De-assert Port Reset 
    $display("\nDe-asserting Port Reset...");
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+   pfvf = '{0,0,0}; // Set PFVF to PF0
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    host_bfm_top.host_bfm.read64(PORT_CONTROL, scratch);
    wdata = scratch[31:0];
    wdata[0] = 1'b0;
@@ -752,7 +773,8 @@ task main_test;
       $display("Entering HE Null Test.");
       host_bfm_top.host_bfm.set_mmio_mode(PU_METHOD_TRANSACTION);
       host_bfm_top.host_bfm.set_dm_mode(DM_AUTO_TRANSACTION);
-      host_bfm_top.host_bfm.set_pfvf_setting(PF2);
+      pfvf = '{2,0,0}; // Set PFVF to PF2
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
 
       test_mmio_addr32   (test_result);
       test_mmio_addr64   (test_result);

@@ -3,15 +3,23 @@
 //---------------------------------------------------------
 // Test module for the simulation. 
 //---------------------------------------------------------
-module unit_test(
+
+import host_bfm_types_pkg::*;
+
+module unit_test #(
+   parameter SOC_ATTACH = 0,
+   parameter type pf_type = default_pfs, 
+   parameter pf_type pf_list = '{1'b1}, 
+   parameter type vf_type = default_vfs, 
+   parameter vf_type vf_list = '{0}
+)(
    input logic clk,
    input logic rst_n,
    input logic csr_clk,
    input logic csr_rst_n
 );
 
-import host_bfm_types_pkg::*;
-import pfvf_def_pkg::*;
+import pfvf_class_pkg::*;
 import host_memory_class_pkg::*;
 import tag_manager_class_pkg::*;
 import pfvf_status_class_pkg::*;
@@ -36,33 +44,37 @@ import top_cfg_pkg::*;
 //---------------------------------------------------------
 // Packet Handles and Storage
 //---------------------------------------------------------
-Packet p;
-PacketPUMemReq pumr;
-PacketPUAtomic pua;
-PacketPUCompletion puc;
-PacketDMMemReq dmmr;
-PacketDMCompletion dmc;
-PacketUnknown pu;
+Packet            #(pf_type, vf_type, pf_list, vf_list) p;
+PacketPUMemReq    #(pf_type, vf_type, pf_list, vf_list) pumr;
+PacketPUAtomic    #(pf_type, vf_type, pf_list, vf_list) pua;
+PacketPUCompletion#(pf_type, vf_type, pf_list, vf_list) puc;
+PacketDMMemReq    #(pf_type, vf_type, pf_list, vf_list) dmmr;
+PacketDMCompletion#(pf_type, vf_type, pf_list, vf_list) dmc;
+PacketUnknown     #(pf_type, vf_type, pf_list, vf_list) pu;
 
-Packet q[$];
-Packet qr[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) q[$];
+Packet#(pf_type, vf_type, pf_list, vf_list) qr[$];
 
 
 //---------------------------------------------------------
 // Transaction Handles and Storage
 //---------------------------------------------------------
-Transaction       t;
-ReadTransaction   rt;
-WriteTransaction  wt;
-AtomicTransaction at;
+Transaction      #(pf_type, vf_type, pf_list, vf_list) t;
+ReadTransaction  #(pf_type, vf_type, pf_list, vf_list) rt;
+WriteTransaction #(pf_type, vf_type, pf_list, vf_list) wt;
+AtomicTransaction#(pf_type, vf_type, pf_list, vf_list) at;
 
-Transaction tx_transaction_queue[$];
-Transaction tx_active_transaction_queue[$];
-Transaction tx_completed_transaction_queue[$];
-Transaction tx_errored_transaction_queue[$];
-Transaction tx_history_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_active_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_completed_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_errored_transaction_queue[$];
+Transaction#(pf_type, vf_type, pf_list, vf_list) tx_history_transaction_queue[$];
 
 
+//---------------------------------------------------------
+// PFVF Structs 
+//---------------------------------------------------------
+pfvf_struct pfvf;
 
 //---------------------------------------------------------
 //  BEGIN: Test Tasks and Utilities
@@ -253,11 +265,11 @@ task test_csr_access_32_ch1;
    //t_tlp_rp_tag tag0,tag1;
    //logic [2:0]  status;
    logic error;
-   Transaction t, rtc;
-   WriteTransaction wt, wtc;
-   WriteTransaction wt_queue[$];
-   ReadTransaction  rt;
-   Transaction  rt_queue[$];
+   Transaction     #(pf_type, vf_type, pf_list, vf_list) t, rtc;
+   WriteTransaction#(pf_type, vf_type, pf_list, vf_list) wt, wtc;
+   WriteTransaction#(pf_type, vf_type, pf_list, vf_list) wt_queue[$];
+   ReadTransaction #(pf_type, vf_type, pf_list, vf_list) rt;
+   Transaction     #(pf_type, vf_type, pf_list, vf_list) rt_queue[$];
    string access_source;
    bit [3:0] first_dw_be = 4'b1111;
    bit [3:0] last_dw_be  = 4'b1111;
@@ -410,11 +422,11 @@ task test_csr_access_64_ch1;
    //t_tlp_rp_tag tag0,tag1;
    //logic [2:0]  status;
    logic error;
-   Transaction t, rtc;
-   WriteTransaction wt, wtc;
-   WriteTransaction wt_queue[$];
-   ReadTransaction  rt;
-   Transaction  rt_queue[$];
+   Transaction     #(pf_type, vf_type, pf_list, vf_list) t, rtc;
+   WriteTransaction#(pf_type, vf_type, pf_list, vf_list) wt, wtc;
+   WriteTransaction#(pf_type, vf_type, pf_list, vf_list) wt_queue[$];
+   ReadTransaction #(pf_type, vf_type, pf_list, vf_list) rt;
+   Transaction     #(pf_type, vf_type, pf_list, vf_list) rt_queue[$];
    string access_source;
    bit [3:0] first_dw_be = 4'b1111;
    bit [3:0] last_dw_be  = 4'b1111;
@@ -769,7 +781,8 @@ begin
    addr_mode = ADDR32;
 
    // AFU CSR
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF1);
+   pfvf = '{0,1,1}; // Set PFVF to PF0-VF1
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    host_bfm_top.host_bfm.set_bar(4'd0);
    // RO Register check
    test_csr_ro_access_64(result, addr_mode, AFU_DFH_ADDR, AFU_DFH_VAL);
@@ -804,7 +817,8 @@ begin
    print_test_header("test_hssi_ss_mmio");
    old_test_err_count = get_err_count();
 
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+   pfvf = '{0,0,0}; // Set PFVF to PF0
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    host_bfm_top.host_bfm.set_bar(4'd0);
    
    result      = 1'b1;
@@ -840,7 +854,8 @@ task write_mailbox;
    input logic [63:0]  addr; //Byte address
    input logic [31:0]  write_data32;
    begin
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF1);
+      pfvf = '{0,1,1}; // Set PFVF to PF0-VF1
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
      if (access32) begin
          host_bfm_top.host_bfm.write32(cmd_ctrl_addr + MB_WRDATA_OFFSET, write_data32);
          host_bfm_top.host_bfm.write32(cmd_ctrl_addr + MB_ADDRESS_OFFSET, addr); 
@@ -939,7 +954,8 @@ task wait_for_reset_done;
    logic                error;
    logic                result;
    begin
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+      pfvf = '{0,0,0}; // Set PFVF to PF0
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       $display("INFO:%t	Waiting for subsystem cold reset deassertion acknowledgment",$time);
       wait(top_tb.DUT.hssi_wrapper.hssi_ss.subsystem_cold_rst_ack_n);
       test_csr_ro_access_32(result, ADDR32, HSSI_WRAP_COLD_RST_ACK_ADDR, 'h0);
@@ -961,7 +977,8 @@ task wait_for_hssi_to_ready;
    logic                is_etile;
    cpl_status_t cpl_status;
    begin
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+      pfvf = '{0,0,0}; // Set PFVF to PF0
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
 
       //READ32(ADDR32, HSSI_FEATURE_ADDR, bar, vf_active, pfn, vfn, hssi_cfg, error);
       //READ32(ADDR32, HSSI_VER_ADDR, bar, vf_active, pfn, vfn, scratch, error);
@@ -1043,7 +1060,8 @@ task traffic_200G_400G;
    logic [31:0] rx_cnt_lsb;
    logic [31:0] rx_cnt_msb;
    begin
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF1);
+      pfvf = '{0,1,1}; // Set PFVF to PF0-VF1
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       host_bfm_top.host_bfm.set_bar(4'd0);
       //---------------------------------------------------------------------------
       // Traffic Controller Configuration
@@ -1117,7 +1135,8 @@ task traffic_10G_25G;
    input logic  access32;
    logic [31:0] scratch1;
    begin
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF1);
+      pfvf = '{0,1,1}; // Set PFVF to PF0-VF1
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       host_bfm_top.host_bfm.set_bar(4'd0);
       //---------------------------------------------------------------------------
       // Traffic Controller Configuration
@@ -1178,7 +1197,8 @@ task traffic_100G;
    logic [31:0] tx_cnt;
    logic [31:0] rx_cnt;
    begin
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF1);
+      pfvf = '{0,1,1}; // Set PFVF to PF0-VF1
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       host_bfm_top.host_bfm.set_bar(4'd0);
       //---------------------------------------------------------------------------
       // Traffic Controller Configuration
@@ -1218,7 +1238,8 @@ task traffic_200G;
    logic [31:0] tx_cnt;
    logic [31:0] rx_cnt;
    begin
-      host_bfm_top.host_bfm.set_pfvf_setting(PF0_VF1);
+      pfvf = '{0,1,1}; // Set PFVF to PF0-VF1
+      host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
       host_bfm_top.host_bfm.set_bar(4'd0);
       //---------------------------------------------------------------------------
       // Traffic Controller Configuration
@@ -1262,7 +1283,8 @@ begin
    PORT_CONTROL = 32'h71000 + 32'h38;
    //De-assert Port Reset 
    $display("\nDe-asserting Port Reset...");
-   host_bfm_top.host_bfm.set_pfvf_setting(PF0);
+   pfvf = '{0,0,0}; // Set PFVF to PF0
+   host_bfm_top.host_bfm.set_pfvf_setting(pfvf);
    host_bfm_top.host_bfm.read64(PORT_CONTROL, scratch);
    wdata = scratch[31:0];
    wdata[0] = 1'b0;
@@ -1469,7 +1491,6 @@ task main_test;
       $display("Entering HSSI KPI Test.");
       host_bfm_top.host_bfm.set_mmio_mode(PU_METHOD_TRANSACTION);
       host_bfm_top.host_bfm.set_dm_mode(DM_AUTO_TRANSACTION);
-      //host_bfm_top.host_bfm.set_pfvf_setting(PF2);
       traffic_test (1); // Pass 1 for 32-bit access to mailbox, 0 for 64-bit
       hssi_kpi_test();
    end
