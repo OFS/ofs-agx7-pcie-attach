@@ -17,14 +17,6 @@ DEFINES="+define+SIM_MODE \
  +define+RP_MAX_TAGS=64 \
  +define+SIM_USE_PCIE_DUMMY_CSR"
 
-if [ -f $OFS_ROOTDIR/sim/scripts/generated_ftile_macros.f ]; then
-    DEFINES="${DEFINES} -F ${OFS_ROOTDIR}/sim/scripts/generated_ftile_macros.f"
-   if [ $MSIM -ne 1 ] ; then
-    DEFINES="$DEFINES +define+QUARTUS_ENABLE_DPI_FORCE +define+IP7581SERDES_UX_SIMSPEED -debug_access+all -debug_region+cell+encrypt -debug_region+cell+lib"
-   fi
-
-fi
-
 NTB_OPTS="+define+VCS_ \
  +nbaopt \
  +delay_mode_zero"
