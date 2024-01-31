@@ -164,55 +164,52 @@ pcie_ss_axis_mux #(
 );
 
 
-`ifdef INCLUDE_PCIE_SS
+
    import ofs_fim_if_pkg::*;
 
-   t_sideband_from_pcie   pcie_p2c_sideband;
-   assign pcie_linkup = pcie_p2c_sideband.pcie_linkup;
-   assign pcie_rx_err_code = pcie_p2c_sideband.pcie_chk_rx_err_code;
-
+   // Include the subsystem in simulation design, but tie off all the I/O since the functionality is served by the BFM
+   // This is required to compile F-Tile designs which includes tile support logic containing cross hierarchical references to the PCIe HIP
    pcie_ss_top #(
       .PCIE_LANES       (ofs_fim_cfg_pkg::PCIE_LANES),
       .SOC_ATTACH       (SOC_ATTACH)
    ) pcie_ss_top (
-      .fim_clk                        (fim_clk                    ),
-      .fim_rst_n                      (fim_rst_n                  ),
-      .csr_clk                        (csr_clk                    ),
-      .csr_rst_n                      (csr_rst_n                  ),
-      .ninit_done                     (ninit_done                 ),
-      .p0_subsystem_cold_rst_n        (p0_subsystem_cold_rst_n    ),  
-      .p0_subsystem_warm_rst_n        (p0_subsystem_warm_rst_n    ),    
-      .p0_subsystem_cold_rst_ack_n    (p0_subsystem_cold_rst_ack_n),
-      .p0_subsystem_warm_rst_ack_n    (p0_subsystem_warm_rst_ack_n),
-      .pin_pcie_refclk0_p             (pin_pcie_refclk0_p         ),
-      .pin_pcie_refclk1_p             (pin_pcie_refclk1_p         ),
-      .pin_pcie_in_perst_n            (pin_pcie_in_perst_n        ),   
-      .pin_pcie_rx_p                  (                           ),
-      .pin_pcie_rx_n                  (                           ),
-      .p0_ss_app_st_txreq_tready      (                           ),
-      .p0_app_ss_st_txreq_tvalid      (     1'b0                  ),
-      .p0_app_ss_st_txreq_tdata       (      'b0                  ),
-      .p0_app_ss_st_txreq_tlast       (      'b0                  ),
-      .axi_st_rxreq_if                (axi_st_rxreq_if_dummy      ),
-      .p0_ss_app_st_ctrlshadow_tvalid (                           ),
-      .p0_ss_app_st_ctrlshadow_tdata  (                           ),
-      .axi_st_rx_if                   (axi_st_rx_if_dummy         ),
-      .axi_st_tx_if                   (axi_st_tx_if_dummy         ),
-      .ss_csr_lite_if                 (ss_csr_lite_if_dummy       ),
-      .flr_req_if                     (                           ),
-      .flr_rsp_if                     (axi_st_flr_rsp_dummy       ),
-      .reset_status                   (                           ),
-      .pin_pcie_tx_p                  (                           ),                
-      .pin_pcie_tx_n                  (                           ), 
-      .cpl_timeout_if                 (                           ),
-      .pcie_p2c_sideband              (                           )
+      .fim_clk                        ('0),
+      .fim_rst_n                      ('1),
+      .csr_clk                        ('0),
+      .csr_rst_n                      ('1),
+      .ninit_done                     ('0),
+      .p0_subsystem_cold_rst_n        ('1),
+      .p0_subsystem_warm_rst_n        ('1),
+      .p0_subsystem_cold_rst_ack_n    (),
+      .p0_subsystem_warm_rst_ack_n    (),
+      .pin_pcie_refclk0_p             ('0),
+      .pin_pcie_refclk1_p             ('0),
+      .pin_pcie_in_perst_n            ('0),
+      .pin_pcie_rx_p                  (),
+      .pin_pcie_rx_n                  (),
+      .p0_ss_app_st_txreq_tready      (),
+      .p0_app_ss_st_txreq_tvalid      ('0),
+      .p0_app_ss_st_txreq_tdata       ('0),
+      .p0_app_ss_st_txreq_tlast       ('0),
+      .p0_ss_app_st_ctrlshadow_tvalid (),
+      .p0_ss_app_st_ctrlshadow_tdata  (),
+      .axi_st_rxreq_if                (axi_st_rxreq_if_dummy ),
+      .axi_st_rx_if                   (axi_st_rx_if_dummy    ),
+      .axi_st_tx_if                   (axi_st_tx_if_dummy    ),
+      .ss_csr_lite_if                 (ss_csr_lite_if_dummy  ),
+      .flr_req_if                     (),
+      .flr_rsp_if                     (axi_st_flr_rsp_dummy  ),
+      .reset_status                   (),
+      .pin_pcie_tx_p                  (),
+      .pin_pcie_tx_n                  (),
+      .cpl_timeout_if                 (),
+      .pcie_p2c_sideband              ()
  );
-   assign axi_st_rxreq_if_dummy.tready =  1'b1;
-   assign axi_st_rx_if_dummy.tready =  1'b1;
-   assign axi_st_tx_if_dummy.tvalid =  1'b0;
-   assign axi_st_flr_rsp_dummy.tvalid = 1'b0;  
+   assign axi_st_rxreq_if_dummy.tready = 1'b1;
+   assign axi_st_rx_if_dummy.tready    = 1'b1;
+   assign axi_st_tx_if_dummy.tvalid    = 1'b0;
+   assign axi_st_flr_rsp_dummy.tvalid  = 1'b0;  
 
-`else
 //-------------------------------------------------------------------------------
 // Used only for Unit sim testing.  For f2000x designs, code generates
 // a 'pcie_top' using the scope for the package import that will be unique for
@@ -316,7 +313,6 @@ generate
       );
    end
 endgenerate
-`endif
 
 `ifdef INCLUDE_PCIE_SS
 always_ff@(posedge csr_clk) begin
