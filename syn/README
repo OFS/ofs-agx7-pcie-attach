@@ -1,0 +1,22 @@
+Folder Structure:
+
+├── README                     // This is current file
+├── scripts
+│   └── build_var_setup.sh     // This script is to setup env variables for repo 
+├── shared_config              // Shared setup files
+│   ├── README.md              // Refer the README in this section for details
+│   ├── ...                    // various setup files
+├── (board)                      // Build setup files for (board)
+├── ├── syn_top                    // Quartus build area with necessary files for build                                                           
+│   ├── ├── ofs_top.qpf               // Quartus Project File (qpf) mentions about Quartus version and project revision
+│   ├── ├── ofs_top.qsf                // Quartus Settings File (qsf) lists current project settings and entity level assignments 
+│   ├── ├── ofs_pr_afu.qsf            // PR AFU qsf file
+│   ├── ├── ofs_pr_afu_sources.tcl    // AFU source file list
+│   ├── ├── build_flash                // Scripts to build flash and bin files
+├── ├── setup                      // Build setup files for Board
+│   ├── ├── ...                    // various setup files
+
+
+
+
+   

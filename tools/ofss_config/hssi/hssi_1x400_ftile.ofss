@@ -1,0 +1,14 @@
+[ip]
+type = hssi
+
+[settings]
+output_name = hssi_ss
+num_channels = 1
+data_rate = 400GAUI-8
+
+# If running F-tile 400GAUI-8 
+# Please set the following parmeters accordingly 
+
+start_channel = 8
+eth_f_rsfec = IEEE_802.3_RS_544_514
+

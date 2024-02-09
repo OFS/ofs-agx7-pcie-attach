@@ -1,0 +1,18 @@
+{
+   "version": 1,
+   "afu-image": {
+      "power": 0,
+      "afu-top-interface":
+         {
+            "class": "afu_main"
+         },
+      "accelerator-clusters":
+         [
+            {
+               "name": "pcie_ats_query",
+               "total-contexts": 1,
+               "accelerator-type-uuid": "fad7f8cb-1f48-4def-9997-2cca97e0dce5"
+            }
+         ]
+   }
+}

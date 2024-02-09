@@ -1,0 +1,15 @@
+#### - '#' means comment
+# NAME   FABRIC      BASEADDRESS    ADDRESS_WIDTH SLAVES
+apf         mst     n/a             18            fme,pcie,pmci,qsfp0,qsfp1,emif,hssi
+fme         mst     n/a             20            apf          
+pmci        mst     n/a             21            fme,pcie,pmci,qsfp0,qsfp1,pmci_lpbk,emif,hssi
+pmci_lpbk   mst     n/a             20            apf
+fme         slv     0x00000         16 		  n/a
+apf         slv     0x00000         20 		  n/a
+pcie        slv     0x10000         12		  n/a
+qsfp0       slv     0x12000         12		  n/a
+qsfp1       slv     0x13000         12		  n/a
+hssi        slv     0x14000         12		  n/a
+emif        slv     0x15000         12		  n/a
+pmci        slv     0x20000         17		  n/a
+pmci_lpbk   slv     0x100000        20 		  n/a

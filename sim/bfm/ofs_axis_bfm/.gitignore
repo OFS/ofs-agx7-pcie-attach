@@ -1,0 +1,3 @@
+gen_pfvf_def_pkg.log
+pfvf_def_pkg_host.sv
+pfvf_def_pkg_soc.sv

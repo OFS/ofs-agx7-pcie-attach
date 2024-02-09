@@ -1,0 +1,4 @@
+[include]
+"$OFS_ROOTDIR"/tools/ofss_config/n6001_base.ofss
+"$OFS_ROOTDIR"/tools/ofss_config/pcie/pcie_2pf.ofss
+

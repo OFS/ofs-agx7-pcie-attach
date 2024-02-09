@@ -1,0 +1,12 @@
+[ip]
+type = pcie
+
+[settings]
+output_name = pcie_ss
+
+[pf0]
+bar0_address_width = 20
+
+[pf1]
+bar0_address_width = 20
+

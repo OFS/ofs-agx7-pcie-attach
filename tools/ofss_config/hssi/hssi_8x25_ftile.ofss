@@ -1,0 +1,14 @@
+[ip]
+type = hssi
+
+[settings]
+output_name = hssi_ss
+num_channels = 8
+data_rate = 25GbE
+
+# If running F-tile 25GbE
+# Please set the following parmeters accordingly 
+
+eth_f_rsfec = IEEE_802.3_RS_528_514
+client_interface = MAC Avalon ST
+
