@@ -667,7 +667,15 @@ def send_email_report():
         receiver_email = user_name
 
     message = MIMEMultipart()
-    message["Subject"] = f"UVM Regression results for COPY ENGINE - Tool:{args.simulator}"
+    if(args.fims=='n6000_100G'):
+        platform = "N6000-100G"
+    elif(args.fims=='n6000_25G'):
+        platform = "N6000-25G"
+    elif(args.fims=='n6000_10G'):
+        platform = "N6000-10G"
+    else:
+        platform = "N6001"
+    message["Subject"] = f"[{platform}] UVM Regression results for COPY ENGINE - Tool:{args.simulator}"
     message["From"] = sender_email
     if args.email_list:
         message["To"]   = ", ".join(receiver_email)

@@ -140,7 +140,7 @@ clean:
 	@if [ -d worklib ]; then rm -rf worklib; fi;
 	@if [ -d libs ]; then rm -rf libs; fi;
 	@rm -rf simv* csrc *.out* *.OUT *.log *.txt *.h *.setup *.vpd test_lib.svh .vlogansetup.* *.tr *.ver *.hex *.xml DVEfiles;
-	@rm -rf $(VERDIR)/sim $(VERDIR)/ip_libraries $(VERDIR)/vip $(VERDIR)/scripts/qip $(VERDIR)/scripts/rtl_pcie.f $(VERDIR)/scripts/ip_list.f $(VERDIR)/scripts/ip_flist.f;
+	@rm -rf $(VERDIR)/sim $(VERDIR)/ip_libraries $(VERDIR)/vip $(VERDIR)/scripts/qip $(VERDIR)/scripts/ip_list.f $(VERDIR)/scripts/ip_flist.f;
 
 clean_dve:
 	@if [ -d worklib ]; then rm -rf worklib; fi;
@@ -187,9 +187,7 @@ vlog_adp: setup
 	cd $(VERDIR)/sim && vlogan -ntb_opts uvm-1.2 -sverilog
 	cd $(VERDIR)/sim && vlogan -full64 -ntb_opts uvm-1.2 -sverilog -timescale=1ns/1ns -l vlog_uvm.log
 	rm -rf  $(SCRIPTS_DIR)/ip_flist.f
-	rm -rf  $(SCRIPTS_DIR)/rtl_pcie.f
 	test -s $(SCRIPTS_DIR)/ip_flist.f  || ln -sf $(ADP_DIR)/ip_flist.f ip_flist.f
-	test -s $(SCRIPTS_DIR)/rtl_pcie.f  || ln -sf $(ADP_DIR)/rtl_pcie.f rtl_pcie.f
 	cd $(VERDIR)/sim && vlogan $(VLOG_OPT) +define+SIM_VIP -f $(SCRIPTS_DIR)/ip_flist.f -F $(ADP_DIR)/generated_rtl_flist.f -f $(SCRIPTS_DIR)/ver_list.f -f $(SCRIPTS_DIR)/rtl_pcie.f 
 
 

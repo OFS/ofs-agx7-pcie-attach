@@ -81,7 +81,7 @@ class tb_env extends uvm_env;
    ral_block_ac_he_mem    mem_regs;
    ral_block_ac_AFU_INTF  afu_intf_regs;
    ral_block_ac_msix      msix_regs;  
-   rand ral_block_ac_src_port_gasket_Agilex_PG     pr_gasket_regs;
+   rand ral_block_ac_src_port_gasket_agilex_pg     pr_gasket_regs;
 
  `ifndef AGILEX
    ral_block_ac_emif      emif_regs;
