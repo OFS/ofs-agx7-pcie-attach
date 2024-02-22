@@ -1053,6 +1053,22 @@ task wait_for_all_eop_done;
    end
 endtask
 
+task wait_for_all_eop_done_200G;
+   input logic [63:0]  tx_cnt;
+   logic [63:0] rx_count;
+   begin
+      
+`ifdef ETH_200G
+      rx_count = 32'h0;
+      while (tx_cnt > rx_count) begin
+         @(posedge top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_mac_seg_traffic_ctrl_inst.GenTrafWrap[0].mac_seg_packet_client_top.packet_client_top.packet_client_csr.u_rx_eop_cnt.clk);
+         rx_count = {top_tb.DUT.afu_top.pg_afu.port_gasket.pr_slot.afu_main.port_afu_instances.afu_gen[1].heh_gen.he_hssi_inst.multi_port_axi_mac_seg_traffic_ctrl_inst.GenTrafWrap[0].mac_seg_packet_client_top.packet_client_top.packet_client_csr.u_rx_eop_cnt.cnt_out[63:0]};
+      end
+      $display("INFO:%t	- RX EOP count is %d", $time, rx_count);
+`endif  
+   end
+endtask
+
 task traffic_200G_400G;
    input logic  access32;
    logic [63:0] tx_cnt;
@@ -1106,24 +1122,21 @@ task traffic_200G_400G;
       // writing hw_pc_cntrl 1 to start the TG 
       write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h1);
 
-              #500000
+      #500000
 
-              // Stop the TG 
-              write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h0);
-              #2000
-              // Take snapshot of counters (bit 6 =1)
-              write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h40);
+      // Stop the TG 
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h0);
 
-      //---------------------------------------------------------------------------
-      // Read Monitor statistics
-      //---------------------------------------------------------------------------
+      #2000
 
       $display("T:%8d INFO: read mailbox 1",$time);
       // reading TX SOP 
       read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0020, tx_cnt_lsb);
       read_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0024, tx_cnt_msb);
-
       tx_cnt = {tx_cnt_msb, tx_cnt_lsb};
+             
+      wait_for_all_eop_done_200G(tx_cnt);
+      write_mailbox(access32, TRAFFIC_CTRL_CMD_ADDR, 32'h0000, 32'h40);  // Take snapshot of counters (bit 6 =1) 
 
       $display("T:%8d INFO: read mailbox 2",$time);
       // reading TX SOP 
