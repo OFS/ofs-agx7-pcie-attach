@@ -1099,7 +1099,7 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--sim', dest='simulator', type=str, nargs='?', default='vcs', choices=['vcs','msim','vcsmx'], help='Simulator used for regression test.  (Default: %(default)s)')
     parser.add_argument('-g', '--gen_sim_files', dest='gen_sim_files', action='store_true', help='Generate IP simulation files.  This should only be done once per repo update.  (Default: %(default)s)')
     parser.add_argument('-o', '--ofss', dest='ofss', nargs='+', help='Pass ofss file to configure IPs')
-    parser.add_argument('-b', '--board_name', dest='board_name', choices=['n6001','fseries-dk','iseries-dk'], default='n6001',  help='Board name. (Default: %(default)s)')
+    parser.add_argument('-b', '--board_name', dest='board_name', choices=['n6000','n6001','fseries-dk','iseries-dk'], default='n6001',  help='Board name. (Default: %(default)s)')
     parser.add_argument('-e', '--email_list', dest='email_list', action='store_true', help='To send mail to multiple receipients')
     args = parser.parse_args()
     logger.info(f">>> Running Unit Test Regression Run Python Script: {os.path.basename(__file__)}")
