@@ -932,6 +932,12 @@ class ce_csr_seq extends base_seq;
             	 `uvm_error(get_name(), $psprintf(" CSR_CE_SFTRST Data mismatch 32! Addr= %0h, Exp = %0h, Act = %0h", addr,wdata[31:0], rdata[31:0]))
 
       	`uvm_info(get_name(), "  Exiting  CSR_CE_SFTRST_LIMIT...", UVM_LOW)
+`ifdef n6000_10G
+        #5us;	
+`endif
+`ifdef n6000_25G
+        #5us;	
+`endif
 `ifdef n6000_100G
         #5us;	
 `endif

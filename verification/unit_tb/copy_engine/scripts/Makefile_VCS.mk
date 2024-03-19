@@ -41,6 +41,12 @@ VLOG_OPT += +define+SIM_MODE +define+SIM_SERIAL +define+PU_MMIO #Enable PCIE Ser
 ifeq ($(n6000_100G),1)
 VLOG_OPT += +define+n6000_100G #Includes CVL by passthrough logic
 endif
+ifeq ($(n6000_10G),1)
+VLOG_OPT += +define+n6000_10G #Includes CVL by passthrough logic
+endif
+ifeq ($(n6000_25G),1)
+VLOG_OPT += +define+n6000_25G #Includes CVL by passthrough logic
+endif
 VLOG_OPT += +define+SIMULATION_MODE
 VLOG_OPT += +define+UVM_DISABLE_AUTO_ITEM_RECORDING
 VLOG_OPT += +define+UVM_PACKER_MAX_BYTES=1500000
@@ -167,11 +173,11 @@ cmplib_adp:
 	mkdir -p ../ip_libraries
 	# Generate On-the-fly IP Sim files for the target platform
 ifeq ($(n6000_10G),1)
-	sh "$(OFS_ROOTDIR)"/sim/scripts/common/gen_sim_files_top.sh n6000_10G 
+	sh "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_8x10.ofss n6000 
 else ifeq ($(n6000_25G),1)
-	sh "$(OFS_ROOTDIR)"/sim/scripts/common/gen_sim_files_top.sh n6000_25G 
+	sh "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_16x25.ofss n6000 
 else ifeq ($(n6000_100G),1)
-	sh "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss n6000
+	sh $(OFS_ROOTDIR)/ofs-common/scripts/common/sim/gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_4x100.ofss n6000
 	#sh $(OFS_ROOTDIR)/ofs-common/scripts/common/sim/gen_sim_files.sh n6000 
 else
 	sh "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh n6001 #Default

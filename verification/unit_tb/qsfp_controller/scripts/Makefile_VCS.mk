@@ -129,11 +129,11 @@ setup: clean_dve
 	@$(DESIGNWARE_HOME)/bin/dw_vip_setup -path $(VERDIR)/unit_tb/qsfp_controller/vip/axi_vip -add axi_system_env_svt -svlog
 	# Generate On-the-fly IP Sim files for the target platform
 ifeq ($(n6000_10G),1)
-	cd $(OFS_ROOTDIR)/ofs-common/scripts/common && "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files_top.sh n6000_10G 
+	cd $(OFS_ROOTDIR)/ofs-common/scripts/common && "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_8x10.ofss n6000 
 else ifeq ($(n6000_25G),1)
-	cd $(OFS_ROOTDIR)/ofs-common/scripts/common && "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files_top.sh n6000_25G 
+	cd $(OFS_ROOTDIR)/ofs-common/scripts/common && "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_16x25.ofss n6000 
 else ifeq ($(n6000_100G),1)
-	cd $(OFS_ROOTDIR)/ofs-common/scripts/common && "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss n6000
+	cd $(OFS_ROOTDIR)/ofs-common/scripts/common && "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_4x100.ofss n6000
 else
 	cd $(OFS_ROOTDIR)/ofs-common/scripts/common && "$(OFS_ROOTDIR)"/ofs-common/scripts/common/sim/gen_sim_files.sh n6001 #Default
 endif

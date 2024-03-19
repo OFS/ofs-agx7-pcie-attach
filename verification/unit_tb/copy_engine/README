@@ -38,6 +38,29 @@ How to Run UVM Testcases with N6001 platform?:
 
 **Note: To clean previous build and sim files, Run "gmake -f Makefile_VCS.mk clean" command.
 
+How to Run UVM Testcases with N6000-10G platform?:
+1)  cd $VERDIR/unit_tb/copy_engine/scripts
+2)  For Compiling IPs and Subsystems, execute: “gmake -f Makefile_VCS.mk cmplib_adp <n6000_10G=1>" 
+3)  For building RTL & TB, execute: “gmake -f Makefile_VCS.mk build_adp <n6000_10G=1> <DUMP=1>”
+4)  For run, execute: “gmake -f Makefile_VCS.mk run TESTNAME=ce_csr_test <n6000_10G=1> <DUMP=1> <SEED=<seed number>>”
+5)  Results are created in a sim directory ($VERDIR/unit_tb/copy_engine/sim)
+
+**Note: Step 2 Compiles IPs and subsystems from scratch instead of using precompiled versions.
+               This step can be skipped if there is no change in Quartus generated files from the previous build.
+
+**Note: To clean previous build and sim files, Run "gmake -f Makefile_VCS.mk clean" command.
+
+How to Run UVM Testcases with N6000-25G platform?:
+1)  cd $VERDIR/unit_tb/copy_engine/scripts
+2)  For Compiling IPs and Subsystems, execute: “gmake -f Makefile_VCS.mk cmplib_adp <n6000_25G=1>" 
+3)  For building RTL & TB, execute: “gmake -f Makefile_VCS.mk build_adp <n6000_25G=1> <DUMP=1>”
+4)  For run, execute: “gmake -f Makefile_VCS.mk run TESTNAME=ce_csr_test <n6000_25G=1> <DUMP=1> <SEED=<seed number>>”
+5)  Results are created in a sim directory ($VERDIR/unit_tb/copy_engine/sim)
+
+**Note: Step 2 Compiles IPs and subsystems from scratch instead of using precompiled versions.
+               This step can be skipped if there is no change in Quartus generated files from the previous build.
+
+**Note: To clean previous build and sim files, Run "gmake -f Makefile_VCS.mk clean" command.
 
 How to Run UVM Testcases with N6000-100G platform?:
 1)  cd $VERDIR/unit_tb/copy_engine/scripts
@@ -69,6 +92,12 @@ How to Run UVM Regressions?:
 
 ###run locally, with 8 processes, for adp platform, using test_pkg set of tests, using VCS with no code coverage.  
 python regress_run.py -l -n 8 -p adp -k test_pkg -s vcs -c none -e
+
+###run locally, with 8 processes, for adp platform, using test_pkg set of tests, using VCS with no code coverage on n6000 10G platform
+python regress_run.py -l -n 8 -p adp -k test_pkg -s vcs -c none -f n6000_10G -e
+
+###run locally, with 8 processes, for adp platform, using test_pkg set of tests, using VCS with no code coverage on n6000 25G platform
+python regress_run.py -l -n 8 -p adp -k test_pkg -s vcs -c none -f n6000_25G -e
 
 ###run locally, with 8 processes, for adp platform, using test_pkg set of tests, using VCS with no code coverage on n6000 100G platform
 python regress_run.py -l -n 8 -p adp -k test_pkg -s vcs -c none -f n6000_100G -e

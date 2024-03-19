@@ -18,14 +18,15 @@ Initial Setup:
     b  Run the script "sh gen_sim_files.sh <target>" 
 	for n6001 8x25G default configuration 	-"gen_sim_files.sh --ofss $OFS_ROOTDIR/tools/ofss_config/n6001.ofss,tools/ofss_config/hssi/hssi_8x25.ofss n6001"
 
-
         for fseries-dk 8x25G configuration	- "gen_sim_files.sh --ofss $OFS_ROOTDIR/tools/ofss_config/fseries-dk.ofss fseries-dk"
 	
         for iseries-dk 8x25G configuration	- "gen_sim_files.sh --ofss $OFS_ROOTDIR/tools/ofss_config/iseries-dk.ofss,tools/ofss_config/hssi/hssi_8x25_ftile.ofss iseries-dk"
     	for iseries-dk 200G congifuration	- "gen_sim_files.sh --ofss $OFS_ROOTDIR/tools/ofss_config/iseries-dk.ofss,tools/ofss_config/hssi/hssi_2x200_ftile.ofss iseries-dk"
 	for iseries-dk 400G congifuration	- "gen_sim_files.sh --ofss $OFS_ROOTDIR/tools/ofss_config/iseries-dk.ofss,tools/ofss_config/hssi/hssi_1x400_ftile.ofss iseries-dk"
              
-        for n6000 				- "gen_sim_files.sh --ofss $OFS_ROOTDIR/tools/ofss_config/n6000.ofss n6000"
+        for n6000 10G 8x10 configuration        - "gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_8x10.ofss n6000"
+        for n6000 25G 16x25 configuration       - "gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_16x25.ofss n6000"
+        for n6000 100G congifuration 		- "gen_sim_files.sh --ofss $(OFS_ROOTDIR)/tools/ofss_config/n6000.ofss,"$(OFS_ROOTDIR)"/tools/ofss_config/hssi/hssi_4x100.ofss n6000"
  
 
 6) **Running Test******

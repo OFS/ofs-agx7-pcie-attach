@@ -1,9 +1,8 @@
 [ip]
 type = hssi
 
-
 [settings]
 output_name = hssi_ss
-num_channels = 8
+num_channels = 16
 data_rate = 25GbE
 

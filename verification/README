@@ -65,17 +65,49 @@ How to Run UVM Testcases with N6001 F_TILE platform?:
 
 **Note: To clean previous build and sim files, Run "gmake -f Makefile_VCS.mk clean" command.
 
-
-How to Run UVM Testcases with N6000 100G platform?:
+How to Run UVM Testcases with N6000 10G platform?:
 1)  cd $VERDIR/scripts
-2)  For Compiling IPs and Subsystems, execute: “gmake -f Makefile_VCS.mk cmplib_adp <n6000_100G=1>" 
-3)  For building RTL & TB, execute: “gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <n6000_100G=1>"
+2)  For Compiling IPs and Subsystems, execute: “gmake -f Makefile_VCS.mk cmplib_adp <n6000_10G=1> DISABLE_EMIF=1" 
+3)  For building RTL & TB, execute: “gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <n6000_10G=1> DISABLE_EMIF=1"
 
-4)  For run, execute: “gmake -f Makefile_VCS.mk run TESTNAME=mmio_test <DUMP=1> <DEBUG=1> <SEED=<seed number>> <n6000_100G=1>”
+4)  For run, execute: “gmake -f Makefile_VCS.mk run TESTNAME=mmio_test <DUMP=1> <DEBUG=1> <SEED=<seed number>> <n6000_10G=1> DISABLE_EMIF=1”
+5)  Results are created in a sim directory ($VERDIR/sim)
+
+**Note: To run he_hssi_rx_lpbk_10G_test testcases:  a switch TEST_LPBK=1 should be added for the build and run command
+        Ex:  "gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <TEST_LPBK=1> <n6000_10G=1> DISABLE_EMIF=1 && gmake -f Makefile_VCS.mk run TESTNAME=he_hssi_rx_lpbk_10G_test <DUMP=1> <DEBUG=1> <TEST_LPBK=1> <SEED=<seed number>> <n6000_10G=1> DISABLE_EMIF=1"
+
+**Note: Step 2 Compiles IPs and subsystems from scratch instead of using precompiled versions.
+               This step can be skipped if there is no change in Quartus generated files from the previous build.
+
+**Note: To clean previous build and sim files, Run "gmake -f Makefile_VCS.mk clean" command.
+
+How to Run UVM Testcases with N6000 25G platform?:
+1)  cd $VERDIR/scripts
+2)  For Compiling IPs and Subsystems, execute: “gmake -f Makefile_VCS.mk cmplib_adp <n6000_25G=1> DISABLE_EMIF=1" 
+3)  For building RTL & TB, execute: “gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <n6000_25G=1> DISABLE_EMIF=1"
+
+4)  For run, execute: “gmake -f Makefile_VCS.mk run TESTNAME=mmio_test <DUMP=1> <DEBUG=1> <SEED=<seed number>> <n6000_25G=1> DISABLE_EMIF=1”
 5)  Results are created in a sim directory ($VERDIR/sim)
 
 **Note: To run he_hssi_rx_lpbk_100G_test testcases:  a switch TEST_LPBK=1 should be added for the build and run command
-        Ex:  "gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <TEST_LPBK=1> <n6000_100G=1> && gmake -f Makefile_VCS.mk run TESTNAME=he_hssi_rx_lpbk_100G_test <DUMP=1> <DEBUG=1> <TEST_LPBK=1> <SEED=<seed number>> <n6000_100G=1>"
+        Ex:  "gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <TEST_LPBK=1> <n6000_25G=1> DISABLE_EMIF=1 && gmake -f Makefile_VCS.mk run TESTNAME=he_hssi_rx_lpbk_100G_test <DUMP=1> <DEBUG=1> <TEST_LPBK=1> <SEED=<seed number>> <n6000_25G=1> DISABLE_EMIF=1"
+
+**Note: Step 2 Compiles IPs and subsystems from scratch instead of using precompiled versions.
+               This step can be skipped if there is no change in Quartus generated files from the previous build.
+
+**Note: To clean previous build and sim files, Run "gmake -f Makefile_VCS.mk clean" command.
+
+
+How to Run UVM Testcases with N6000 100G platform?:
+1)  cd $VERDIR/scripts
+2)  For Compiling IPs and Subsystems, execute: “gmake -f Makefile_VCS.mk cmplib_adp <n6000_100G=1> DISABLE_EMIF=1" 
+3)  For building RTL & TB, execute: “gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <n6000_100G=1> DISABLE_EMIF=1"
+
+4)  For run, execute: “gmake -f Makefile_VCS.mk run TESTNAME=mmio_test <DUMP=1> <DEBUG=1> <SEED=<seed number>> <n6000_100G=1> DISABLE_EMIF=1”
+5)  Results are created in a sim directory ($VERDIR/sim)
+
+**Note: To run he_hssi_rx_lpbk_100G_test testcases:  a switch TEST_LPBK=1 should be added for the build and run command
+        Ex:  "gmake -f Makefile_VCS.mk build_adp <DUMP=1> <DEBUG=1> <TEST_LPBK=1> <n6000_100G=1> DISABLE_EMIF=1 && gmake -f Makefile_VCS.mk run TESTNAME=he_hssi_rx_lpbk_100G_test <DUMP=1> <DEBUG=1> <TEST_LPBK=1> <SEED=<seed number>> <n6000_100G=1> DISABLE_EMIF=1"
 
 **Note: Step 2 Compiles IPs and subsystems from scratch instead of using precompiled versions.
                This step can be skipped if there is no change in Quartus generated files from the previous build.
@@ -104,6 +136,15 @@ python uvm_regress.py -l -n 8 -p adp -k top_pkg -s vcs -c none -e
 
 ###run locally, with 8 processes, for adp platform, using top_pkg set of tests, using VCS with no code coverage on FTILE 
 python uvm_regress.py -l -n 8 -p adp -k top_pkg -s vcs -c none -e -t ftile
+
+###run locally, with 8 processes, for adp platform, using top_pkg set of tests, using VCS with no code coverage on N6000_10G 
+python uvm_regress.py -l -n 8 -p adp -k top_pkg -s vcs -c none -e -f n6000_10G
+
+###run locally, with 8 processes, for adp platform, using top_pkg set of tests, using VCS with no code coverage on N6000_25G 
+python uvm_regress.py -l -n 8 -p adp -k top_pkg -s vcs -c none -e -f n6000_25G
+
+###run locally, with 8 processes, for adp platform, using top_pkg set of tests, using VCS with no code coverage on N6000_100G 
+python uvm_regress.py -l -n 8 -p adp -k top_pkg -s vcs -c none -e -f n6000_100G
 
 ###Same as above, but run on Intel Farm (no --local):   
 python uvm_regress.py --plat adp --pack top_pkg --sim vcs --cov none -e

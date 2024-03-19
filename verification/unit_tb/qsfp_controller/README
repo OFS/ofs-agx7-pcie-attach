@@ -33,6 +33,20 @@ How to Run UVM Testcases with QSFP UNIT TESTBENCH?:
     To get the list of tests, refer to $VERDIR/unit_tb/qsfp_controller/tests
 4)	Results are created in a sim directory ($VERDIR/unit_tb/qsfp_controller/sim)
 
+How to Run UVM Testcases with QSFP UNIT TESTBENCH on n6000-10G platform?:
+1)  cd $VERDIR/unit_tb/qsfp_controller/scripts
+2)	For compiling,building RTL & TB, execute: “gmake -f Makefile_VCS.mk qsfp_build_all <DUMP=1> <n6000_10G=1>”
+3)	For run, execute: “gmake -f Makefile_VCS.mk qsfp_run TESTNAME=qsfp_init_test <DUMP=1> <SEED=<seed number>>”
+    To get the list of tests, refer to $VERDIR/unit_tb/qsfp_controller/tests
+4)	Results are created in a sim directory ($VERDIR/unit_tb/qsfp_controller/sim)
+
+How to Run UVM Testcases with QSFP UNIT TESTBENCH on n6000-25G platform?:
+1)  cd $VERDIR/unit_tb/qsfp_controller/scripts
+2)	For compiling,building RTL & TB, execute: “gmake -f Makefile_VCS.mk qsfp_build_all <DUMP=1> <n6000_25G=1>”
+3)	For run, execute: “gmake -f Makefile_VCS.mk qsfp_run TESTNAME=qsfp_init_test <DUMP=1> <SEED=<seed number>>”
+    To get the list of tests, refer to $VERDIR/unit_tb/qsfp_controller/tests
+4)	Results are created in a sim directory ($VERDIR/unit_tb/qsfp_controller/sim)
+
 How to Run UVM Testcases with QSFP UNIT TESTBENCH on n6000-100G platform?:
 1)  cd $VERDIR/unit_tb/qsfp_controller/scripts
 2)	For compiling,building RTL & TB, execute: “gmake -f Makefile_VCS.mk qsfp_build_all <DUMP=1> <n6000_100G=1>”
@@ -69,6 +83,12 @@ How to Run UVM Regressions?:
 
 ###run locally, with 8 processes, for adp platform, using top_pkg set of tests, using VCS with code coverage.  
 python regress_run.py -l -n 8 -c -e
+
+###run locally, with 8 processes, for adp platform, using top_pkg set of tests, using VCS with code coverage on n6000-10G platform.
+python regress_run.py -l -n 8 -c -f n6000_10G -e
+
+###run locally, with 8 processes, for adp platform, using top_pkg set of tests, using VCS with code coverage on n6000-25G platform.
+python regress_run.py -l -n 8 -c -f n6000_25G -e
 
 ###run locally, with 8 processes, for adp platform, using top_pkg set of tests, using VCS with code coverage on n6000-100G platform.
 python regress_run.py -l -n 8 -c -f n6000_100G -e

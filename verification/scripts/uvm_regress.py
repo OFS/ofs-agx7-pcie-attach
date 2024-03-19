@@ -797,9 +797,9 @@ def build_sim_env(platform, coverage, simulator, package, tile, fims):
     if(fims=='n6000_100G'):
         fim = "n6000_100G=1 DISABLE_EMIF=1"
     elif(fims=='n6000_25G'):
-        fim = "n6000_25G=1"
+        fim = "n6000_25G=1 DISABLE_EMIF=1"
     elif(fims=='n6000_10G'):
-        fim = "n6000_10G=1"
+        fim = "n6000_10G=1 DISABLE_EMIF=1"
     elif(fims=='ETH_200G'):
         fim  = "FTILE_SIM=1 ETH_200G=1"
     elif(fims=='ETH_400G'):
@@ -955,9 +955,9 @@ def sim_process(index, test, test_dir_top, platform, coverage, simulator, packag
     if(fims=='n6000_100G'):
         fim = "n6000_100G=1 DISABLE_EMIF=1"
     elif(fims=='n6000_25G'):
-        fim = "n6000_25G=1"
+        fim = "n6000_25G=1 DISABLE_EMIF=1"
     elif(fims=='n6000_10G'):
-        fim = "n6000_10G=1"
+        fim = "n6000_10G=1 DISABLE_EMIF=1"
     elif(fims=='ETH_200G'):
         fim  = "FTILE_SIM=1 ETH_200G=1"
     elif(fims=='ETH_400G'):
@@ -1046,9 +1046,9 @@ def sim_farm_process(index, test, test_dir_top, platform, coverage, simulator, p
     if(fims=='n6000_100G'):
         fim = "n6000_100G=1 DISABLE_EMIF=1"
     elif(fims=='n6000_25G'):
-        fim = "n6000_25G=1"
+        fim = "n6000_25G=1 DISABLE_EMIF=1"
     elif(fims=='n6000_10G'):
-        fim = "n6000_10G=1"
+        fim = "n6000_10G=1 DISABLE_EMIF=1"
     elif(fims=='ETH_200G'):
         fim  = "FTILE_SIM=1 ETH_200G=1"
     elif(fims=='ETH_400G'):
