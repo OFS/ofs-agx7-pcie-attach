@@ -102,8 +102,8 @@ set_global_assignment -name VERILOG_MACRO "INCLUDE_UART"             # Includes 
 # At most one of INCLUDE_REMOTE_STP and INCLUDE_JTAG_PR_STP should be
 # set. If both are defined, JTAG-based SignalTap takes precedence.
 # Remote STP uses mmlink. JTAG_PR_STP is on node 0 of the FPGA chain.
-set_global_assignment -name VERILOG_MACRO "INCLUDE_REMOTE_STP"       # Includes Remote SignalTap support in PR Region
-#set_global_assignment -name VERILOG_MACRO "INCLUDE_JTAG_PR_STP"      # Includes JTAG-based SignalTap via programming cable in the PR region
+#set_global_assignment -name VERILOG_MACRO "INCLUDE_REMOTE_STP"       # Includes Remote SignalTap support in PR Region
+set_global_assignment -name VERILOG_MACRO "INCLUDE_JTAG_PR_STP"      # Includes JTAG-based SignalTap via programming cable in the PR region
 
 # Compile time Verilog Macros
 set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../../../shared_config/compile_flags.tcl

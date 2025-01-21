@@ -84,9 +84,14 @@ set_global_assignment -name VERILOG_MACRO "INCLUDE_USER_CLK"         # Includes 
 set_global_assignment -name VERILOG_MACRO "INCLUDE_HSSI"             # Includes HSSI SS and HE-HSSI logic into the design
 set_global_assignment -name VERILOG_MACRO "DISABLE_HE_HSSI_CRC"      # Disables CRC generation from HE-HSSI traffic generation
 set_global_assignment -name VERILOG_MACRO "INCLUDE_PCIE_SS"          # Instantiates the PCIE SS (Gen4) when enabled, else instantiates PCIE Gen3 (should only be disabled in unit test sim only).   
-set_global_assignment -name VERILOG_MACRO "INCLUDE_REMOTE_STP"       # Includes Remote SignalTap support in PR Region
 #set_global_assignment -name VERILOG_MACRO "INCLUDE_HPS"              # Includes Hard Processor System in the fim
 #set_global_assignment -name VERILOG_MACRO "INCLUDE_UART"             # Includes Soft UART accessible from PCIe
+
+# At most one of INCLUDE_REMOTE_STP and INCLUDE_JTAG_PR_STP should be
+# set. If both are defined, JTAG-based SignalTap takes precedence.
+# Remote STP uses mmlink. JTAG_PR_STP is on node 0 of the FPGA chain.
+#set_global_assignment -name VERILOG_MACRO "INCLUDE_REMOTE_STP"       # Includes Remote SignalTap support in PR Region
+set_global_assignment -name VERILOG_MACRO "INCLUDE_JTAG_PR_STP"      # Includes JTAG-based SignalTap via programming cable in the PR region
 
 # Compile time Verilog Macros
 set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../../../shared_config/compile_flags.tcl
