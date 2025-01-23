@@ -219,8 +219,11 @@ export ENA_GBS_GENERATION="1"
 
 
 export SYN_TOP_PATH=${OFS_ROOTDIR}/syn/board/${OFS_BOARD_CORE}/syn_top
-# WORK_SYN_TOP_PATH is used to copy qsf and other files to
-export WORK_SYN_TOP_PATH=${WORK_DIR}/syn/board/${OFS_BOARD_CORE}/syn_top
+
+# WORK_SYN_BOARDS_DIR is the parent of board-specific project directories
+export WORK_SYN_BOARDS_DIR=${WORK_DIR}/syn/board
+# WORK_SYN_TOP_PATH is the Quartus project directory
+export WORK_SYN_TOP_PATH=${WORK_SYN_BOARDS_DIR}/${OFS_BOARD_CORE}/syn_top
 
 # local path pointers
 SYN_COMMON_SCRIPTS_PATH=${OFS_ROOTDIR}/ofs-common/scripts/common/syn
