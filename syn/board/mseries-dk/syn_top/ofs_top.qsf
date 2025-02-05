@@ -33,7 +33,7 @@ set_global_assignment -name LAST_QUARTUS_VERSION "24.3.0 Pro Edition"
 
 set_global_assignment -name FLOW_DISABLE_ASSEMBLER OFF
 set_global_assignment -name FLOW_ENABLE_INTERACTIVE_TIMING_ANALYZER OFF
-set_global_assignment -name SEED 1
+set_global_assignment -name SEED 2
 
 ############################################################################################
 # PWR MGMT
@@ -84,7 +84,7 @@ set_global_assignment -name VERILOG_MACRO "INCLUDE_PCIE_SS"          # Instantia
 # set. If both are defined, JTAG-based SignalTap takes precedence.
 # Remote STP uses mmlink. JTAG_PR_STP is on node 0 of the FPGA chain.
 #set_global_assignment -name VERILOG_MACRO "INCLUDE_REMOTE_STP"       # Includes Remote SignalTap support in PR Region
-set_global_assignment -name VERILOG_MACRO "INCLUDE_JTAG_PR_STP"      # Includes JTAG-based SignalTap via programming cable in the PR region
+#set_global_assignment -name VERILOG_MACRO "INCLUDE_JTAG_PR_STP"      # Includes JTAG-based SignalTap via programming cable in the PR region
 
 # Compile time Verilog Macros
 set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../../../shared_config/compile_flags.tcl
