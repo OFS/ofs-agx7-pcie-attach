@@ -88,7 +88,7 @@ set_global_assignment -name VERILOG_MACRO "CONFIG_ESERIES_MDK"       # Specific 
 #set_global_assignment -name VERILOG_MACRO "INCLUDE_DDR4"             # Includes the MEM SS and the AXI-MM datapath
 #set_global_assignment -name VERILOG_MACRO "INCLUDE_PMCI"             # Includes PMCI SS in the fim
 set_global_assignment -name VERILOG_MACRO "INCLUDE_PR"               # INCLUDE_PR removes PR IP instatiation in port_gasket. To disable PR, remove INCLUDE_PR & pr_assignments.tcl from .qsf  
-#set_global_assignment -name VERILOG_MACRO "INCLUDE_USER_CLK"         # Includes the user clock system in port_gasket.
+set_global_assignment -name VERILOG_MACRO "INCLUDE_USER_CLK"         # Includes the user clock system in port_gasket.
 #set_global_assignment -name VERILOG_MACRO "INCLUDE_HSSI"             # Includes HSSI SS and HE-HSSI logic into the design
 #set_global_assignment -name VERILOG_MACRO "DISABLE_HE_HSSI_CRC"      # Disables CRC generation from HE-HSSI traffic generation
 set_global_assignment -name VERILOG_MACRO "INCLUDE_PCIE_SS"          # Instantiates the PCIE SS (Gen4) when enabled, else instantiates PCIE Gen3 (should only be disabled in unit test sim only).   
