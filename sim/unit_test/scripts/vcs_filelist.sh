@@ -7,7 +7,7 @@ SCRIPT_NAME=$BASH_SOURCE
 SCRIPT_DIR="$(cd "$(dirname -- "$SCRIPT_NAME")" 2>/dev/null && pwd -P)"
 
 #BFM_DIR="$(readlink -f ${SCRIPT_DIR})/../../bfm/rp_bfm_simple"
-BFM_DIR="$(readlink -f ${SCRIPT_DIR})/../../bfm/ofs_axis_bfm"
+export BFM_DIR=$OFS_ROOTDIR/ofs-common/sim/bfm/ofs_axis_bfm
 echo "Setting: BFM DIR = ${BFM_DIR}"
 
 BFM_SRC="+incdir+$BFM_DIR \

@@ -75,9 +75,9 @@ else
    sed -i 's/PCIE_RTL_FILELIST=.*/PCIE_RTL_FILELIST="-f .\/rtl_pcie.f"/' ${SIM_DIR}/vcs_filelist.sh
 fi
 # Switch in the BFM .
-sed -i 's,'.*\/pcie_wrapper.sv',$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pcie_wrapper.sv,' ${SIM_DIR}/rtl_pcie.f
-sed -i 's,'.*\/pcie_top.sv',$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pcie_top.sv,' ${SIM_DIR}/rtl_pcie.f
-sed -i 's,'.*\/axi_s_adapter.sv',$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/axi_s_adapter.sv,' ${SIM_DIR}/rtl_pcie.f
-sed -i 's,'.*\/pcie_csr.sv',$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pcie_csr.sv,' ${SIM_DIR}/rtl_pcie.f
+sed -i 's,'.*\/pcie_wrapper.sv',$OFS_ROOTDIR/ofs-common/sim/bfm/ofs_axis_bfm/pcie_wrapper.sv,' ${SIM_DIR}/rtl_pcie.f
+sed -i 's,'.*\/pcie_top.sv',$OFS_ROOTDIR/ofs-common/sim/bfm/ofs_axis_bfm/pcie_top.sv,' ${SIM_DIR}/rtl_pcie.f
+sed -i 's,'.*\/axi_s_adapter.sv',$OFS_ROOTDIR/ofs-common/sim/bfm/ofs_axis_bfm/axi_s_adapter.sv,' ${SIM_DIR}/rtl_pcie.f
+sed -i 's,'.*\/pcie_csr.sv',$OFS_ROOTDIR/ofs-common/sim/bfm/ofs_axis_bfm/pcie_csr.sv,' ${SIM_DIR}/rtl_pcie.f
 
 echo "sim_setup_common: done!"

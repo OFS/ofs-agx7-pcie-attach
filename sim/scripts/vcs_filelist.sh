@@ -9,10 +9,10 @@
 cp -f $OFS_ROOTDIR/ofs-common/src/common/fme_id_rom/fme_id.mif ./
 # <COPY_ROM_END>
 
-LIB_FILELIST="$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/host_bfm_types_pkg.sv \
-$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pfvf_def_pkg_host.sv \
-$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pfvf_def_pkg_soc.sv \
-$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pfvf_class_pkg.sv \
+LIB_FILELIST="$OFS_ROOTDIR/ofs-common/sim/bfm/ofs_axis_bfm/host_bfm_types_pkg.sv \
+$OFS_ROOTDIR/ofs-common/sim/bfm/ofs_axis_bfm/pfvf_def_pkg_host.sv \
+$OFS_ROOTDIR/ofs-common/sim/bfm/ofs_axis_bfm/pfvf_def_pkg_soc.sv \
+$OFS_ROOTDIR/ofs-common/sim/bfm/ofs_axis_bfm/pfvf_class_pkg.sv \
 "
 
 # Quartus HSSI libraries for VCS are pre-compiled during gen_sim_files
