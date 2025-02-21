@@ -1,6 +1,0 @@
-partition package uvm_pkg;
-partition package svt_uvm_pkg;
-partition package svt_pcie_uvm_pkg;
-partition package svt_ethernet_uvm_pkg;
-partition package svt_axi_uvm_pkg; 
-partition package svt_amba_common_uvm_pkg; 
