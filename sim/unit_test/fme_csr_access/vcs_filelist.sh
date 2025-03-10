@@ -12,7 +12,7 @@ VCS_FILELIST="-v $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives.v \
 $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_lnsim.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/tennm_atoms.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/synopsys/tennm_atoms_ncrypt.sv \
-$THE_PLATFORM/sim/scripts/qip_gen/ofs-common/src/common/fme_id_rom/fme_id_rom/rom_1port_2021/sim/fme_id_rom_rom_1port_2021_bjn5sjy.v
+$THE_PLATFORM/sim/scripts/qip_gen/ofs-common/src/common/fme_id_rom/fme_id_rom/rom_1port_2022/sim/fme_id_rom_rom_1port_2022_vqmen7i.v
 $THE_PLATFORM/sim/scripts/qip_gen/ofs-common/src/common/fme_id_rom/fme_id_rom/sim/fme_id_rom.v \
 $OFS_ROOTDIR/ofs-common/src/common/includes/ofs_csr_pkg.sv \
 $OFS_ROOTDIR/ofs-common/src/fpga_family/agilex/pcie_ss/ofs_fim_pcie_hdr_def.sv \

@@ -978,6 +978,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -1376,6 +1381,10 @@ https://fpgasoftware.intel.com/eula.-->
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
                             &lt;key&gt;maximumOutstandingReads&lt;/key&gt;
                             &lt;value&gt;1&lt;/value&gt;
                         &lt;/entry&gt;
@@ -1718,6 +1727,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;traceSignals&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
@@ -3234,6 +3247,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -3632,6 +3650,10 @@ https://fpgasoftware.intel.com/eula.-->
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
                             &lt;key&gt;maximumOutstandingReads&lt;/key&gt;
                             &lt;value&gt;1&lt;/value&gt;
                         &lt;/entry&gt;
@@ -3974,6 +3996,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;traceSignals&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
@@ -5490,6 +5516,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -5791,6 +5822,11 @@ https://fpgasoftware.intel.com/eula.-->
             <ipxact:parameter parameterId="svInterfaceDefinition" type="string">
               <ipxact:name>svInterfaceDefinition</ipxact:name>
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
           </ipxact:parameters>
@@ -6105,6 +6141,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;enableConcurrentSubordinateAccess&lt;/key&gt;
+                            &lt;value&gt;0&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;optimizedReadsWithBE&lt;/key&gt;
                             &lt;value&gt;0&lt;/value&gt;
                         &lt;/entry&gt;
                     &lt;/parameterValueMap&gt;
@@ -7328,6 +7368,11 @@ https://fpgasoftware.intel.com/eula.-->
             <ipxact:parameter parameterId="svInterfaceDefinition" type="string">
               <ipxact:name>svInterfaceDefinition</ipxact:name>
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
           </ipxact:parameters>
@@ -9009,6 +9054,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -9632,6 +9682,10 @@ https://fpgasoftware.intel.com/eula.-->
                             &lt;key&gt;enableConcurrentSubordinateAccess&lt;/key&gt;
                             &lt;value&gt;0&lt;/value&gt;
                         &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;optimizedReadsWithBE&lt;/key&gt;
+                            &lt;value&gt;0&lt;/value&gt;
+                        &lt;/entry&gt;
                     &lt;/parameterValueMap&gt;
                 &lt;/parameters&gt;
             &lt;/interface&gt;
@@ -10159,6 +10213,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;enableConcurrentSubordinateAccess&lt;/key&gt;
+                            &lt;value&gt;0&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;optimizedReadsWithBE&lt;/key&gt;
                             &lt;value&gt;0&lt;/value&gt;
                         &lt;/entry&gt;
                     &lt;/parameterValueMap&gt;
@@ -11668,6 +11726,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -12090,6 +12153,11 @@ https://fpgasoftware.intel.com/eula.-->
             <ipxact:parameter parameterId="svInterfaceDefinition" type="string">
               <ipxact:name>svInterfaceDefinition</ipxact:name>
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
           </ipxact:parameters>
@@ -13088,6 +13156,11 @@ https://fpgasoftware.intel.com/eula.-->
             <ipxact:parameter parameterId="svInterfaceDefinition" type="string">
               <ipxact:name>svInterfaceDefinition</ipxact:name>
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
           </ipxact:parameters>
@@ -16199,6 +16272,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -17197,6 +17275,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -17525,6 +17608,10 @@ https://fpgasoftware.intel.com/eula.-->
                             &lt;key&gt;enableConcurrentSubordinateAccess&lt;/key&gt;
                             &lt;value&gt;0&lt;/value&gt;
                         &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;optimizedReadsWithBE&lt;/key&gt;
+                            &lt;value&gt;0&lt;/value&gt;
+                        &lt;/entry&gt;
                     &lt;/parameterValueMap&gt;
                 &lt;/parameters&gt;
             &lt;/interface&gt;
@@ -17716,6 +17803,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;enableConcurrentSubordinateAccess&lt;/key&gt;
+                            &lt;value&gt;0&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;optimizedReadsWithBE&lt;/key&gt;
                             &lt;value&gt;0&lt;/value&gt;
                         &lt;/entry&gt;
                     &lt;/parameterValueMap&gt;
@@ -19754,6 +19845,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -20094,6 +20190,10 @@ https://fpgasoftware.intel.com/eula.-->
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
                             &lt;key&gt;maximumOutstandingReads&lt;/key&gt;
                             &lt;value&gt;1&lt;/value&gt;
                         &lt;/entry&gt;
@@ -20352,6 +20452,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;traceSignals&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
@@ -22765,6 +22869,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -23059,6 +23168,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;enableConcurrentSubordinateAccess&lt;/key&gt;
+                            &lt;value&gt;0&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;optimizedReadsWithBE&lt;/key&gt;
                             &lt;value&gt;0&lt;/value&gt;
                         &lt;/entry&gt;
                     &lt;/parameterValueMap&gt;
@@ -24131,6 +24244,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -24475,6 +24593,11 @@ https://fpgasoftware.intel.com/eula.-->
             <ipxact:parameter parameterId="svInterfaceDefinition" type="string">
               <ipxact:name>svInterfaceDefinition</ipxact:name>
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
           </ipxact:parameters>
@@ -25456,6 +25579,11 @@ https://fpgasoftware.intel.com/eula.-->
             <ipxact:parameter parameterId="svInterfaceDefinition" type="string">
               <ipxact:name>svInterfaceDefinition</ipxact:name>
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
           </ipxact:parameters>
@@ -27154,6 +27282,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -27526,6 +27659,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;enableConcurrentSubordinateAccess&lt;/key&gt;
+                            &lt;value&gt;0&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;optimizedReadsWithBE&lt;/key&gt;
                             &lt;value&gt;0&lt;/value&gt;
                         &lt;/entry&gt;
                     &lt;/parameterValueMap&gt;
@@ -28005,6 +28142,11 @@ https://fpgasoftware.intel.com/eula.-->
             <ipxact:parameter parameterId="svInterfaceDefinition" type="string">
               <ipxact:name>svInterfaceDefinition</ipxact:name>
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
           </ipxact:parameters>
@@ -29473,12 +29615,17 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
     </altera:modules>
     <altera:connections>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="flash_burst_master.avalon_master" altera:end="flash_ctrlr.avl_mem">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="flash_burst_master.avalon_master" altera:end="flash_ctrlr.avl_mem">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29499,7 +29646,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pxeboot_optrom.avalon_master" altera:end="flash_ctrlr.avl_mem">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pxeboot_optrom.avalon_master" altera:end="flash_ctrlr.avl_mem">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29520,7 +29667,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="spi_slave.avalon_master" altera:end="mctp_pcievdm.avmm_egrs_slv">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="spi_slave.avalon_master" altera:end="mctp_pcievdm.avmm_egrs_slv">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00010000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29541,7 +29688,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="spi_slave.avalon_master" altera:end="pmci_csr.mnios_avmm_slv">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="spi_slave.avalon_master" altera:end="pmci_csr.mnios_avmm_slv">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29562,7 +29709,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="spi_slave.avalon_master" altera:end="pmci_mailbox.s1">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="spi_slave.avalon_master" altera:end="pmci_mailbox.s1">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x1000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29583,7 +29730,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="mctp_pcievdm.avmm_egrs_mstr" altera:end="axi_m_bridge.s0">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="mctp_pcievdm.avmm_egrs_mstr" altera:end="axi_m_bridge.s0">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29604,7 +29751,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="mctp_pcievdm.avmm_ingr_mstr" altera:end="spi_master.avmm_dir">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="mctp_pcievdm.avmm_ingr_mstr" altera:end="spi_master.avmm_dir">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29625,7 +29772,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.data_manager" altera:end="flash_ctrlr.avl_csr">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.data_manager" altera:end="flash_ctrlr.avl_csr">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00043000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29646,7 +29793,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.data_manager" altera:end="sdm_mailbox_client.avmm">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.data_manager" altera:end="sdm_mailbox_client.avmm">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00042000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29667,7 +29814,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.data_manager" altera:end="pmci_niosv.dm_agent">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.data_manager" altera:end="pmci_niosv.dm_agent">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00050000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29688,7 +29835,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.data_manager" altera:end="pmci_csr.pnios_avmm_slv">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.data_manager" altera:end="pmci_csr.pnios_avmm_slv">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00040000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29709,7 +29856,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.data_manager" altera:end="axi_m_bridge.s0">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.data_manager" altera:end="axi_m_bridge.s0">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00200000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29730,7 +29877,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.data_manager" altera:end="nios_ram.s1">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.data_manager" altera:end="nios_ram.s1">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29751,7 +29898,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.data_manager" altera:end="timer.s1">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.data_manager" altera:end="timer.s1">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00044000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29772,7 +29919,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.data_manager" altera:end="pmci_mailbox.s1">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.data_manager" altera:end="pmci_mailbox.s1">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00041000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29793,7 +29940,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.data_manager" altera:end="pmci_niosv.timer_sw_agent">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.data_manager" altera:end="pmci_niosv.timer_sw_agent">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00046000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29814,7 +29961,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_nios.data_master" altera:end="pmci_nios.debug_mem_slave">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_nios.data_master" altera:end="pmci_nios.debug_mem_slave">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00045000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29835,7 +29982,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.instruction_manager" altera:end="pmci_niosv.dm_agent">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.instruction_manager" altera:end="pmci_niosv.dm_agent">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00050000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29856,7 +30003,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_niosv.instruction_manager" altera:end="nios_ram.s1">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_niosv.instruction_manager" altera:end="nios_ram.s1">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29877,7 +30024,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="pmci_nios.instruction_master" altera:end="pmci_nios.debug_mem_slave">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="pmci_nios.instruction_master" altera:end="pmci_nios.debug_mem_slave">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00045000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29898,7 +30045,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="axi_s_bridge.m0" altera:end="flash_burst_master.avalon_slave">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="axi_s_bridge.m0" altera:end="flash_burst_master.avalon_slave">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0800"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29919,7 +30066,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="axi_s_bridge.m0" altera:end="pxeboot_optrom.avalon_slave">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="axi_s_bridge.m0" altera:end="pxeboot_optrom.avalon_slave">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x00010000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29940,7 +30087,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="axi_s_bridge.m0" altera:end="spi_master.avmm_csr">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="axi_s_bridge.m0" altera:end="spi_master.avmm_csr">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0400"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29961,7 +30108,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="axi_s_bridge.m0" altera:end="mctp_pcievdm.avmm_ingr_slv">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="axi_s_bridge.m0" altera:end="mctp_pcievdm.avmm_ingr_slv">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x2000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -29982,7 +30129,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="axi_s_bridge.m0" altera:end="pmci_csr.host_avmm_slv">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="axi_s_bridge.m0" altera:end="pmci_csr.host_avmm_slv">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -30003,7 +30150,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon_streaming" altera:version="24.3" altera:start="advncd_seu_detect.avst_seu_source" altera:end="pmci_csr.seu_avst_sink">
+      <altera:connection altera:kind="avalon_streaming" altera:version="25.1" altera:start="advncd_seu_detect.avst_seu_source" altera:end="pmci_csr.seu_avst_sink">
         <altera:connection_parameter altera:parameter_name="qsys_mm.burstAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.clockCrossingAdapter" altera:parameter_value="HANDSHAKE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.enableAllPipelines" altera:parameter_value="FALSE"></altera:connection_parameter>
@@ -30020,76 +30167,76 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="FALSE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="reset_in.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="spi_slave.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="axi_s_bridge.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="flash_ctrlr.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="axi_m_bridge.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="timer.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="advncd_seu_detect.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="pmci_niosv.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="nios_ram.clk1"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="pmci_mailbox.clk1"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="spi_master.clock"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="ncsi_ctrlr.clock"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="flash_burst_master.clock"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="mctp_pcievdm.clock"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="pxeboot_optrom.clock"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="pmci_csr.clock"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="sdm_mailbox_client.in_clk"></altera:connection>
-      <altera:connection altera:kind="conduit" altera:version="24.3" altera:start="flash_burst_master.csr_if" altera:end="pmci_csr.fbm_if">
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="reset_in.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="spi_slave.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="axi_s_bridge.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="flash_ctrlr.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="axi_m_bridge.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="timer.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="advncd_seu_detect.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="pmci_niosv.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="nios_ram.clk1"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="pmci_mailbox.clk1"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="spi_master.clock"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="ncsi_ctrlr.clock"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="flash_burst_master.clock"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="mctp_pcievdm.clock"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="pxeboot_optrom.clock"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="pmci_csr.clock"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="sdm_mailbox_client.in_clk"></altera:connection>
+      <altera:connection altera:kind="conduit" altera:version="25.1" altera:start="flash_burst_master.csr_if" altera:end="pmci_csr.fbm_if">
         <altera:connection_parameter altera:parameter_name="endPort" altera:parameter_value=""></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="endPortLSB" altera:parameter_value="0"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="startPort" altera:parameter_value=""></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="startPortLSB" altera:parameter_value="0"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="width" altera:parameter_value="0"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="conduit" altera:version="24.3" altera:start="mctp_pcievdm.csr_if" altera:end="pmci_csr.mpc_if">
+      <altera:connection altera:kind="conduit" altera:version="25.1" altera:start="mctp_pcievdm.csr_if" altera:end="pmci_csr.mpc_if">
         <altera:connection_parameter altera:parameter_name="endPort" altera:parameter_value=""></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="endPortLSB" altera:parameter_value="0"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="startPort" altera:parameter_value=""></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="startPortLSB" altera:parameter_value="0"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="width" altera:parameter_value="0"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="conduit" altera:version="24.3" altera:start="pmci_csr.orom_if" altera:end="pxeboot_optrom.csr_if">
+      <altera:connection altera:kind="conduit" altera:version="25.1" altera:start="pmci_csr.orom_if" altera:end="pxeboot_optrom.csr_if">
         <altera:connection_parameter altera:parameter_name="endPort" altera:parameter_value=""></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="endPortLSB" altera:parameter_value="0"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="startPort" altera:parameter_value=""></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="startPortLSB" altera:parameter_value="0"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="width" altera:parameter_value="0"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="conduit" altera:version="24.3" altera:start="advncd_seu_detect.sys_error" altera:end="pmci_csr.seu_sys_err">
+      <altera:connection altera:kind="conduit" altera:version="25.1" altera:start="advncd_seu_detect.sys_error" altera:end="pmci_csr.seu_sys_err">
         <altera:connection_parameter altera:parameter_name="endPort" altera:parameter_value=""></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="endPortLSB" altera:parameter_value="0"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="startPort" altera:parameter_value=""></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="startPortLSB" altera:parameter_value="0"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="width" altera:parameter_value="0"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="interrupt" altera:version="24.3" altera:start="pmci_niosv.platform_irq_rx" altera:end="sdm_mailbox_client.irq">
+      <altera:connection altera:kind="interrupt" altera:version="25.1" altera:start="pmci_niosv.platform_irq_rx" altera:end="sdm_mailbox_client.irq">
         <altera:connection_parameter altera:parameter_name="irqNumber" altera:parameter_value="0"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="interrupt" altera:version="24.3" altera:start="pmci_niosv.platform_irq_rx" altera:end="timer.irq">
+      <altera:connection altera:kind="interrupt" altera:version="25.1" altera:start="pmci_niosv.platform_irq_rx" altera:end="timer.irq">
         <altera:connection_parameter altera:parameter_name="irqNumber" altera:parameter_value="1"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="pmci_niosv.dbg_reset_out" altera:end="pmci_niosv.ndm_reset_in"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="pmci_niosv.dbg_reset_out" altera:end="pmci_niosv.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="pmci_nios.debug_reset_request" altera:end="pmci_nios.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="axi_s_bridge.clk_reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="axi_m_bridge.clk_reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="sdm_mailbox_client.in_reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="flash_ctrlr.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="timer.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="spi_master.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="ncsi_ctrlr.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="flash_burst_master.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="mctp_pcievdm.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="pxeboot_optrom.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="advncd_seu_detect.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="pmci_csr.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="pmci_niosv.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="nios_ram.reset1"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="pmci_mailbox.reset1"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="spi_slave.reset_n"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="pmci_niosv.dbg_reset_out" altera:end="pmci_niosv.ndm_reset_in"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="pmci_niosv.dbg_reset_out" altera:end="pmci_niosv.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="pmci_nios.debug_reset_request" altera:end="pmci_nios.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="axi_s_bridge.clk_reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="axi_m_bridge.clk_reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="sdm_mailbox_client.in_reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="flash_ctrlr.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="timer.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="spi_master.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="ncsi_ctrlr.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="flash_burst_master.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="mctp_pcievdm.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="pxeboot_optrom.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="advncd_seu_detect.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="pmci_csr.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="pmci_niosv.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="nios_ram.reset1"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="pmci_mailbox.reset1"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="spi_slave.reset_n"></altera:connection>
     </altera:connections>
     <altera:interconnect_requirements></altera:interconnect_requirements>
     <altera:wire_level_connections></altera:wire_level_connections>
@@ -30140,40 +30287,40 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:busInterfaces>
           <ipxact:busInterface>
             <ipxact:name>axi_m_bridge.m0</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4" version="25.1"></ipxact:busType>
             <ipxact:master></ipxact:master>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>flash_burst_master.avalon_slave</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>flash_ctrlr.avl_mem</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pxeboot_optrom.avalon_slave</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>flash_ctrlr.avl_mem</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>spi_master.avmm_csr</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>mctp_pcievdm.avmm_ingr_slv</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pmci_csr.host_avmm_slv</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>axi_s_bridge.m0</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4" version="25.1"></ipxact:busType>
             <ipxact:master>
               <ipxact:addressSpaceRef addressSpaceRef="axi_s_bridge.m0">
                 <ipxact:baseAddress>0x0000_0800</ipxact:baseAddress>
@@ -30182,11 +30329,11 @@ https://fpgasoftware.intel.com/eula.-->
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>flash_ctrlr.avl_mem</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>flash_burst_master.avalon_master</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
             <ipxact:master>
               <ipxact:addressSpaceRef addressSpaceRef="flash_burst_master.avalon_master">
                 <ipxact:baseAddress>0x0000_0000</ipxact:baseAddress>
@@ -30195,11 +30342,11 @@ https://fpgasoftware.intel.com/eula.-->
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>spi_master.avmm_dir</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>mctp_pcievdm.avmm_ingr_mstr</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
             <ipxact:master>
               <ipxact:addressSpaceRef addressSpaceRef="mctp_pcievdm.avmm_ingr_mstr">
                 <ipxact:baseAddress>0x0000</ipxact:baseAddress>
@@ -30208,11 +30355,11 @@ https://fpgasoftware.intel.com/eula.-->
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>axi_m_bridge.s0</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>mctp_pcievdm.avmm_egrs_mstr</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
             <ipxact:master>
               <ipxact:addressSpaceRef addressSpaceRef="mctp_pcievdm.avmm_egrs_mstr">
                 <ipxact:baseAddress>0x0000_0000</ipxact:baseAddress>
@@ -30221,15 +30368,15 @@ https://fpgasoftware.intel.com/eula.-->
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pmci_niosv.dm_agent</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>nios_ram.s1</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pmci_niosv.instruction_manager</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="25.1"></ipxact:busType>
             <ipxact:master>
               <ipxact:addressSpaceRef addressSpaceRef="pmci_niosv.instruction_manager">
                 <ipxact:baseAddress>0x0005_0000</ipxact:baseAddress>
@@ -30238,43 +30385,43 @@ https://fpgasoftware.intel.com/eula.-->
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>flash_ctrlr.avl_csr</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>sdm_mailbox_client.avmm</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pmci_niosv.dm_agent</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pmci_csr.pnios_avmm_slv</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>axi_m_bridge.s0</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>nios_ram.s1</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>timer.s1</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pmci_mailbox.s1</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pmci_niosv.timer_sw_agent</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pmci_niosv.data_manager</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="25.1"></ipxact:busType>
             <ipxact:master>
               <ipxact:addressSpaceRef addressSpaceRef="pmci_niosv.data_manager">
                 <ipxact:baseAddress>0x0004_3000</ipxact:baseAddress>
@@ -30283,11 +30430,11 @@ https://fpgasoftware.intel.com/eula.-->
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>flash_ctrlr.avl_mem</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pxeboot_optrom.avalon_master</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
             <ipxact:master>
               <ipxact:addressSpaceRef addressSpaceRef="pxeboot_optrom.avalon_master">
                 <ipxact:baseAddress>0x0000_0000</ipxact:baseAddress>
@@ -30296,19 +30443,19 @@ https://fpgasoftware.intel.com/eula.-->
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>mctp_pcievdm.avmm_egrs_slv</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pmci_csr.mnios_avmm_slv</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>pmci_mailbox.s1</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>spi_slave.avalon_master</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="25.1"></ipxact:busType>
             <ipxact:master>
               <ipxact:addressSpaceRef addressSpaceRef="spi_slave.avalon_master">
                 <ipxact:baseAddress>0x0001_0000</ipxact:baseAddress>

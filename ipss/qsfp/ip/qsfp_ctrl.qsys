@@ -556,6 +556,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -2529,6 +2534,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -4049,6 +4059,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -4392,16 +4407,21 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
     </altera:modules>
     <altera:connections>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="reset_in.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="onchip_memory2_0.clk1"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="i2c_0.clock"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="onchip_memory2_0.reset1"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="i2c_0.reset_sink"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="reset_in.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="onchip_memory2_0.clk1"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="i2c_0.clock"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="onchip_memory2_0.reset1"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="i2c_0.reset_sink"></altera:connection>
     </altera:connections>
     <altera:interconnect_requirements></altera:interconnect_requirements>
     <altera:wire_level_connections></altera:wire_level_connections>

@@ -519,6 +519,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -818,6 +823,10 @@ https://fpgasoftware.intel.com/eula.-->
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
                             &lt;key&gt;maximumOutstandingReads&lt;/key&gt;
                             &lt;value&gt;1&lt;/value&gt;
                         &lt;/entry&gt;
@@ -1114,6 +1123,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;traceSignals&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
@@ -1774,6 +1787,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -2073,6 +2091,10 @@ https://fpgasoftware.intel.com/eula.-->
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
                             &lt;key&gt;maximumOutstandingReads&lt;/key&gt;
                             &lt;value&gt;1&lt;/value&gt;
                         &lt;/entry&gt;
@@ -2369,6 +2391,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;traceSignals&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
@@ -3029,6 +3055,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -3328,6 +3359,10 @@ https://fpgasoftware.intel.com/eula.-->
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
                             &lt;key&gt;maximumOutstandingReads&lt;/key&gt;
                             &lt;value&gt;1&lt;/value&gt;
                         &lt;/entry&gt;
@@ -3624,6 +3659,10 @@ https://fpgasoftware.intel.com/eula.-->
                         &lt;/entry&gt;
                         &lt;entry&gt;
                             &lt;key&gt;traceSignals&lt;/key&gt;
+                            &lt;value&gt;false&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;isTranslator&lt;/key&gt;
                             &lt;value&gt;false&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
@@ -4284,6 +4323,11 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
@@ -4630,12 +4674,17 @@ https://fpgasoftware.intel.com/eula.-->
               <ipxact:displayName>System Verilog Interface definition</ipxact:displayName>
               <ipxact:value></ipxact:value>
             </ipxact:parameter>
+            <ipxact:parameter parameterId="transformParameters" type="string">
+              <ipxact:name>transformParameters</ipxact:name>
+              <ipxact:displayName>Transform Parameters</ipxact:displayName>
+              <ipxact:value></ipxact:value>
+            </ipxact:parameter>
           </ipxact:parameters>
         </altera:altera_module_parameters>
       </altera:module>
     </altera:modules>
     <altera:connections>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="hssi_ss_csr_mst.altera_axi4lite_master" altera:end="hssi_ss_ip_slv.altera_axi4lite_slave">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="hssi_ss_csr_mst.altera_axi4lite_master" altera:end="hssi_ss_ip_slv.altera_axi4lite_slave">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -4656,7 +4705,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="FALSE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="avalon" altera:version="24.3" altera:start="hssi_ss_csr_mst.altera_axi4lite_master" altera:end="hssi_ss_wrapper_slv.altera_axi4lite_slave">
+      <altera:connection altera:kind="avalon" altera:version="25.1" altera:start="hssi_ss_csr_mst.altera_axi4lite_master" altera:end="hssi_ss_wrapper_slv.altera_axi4lite_slave">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0800"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -4677,13 +4726,13 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="FALSE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="reset_in.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="hssi_ss_wrapper_slv.clock"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="hssi_ss_csr_mst.clock"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="24.3" altera:start="clock_in.out_clk" altera:end="hssi_ss_ip_slv.clock"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="hssi_ss_wrapper_slv.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="hssi_ss_csr_mst.reset"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="24.3" altera:start="reset_in.out_reset" altera:end="hssi_ss_ip_slv.reset"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="reset_in.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="hssi_ss_wrapper_slv.clock"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="hssi_ss_csr_mst.clock"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="25.1" altera:start="clock_in.out_clk" altera:end="hssi_ss_ip_slv.clock"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="hssi_ss_wrapper_slv.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="hssi_ss_csr_mst.reset"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="25.1" altera:start="reset_in.out_reset" altera:end="hssi_ss_ip_slv.reset"></altera:connection>
     </altera:connections>
     <altera:interconnect_requirements></altera:interconnect_requirements>
     <altera:wire_level_connections></altera:wire_level_connections>
@@ -4706,15 +4755,15 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:busInterfaces>
           <ipxact:busInterface>
             <ipxact:name>hssi_ss_ip_slv.altera_axi4lite_slave</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>hssi_ss_wrapper_slv.altera_axi4lite_slave</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="25.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>hssi_ss_csr_mst.altera_axi4lite_master</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="25.1"></ipxact:busType>
             <ipxact:master>
               <ipxact:addressSpaceRef addressSpaceRef="hssi_ss_csr_mst.altera_axi4lite_master">
                 <ipxact:baseAddress>0x0000</ipxact:baseAddress>
@@ -4723,12 +4772,12 @@ https://fpgasoftware.intel.com/eula.-->
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>hssi_ss_ip_slv.altera_axi4lite_master</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="25.1"></ipxact:busType>
             <ipxact:master></ipxact:master>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>hssi_ss_wrapper_slv.altera_axi4lite_master</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="24.3"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4lite" version="25.1"></ipxact:busType>
             <ipxact:master></ipxact:master>
           </ipxact:busInterface>
         </ipxact:busInterfaces>

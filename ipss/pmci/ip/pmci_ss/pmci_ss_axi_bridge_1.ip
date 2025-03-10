@@ -16,14 +16,14 @@ https://fpgasoftware.intel.com/eula.-->
   <ipxact:vendor>Intel Corporation</ipxact:vendor>
   <ipxact:library>pmci_ss_axi_bridge_1</ipxact:library>
   <ipxact:name>axi_bridge_1</ipxact:name>
-  <ipxact:version>19.8.3</ipxact:version>
+  <ipxact:version>19.9.3</ipxact:version>
   <ipxact:busInterfaces>
     <ipxact:busInterface>
       <ipxact:name>clk</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="24.3"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="25.1"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="24.3"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="25.1"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -57,10 +57,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>clk_reset</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="24.3"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="25.1"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="24.3"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="25.1"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -89,10 +89,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>s0</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="25.1"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="25.1"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -374,6 +374,11 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>traceSignals</ipxact:displayName>
           <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="isTranslator" type="bit">
+          <ipxact:name>isTranslator</ipxact:name>
+          <ipxact:displayName>isTranslator</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="maximumOutstandingReads" type="longint">
           <ipxact:name>maximumOutstandingReads</ipxact:name>
           <ipxact:displayName>maximumOutstandingReads</ipxact:displayName>
@@ -493,10 +498,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>m0</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="25.1"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="24.3"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="25.1"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -728,6 +733,11 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:parameter parameterId="traceSignals" type="bit">
           <ipxact:name>traceSignals</ipxact:name>
           <ipxact:displayName>traceSignals</ipxact:displayName>
+          <ipxact:value>false</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="isTranslator" type="bit">
+          <ipxact:name>isTranslator</ipxact:name>
+          <ipxact:displayName>isTranslator</ipxact:displayName>
           <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="maximumOutstandingReads" type="longint">
@@ -1697,7 +1707,7 @@ https://fpgasoftware.intel.com/eula.-->
       <ipxact:vendor>Intel Corporation</ipxact:vendor>
       <ipxact:library>pmci_ss_axi_bridge_1</ipxact:library>
       <ipxact:name>altera_axi_bridge</ipxact:name>
-      <ipxact:version>19.8.3</ipxact:version>
+      <ipxact:version>19.9.3</ipxact:version>
     </altera:entity_info>
     <altera:altera_module_parameters>
       <ipxact:parameters>
@@ -1744,6 +1754,11 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:parameter parameterId="USE_M0_AWQOS" type="int">
           <ipxact:name>USE_M0_AWQOS</ipxact:name>
           <ipxact:displayName>Use AWQOS signal</ipxact:displayName>
+          <ipxact:value>0</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="USE_M0_AWUNIQUE" type="int">
+          <ipxact:name>USE_M0_AWUNIQUE</ipxact:name>
+          <ipxact:displayName>Use AWUNIQUE signal</ipxact:displayName>
           <ipxact:value>0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="USE_S0_AWSIZE" type="int">
@@ -1915,6 +1930,16 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:name>DATA_WIDTH</ipxact:name>
           <ipxact:displayName>Data Width</ipxact:displayName>
           <ipxact:value>64</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="UNTRANSLATED_TXN" type="string">
+          <ipxact:name>UNTRANSLATED_TXN</ipxact:name>
+          <ipxact:displayName>Enable</ipxact:displayName>
+          <ipxact:value>FALSE</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="SID_WIDTH" type="int">
+          <ipxact:name>SID_WIDTH</ipxact:name>
+          <ipxact:displayName>SID WIDTH</ipxact:displayName>
+          <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="WRITE_ADDR_USER_WIDTH" type="int">
           <ipxact:name>WRITE_ADDR_USER_WIDTH</ipxact:name>
@@ -3075,7 +3100,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:port_mapping altera:name="s0_wvalid" altera:internal="s0_wvalid"></altera:port_mapping>
       </altera:interface_mapping>
     </altera:altera_interface_boundary>
-    <altera:altera_has_warnings>true</altera:altera_has_warnings>
+    <altera:altera_has_warnings>false</altera:altera_has_warnings>
     <altera:altera_has_errors>false</altera:altera_has_errors>
   </ipxact:vendorExtensions>
 </ipxact:component>
