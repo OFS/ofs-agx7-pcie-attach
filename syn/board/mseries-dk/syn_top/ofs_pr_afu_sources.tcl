@@ -17,7 +17,9 @@ set_global_assignment -name SEARCH_PATH "ofs_ip_cfg_db"
 # during the FIM build but is not required for PR. Defining the namespace
 # prevents errors in Tcl files that are shared by FIM and PR builds.
 namespace eval ::ofs_ip_cfg_db {}
-
+if { [file exists ofs_ip_cfg_db/ip_gen_sv_wrapper_inc.tcl] } {
+    set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ofs_ip_cfg_db/ip_gen_sv_wrapper_inc.tcl
+}
 
 ##### Interfaces and definitions
 
