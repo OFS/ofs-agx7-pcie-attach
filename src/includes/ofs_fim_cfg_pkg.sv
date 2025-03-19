@@ -18,8 +18,7 @@
 
 package ofs_fim_cfg_pkg;
 
-localparam real MAIN_CLK_MHZ = `OFS_FIM_IP_CFG_SYS_CLK_SYS_MHZ;
-//localparam MAIN_CLK_MHZ = `OFS_FIM_IP_CFG_SYS_CLK_CLK0_MHZ_INT;
+localparam real MAIN_CLK_MHZ = sys_pll_pkg::clock_name_to_actual_mhz("clk_sys");
 
 //*****************
 // PCIe host parameters
