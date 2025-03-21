@@ -1,4 +1,0 @@
-[default]
-"$OFS_ROOTDIR"/tools/ofss_config/base/eseries-mdk_base.ofss
-"$OFS_ROOTDIR"/tools/ofss_config/pcie/pcie_host.ofss
-"$OFS_ROOTDIR"/tools/ofss_config/iopll/iopll_250MHz.ofss
