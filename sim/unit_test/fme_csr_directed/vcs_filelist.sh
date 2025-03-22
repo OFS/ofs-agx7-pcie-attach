@@ -16,6 +16,7 @@ $THE_PLATFORM/sim/scripts/qip_gen/ofs-common/src/common/fme_id_rom/fme_id_rom/ro
 $THE_PLATFORM/sim/scripts/qip_gen/ofs-common/src/common/fme_id_rom/fme_id_rom/sim/fme_id_rom.v \
 $OFS_ROOTDIR/ofs-common/src/common/includes/ofs_csr_pkg.sv \
 $OFS_ROOTDIR/ofs-common/src/fpga_family/agilex/pcie_ss/ofs_fim_pcie_hdr_def.sv \
+$OFS_ROOTDIR/ofs-common/src/fpga_family/agilex/sys_pll/sys_pll_pkg.sv \
 $THE_PLATFORM/src/includes/ofs_fim_cfg_pkg.sv \
 $OFS_ROOTDIR/ofs-common/src/common/lib/mux/pf_vf_mux_pkg.sv \
 $OFS_ROOTDIR/src/afu_top/mux/top_cfg_pkg.sv \
