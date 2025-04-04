@@ -26,12 +26,16 @@ HSSI_FTILE_DEFINES="+define+TIMESCALE_EN \
  +define+IP7581SERDES_UXS2T1R1PGD_PIPE_FAST_SIM \
  +define+IP7581SERDES_UX_SIMSPEED \
  +define+SRC_SPEC_SPEED_UP \
+ +define+rnrb_one_lib_IALUP_IP_FLEXBUS_LOGPHY_CXP_EXCLUDE_S_E \
+ +define+rnrb_one_lib_CXP_EXCLUDE_E \
+ +define+rnrb_one_lib_CXP_EXCLUDE_S_E \
+ +define+rnrb_one_lib_CXP_EXCLUDE_S_E_F \
  +define+__SRC_TEST__"
 
 
 if [ -f $OFS_ROOTDIR/sim/scripts/generated_ftile_macros.f ]; then
   if [ $MSIM -eq 1 ]; then
-    DEFINES="${DEFINES} ${HSSI_FTILE_DEFINES} +define+INCLUDE_FTILE -F ${OFS_ROOTDIR}/sim/scripts/generated_ftile_macros.f "
+    DEFINES="${DEFINES} ${HSSI_FTILE_DEFINES} +define+QUARTUS_ENABLE_DPI_FORCE +define+INCLUDE_FTILE -F ${OFS_ROOTDIR}/sim/scripts/generated_ftile_macros.f"
   else 
     DEFINES="${DEFINES} ${HSSI_FTILE_DEFINES} +define+QUARTUS_ENABLE_DPI_FORCE +define+IP7581SERDES_UX_SIMSPEED +define+INCLUDE_FTILE -F ${OFS_ROOTDIR}/sim/scripts/generated_ftile_macros.f -debug_access+all -debug_region+cell+encrypt -debug_region+cell+lib"
   fi

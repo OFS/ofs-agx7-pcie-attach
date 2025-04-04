@@ -16,10 +16,15 @@ $QUARTUS_ROOTDIR/eda/sim_lib/altera_mf.v \
 $QUARTUS_ROOTDIR/eda/sim_lib/altera_lnsim.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/tennm_atoms.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/mentor/tennm_atoms_ncrypt.sv \
+$QUARTUS_ROOTDIR/eda/sim_lib/fmica_atoms_ncrypt.sv \
+$QUARTUS_ROOTDIR/eda/sim_lib/quartus_dpi.c \
+$QUARTUS_ROOTDIR/eda/sim_lib/simsf_dpi.cpp \
 "
 
 HSSI_LIB_FILELIST="$QUARTUS_ROOTDIR/eda/sim_lib/tennm_hssi_atoms.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/tennm_hssi_atoms_ncrypt.sv \
+$QUARTUS_ROOTDIR/../devices/sim_lib/tennm_fm_hps.sv \
+$QUARTUS_ROOTDIR/../devices/sim_lib/tennm_fm_hps_ncrypt.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/mentor/cr3v0_serdes_models_ncrypt.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/ctp_hssi_atoms.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/ctp_hssi_atoms_ncrypt.sv \
@@ -30,6 +35,7 @@ $QUARTUS_ROOTDIR/eda/sim_lib/ctr_hssi_atoms_ncrypt.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/ctfb_hssi_atoms.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/ctfb_hssi_atoms_ncrypt.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/ctfb_hssi_atoms2_ncrypt.sv \
+$QUARTUS_ROOTDIR/eda/sim_lib/ctr_hssi_atoms.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/ctr_hssi_atoms_ncrypt.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/ctrb_hssi_atoms_ncrypt.sv \
 "
