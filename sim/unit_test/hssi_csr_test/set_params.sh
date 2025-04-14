@@ -35,7 +35,7 @@ HSSI_FTILE_DEFINES="+define+TIMESCALE_EN \
 
 if [ -f $OFS_ROOTDIR/sim/scripts/generated_ftile_macros.f ]; then
   if [ $MSIM -eq 1 ]; then
-    DEFINES="${DEFINES} ${HSSI_FTILE_DEFINES} +define+QUARTUS_ENABLE_DPI_FORCE +define+INCLUDE_FTILE -F ${OFS_ROOTDIR}/sim/scripts/generated_ftile_macros.f"
+    DEFINES="${DEFINES} ${HSSI_FTILE_DEFINES} +define+INCLUDE_FTILE -F ${OFS_ROOTDIR}/sim/scripts/generated_ftile_macros.f"
   else 
     DEFINES="${DEFINES} ${HSSI_FTILE_DEFINES} +define+QUARTUS_ENABLE_DPI_FORCE +define+IP7581SERDES_UX_SIMSPEED +define+INCLUDE_FTILE -F ${OFS_ROOTDIR}/sim/scripts/generated_ftile_macros.f -debug_access+all -debug_region+cell+encrypt -debug_region+cell+lib"
   fi
