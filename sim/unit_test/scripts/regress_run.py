@@ -546,7 +546,6 @@ def create_test_list():
         filtered_test_list.append('pmci_vdm_tx_rx_lpbk_test')
         filtered_test_list.append('port_gasket_test')
         filtered_test_list.append('qsfp_test')
-        filtered_test_list.append('remote_stp_test')
         filtered_test_list.append('uart_csr')
     else:
         if (args.package == "list"):
@@ -589,6 +588,12 @@ def create_test_list():
                 if not design_includes_hssi:
                     test_remove_patterns.append(r'^he_null')
                     test_remove_patterns.append(r'^hssi_')
+                    test_remove_patterns.append(r'qsfp_')
+                if not design_includes_userclk:
+                    test_remove_patterns.append(r'user_clk_test')
+                    test_remove_patterns.append(r'port_gasket_test')
+                if not design_includes_remote_stp:
+                    test_remove_patterns.append(r'remote_stp_test')
                 filtered_test_list = remove_matching_tests(pre_filtered_test_list,test_remove_patterns)
             else:
                 test_dir_pattern = "\/(" + args.package + r'\w+)$'
@@ -832,6 +837,22 @@ def send_email_report():
     else:
         html_data += html_body_text_header
         html_data += f"    Design contains HSSI..........................:   None"
+        html_data += html_body_text_ender
+    if (design_includes_userclk):
+        html_data += html_body_text_header
+        html_data += f"    Design contains User Clk..........................:   User Clk Included"
+        html_data += html_body_text_ender
+    else:
+        html_data += html_body_text_header
+        html_data += f"    Design contains User Clk..........................:   None"
+        html_data += html_body_text_ender
+    if (design_includes_remote_stp):
+        html_data += html_body_text_header
+        html_data += f"    Design contains Remote STP..........................:   Remote STP Included"
+        html_data += html_body_text_ender
+    else:
+        html_data += html_body_text_header
+        html_data += f"    Design contains Remote STP..........................:   None"
         html_data += html_body_text_ender
     html_data += html_body_text_header
     html_data += f"    Last Sim File Generation Command Invoked......: {generation_cmd_line}"
@@ -1448,6 +1469,8 @@ if __name__ == "__main__":
     design_includes_local_mem = False
     design_includes_pmci = False
     design_includes_hssi = False
+    design_includes_userclk = False
+    design_includes_remote_stp = False
     regression_run_start = datetime.datetime.now()
     msg_queue = multiprocessing.Queue()
     format = "%(asctime)s: %(message)s"
@@ -1548,6 +1571,8 @@ if __name__ == "__main__":
     design_includes_local_mem = scan_verilog_macros_for_include("INCLUDE_LOCAL_MEM")
     design_includes_pmci = scan_verilog_macros_for_include("INCLUDE_PMCI")
     design_includes_hssi = scan_verilog_macros_for_include("INCLUDE_HSSI")
+    design_includes_remote_stp = scan_verilog_macros_for_include("INCLUDE_REMOTE_STP")
+    design_includes_userclk = scan_verilog_macros_for_include("INCLUDE_USER_CLK")
     generation_cmd_line  = scan_last_generation_command()
     logger.info(f"    FIM Variant detected in sim generation..: {fim_variant}")
     for ddr_family_name in design_includes_ddr:
@@ -1565,6 +1590,14 @@ if __name__ == "__main__":
         logger.info(f"      Design contains HSSI..................:   HSSI Included")
     else:
         logger.info(f"      Design contains HSSI..................:   None")
+    if (design_includes_userclk):
+        logger.info(f"      Design contains User Clk..................: User Clk Included")
+    else:
+        logger.info(f"      Design contains User Clk..................:   None")
+    if (design_includes_remote_stp):
+        logger.info(f"      Design contains Remote STP..................: Remote STP Included")
+    else:
+        logger.info(f"      Design contains Remote STP..................:   None")
     logger.info(f"    Last Sim File Generation Command Invoked: {generation_cmd_line}")
     list_of_tests = create_test_list()
     pmci_problem_list_of_tests = pmci_problem_test_filter()
