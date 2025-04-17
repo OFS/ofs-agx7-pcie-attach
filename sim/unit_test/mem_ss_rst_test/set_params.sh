@@ -25,7 +25,7 @@ if [ -f $OFS_ROOTDIR/sim/scripts/generated_ftile_macros.f ]; then
     if [ $MSIM -eq 1 ]; then
         MSIM_OPTS=(-c top_tb -suppress 2732,7033,12023,3053 -voptargs="-access=rw+/. -designfile design_2.bin -debug" -qwavedb=+signal -do "add log -r /* ; run -all; quit -f" -Gio_ssm/iossm_use_model=0) 
     else
-        USER_DEFINED_ELAB_OPTIONS="$USER_DEFINED_ELAB_OPTIONS -pvalue+top_tb.DUT.local_mem_wrapper.mem_ss_top.mem_ss_inst.mem_ss.emif_cal_top.emif_cal_top.emif_cal.arch_inst.IOSSM_USE_MODEL=0"
+        USER_DEFINED_ELAB_OPTIONS="$USER_DEFINED_ELAB_OPTIONS -pvalue+top_tb.DUT.local_mem_wrapper.mem_ss_top.mem_ss_sv.mem_ss.mem_ss.emif_cal_top.emif_cal_top.emif_cal.arch_inst.IOSSM_USE_MODEL=0"
     fi
 fi
 

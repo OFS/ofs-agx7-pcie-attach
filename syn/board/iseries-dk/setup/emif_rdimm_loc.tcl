@@ -14,8 +14,8 @@
 #-----------------------------------------------------------------------------
 # DDR4 Component CH0 3C/3D
 #-----------------------------------------------------------------------------
-set_location_assignment PIN_AD32 -to "ddr4_mem[0].ref_clk(n)"
-set_location_assignment PIN_AA31 -to ddr4_mem[0].ref_clk
+set_location_assignment PIN_AD32 -to "ddr4_mem_ref_clk[0].clk(n)"
+set_location_assignment PIN_AA31 -to ddr4_mem_ref_clk[0].clk
 set_location_assignment PIN_AV37 -to ddr4_mem[0].bg[1]
 set_location_assignment PIN_AK28 -to ddr4_mem[0].bg[0]
 set_location_assignment PIN_AN27 -to ddr4_mem[0].ba[1]
@@ -39,13 +39,13 @@ set_location_assignment PIN_U33  -to ddr4_mem[0].a[2]
 set_location_assignment PIN_L34  -to ddr4_mem[0].a[1]
 set_location_assignment PIN_N33  -to ddr4_mem[0].a[0]
 set_location_assignment PIN_BF34 -to ddr4_mem[0].par
-set_location_assignment PIN_AT34 -to ddr4_mem[0].ck_n[0]
-set_location_assignment PIN_AV33 -to ddr4_mem[0].ck[0]
-set_location_assignment PIN_BC35 -to ddr4_mem[0].cke[0]
-set_location_assignment PIN_AV35 -to ddr4_mem[0].odt[0]
+set_location_assignment PIN_AT34 -to ddr4_mem[0].ck_n
+set_location_assignment PIN_AV33 -to ddr4_mem[0].ck
+set_location_assignment PIN_BC35 -to ddr4_mem[0].cke
+set_location_assignment PIN_AV35 -to ddr4_mem[0].odt
 set_location_assignment PIN_BF38 -to ddr4_mem[0].act_n
-set_location_assignment PIN_AN31 -to ddr4_mem[0].oct_rzqin
-set_location_assignment PIN_BC37 -to ddr4_mem[0].cs_n[0]
+set_location_assignment PIN_AN31 -to ddr4_mem_ref_clk[0].oct_rzqin
+set_location_assignment PIN_BC37 -to ddr4_mem[0].cs_n
 set_location_assignment PIN_AT38 -to ddr4_mem[0].reset_n
 
 # CH0 DQS0
@@ -168,14 +168,14 @@ set_location_assignment PIN_AT44 -to ddr4_mem[0].dq[63]
 #-----------------------------------------------------------------------------
 # DDR4 Component CH1 3A/3B
 #-----------------------------------------------------------------------------
-set_location_assignment PIN_AK64 -to "ddr4_mem[1].ref_clk(n)"
-set_location_assignment PIN_AG63 -to ddr4_mem[1].ref_clk
+set_location_assignment PIN_AK64 -to "ddr4_mem_ref_clk[1].clk(n)"
+set_location_assignment PIN_AG63 -to ddr4_mem_ref_clk[1].clk
 set_location_assignment PIN_B59  -to ddr4_mem[1].bg[1]
 set_location_assignment PIN_AT70 -to ddr4_mem[1].bg[0]
 set_location_assignment PIN_AV68 -to ddr4_mem[1].ba[1]
 set_location_assignment PIN_AK70 -to ddr4_mem[1].ba[0]
 set_location_assignment PIN_AG68 -to ddr4_mem[1].alert_n
-set_location_assignment PIN_AV63 -to ddr4_mem[1].oct_rzqin
+set_location_assignment PIN_AV63 -to ddr4_mem_ref_clk[1].oct_rzqin
 set_location_assignment PIN_AT66 -to ddr4_mem[1].a[16]
 set_location_assignment PIN_AV65 -to ddr4_mem[1].a[15]
 set_location_assignment PIN_AK66 -to ddr4_mem[1].a[14]
@@ -194,12 +194,12 @@ set_location_assignment PIN_U59  -to ddr4_mem[1].a[2]
 set_location_assignment PIN_L60  -to ddr4_mem[1].a[1]
 set_location_assignment PIN_N59  -to ddr4_mem[1].a[0]
 set_location_assignment PIN_H64  -to ddr4_mem[1].par
-set_location_assignment PIN_D64  -to ddr4_mem[1].ck_n[0]
-set_location_assignment PIN_B63  -to ddr4_mem[1].ck[0]
-set_location_assignment PIN_J61  -to ddr4_mem[1].cke[0]
-set_location_assignment PIN_B61  -to ddr4_mem[1].odt[0]
+set_location_assignment PIN_D64  -to ddr4_mem[1].ck_n
+set_location_assignment PIN_B63  -to ddr4_mem[1].ck
+set_location_assignment PIN_J61  -to ddr4_mem[1].cke
+set_location_assignment PIN_B61  -to ddr4_mem[1].odt
 set_location_assignment PIN_H60  -to ddr4_mem[1].act_n
-set_location_assignment PIN_J59  -to ddr4_mem[1].cs_n[0]
+set_location_assignment PIN_J59  -to ddr4_mem[1].cs_n
 set_location_assignment PIN_D60  -to ddr4_mem[1].reset_n
 
 # CH1 DQS0
@@ -322,8 +322,8 @@ set_location_assignment PIN_AN45 -to ddr4_mem[1].dq[63]
 #-----------------------------------------------------------------------------
 # DDR4 DIMM CH2 2C/2F
 #-----------------------------------------------------------------------------
-set_location_assignment PIN_KR37 -to "ddr4_mem_group_1[0].ref_clk(n)"
-set_location_assignment PIN_KU36 -to ddr4_mem_group_1[0].ref_clk
+set_location_assignment PIN_KR37 -to "ddr4_mem_ref_clk[2].clk(n)"
+set_location_assignment PIN_KU36 -to ddr4_mem_ref_clk[2].clk
 set_location_assignment PIN_KJ35 -to ddr4_mem_group_1[0].a[16]
 set_location_assignment PIN_KF34 -to ddr4_mem_group_1[0].a[15]
 set_location_assignment PIN_KR35 -to ddr4_mem_group_1[0].a[14]
@@ -345,15 +345,15 @@ set_location_assignment PIN_KR43 -to ddr4_mem_group_1[0].bg[1]
 set_location_assignment PIN_KF32 -to ddr4_mem_group_1[0].bg[0]
 set_location_assignment PIN_KJ33 -to ddr4_mem_group_1[0].ba[1]
 set_location_assignment PIN_KR33 -to ddr4_mem_group_1[0].ba[0]
-set_location_assignment PIN_KF42 -to ddr4_mem_group_1[0].cs_n[0]
-set_location_assignment PIN_KU38 -to ddr4_mem_group_1[0].ck_n[0]
-set_location_assignment PIN_KR39 -to ddr4_mem_group_1[0].ck[0]
-set_location_assignment PIN_KF40 -to ddr4_mem_group_1[0].cke[0]
-set_location_assignment PIN_KU40 -to ddr4_mem_group_1[0].odt[0]
+set_location_assignment PIN_KF42 -to ddr4_mem_group_1[0].cs_n
+set_location_assignment PIN_KU38 -to ddr4_mem_group_1[0].ck_n
+set_location_assignment PIN_KR39 -to ddr4_mem_group_1[0].ck
+set_location_assignment PIN_KF40 -to ddr4_mem_group_1[0].cke
+set_location_assignment PIN_KU40 -to ddr4_mem_group_1[0].odt
 set_location_assignment PIN_KJ39 -to ddr4_mem_group_1[0].par
 set_location_assignment PIN_KJ43 -to ddr4_mem_group_1[0].act_n
 set_location_assignment PIN_KC33 -to ddr4_mem_group_1[0].alert_n
-set_location_assignment PIN_KJ37 -to ddr4_mem_group_1[0].oct_rzqin
+set_location_assignment PIN_KJ37 -to ddr4_mem_ref_clk[2].oct_rzqin
 set_location_assignment PIN_KU42 -to ddr4_mem_group_1[0].reset_n
 
 # CH2 DQS0
@@ -502,14 +502,14 @@ set_location_assignment PIN_KW33 -to ddr4_mem_group_1[0].dq[63]
 #-----------------------------------------------------------------------------
 # DDR4 DIMM CH3 2B,2E
 #-----------------------------------------------------------------------------
-#set_location_assignment PIN_LW43 -to "ddr4_mem_group_1[1].ref_clk(n)"
-#set_location_assignment PIN_MA44 -to ddr4_mem_group_1[1].ref_clk
+#set_location_assignment PIN_LW43 -to "ddr4_mem_ref_clk[3].clk(n)"
+#set_location_assignment PIN_MA44 -to ddr4_mem_ref_clk[3].clk
 #set_location_assignment PIN_MA54 -to ddr4_mem_group_1[1].alert_n
 #set_location_assignment PIN_LH44 -to ddr4_mem_group_1[1].bg[1]
 #set_location_assignment PIN_LR47 -to ddr4_mem_group_1[1].bg[0]
 #set_location_assignment PIN_LN48 -to ddr4_mem_group_1[1].ba[1]
 #set_location_assignment PIN_LW47 -to ddr4_mem_group_1[1].ba[0]
-#set_location_assignment PIN_LN44 -to ddr4_mem_group_1[1].oct_rzqin
+#set_location_assignment PIN_LN44 -to ddr4_mem_ref_clk[3].oct_rzqin
 #set_location_assignment PIN_MA48 -to ddr4_mem_group_1[1].a[17]
 #set_location_assignment PIN_LN46 -to ddr4_mem_group_1[1].a[16]
 #set_location_assignment PIN_LR45 -to ddr4_mem_group_1[1].a[15]
@@ -529,12 +529,12 @@ set_location_assignment PIN_KW33 -to ddr4_mem_group_1[0].dq[63]
 #set_location_assignment PIN_KU44 -to ddr4_mem_group_1[1].a[1]
 #set_location_assignment PIN_KR45 -to ddr4_mem_group_1[1].a[0]
 #set_location_assignment PIN_LB48 -to ddr4_mem_group_1[1].par
-#set_location_assignment PIN_LL49 -to ddr4_mem_group_1[1].ck_n[0]
-#set_location_assignment PIN_LH48 -to ddr4_mem_group_1[1].ck[0]
-#set_location_assignment PIN_LB46 -to ddr4_mem_group_1[1].cke[0]
-#set_location_assignment PIN_LH46 -to ddr4_mem_group_1[1].odt[0]
+#set_location_assignment PIN_LL49 -to ddr4_mem_group_1[1].ck_n
+#set_location_assignment PIN_LH48 -to ddr4_mem_group_1[1].ck
+#set_location_assignment PIN_LB46 -to ddr4_mem_group_1[1].cke
+#set_location_assignment PIN_LH46 -to ddr4_mem_group_1[1].odt
 #set_location_assignment PIN_KW45 -to ddr4_mem_group_1[1].act_n
-#set_location_assignment PIN_LB44 -to ddr4_mem_group_1[1].cs_n[0]
+#set_location_assignment PIN_LB44 -to ddr4_mem_group_1[1].cs_n
 #set_location_assignment PIN_LL45 -to ddr4_mem_group_1[1].reset_n
 #
 ## CH3 DQS0

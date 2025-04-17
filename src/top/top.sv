@@ -37,15 +37,13 @@ module top
 // Local Memory technology interfaces
 `ifdef INCLUDE_LOCAL_MEM
 `ifdef INCLUDE_DDR4
-`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_0
-                     ofs_fim_emif_ddr4_if.emif                 ddr4_mem          [NUM_GROUP_0_DDR4_CHANNELS-1:0],
-`endif // OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_0
-`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_1
-                     ofs_fim_emif_ddr4_group_1_if.emif         ddr4_mem_group_1     [NUM_GROUP_1_DDR4_CHANNELS-1:0],
-`endif // OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_1
-`ifdef INCLUDE_HPS
-                     ofs_fim_hps_ddr4_if.emif                  ddr4_hps,
-`endif // INCLUDE_HPS
+                    ofs_fim_mem_ddr4_ref_clk_if.ip              ddr4_mem_ref_clk  [NUM_DDR4_CHANNELS-1:0],
+`ifdef HAS_IFC_MEM_SS_MEM_DDR4_IF
+                    mem_ss_mem_ddr4_if.ip                       ddr4_mem          [NUM_GROUP_0_DDR4_CHANNELS-1:0],
+`endif
+`ifdef HAS_IFC_MEM_SS_MEM_G1_DDR4_IF
+                    mem_ss_mem_g1_ddr4_if.ip                    ddr4_mem_group_1  [NUM_GROUP_1_DDR4_CHANNELS-1:0],
+`endif
 `endif // INCLUDE_DDR4
 `ifdef INCLUDE_HBM
                      input                                     hbm_cattrip       [NUM_HBM_DEVICES-1:0],
@@ -1229,12 +1227,13 @@ endgenerate
        // AFU ext mem interfaces
       .afu_mem_if   (afu_ext_mem_if),
 `ifdef INCLUDE_DDR4
-`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_0
+      .ddr4_mem_if_ref_clk(ddr4_mem_ref_clk),
+ `ifdef HAS_IFC_MEM_SS_MEM_DDR4_IF
       .ddr4_mem_if  (ddr4_mem),
-`endif
-`ifdef OFS_FIM_IP_CFG_LOCAL_MEM_DEFINES_EMIF_DDR4_PARAM_GROUP_1
+ `endif
+ `ifdef HAS_IFC_MEM_SS_MEM_G1_DDR4_IF
       .ddr4_mem_if_group_1  (ddr4_mem_group_1),
-`endif
+ `endif
 `endif
 
 `ifdef INCLUDE_HBM
@@ -1256,9 +1255,6 @@ endgenerate
       .hps2emif_gp (hps2emif_gp),
       .emif2hps    (emif2hps),
       .emif2hps_gp (emif2hps_gp),
-`ifdef INCLUDE_DDR4
-      .ddr4_hps_if (ddr4_hps),
-`endif
 `endif
 
        // CSR interfaces

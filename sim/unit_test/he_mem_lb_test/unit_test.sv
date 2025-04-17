@@ -764,7 +764,22 @@ task main_test;
       $display("HE local memory bus byte width: %0d\n", local_mem_bus_bytes);
 
      `ifdef INCLUDE_DDR4
-      wait(top_tb.DUT.local_mem_wrapper.mem_ss_top.mem_ss_cal_success[0] == 1'b1);
+      wait(top_tb.DUT.local_mem_wrapper.mem_ss_top.mem_ss_cal_success[0] ||
+           top_tb.DUT.local_mem_wrapper.mem_ss_top.mem_ss_cal_fail[0]);
+      if (top_tb.DUT.local_mem_wrapper.mem_ss_top.mem_ss_cal_fail[0]) begin
+          $display("\nERROR: memory calibration failed");
+          incr_err_count();
+          $finish;
+      end
+     `endif
+     `ifdef INCLUDE_HBM
+      wait(top_tb.DUT.local_mem_wrapper.hbm_ss_top.hbm_cal_success[0] ||
+           top_tb.DUT.local_mem_wrapper.hbm_ss_top.hbm_cal_fail[0]);
+      if (top_tb.DUT.local_mem_wrapper.hbm_ss_top.hbm_cal_fail[0]) begin
+          $display("\nERROR: HBM calibration failed");
+          incr_err_count();
+          $finish;
+      end
      `endif
 
       test_emif_calibration (test_result);
