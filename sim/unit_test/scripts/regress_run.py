@@ -594,6 +594,8 @@ def create_test_list():
                     test_remove_patterns.append(r'port_gasket_test')
                 if not design_includes_remote_stp:
                     test_remove_patterns.append(r'remote_stp_test')
+                if (fim_variant == "mseries-dk"):
+                    test_remove_patterns.append(r'he_mem_lb_test')
                 filtered_test_list = remove_matching_tests(pre_filtered_test_list,test_remove_patterns)
             else:
                 test_dir_pattern = "\/(" + args.package + r'\w+)$'
