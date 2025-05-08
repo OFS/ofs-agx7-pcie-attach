@@ -456,7 +456,7 @@ task main_test;
       
       `ifdef INCLUDE_DDR4
       // wait for mem_ss rst ack
-      wait(top_tb.DUT.local_mem_wrapper.mem_ss_top.mem_ss_rst_ack_n == 1'b0);      
+      wait(top_tb.DUT.local_mem_wrapper.mem_ss_top.ss_reset_if.ss_app_cold_rst_ack_n == 1'b0);      
       // wiat for cal
       wait(top_tb.DUT.local_mem_wrapper.mem_ss_top.mem_ss_cal_success[0] == 1'b1);      
       test_emif_calibration ( test_result );
