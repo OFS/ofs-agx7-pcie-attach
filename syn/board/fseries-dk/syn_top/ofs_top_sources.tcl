@@ -87,7 +87,7 @@ set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/pr_assignments.tcl
 # Pins & Location Assignments
 ############################################################################################
 set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/top_loc.tcl
-set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/emif_loc.tcl
+set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/emif_rdimm_loc.tcl
 set_global_assignment -name SOURCE_TCL_SCRIPT_FILE ../setup/pmci_loc.tcl
 
 ############################################################################################

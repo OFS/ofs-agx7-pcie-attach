@@ -12,8 +12,10 @@
 #-----------------------------------------------------------------------------
 # EMIF CH0
 #-----------------------------------------------------------------------------
+
 set_location_assignment PIN_CW29 -to "ddr4_mem_ref_clk[0].clk(n)"
 set_location_assignment PIN_CV28 -to ddr4_mem_ref_clk[0].clk
+set_location_assignment PIN_CT28 -to ddr4_mem_ref_clk[0].oct_rzqin
 set_location_assignment PIN_CP34 -to ddr4_mem[0].bg[1]
 set_location_assignment PIN_CR25 -to ddr4_mem[0].bg[0]
 set_location_assignment PIN_CT24 -to ddr4_mem[0].ba[1]
@@ -43,9 +45,11 @@ set_location_assignment PIN_CK32 -to ddr4_mem[0].cke
 set_location_assignment PIN_CP32 -to ddr4_mem[0].odt
 set_location_assignment PIN_CL35 -to ddr4_mem[0].act_n
 set_location_assignment PIN_CP24 -to ddr4_mem[0].alert_n
-set_location_assignment PIN_CT28 -to ddr4_mem_ref_clk[0].oct_rzqin
 set_location_assignment PIN_CL31 -to ddr4_mem[0].par
 set_location_assignment PIN_CN35 -to ddr4_mem[0].reset_n
+
+set_instance_assignment -name IO_STANDARD "TRUE DIFFERENTIAL SIGNALING" -to ddr4_mem_ref_clk[0].clk
+set_instance_assignment -name INPUT_TERMINATION DIFFERENTIAL -to ddr4_mem_ref_clk[0].clk
 
 # CH0 DQS0
 set_location_assignment PIN_CY28 -to ddr4_mem[0].dbi_n[0]
@@ -154,8 +158,10 @@ set_location_assignment PIN_DD8  -to ddr4_mem[0].dq[63]
 #-----------------------------------------------------------------------------
 # EMIF CH1
 #-----------------------------------------------------------------------------
+
 set_location_assignment PIN_DC37 -to "ddr4_mem_ref_clk[1].clk(n)"
 set_location_assignment PIN_DD36 -to ddr4_mem_ref_clk[1].clk
+set_location_assignment PIN_CY36 -to ddr4_mem_ref_clk[1].oct_rzqin
 set_location_assignment PIN_DD42 -to ddr4_mem[1].bg[1]
 set_location_assignment PIN_DA33 -to ddr4_mem[1].bg[0]
 set_location_assignment PIN_CY32 -to ddr4_mem[1].ba[1]
@@ -185,9 +191,11 @@ set_location_assignment PIN_CY40 -to ddr4_mem[1].cke
 set_location_assignment PIN_DD40 -to ddr4_mem[1].odt
 set_location_assignment PIN_DA43 -to ddr4_mem[1].act_n
 set_location_assignment PIN_DH28 -to ddr4_mem[1].alert_n
-set_location_assignment PIN_CY36 -to ddr4_mem_ref_clk[1].oct_rzqin
 set_location_assignment PIN_DA39 -to ddr4_mem[1].par
 set_location_assignment PIN_DC43 -to ddr4_mem[1].reset_n
+
+set_instance_assignment -name IO_STANDARD "TRUE DIFFERENTIAL SIGNALING" -to ddr4_mem[1].ref_clk
+set_instance_assignment -name INPUT_TERMINATION DIFFERENTIAL -to ddr4_mem[1].ref_clk
 
 # CH1 DQS0
 set_location_assignment PIN_CK44 -to ddr4_mem[1].dbi_n[0]
@@ -298,6 +306,7 @@ set_location_assignment PIN_DH50 -to ddr4_mem[1].dq[63]
 #-----------------------------------------------------------------------------
 set_location_assignment PIN_T6  -to "ddr4_mem_ref_clk[2].clk(n)"
 set_location_assignment PIN_U5  -to ddr4_mem_ref_clk[2].clk
+set_location_assignment PIN_W5  -to ddr4_mem_ref_clk[2].oct_rzqin
 set_location_assignment PIN_L11 -to ddr4_mem_group_1[0].bg[1]
 set_location_assignment PIN_Y2  -to ddr4_mem_group_1[0].bg[0]
 set_location_assignment PIN_W1  -to ddr4_mem_group_1[0].ba[1]
@@ -308,7 +317,6 @@ set_location_assignment PIN_W3  -to ddr4_mem_group_1[0].a[15]
 set_location_assignment PIN_T4  -to ddr4_mem_group_1[0].a[14]
 set_location_assignment PIN_U3  -to ddr4_mem_group_1[0].a[13]
 set_location_assignment PIN_Y6  -to ddr4_mem_group_1[0].a[12]
-set_location_assignment PIN_W5  -to ddr4_mem_ref_clk[2].oct_rzqin
 set_location_assignment PIN_Y8  -to ddr4_mem_group_1[0].a[11]
 set_location_assignment PIN_W7  -to ddr4_mem_group_1[0].a[10]
 set_location_assignment PIN_T8  -to ddr4_mem_group_1[0].a[9]
@@ -322,7 +330,6 @@ set_location_assignment PIN_W11 -to ddr4_mem_group_1[0].a[2]
 set_location_assignment PIN_T12 -to ddr4_mem_group_1[0].a[1]
 set_location_assignment PIN_U11 -to ddr4_mem_group_1[0].a[0]
 set_location_assignment PIN_P8  -to ddr4_mem_group_1[0].par
-set_location_assignment PIN_R11 -to ddr4_mem_group_1[0].cs_n[1]
 set_location_assignment PIN_M8  -to ddr4_mem_group_1[0].ck_n
 set_location_assignment PIN_L7  -to ddr4_mem_group_1[0].ck
 set_location_assignment PIN_R9  -to ddr4_mem_group_1[0].cke

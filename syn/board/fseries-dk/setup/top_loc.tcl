@@ -9,26 +9,26 @@
 #
 #-----------------------------------------------------------------------------
 
-set_location_assignment PIN_P36 -to qsfpa_resetn
-set_location_assignment PIN_R35 -to qsfpa_lpmode
-set_location_assignment PIN_M36 -to qsfpa_modeseln
-set_location_assignment PIN_L35 -to qsfpa_intn
-set_location_assignment PIN_P34 -to qsfpa_modprsln
-set_location_assignment PIN_R33 -to qsfpa_power_good
-set_location_assignment PIN_P32 -to qsfpb_resetn
-set_location_assignment PIN_R31 -to qsfpb_lpmode
-set_location_assignment PIN_M32 -to qsfpb_modeseln
-set_location_assignment PIN_L31 -to qsfpb_intn
-set_location_assignment PIN_Y36 -to qsfpb_modprsln
-set_location_assignment PIN_W35 -to qsfpb_power_good
+set_location_assignment PIN_Y14 -to qsfpa_resetn
+set_location_assignment PIN_W13 -to qsfpa_lpmode
+set_location_assignment PIN_T14 -to qsfpa_modeseln
+set_location_assignment PIN_U13 -to qsfpa_intn
+set_location_assignment PIN_Y16 -to qsfpa_modprsln
+set_location_assignment PIN_W15 -to qsfpa_power_good
+set_location_assignment PIN_Y18 -to qsfpb_resetn
+set_location_assignment PIN_W17 -to qsfpb_lpmode
+set_location_assignment PIN_T18 -to qsfpb_modeseln
+set_location_assignment PIN_U17 -to qsfpb_intn
+set_location_assignment PIN_P14 -to qsfpb_modprsln
+set_location_assignment PIN_R13 -to qsfpb_power_good
 set_location_assignment PIN_K44 -to qsfpa_i2c_scl
 set_location_assignment PIN_J43 -to qsfpa_i2c_sda
 
 set_location_assignment PIN_CE24 -to "tod_fpga_clk(n)"
 set_location_assignment PIN_CG24 -to tod_fpga_clk
 set_location_assignment PIN_CH25 -to b_1pps_fpga_clk
-set_location_assignment PIN_B32 -to qsfpb_i2c_scl
-set_location_assignment PIN_A31 -to qsfpb_i2c_sda
+set_location_assignment PIN_M16 -to qsfpb_i2c_scl
+set_location_assignment PIN_L15 -to qsfpb_i2c_sda
 set_location_assignment PIN_V19  -to b_sel_1pps_inout
 set_location_assignment PIN_CH27 -to b_shdn_1pps_to_10mhz
 set_location_assignment PIN_CG28 -to b_shdn_10mhz_in
@@ -60,13 +60,13 @@ set_location_assignment PIN_DC24 -to b_fpga_hps_zl_gpout[0]
 
 set_location_assignment PIN_B48 -to qsfpa_act_r
 set_location_assignment PIN_A47 -to qsfpa_act_g
-set_location_assignment PIN_F36 -to qsfpa_speed_y
-set_location_assignment PIN_G35 -to qsfpa_speed_g
+set_location_assignment PIN_M14 -to qsfpa_speed_y
+set_location_assignment PIN_L13 -to qsfpa_speed_g
 
 set_location_assignment PIN_G49 -to qsfpb_act_r
 set_location_assignment PIN_F48 -to qsfpb_act_g
-set_location_assignment PIN_F32 -to qsfpb_speed_y
-set_location_assignment PIN_G31 -to qsfpb_speed_g
+set_location_assignment PIN_P16 -to qsfpb_speed_y
+set_location_assignment PIN_R15 -to qsfpb_speed_g
 
 # set_location_assignment PIN_AG6 -to hps_uart_tx
 # set_location_assignment PIN_AB1 -to hps_uart_rx
@@ -211,8 +211,8 @@ set_location_assignment PIN_CW5 -to PCIE_RX_N[15]
 set_location_assignment PIN_CG13 -to PCIE_RESET_N
 set_location_assignment PIN_BU7 -to "PCIE_REFCLK0(n)"
 set_location_assignment PIN_BR7 -to PCIE_REFCLK0
-#set_location_assignment PIN_AD49 -to "PCIE_REFCLK1(n)"
-#set_location_assignment PIN_AE48 -to PCIE_REFCLK1
+set_location_assignment PIN_CC7 -to "PCIE_REFCLK1(n)"
+set_location_assignment PIN_CD8 -to PCIE_REFCLK1
 set_location_assignment PIN_AK4 -to PCIE_TX_P[0]
 set_location_assignment PIN_AN7 -to PCIE_TX_P[1]
 set_location_assignment PIN_AP4 -to PCIE_TX_P[2]

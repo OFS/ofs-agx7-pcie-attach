@@ -37,8 +37,8 @@ if { [::config_env::verilog_macro_defined INCLUDE_PR] == 0 } {
         set_instance_assignment -name PARTIAL_RECONFIGURATION_PARTITION ON -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
 
 
-        set_instance_assignment -name PLACE_REGION "X90 Y40 X350 Y220" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
-        set_instance_assignment -name ROUTE_REGION "X0 Y0 X385 Y329" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        set_instance_assignment -name PLACE_REGION "X0 Y10 X178 Y166; X70 Y167 X178 Y288" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
+        set_instance_assignment -name ROUTE_REGION "X0 Y9 X179 Y289" -to afu_top|pg_afu.port_gasket|pr_slot|afu_main
     }
 
 }

@@ -5,7 +5,7 @@ type = ofs
 platform = n6001
 family = agilex
 fim = base_x16
-part = AGFB027R24C2E2VR2
+part = AGFD023R24C2E1VC
 device_id = 6001
 
 [pcie]

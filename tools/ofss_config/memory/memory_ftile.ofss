@@ -3,4 +3,4 @@ type = memory
 
 [settings]
 output_name = mem_ss
-preset = fseries-dk
+preset = fseries-dk-1_rdimm
