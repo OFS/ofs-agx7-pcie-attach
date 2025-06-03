@@ -27,7 +27,7 @@ if grep -q "INCLUDE_HBM" "${OFS_ROOTDIR}/sim/scripts/generated_rtl_flist_macros.
     # TODO: replace with generic way to qip_gen_* path
     MEM_MAP_PATH="${OFS_ROOTDIR}/sim/scripts/qip_gen_mseries-dk/ipss/mem/qip/hbm_ss/hbm_ss/sim/hbm_ss_noc_sim.inc"
     echo ${MEM_MAP_PATH}
-    sed -i '/`define HBM_SS_SYSTEM_PATH hbm_ss/ s#`define HBM_SS_SYSTEM_PATH hbm_ss#`define HBM_SS_SYSTEM_PATH top_tb.DUT.local_mem_wrapper.hbm_ss_top.hbm_inst#' ${MEM_MAP_PATH}
+    sed -i '/`define HBM_SS_SYSTEM_PATH hbm_ss/ s#`define HBM_SS_SYSTEM_PATH hbm_ss#`define HBM_SS_SYSTEM_PATH top_tb.DUT.local_mem_wrapper.hbm_ss_top.hbm_ss_sv.hbm_ss#' ${MEM_MAP_PATH}
 fi
 
 if grep -q "INCLUDE_DDR" "${OFS_ROOTDIR}/sim/scripts/generated_rtl_flist_macros.f"; then
