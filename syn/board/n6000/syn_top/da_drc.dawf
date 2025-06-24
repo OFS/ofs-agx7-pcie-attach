@@ -1,0 +1,220 @@
+
+::drc::add_waiver \
+	-description {Waiver for PWR GOOD signal synchronizer_nocut registers.} \
+	-rule_id {CDC-50001} \
+	-query_string {From =~ 'PCIE_RST_CTRL[0].rst_ctrl|pwr_good_csr_clk_n_resync|resync_chains[0].synchronizer_nocut'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50001_n6000} \
+	-timestamp {2025-05-15*13:40:08} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for inputs into timeout_regs_frozen_reg.} \
+	-rule_id {CDC-50001} \
+	-query_string {To == 'afu_top|afu_intf_inst|protocol_checker_csr|timeout_regs_frozen_reg'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50001_n6000} \
+	-timestamp {2025-05-15*13:43:36} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for inputs into flr_rcvd_vf_flag.} \
+	-rule_id {CDC-50001} \
+	-query_string {To == 'afu_top|pg_afu.port_gasket|port_reset_fsm_inst|flr_rcvd_vf_flag'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC-50001_n6000} \
+	-timestamp {2025-05-15*13:44:33} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for MSIX delayed_wrptr_g[*].} \
+	-rule_id {CDC-50001} \
+	-query_string {From =~ 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].msix.msix|msix_table|u_flrcmpl_fifo|auto_generated|delayed_wrptr_g'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50001_n6000} \
+	-timestamp {2025-05-15*13:46:07} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for protocol checker addr_timeout_csr_reg_load_data registers.} \
+	-rule_id {CDC-50004} \
+	-query_string {From == 'afu_top|afu_intf_inst|protocol_checker_csr|addr_timeout_csr_reg_load_data[*]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50004_n6000} \
+	-timestamp {2025-05-15*13:48:21} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for protocol checker dw0_len_timeout_csr_reg_load_data register.} \
+	-rule_id {CDC-50004} \
+	-query_string {From == 'afu_top|afu_intf_inst|protocol_checker_csr|dw0_len_timeout_csr_reg_load_data[*]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50004_n6000} \
+	-timestamp {2025-05-15*13:49:33} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waivers for protocol checker requester_id_timeout_csr_reg_load_data register.} \
+	-rule_id {CDC-50004} \
+	-query_string {From == 'afu_top|afu_intf_inst|protocol_checker_csr|requester_id_timeout_csr_reg_load_data[*]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50004_n6000} \
+	-timestamp {2025-05-15*13:50:40} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for protocol checker tag_timeout_csr_reg_load_data registers.} \
+	-rule_id {CDC-50004} \
+	-query_string {From == 'afu_top|afu_intf_inst|protocol_checker_csr|tag_timeout_csr_reg_load_data[*]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50004_n6000} \
+	-timestamp {2025-05-15*13:51:49} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for AFU tx_hdr_is_pu_mode_load_data register.} \
+	-rule_id {CDC-50004} \
+	-query_string {From == 'afu_top|afu_intf_inst|tx_hdr_is_pu_mode_load_data'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50004_n6000} \
+	-timestamp {2025-05-15*13:53:44} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for AFU tx_header_error_127_64_load_data registers.} \
+	-rule_id {CDC-50004} \
+	-query_string {From == 'afu_top|afu_intf_inst|tx_header_error_127_64_load_data[*]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC-50004} \
+	-timestamp {2025-05-15*13:54:52} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for AFU tx_header_error_63_00_load_data register.} \
+	-rule_id {CDC-50004} \
+	-query_string {From == 'afu_top|afu_intf_inst|tx_header_error_63_00_load_data[*]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50004_n6000} \
+	-timestamp {2025-05-15*13:55:59} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for QSFP output signals.} \
+	-rule_id {TMC-20012} \
+	-query_string {Port =~ 'qsfp'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {TMC_20012_n6000} \
+	-timestamp {2025-05-15*13:59:30} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for reset source rst_clk100m_resync that uses synchronizer_nocut.} \
+	-rule_id {RES-50001} \
+	-query_string {"Reset Source" =~ 'PCIE_RST_CTRL[0].rst_ctrl|rst_clk100m_resync|resync_chains[0].synchronizer_nocut'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {RES_50001_n6000} \
+	-timestamp {2025-05-15*14:04:25} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for MSIX Table u_rst_stclk_sync.} \
+	-rule_id {RES-50001} \
+	-query_string {"Reset Source" =~ 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].msix.msix|msix_table|u_rst_stclk_sync'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {RES_50001_n6000} \
+	-timestamp {2025-05-15*14:05:56} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for HSSI synchronizer_nocut.} \
+	-rule_id {RES-50003} \
+	-query_string {"Unconstrained Chain Registers" =~ 'hssi_data_sync|fifo|rst_rclk_resync|resync_chains[0].synchronizer_nocut'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {RES_50003_n6000} \
+	-timestamp {2025-05-15*14:10:00} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for QSFP inputs.} \
+	-rule_id {TMC-20011} \
+	-query_string {Port =~ 'qsfp'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {TMC_20011_n6000} \
+	-timestamp {2025-05-15*14:11:31} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Wavier for PCIe MSIX delayed_wrptr_g.} \
+	-rule_id {CDC-50007} \
+	-query_string {"Source Nodes" == 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].msix.msix|msix_table|u_ctrlshadow_dcfifo|auto_generated|delayed_wrptr_g[*]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50007_n6000} \
+	-timestamp {2025-05-15*14:13:56} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for PCIe MSIX rdptr_g.} \
+	-rule_id {CDC-50007} \
+	-query_string {"Source Nodes" == 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].msix.msix|msix_table|u_flrcmpl_fifo|auto_generated|rdptr_g[*]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50007_n6000} \
+	-timestamp {2025-05-15*14:15:06} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for PCIe MSIX delayed_wrptr_g.} \
+	-rule_id {CDC-50007} \
+	-query_string {"Source Nodes" == 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].msix.msix|msix_table|u_flrrcvd_fifo|auto_generated|delayed_wrptr_g[*]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50007_n6000} \
+	-timestamp {2025-05-15*14:15:57} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for inputs into protocol checker mmio_immediate_frozen_reg.} \
+	-rule_id {CDC-50012} \
+	-query_string {To == 'afu_top|afu_intf_inst|protocol_checker_csr|mmio_immediate_frozen_reg'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50012_n6000} \
+	-timestamp {2025-05-15*14:19:22} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for User Clock synchronizer.} \
+	-rule_id {CDC-50012} \
+	-query_string {To =~ 'afu_top|pg_afu.port_gasket|user_clock|qph_user_clk|pll.qph_reconfig_from_pll_resync|resync_chains[0].synchronizer'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50012_n6000} \
+	-timestamp {2025-05-15*14:20:49} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for completion metering sync path.} \
+	-rule_id {CDC-50003} \
+	-query_string {From == 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].tx_sb.pipe_tx|cpl_metering|impl|u_hia_dm_st_cplto_sync|data_in_d1[*]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50003_n6000} \
+	-timestamp {2025-05-15*14:25:51} \
+	-owner {Tamim} \
+	-no_warn

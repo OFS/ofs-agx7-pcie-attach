@@ -1,0 +1,222 @@
+#Report waivers by thofion at 05/06/2025 09:53:10
+
+::drc::add_waiver \
+	-description {Set waiver for set_false_path -through $tmp_pin -to $hier_path for cells.} \
+	-rule_id {TMC-20027} \
+	-query_string {"SDC Command" == 'set_false_path -through $tmp_pin -to $hier_path'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {TMC_20027} \
+	-timestamp {2025-05-05*13:46:58} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waive paths outward from Altera synchronizer.} \
+	-rule_id {CDC-50001} \
+	-query_string {From == 'PCIE_RST_CTRL[0].rst_ctrl|pwr_good_csr_clk_n_resync|resync_chains[0].synchronizer_nocut|dreg[1]'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50001_n6001} \
+	-timestamp {2025-05-05*14:05:57} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver on synchronizer chains and flr_rcvd_vf_flag.} \
+	-rule_id {CDC-50001} \
+	-query_string {To == 'afu_top|pg_afu.port_gasket|port_reset_fsm_inst|flr_rcvd_vf_flag'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC-50001} \
+	-timestamp {2025-05-05*16:12:45} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver to timeout_regs_frozen_reg} \
+	-rule_id {CDC-50001} \
+	-query_string {To == 'afu_top|afu_intf_inst|protocol_checker_csr|timeout_regs_frozen_reg'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50001_n6001} \
+	-timestamp {2025-05-06*09:27:43} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for MSIX Write Pointer.} \
+	-rule_id {CDC-50001} \
+	-query_string {From =~ 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].msix.msix|msix_table|u_flrcmpl_fifo|auto_generated|delayed_wrptr_g'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50001_n6001} \
+	-timestamp {2025-05-06*09:51:53} \
+	-owner {Tamim} \
+	-no_warn
+
+
+::drc::add_waiver \
+	-description {Waiver for MEM TG CSR Registers.} \
+	-rule_id {CDC-50001} \
+	-query_string {To =~ 'afu_top|pg_afu.port_gasket|pr_slot|afu_main|port_afu_instances|afu_gen[2].tg_gen.mem_tg_inst|tg2_csr_inst|csr_reg'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50001_n6001} \
+	-timestamp {2025-05-06*09:54:16} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for registers using synchronized CSR Clock as control signal.} \
+	-rule_id {CDC-50004} \
+	-query_string {"Control Signal" =~ 'PCIE_RST_CTRL[0].rst_ctrl|pwr_good_csr_clk_n_resync|resync_chains[0].synchronizer_nocut'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50004_n6001} \
+	-timestamp {2025-05-06*10:09:11} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for MEM TG CSR Registers.} \
+	-rule_id {CDC-50006} \
+	-query_string {"Synchronization Nodes" =~ 'afu_top|pg_afu.port_gasket|pr_slot|afu_main|port_afu_instances|afu_gen[2].tg_gen.mem_tg_inst|tg2_csr_inst|csr_reg'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50006} \
+	-timestamp {2025-05-06*10:13:54} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for QSFP outputs - Registers have controlled MIN/MAX delays.} \
+	-rule_id {TMC-20012} \
+	-query_string {Port =~ 'qsfp'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {TMC_20012_n6001} \
+	-timestamp {2025-05-06*10:47:36} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for MEM TG Read Pointer from DCFIFO.} \
+	-rule_id {CDC-50007} \
+	-query_string {"Source Nodes" =~ 'afu_top|pg_afu.port_gasket|pr_slot|afu_main|port_afu_instances|afu_gen[2].tg_gen.mem_tg_inst|tg_ch[3].tg2_inst|cfg_ccb|dcfifo_component'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50007_n6001} \
+	-timestamp {2025-05-06*10:51:43} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for MEM TG delayed write pointer.} \
+	-rule_id {CDC-50007} \
+	-query_string {"Source Nodes" =~ 'afu_top|pg_afu.port_gasket|pr_slot|afu_main|port_afu_instances|afu_gen[2].tg_gen.mem_tg_inst|tg_ch[3].tg2_inst|cfg_rd_ccb|dcfifo_component'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50007_n6001} \
+	-timestamp {2025-05-06*10:53:01} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for PCIE MSIX shadow delayed write pointer.} \
+	-rule_id {CDC-50007} \
+	-query_string {"Source Nodes" =~ 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].msix.msix|msix_table|u_ctrlshadow_dcfifo'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50007_n6001} \
+	-timestamp {2025-05-06*10:54:47} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for PCIE MSIX table read pointer.} \
+	-rule_id {CDC-50007} \
+	-query_string {"Source Nodes" =~ 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].msix.msix|msix_table|u_flrcmpl_fifo'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50007_n6001} \
+	-timestamp {2025-05-06*10:55:59} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for PCIE MSIX table delayed write pointer.} \
+	-rule_id {CDC-50007} \
+	-query_string {"Source Nodes" =~ 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].msix.msix|msix_table|u_flrrcvd_fifo'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50007_n6001} \
+	-timestamp {2025-05-06*10:56:52} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for Memory Reset Controller  outputs.} \
+	-rule_id {TMC-20027} \
+	-query_string {"Bare String Filter" =~ 'local_mem_wrapper|mem_ss_top|mem_ss_sv|mem_ss|mem_ss|mem_reset_ctrl|mem_reset_ctrl|reset_ctrl_impl'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {TMC_20027_n6001} \
+	-timestamp {2025-05-06*11:00:07} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for synchronizer_nocut.} \
+	-rule_id {RES-50001} \
+	-query_string {"Reset Source" =~ 'PCIE_RST_CTRL[0].rst_ctrl|rst_clk100m_resync|resync_chains[0].synchronizer_nocut'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {RES_50001_n6001} \
+	-timestamp {2025-05-06*11:33:35} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waivers for PCIE MSIX Reset Sync Registers.} \
+	-rule_id {RES-50001} \
+	-query_string {"Reset Source" =~ 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].msix.msix|msix_table|u_rst_stclk_sync'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {RES_50001_n6001} \
+	-timestamp {2025-05-06*11:34:45} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for QSFP input delay.  Delays are controlled from register.} \
+	-rule_id {TMC-20011} \
+	-query_string {Port =~ 'qsfp'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {TMC_20011_n6001} \
+	-timestamp {2025-05-06*11:36:45} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for inputs on different clock into mmio_immediate_frozen_reg on 100MHz.} \
+	-rule_id {CDC-50012} \
+	-query_string {To == 'afu_top|afu_intf_inst|protocol_checker_csr|mmio_immediate_frozen_reg'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50012_n6001} \
+	-timestamp {2025-05-06*11:42:15} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for inputs into QPH User Clock Resync Chain.} \
+	-rule_id {CDC-50012} \
+	-query_string {To == 'afu_top|pg_afu.port_gasket|user_clock|qph_user_clk|pll.qph_reconfig_from_pll_resync|resync_chains[0].synchronizer|din_s1'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50012} \
+	-timestamp {2025-05-06*11:44:04} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for paths using PCIE_LINK_CONN control signal.} \
+	-rule_id {CDC-50003} \
+	-query_string {"Control Signal" == 'pcie_wrapper|pcie_ss.top|PCIE_LINK_CONN[0].tx_sb.pipe_tx|cpl_metering|impl|u_hia_dm_st_cplto_sync|req_rd_clk_d1'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {CDC_50003_n6001} \
+	-timestamp {2025-05-06*11:46:03} \
+	-owner {Tamim} \
+	-no_warn
+
+::drc::add_waiver \
+	-description {Waiver for MEM TG writes_in_prog.} \
+	-rule_id {TMC-20017} \
+	-query_string {"Starting node" =~ 'tg_inst|tg_0|gen_avl_mm_driver[0].traffic_gen_inst|writes_in_prog'} \
+	-stages {analysis_final_quartus_sta timing_signoff} \
+	-tag {TMC-20017_n6001} \
+	-timestamp {2025-05-17*21:41:24} \
+	-owner {Tamim} \
+	-no_warn
