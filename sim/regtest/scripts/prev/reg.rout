@@ -1,0 +1,4 @@
+[RegTest Section]
+HAS_SUBTESTS = TRUE
+
+Test passed!

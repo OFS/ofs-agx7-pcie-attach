@@ -1483,7 +1483,7 @@ if __name__ == "__main__":
     stdout_handler.setLevel(logging.INFO)
     #stdout_handler.setLevel(logging.DEBUG)
     stdout_handler.setFormatter(formatter)
-    file_handler = logging.FileHandler('regression.log')
+    file_handler = logging.FileHandler('regression.log', mode='w')
     file_handler.setLevel(logging.INFO)
     #file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(formatter)
@@ -1581,27 +1581,27 @@ if __name__ == "__main__":
     logger.info(f"    FIM Variant detected in sim generation..: {fim_variant}")
     for ddr_family_name in design_includes_ddr:
         if (design_includes_ddr[ddr_family_name] == True):
-            logger.info(f"      Design contains {ddr_family_name}..................:   {ddr_family_name} Included")
+            logger.info(f"      Design contains {ddr_family_name}..................: {ddr_family_name} Included")
     if (design_includes_local_mem):
-        logger.info(f"      Design contains Local Memory..........:   Local Memory Included")
+        logger.info(f"      Design contains Local Memory..........: Local Memory Included")
     else:
-        logger.info(f"      Design contains Local Memory..........:   None")
+        logger.info(f"      Design contains Local Memory..........: None")
     if (design_includes_pmci):
-        logger.info(f"      Design contains PMCI..................:   PMCI Included")
+        logger.info(f"      Design contains PMCI..................: PMCI Included")
     else:
-        logger.info(f"      Design contains PMCI..................:   None")
+        logger.info(f"      Design contains PMCI..................: None")
     if (design_includes_hssi):
-        logger.info(f"      Design contains HSSI..................:   HSSI Included")
+        logger.info(f"      Design contains HSSI..................: HSSI Included")
     else:
-        logger.info(f"      Design contains HSSI..................:   None")
+        logger.info(f"      Design contains HSSI..................: None")
     if (design_includes_userclk):
-        logger.info(f"      Design contains User Clk..................: User Clk Included")
+        logger.info(f"      Design contains User Clk..............: User Clk Included")
     else:
-        logger.info(f"      Design contains User Clk..................:   None")
+        logger.info(f"      Design contains User Clk..............: None")
     if (design_includes_remote_stp):
-        logger.info(f"      Design contains Remote STP..................: Remote STP Included")
+        logger.info(f"      Design contains Remote STP............: Remote STP Included")
     else:
-        logger.info(f"      Design contains Remote STP..................:   None")
+        logger.info(f"      Design contains Remote STP............: None")
     logger.info(f"    Last Sim File Generation Command Invoked: {generation_cmd_line}")
     list_of_tests = create_test_list()
     pmci_problem_list_of_tests = pmci_problem_test_filter()
@@ -1615,8 +1615,8 @@ if __name__ == "__main__":
     total_processes_to_run = len(all_tests)
     if (total_processes_to_run > 0):
         if args.run_regression_locally:
-            logger.info(f"          Beginning Test Regression with {total_processes_to_run} processes.")
-            logger.info(f"          Parallel Running Process Count limited to {args.max_parallel_running_process_count} processes.")
+            logger.info(f"         >>> Beginning Test Regression with {total_processes_to_run} processes.")
+            logger.info(f"         >>> Parallel Running Process Count limited to {args.max_parallel_running_process_count} processes.")
             queue_normal = multiprocessing.Queue()
             #pool_normal = multiprocessing.Pool(processes=args.max_parallel_running_process_count)
             #pool_normal = multiprocessing.Pool(processes=args.max_parallel_running_process_count,process_init,[msg_queue])
