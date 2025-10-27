@@ -30,11 +30,15 @@ echo "cd ${REG_LOCAL_ROOT_DIR_PATH}"
 cd ${REG_LOCAL_ROOT_DIR_PATH}
 echo ""
 echo "Running Regression Test Script: python regress_run.py -g"
+# echo "Running Regression Test Script: python regress_run.py -g -k fme"
+# echo "Running Regression Test Script: python regress_run.py -k fme"
 cd ${REG_LOCAL_REG_PYTHON_DIR_PATH}
 # The below "regress_run.py -k fme" call will not update the simulation libraries and only generates the FME tests.
+# The below "regress_run.py -g -k fme" call *will* update the simulation libraries and only generates the FME tests.
 # This is done for testing and will shorten the run time by several hours.
-# python regress_run.py -g
-python regress_run.py -k fme
+python regress_run.py -g
+# python regress_run.py -k fme
+# python regress_run.py -g -k fme
 echo ""
 echo "Running copy manager script: perl copy_manager.pl"
 cd ${REG_LOCAL_ROOT_DIR_PATH}
@@ -45,5 +49,5 @@ echo 'Running RegTest: reg_exe --farm --title="OFS-Sim-Unit-Test"'
 cd ${REG_LOCAL_ROOT_DIR_PATH}
 reg_reset
 # Use the --localr command for debug purposes and the --farm version for usual regression runs.
-reg_exe --localr
-# reg_exe --farm --title="OFS-Sim-Unit-Test"
+# reg_exe --localr
+reg_exe --farm --title="OFS-Sim-Unit-Test"
