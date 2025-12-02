@@ -1,3 +1,6 @@
+#------------------------------------------------------
+# This is the test list for the N6001 FIM Variant
+#------------------------------------------------------
 TESTNAME=bfm_test
 TESTNAME=csr_test
 TESTNAME=dfh_walker

@@ -13,7 +13,7 @@ my $vcs_comp_filename = "vlog.log";
 my $line;
 my @lines;
 my $extracted_variation_name = "";
-my $tail_line_number = 100;
+my $tail_line_number = 300;
 
 
 reg_get_options (

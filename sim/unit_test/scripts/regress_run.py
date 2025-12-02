@@ -844,19 +844,19 @@ def send_email_report():
         html_data += html_body_text_ender
     if (design_includes_userclk):
         html_data += html_body_text_header
-        html_data += f"    Design contains User Clk..........................:   User Clk Included"
+        html_data += f"    Design contains User Clk......................:   User Clk Included"
         html_data += html_body_text_ender
     else:
         html_data += html_body_text_header
-        html_data += f"    Design contains User Clk..........................:   None"
+        html_data += f"    Design contains User Clk......................:   None"
         html_data += html_body_text_ender
     if (design_includes_remote_stp):
         html_data += html_body_text_header
-        html_data += f"    Design contains Remote STP..........................:   Remote STP Included"
+        html_data += f"    Design contains Remote STP....................:   Remote STP Included"
         html_data += html_body_text_ender
     else:
         html_data += html_body_text_header
-        html_data += f"    Design contains Remote STP..........................:   None"
+        html_data += f"    Design contains Remote STP....................:   None"
         html_data += html_body_text_ender
     html_data += html_body_text_header
     html_data += f"    Last Sim File Generation Command Invoked......: {generation_cmd_line}"

@@ -1,5 +1,6 @@
 #!/usr/bin/env/ perl
 use strict;
+use Env;
 
 my $my_pwd = `pwd`;
 chomp($my_pwd);
@@ -8,7 +9,6 @@ print("My current working directory is: $my_pwd\n");
 
 my @tests;
 my $test;
-my $subtest;
 
 get_ofs_sim_test_list();
 
@@ -29,6 +29,10 @@ sub get_ofs_sim_test_list {
    my $duplicate_test_number = 0;
    my $tests_not_found_number = 0;
    my $skipped_test_number = 0;
+
+   print ("\n\n");  # Give a little space in the information for readability.
+   print (">>> Variant: $FIM_VARIANT_TARGET");
+
    print ("\n\n");  # Give a little space in the information for readability.
    print(">>> Scanning test list file: $test_list_file...\n");
    open(TESTLIST,$test_list_file) || die "Cannot open file: $test_list_file -- $!";
