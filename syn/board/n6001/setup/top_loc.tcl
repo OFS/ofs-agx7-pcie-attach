@@ -97,6 +97,14 @@ set_location_assignment PIN_BP7  -to hssi_if[4].rx_p
 set_location_assignment PIN_BR10 -to hssi_if[5].rx_p
 set_location_assignment PIN_BV7  -to hssi_if[6].rx_p
 set_location_assignment PIN_BW10 -to hssi_if[7].rx_p
+set_location_assignment PIN_BE8  -to hssi_if[0].rx_n
+set_location_assignment PIN_BH11 -to hssi_if[1].rx_n
+set_location_assignment PIN_BJ8  -to hssi_if[2].rx_n
+set_location_assignment PIN_BM11 -to hssi_if[3].rx_n
+set_location_assignment PIN_BN8  -to hssi_if[4].rx_n
+set_location_assignment PIN_BT11 -to hssi_if[5].rx_n
+set_location_assignment PIN_BU8  -to hssi_if[6].rx_n
+set_location_assignment PIN_BY11 -to hssi_if[7].rx_n
 
 set_location_assignment PIN_AK13 -to qsfp_ref_clk
 set_location_assignment PIN_AH13 -to "qsfp_ref_clk(n)"
@@ -128,6 +136,14 @@ set_location_assignment PIN_BP1 -to hssi_if[4].tx_p
 set_location_assignment PIN_BR4 -to hssi_if[5].tx_p
 set_location_assignment PIN_BV1 -to hssi_if[6].tx_p
 set_location_assignment PIN_BW4 -to hssi_if[7].tx_p
+set_location_assignment PIN_BE2 -to hssi_if[0].tx_n
+set_location_assignment PIN_BH5 -to hssi_if[1].tx_n
+set_location_assignment PIN_BJ2 -to hssi_if[2].tx_n
+set_location_assignment PIN_BM5 -to hssi_if[3].tx_n
+set_location_assignment PIN_BN2 -to hssi_if[4].tx_n
+set_location_assignment PIN_BT5 -to hssi_if[5].tx_n
+set_location_assignment PIN_BU2 -to hssi_if[6].tx_n
+set_location_assignment PIN_BY5 -to hssi_if[7].tx_n
 
 set_location_assignment PIN_BP61 -to PCIE_RX_P[0]
 set_location_assignment PIN_BN58 -to PCIE_RX_P[1]
