@@ -268,6 +268,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:name>mem_bg</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
+          <ipxact:vectors>
+            <ipxact:vector>
+              <ipxact:left>0</ipxact:left>
+              <ipxact:right>1</ipxact:right>
+            </ipxact:vector>
+          </ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC_VECTOR</ipxact:typeName>
@@ -292,12 +298,6 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:name>mem_cs_n</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
-          <ipxact:vectors>
-            <ipxact:vector>
-              <ipxact:left>0</ipxact:left>
-              <ipxact:right>1</ipxact:right>
-            </ipxact:vector>
-          </ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC_VECTOR</ipxact:typeName>
@@ -361,7 +361,7 @@ Altera and sold by Altera or its authorized distributors.-->
           <ipxact:vectors>
             <ipxact:vector>
               <ipxact:left>0</ipxact:left>
-              <ipxact:right>3</ipxact:right>
+              <ipxact:right>7</ipxact:right>
             </ipxact:vector>
           </ipxact:vectors>
           <ipxact:wireTypeDefs>
@@ -379,7 +379,7 @@ Altera and sold by Altera or its authorized distributors.-->
           <ipxact:vectors>
             <ipxact:vector>
               <ipxact:left>0</ipxact:left>
-              <ipxact:right>3</ipxact:right>
+              <ipxact:right>7</ipxact:right>
             </ipxact:vector>
           </ipxact:vectors>
           <ipxact:wireTypeDefs>
@@ -397,7 +397,7 @@ Altera and sold by Altera or its authorized distributors.-->
           <ipxact:vectors>
             <ipxact:vector>
               <ipxact:left>0</ipxact:left>
-              <ipxact:right>31</ipxact:right>
+              <ipxact:right>63</ipxact:right>
             </ipxact:vector>
           </ipxact:vectors>
           <ipxact:wireTypeDefs>
@@ -415,7 +415,7 @@ Altera and sold by Altera or its authorized distributors.-->
           <ipxact:vectors>
             <ipxact:vector>
               <ipxact:left>0</ipxact:left>
-              <ipxact:right>3</ipxact:right>
+              <ipxact:right>7</ipxact:right>
             </ipxact:vector>
           </ipxact:vectors>
           <ipxact:wireTypeDefs>
@@ -445,27 +445,27 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="SYS_INFO_DEVICE" type="string">
           <ipxact:name>SYS_INFO_DEVICE</ipxact:name>
           <ipxact:displayName>PARAM_SYS_INFO_DEVICE_NAME</ipxact:displayName>
-          <ipxact:value></ipxact:value>
+          <ipxact:value>AGIB027R29A1E2VR3</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="SYS_INFO_DEVICE_SPEEDGRADE" type="string">
           <ipxact:name>SYS_INFO_DEVICE_SPEEDGRADE</ipxact:name>
           <ipxact:displayName>PARAM_SYS_INFO_DEVICE_SPEEDGRADE_NAME</ipxact:displayName>
-          <ipxact:value></ipxact:value>
+          <ipxact:value>2</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="SYS_INFO_DEVICE_TEMPERATURE_GRADE" type="string">
           <ipxact:name>SYS_INFO_DEVICE_TEMPERATURE_GRADE</ipxact:name>
           <ipxact:displayName>PARAM_SYS_INFO_DEVICE_TEMPERATURE_GRADE_NAME</ipxact:displayName>
-          <ipxact:value></ipxact:value>
+          <ipxact:value>EXTENDED</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="SYS_INFO_DEVICE_POWER_MODEL" type="string">
           <ipxact:name>SYS_INFO_DEVICE_POWER_MODEL</ipxact:name>
           <ipxact:displayName>PARAM_SYS_INFO_DEVICE_POWER_MODEL_NAME</ipxact:displayName>
-          <ipxact:value></ipxact:value>
+          <ipxact:value>STANDARD_POWER</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="SYS_INFO_DEVICE_DIE_REVISIONS" type="string">
           <ipxact:name>SYS_INFO_DEVICE_DIE_REVISIONS</ipxact:name>
           <ipxact:displayName>PARAM_SYS_INFO_DEVICE_DIE_REVISIONS_NAME</ipxact:displayName>
-          <ipxact:value></ipxact:value>
+          <ipxact:value>HSSI_GDR_REVB,HSSI_RNR_REVB,MAIN_FM8_REVA</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="FAMILY_ENUM" type="string">
           <ipxact:name>FAMILY_ENUM</ipxact:name>
@@ -475,12 +475,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="TRAIT_SUPPORTS_VID" type="string">
           <ipxact:name>TRAIT_SUPPORTS_VID</ipxact:name>
           <ipxact:displayName>PARAM_TRAIT_SUPPORTS_VID_NAME</ipxact:displayName>
-          <ipxact:value>0</ipxact:value>
+          <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="TRAIT_IOBANK_REVISION" type="string">
           <ipxact:name>TRAIT_IOBANK_REVISION</ipxact:name>
           <ipxact:displayName>PARAM_TRAIT_IOBANK_REVISION_NAME</ipxact:displayName>
-          <ipxact:value>IO96A_REVB0</ipxact:value>
+          <ipxact:value>IO96A_REVB2</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PROTOCOL_ENUM" type="string">
           <ipxact:name>PROTOCOL_ENUM</ipxact:name>
@@ -505,7 +505,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="SYS_INFO_UNIQUE_ID" type="string">
           <ipxact:name>SYS_INFO_UNIQUE_ID</ipxact:name>
           <ipxact:displayName>PARAM_SYS_INFO_UNIQUE_ID_NAME</ipxact:displayName>
-          <ipxact:value>mem_ss_fm_intf</ipxact:value>
+          <ipxact:value>emif_0_emif_0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PREV_PROTOCOL_ENUM" type="string">
           <ipxact:name>PREV_PROTOCOL_ENUM</ipxact:name>
@@ -515,7 +515,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_FPGA_SPEEDGRADE_GUI" type="string">
           <ipxact:name>PHY_FPGA_SPEEDGRADE_GUI</ipxact:name>
           <ipxact:displayName>Speed grade</ipxact:displayName>
-          <ipxact:value></ipxact:value>
+          <ipxact:value>E2V (ES3) - change device under 'View'-&gt;'Device Family'</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_TARGET_SPEEDGRADE" type="string">
           <ipxact:name>PHY_TARGET_SPEEDGRADE</ipxact:name>
@@ -530,12 +530,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_TARGET_IS_ES2" type="bit">
           <ipxact:name>PHY_TARGET_IS_ES2</ipxact:name>
           <ipxact:displayName>PARAM_PHY_TARGET_IS_ES2_NAME</ipxact:displayName>
-          <ipxact:value>true</ipxact:value>
+          <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_TARGET_IS_ES3" type="bit">
           <ipxact:name>PHY_TARGET_IS_ES3</ipxact:name>
           <ipxact:displayName>PARAM_PHY_TARGET_IS_ES3_NAME</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_TARGET_IS_PRODUCTION" type="bit">
           <ipxact:name>PHY_TARGET_IS_PRODUCTION</ipxact:name>
@@ -555,7 +555,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_CLAMSHELL_EN" type="bit">
           <ipxact:name>PHY_CLAMSHELL_EN</ipxact:name>
           <ipxact:displayName>Use clamshell layout </ipxact:displayName>
-          <ipxact:value>true</ipxact:value>
+          <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_RATE_ENUM" type="string">
           <ipxact:name>PHY_RATE_ENUM</ipxact:name>
@@ -565,12 +565,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_MEM_CLK_FREQ_MHZ" type="real">
           <ipxact:name>PHY_MEM_CLK_FREQ_MHZ</ipxact:name>
           <ipxact:displayName>Memory clock frequency</ipxact:displayName>
-          <ipxact:value>1200.0</ipxact:value>
+          <ipxact:value>1333.333</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_REF_CLK_FREQ_MHZ" type="real">
           <ipxact:name>PHY_REF_CLK_FREQ_MHZ</ipxact:name>
           <ipxact:displayName>PLL reference clock frequency</ipxact:displayName>
-          <ipxact:value>150.0</ipxact:value>
+          <ipxact:value>33.333</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_REF_CLK_JITTER_PS" type="real">
           <ipxact:name>PHY_REF_CLK_JITTER_PS</ipxact:name>
@@ -680,7 +680,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_MIMIC_HPS_EMIF" type="bit">
           <ipxact:name>PHY_MIMIC_HPS_EMIF</ipxact:name>
           <ipxact:displayName>Mimic HPS EMIF</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PLL_ADD_EXTRA_CLKS" type="bit">
           <ipxact:name>PLL_ADD_EXTRA_CLKS</ipxact:name>
@@ -1100,7 +1100,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PLL_VCO_CLK_FREQ_MHZ" type="real">
           <ipxact:name>PLL_VCO_CLK_FREQ_MHZ</ipxact:name>
           <ipxact:displayName>PARAM_PLL_VCO_CLK_FREQ_MHZ_NAME</ipxact:displayName>
-          <ipxact:value>1200.0</ipxact:value>
+          <ipxact:value>1333.333</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PLL_NUM_OF_EXTRA_CLKS" type="int">
           <ipxact:name>PLL_NUM_OF_EXTRA_CLKS</ipxact:name>
@@ -1160,7 +1160,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_5" type="real">
           <ipxact:name>PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_5</ipxact:name>
           <ipxact:displayName>PARAM_PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_5_NAME</ipxact:displayName>
-          <ipxact:value>1200.0</ipxact:value>
+          <ipxact:value>1333.333</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PLL_EXTRA_CLK_ACTUAL_PHASE_PS_5" type="real">
           <ipxact:name>PLL_EXTRA_CLK_ACTUAL_PHASE_PS_5</ipxact:name>
@@ -1170,7 +1170,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_6" type="real">
           <ipxact:name>PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_6</ipxact:name>
           <ipxact:displayName>PARAM_PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_6_NAME</ipxact:displayName>
-          <ipxact:value>1200.0</ipxact:value>
+          <ipxact:value>1333.333</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PLL_EXTRA_CLK_ACTUAL_PHASE_PS_6" type="real">
           <ipxact:name>PLL_EXTRA_CLK_ACTUAL_PHASE_PS_6</ipxact:name>
@@ -1180,7 +1180,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_7" type="real">
           <ipxact:name>PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_7</ipxact:name>
           <ipxact:displayName>PARAM_PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_7_NAME</ipxact:displayName>
-          <ipxact:value>1200.0</ipxact:value>
+          <ipxact:value>1333.333</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PLL_EXTRA_CLK_ACTUAL_PHASE_PS_7" type="real">
           <ipxact:name>PLL_EXTRA_CLK_ACTUAL_PHASE_PS_7</ipxact:name>
@@ -1190,7 +1190,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_8" type="real">
           <ipxact:name>PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_8</ipxact:name>
           <ipxact:displayName>PARAM_PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_8_NAME</ipxact:displayName>
-          <ipxact:value>1200.0</ipxact:value>
+          <ipxact:value>1333.333</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PLL_EXTRA_CLK_ACTUAL_PHASE_PS_8" type="real">
           <ipxact:name>PLL_EXTRA_CLK_ACTUAL_PHASE_PS_8</ipxact:name>
@@ -1480,7 +1480,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_DDR4_USER_CLAMSHELL_EN" type="bit">
           <ipxact:name>PHY_DDR4_USER_CLAMSHELL_EN</ipxact:name>
           <ipxact:displayName>Use clamshell layout </ipxact:displayName>
-          <ipxact:value>true</ipxact:value>
+          <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_DDR4_USER_DLL_CORE_UPDN_EN" type="bit">
           <ipxact:name>PHY_DDR4_USER_DLL_CORE_UPDN_EN</ipxact:name>
@@ -1490,7 +1490,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_DDR4_MEM_CLK_FREQ_MHZ" type="real">
           <ipxact:name>PHY_DDR4_MEM_CLK_FREQ_MHZ</ipxact:name>
           <ipxact:displayName>Memory clock frequency</ipxact:displayName>
-          <ipxact:value>1200.0</ipxact:value>
+          <ipxact:value>1333.333</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_DDR4_DEFAULT_REF_CLK_FREQ" type="bit">
           <ipxact:name>PHY_DDR4_DEFAULT_REF_CLK_FREQ</ipxact:name>
@@ -1500,7 +1500,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_DDR4_USER_REF_CLK_FREQ_MHZ" type="real">
           <ipxact:name>PHY_DDR4_USER_REF_CLK_FREQ_MHZ</ipxact:name>
           <ipxact:displayName>PLL reference clock frequency</ipxact:displayName>
-          <ipxact:value>150.0</ipxact:value>
+          <ipxact:value>33.333</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_DDR4_REF_CLK_JITTER_PS" type="real">
           <ipxact:name>PHY_DDR4_REF_CLK_JITTER_PS</ipxact:name>
@@ -1545,7 +1545,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_DDR4_MIMIC_HPS_EMIF" type="bit">
           <ipxact:name>PHY_DDR4_MIMIC_HPS_EMIF</ipxact:name>
           <ipxact:displayName>Mimic HPS EMIF</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_DDR4_ALLOW_72_DQ_WIDTH" type="bit">
           <ipxact:name>PHY_DDR4_ALLOW_72_DQ_WIDTH</ipxact:name>
@@ -1555,7 +1555,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_DDR4_REF_CLK_FREQ_MHZ" type="real">
           <ipxact:name>PHY_DDR4_REF_CLK_FREQ_MHZ</ipxact:name>
           <ipxact:displayName>PLL reference clock frequency</ipxact:displayName>
-          <ipxact:value>150.0</ipxact:value>
+          <ipxact:value>33.333</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_DDR4_PING_PONG_EN" type="bit">
           <ipxact:name>PHY_DDR4_PING_PONG_EN</ipxact:name>
@@ -1565,7 +1565,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="PHY_DDR4_CLAMSHELL_EN" type="bit">
           <ipxact:name>PHY_DDR4_CLAMSHELL_EN</ipxact:name>
           <ipxact:displayName>Use clamshell layout </ipxact:displayName>
-          <ipxact:value>true</ipxact:value>
+          <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="PHY_DDR4_USER_AC_IO_STD_ENUM" type="string">
           <ipxact:name>PHY_DDR4_USER_AC_IO_STD_ENUM</ipxact:name>
@@ -3310,12 +3310,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_READ_LATENCY" type="real">
           <ipxact:name>MEM_READ_LATENCY</ipxact:name>
           <ipxact:displayName>PARAM_MEM_READ_LATENCY_NAME</ipxact:displayName>
-          <ipxact:value>19.0</ipxact:value>
+          <ipxact:value>21.0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_WRITE_LATENCY" type="int">
           <ipxact:name>MEM_WRITE_LATENCY</ipxact:name>
           <ipxact:displayName>PARAM_MEM_WRITE_LATENCY_NAME</ipxact:displayName>
-          <ipxact:value>12</ipxact:value>
+          <ipxact:value>14</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_BURST_LENGTH" type="int">
           <ipxact:name>MEM_BURST_LENGTH</ipxact:name>
@@ -3355,17 +3355,17 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_TTL_DATA_WIDTH" type="int">
           <ipxact:name>MEM_TTL_DATA_WIDTH</ipxact:name>
           <ipxact:displayName>PARAM_MEM_TTL_DATA_WIDTH_NAME</ipxact:displayName>
-          <ipxact:value>32</ipxact:value>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_TTL_NUM_OF_READ_GROUPS" type="int">
           <ipxact:name>MEM_TTL_NUM_OF_READ_GROUPS</ipxact:name>
           <ipxact:displayName>PARAM_MEM_TTL_NUM_OF_READ_GROUPS_NAME</ipxact:displayName>
-          <ipxact:value>4</ipxact:value>
+          <ipxact:value>8</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_TTL_NUM_OF_WRITE_GROUPS" type="int">
           <ipxact:name>MEM_TTL_NUM_OF_WRITE_GROUPS</ipxact:name>
           <ipxact:displayName>PARAM_MEM_TTL_NUM_OF_WRITE_GROUPS_NAME</ipxact:displayName>
-          <ipxact:value>4</ipxact:value>
+          <ipxact:value>8</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_FORMAT_ENUM" type="string">
           <ipxact:name>MEM_DDR3_FORMAT_ENUM</ipxact:name>
@@ -3675,7 +3675,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR3_R_ODTN_1X1" type="string">
           <ipxact:name>MEM_DDR3_R_ODTN_1X1</ipxact:name>
           <ipxact:displayName>Read Target</ipxact:displayName>
-          <ipxact:value>Rank 0</ipxact:value>
+          <ipxact:value>Rank,0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_R_ODT0_1X1" type="string">
           <ipxact:name>MEM_DDR3_R_ODT0_1X1</ipxact:name>
@@ -3685,7 +3685,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR3_W_ODTN_1X1" type="string">
           <ipxact:name>MEM_DDR3_W_ODTN_1X1</ipxact:name>
           <ipxact:displayName>Write Target</ipxact:displayName>
-          <ipxact:value>Rank 0</ipxact:value>
+          <ipxact:value>Rank,0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_W_ODT0_1X1" type="string">
           <ipxact:name>MEM_DDR3_W_ODT0_1X1</ipxact:name>
@@ -3805,52 +3805,52 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR3_R_DERIVED_ODTN" type="string">
           <ipxact:name>MEM_DDR3_R_DERIVED_ODTN</ipxact:name>
           <ipxact:displayName>Read Target</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_R_DERIVED_ODT0" type="string">
           <ipxact:name>MEM_DDR3_R_DERIVED_ODT0</ipxact:name>
           <ipxact:displayName>ODT0 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_R_DERIVED_ODT1" type="string">
           <ipxact:name>MEM_DDR3_R_DERIVED_ODT1</ipxact:name>
           <ipxact:displayName>ODT1 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_R_DERIVED_ODT2" type="string">
           <ipxact:name>MEM_DDR3_R_DERIVED_ODT2</ipxact:name>
           <ipxact:displayName>ODT2 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_R_DERIVED_ODT3" type="string">
           <ipxact:name>MEM_DDR3_R_DERIVED_ODT3</ipxact:name>
           <ipxact:displayName>ODT3 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_W_DERIVED_ODTN" type="string">
           <ipxact:name>MEM_DDR3_W_DERIVED_ODTN</ipxact:name>
           <ipxact:displayName>Write Target</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_W_DERIVED_ODT0" type="string">
           <ipxact:name>MEM_DDR3_W_DERIVED_ODT0</ipxact:name>
           <ipxact:displayName>ODT0 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_W_DERIVED_ODT1" type="string">
           <ipxact:name>MEM_DDR3_W_DERIVED_ODT1</ipxact:name>
           <ipxact:displayName>ODT1 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_W_DERIVED_ODT2" type="string">
           <ipxact:name>MEM_DDR3_W_DERIVED_ODT2</ipxact:name>
           <ipxact:displayName>ODT2 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_W_DERIVED_ODT3" type="string">
           <ipxact:name>MEM_DDR3_W_DERIVED_ODT3</ipxact:name>
           <ipxact:displayName>ODT3 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR3_SEQ_ODT_TABLE_LO" type="int">
           <ipxact:name>MEM_DDR3_SEQ_ODT_TABLE_LO</ipxact:name>
@@ -4110,7 +4110,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_DQ_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_DQ_WIDTH</ipxact:name>
           <ipxact:displayName>DQ width</ipxact:displayName>
-          <ipxact:value>32</ipxact:value>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_DQ_PER_DQS" type="int">
           <ipxact:name>MEM_DDR4_DQ_PER_DQS</ipxact:name>
@@ -4150,7 +4150,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_ROW_ADDR_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_ROW_ADDR_WIDTH</ipxact:name>
           <ipxact:displayName>Row address width</ipxact:displayName>
-          <ipxact:value>17</ipxact:value>
+          <ipxact:value>16</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_COL_ADDR_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_COL_ADDR_WIDTH</ipxact:name>
@@ -4165,7 +4165,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_BANK_GROUP_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_BANK_GROUP_WIDTH</ipxact:name>
           <ipxact:displayName>Bank group width</ipxact:displayName>
-          <ipxact:value>1</ipxact:value>
+          <ipxact:value>2</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_DM_EN" type="bit">
           <ipxact:name>MEM_DDR4_DM_EN</ipxact:name>
@@ -4180,7 +4180,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_ALERT_N_PLACEMENT_ENUM" type="string">
           <ipxact:name>MEM_DDR4_ALERT_N_PLACEMENT_ENUM</ipxact:name>
           <ipxact:displayName>ALERT# pin placement</ipxact:displayName>
-          <ipxact:value>DDR4_ALERT_N_PLACEMENT_FM_LANE2</ipxact:value>
+          <ipxact:value>DDR4_ALERT_N_PLACEMENT_AUTO</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_ALERT_N_DQS_GROUP" type="int">
           <ipxact:name>MEM_DDR4_ALERT_N_DQS_GROUP</ipxact:name>
@@ -4230,7 +4230,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_TCL" type="int">
           <ipxact:name>MEM_DDR4_TCL</ipxact:name>
           <ipxact:displayName>Memory CAS latency setting</ipxact:displayName>
-          <ipxact:value>19</ipxact:value>
+          <ipxact:value>21</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_RTT_NOM_ENUM" type="string">
           <ipxact:name>MEM_DDR4_RTT_NOM_ENUM</ipxact:name>
@@ -4265,7 +4265,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_WTCL" type="int">
           <ipxact:name>MEM_DDR4_WTCL</ipxact:name>
           <ipxact:displayName>Memory write CAS latency setting</ipxact:displayName>
-          <ipxact:value>12</ipxact:value>
+          <ipxact:value>14</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_WRITE_CRC" type="bit">
           <ipxact:name>MEM_DDR4_WRITE_CRC</ipxact:name>
@@ -4520,12 +4520,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_DQS_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_DQS_WIDTH</ipxact:name>
           <ipxact:displayName>Number of DQS groups</ipxact:displayName>
-          <ipxact:value>4</ipxact:value>
+          <ipxact:value>8</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_CS_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_CS_WIDTH</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_CS_WIDTH_NAME</ipxact:displayName>
-          <ipxact:value>2</ipxact:value>
+          <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_CS_PER_DIMM" type="int">
           <ipxact:name>MEM_DDR4_CS_PER_DIMM</ipxact:name>
@@ -4585,7 +4585,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_VREFDQ_TRAINING_RANGE_DISP" type="string">
           <ipxact:name>MEM_DDR4_VREFDQ_TRAINING_RANGE_DISP</ipxact:name>
           <ipxact:displayName>VrefDQ training range</ipxact:displayName>
-          <ipxact:value>Range 2 - 45% to 77.5%</ipxact:value>
+          <ipxact:value>Range 1 - 60% to 92.5%</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_INTEL_DEFAULT_DRV_STR_ENUM" type="string">
           <ipxact:name>MEM_DDR4_INTEL_DEFAULT_DRV_STR_ENUM</ipxact:name>
@@ -4620,12 +4620,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_INTEL_DEFAULT_RTT_NOM_ENUM_DISP" type="string">
           <ipxact:name>MEM_DDR4_INTEL_DEFAULT_RTT_NOM_ENUM_DISP</ipxact:name>
           <ipxact:displayName>ODT Rtt nominal value</ipxact:displayName>
-          <ipxact:value>RZQ/4 (60 Ohm)</ipxact:value>
+          <ipxact:value>ODT Disabled</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_INTEL_DEFAULT_RTT_PARK_ENUM_DISP" type="string">
           <ipxact:name>MEM_DDR4_INTEL_DEFAULT_RTT_PARK_ENUM_DISP</ipxact:name>
           <ipxact:displayName>RTT PARK</ipxact:displayName>
-          <ipxact:value>Park ODT off</ipxact:value>
+          <ipxact:value>RZQ/4 (60 Ohm)</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_INTEL_DEFAULT_DB_RTT_NOM_ENUM" type="string">
           <ipxact:name>MEM_DDR4_INTEL_DEFAULT_DB_RTT_NOM_ENUM</ipxact:name>
@@ -4670,17 +4670,17 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_TTL_DQS_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_TTL_DQS_WIDTH</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TTL_DQS_WIDTH_NAME</ipxact:displayName>
-          <ipxact:value>4</ipxact:value>
+          <ipxact:value>8</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TTL_DQ_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_TTL_DQ_WIDTH</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TTL_DQ_WIDTH_NAME</ipxact:displayName>
-          <ipxact:value>32</ipxact:value>
+          <ipxact:value>64</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TTL_CS_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_TTL_CS_WIDTH</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TTL_CS_WIDTH_NAME</ipxact:displayName>
-          <ipxact:value>2</ipxact:value>
+          <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TTL_CK_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_TTL_CK_WIDTH</ipxact:name>
@@ -4705,7 +4705,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_TTL_BANK_GROUP_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_TTL_BANK_GROUP_WIDTH</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TTL_BANK_GROUP_WIDTH_NAME</ipxact:displayName>
-          <ipxact:value>1</ipxact:value>
+          <ipxact:value>2</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TTL_CHIP_ID_WIDTH" type="int">
           <ipxact:name>MEM_DDR4_TTL_CHIP_ID_WIDTH</ipxact:name>
@@ -4740,7 +4740,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_MR0" type="int">
           <ipxact:name>MEM_DDR4_MR0</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_MR0_NAME</ipxact:displayName>
-          <ipxact:value>2160</ipxact:value>
+          <ipxact:value>2676</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_MR1" type="int">
           <ipxact:name>MEM_DDR4_MR1</ipxact:name>
@@ -4750,12 +4750,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_MR2" type="int">
           <ipxact:name>MEM_DDR4_MR2</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_MR2_NAME</ipxact:displayName>
-          <ipxact:value>131096</ipxact:value>
+          <ipxact:value>131104</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_MR3" type="int">
           <ipxact:name>MEM_DDR4_MR3</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_MR3_NAME</ipxact:displayName>
-          <ipxact:value>197120</ipxact:value>
+          <ipxact:value>197632</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_MR4" type="int">
           <ipxact:name>MEM_DDR4_MR4</ipxact:name>
@@ -4770,7 +4770,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_MR6" type="int">
           <ipxact:name>MEM_DDR4_MR6</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_MR6_NAME</ipxact:displayName>
-          <ipxact:value>395279</ipxact:value>
+          <ipxact:value>396303</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_RDIMM_CONFIG" type="string">
           <ipxact:name>MEM_DDR4_RDIMM_CONFIG</ipxact:name>
@@ -4785,7 +4785,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_ADDRESS_MIRROR_BITVEC" type="int">
           <ipxact:name>MEM_DDR4_ADDRESS_MIRROR_BITVEC</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_ADDRESS_MIRROR_BITVEC_NAME</ipxact:displayName>
-          <ipxact:value>2</ipxact:value>
+          <ipxact:value>0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_RCD_PARITY_CONTROL_WORD" type="int">
           <ipxact:name>MEM_DDR4_RCD_PARITY_CONTROL_WORD</ipxact:name>
@@ -4805,7 +4805,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_R_ODTN_1X1" type="string">
           <ipxact:name>MEM_DDR4_R_ODTN_1X1</ipxact:name>
           <ipxact:displayName>Read Target</ipxact:displayName>
-          <ipxact:value>Rank 0</ipxact:value>
+          <ipxact:value>Rank,0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_R_ODT0_1X1" type="string">
           <ipxact:name>MEM_DDR4_R_ODT0_1X1</ipxact:name>
@@ -4815,7 +4815,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_W_ODTN_1X1" type="string">
           <ipxact:name>MEM_DDR4_W_ODTN_1X1</ipxact:name>
           <ipxact:displayName>Write Target</ipxact:displayName>
-          <ipxact:value>Rank 0</ipxact:value>
+          <ipxact:value>Rank,0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_W_ODT0_1X1" type="string">
           <ipxact:name>MEM_DDR4_W_ODT0_1X1</ipxact:name>
@@ -4935,27 +4935,27 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_R_DERIVED_ODTN" type="string">
           <ipxact:name>MEM_DDR4_R_DERIVED_ODTN</ipxact:name>
           <ipxact:displayName>Read Target</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>Rank 0,-,-,-</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_R_DERIVED_ODT0" type="string">
           <ipxact:name>MEM_DDR4_R_DERIVED_ODT0</ipxact:name>
           <ipxact:displayName>ODT0 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>(Drive) RZQ/7 (34 Ohm),-,-,-</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_R_DERIVED_ODT1" type="string">
           <ipxact:name>MEM_DDR4_R_DERIVED_ODT1</ipxact:name>
           <ipxact:displayName>ODT1 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>-,-,-,-</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_R_DERIVED_ODT2" type="string">
           <ipxact:name>MEM_DDR4_R_DERIVED_ODT2</ipxact:name>
           <ipxact:displayName>ODT2 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>-,-,-,-</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_R_DERIVED_ODT3" type="string">
           <ipxact:name>MEM_DDR4_R_DERIVED_ODT3</ipxact:name>
           <ipxact:displayName>ODT3 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>-,-,-,-</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_R_DERIVED_BODTN" type="string">
           <ipxact:name>MEM_DDR4_R_DERIVED_BODTN</ipxact:name>
@@ -4975,27 +4975,27 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_W_DERIVED_ODTN" type="string">
           <ipxact:name>MEM_DDR4_W_DERIVED_ODTN</ipxact:name>
           <ipxact:displayName>Write Target</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>Rank 0,-,-,-</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_W_DERIVED_ODT0" type="string">
           <ipxact:name>MEM_DDR4_W_DERIVED_ODT0</ipxact:name>
           <ipxact:displayName>ODT0 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>(Park) RZQ/4 (60 Ohm),-,-,-</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_W_DERIVED_ODT1" type="string">
           <ipxact:name>MEM_DDR4_W_DERIVED_ODT1</ipxact:name>
           <ipxact:displayName>ODT1 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>-,-,-,-</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_W_DERIVED_ODT2" type="string">
           <ipxact:name>MEM_DDR4_W_DERIVED_ODT2</ipxact:name>
           <ipxact:displayName>ODT2 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>-,-,-,-</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_W_DERIVED_ODT3" type="string">
           <ipxact:name>MEM_DDR4_W_DERIVED_ODT3</ipxact:name>
           <ipxact:displayName>ODT3 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>-,-,-,-</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_W_DERIVED_BODTN" type="string">
           <ipxact:name>MEM_DDR4_W_DERIVED_BODTN</ipxact:name>
@@ -5045,42 +5045,42 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_SPEEDBIN_ENUM" type="string">
           <ipxact:name>MEM_DDR4_SPEEDBIN_ENUM</ipxact:name>
           <ipxact:displayName>Speed bin</ipxact:displayName>
-          <ipxact:value>DDR4_SPEEDBIN_2400</ipxact:value>
+          <ipxact:value>DDR4_SPEEDBIN_2666</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TIS_PS" type="int">
           <ipxact:name>MEM_DDR4_TIS_PS</ipxact:name>
           <ipxact:displayName>tIS (base)</ipxact:displayName>
-          <ipxact:value>62</ipxact:value>
+          <ipxact:value>55</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TIS_AC_MV" type="int">
           <ipxact:name>MEM_DDR4_TIS_AC_MV</ipxact:name>
           <ipxact:displayName>tIS (base) AC level</ipxact:displayName>
-          <ipxact:value>100</ipxact:value>
+          <ipxact:value>90</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TIH_PS" type="int">
           <ipxact:name>MEM_DDR4_TIH_PS</ipxact:name>
           <ipxact:displayName>tIH (base)</ipxact:displayName>
-          <ipxact:value>87</ipxact:value>
+          <ipxact:value>80</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TIH_DC_MV" type="int">
           <ipxact:name>MEM_DDR4_TIH_DC_MV</ipxact:name>
           <ipxact:displayName>tIH (base) DC level</ipxact:displayName>
-          <ipxact:value>75</ipxact:value>
+          <ipxact:value>65</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TDIVW_TOTAL_UI" type="real">
           <ipxact:name>MEM_DDR4_TDIVW_TOTAL_UI</ipxact:name>
           <ipxact:displayName>TdiVW_total</ipxact:displayName>
-          <ipxact:value>0.2</ipxact:value>
+          <ipxact:value>0.22</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_VDIVW_TOTAL" type="int">
           <ipxact:name>MEM_DDR4_VDIVW_TOTAL</ipxact:name>
           <ipxact:displayName>VdiVW_total</ipxact:displayName>
-          <ipxact:value>130</ipxact:value>
+          <ipxact:value>120</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TDQSQ_UI" type="real">
           <ipxact:name>MEM_DDR4_TDQSQ_UI</ipxact:name>
           <ipxact:displayName>tDQSQ</ipxact:displayName>
-          <ipxact:value>0.17</ipxact:value>
+          <ipxact:value>0.18</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TQH_UI" type="real">
           <ipxact:name>MEM_DDR4_TQH_UI</ipxact:name>
@@ -5095,7 +5095,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_TDQSCK_PS" type="int">
           <ipxact:name>MEM_DDR4_TDQSCK_PS</ipxact:name>
           <ipxact:displayName>tDQSCK</ipxact:displayName>
-          <ipxact:value>175</ipxact:value>
+          <ipxact:value>170</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TDQSS_CYC" type="real">
           <ipxact:name>MEM_DDR4_TDQSS_CYC</ipxact:name>
@@ -5145,12 +5145,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_TRCD_NS" type="real">
           <ipxact:name>MEM_DDR4_TRCD_NS</ipxact:name>
           <ipxact:displayName>tRCD</ipxact:displayName>
-          <ipxact:value>13.32</ipxact:value>
+          <ipxact:value>13.5</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TRP_NS" type="real">
           <ipxact:name>MEM_DDR4_TRP_NS</ipxact:name>
           <ipxact:displayName>tRP</ipxact:displayName>
-          <ipxact:value>13.32</ipxact:value>
+          <ipxact:value>13.5</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TREFI_US" type="real">
           <ipxact:name>MEM_DDR4_TREFI_US</ipxact:name>
@@ -5170,12 +5170,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_TWTR_L_CYC" type="int">
           <ipxact:name>MEM_DDR4_TWTR_L_CYC</ipxact:name>
           <ipxact:displayName>tWTR_L</ipxact:displayName>
-          <ipxact:value>9</ipxact:value>
+          <ipxact:value>10</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TWTR_S_CYC" type="int">
           <ipxact:name>MEM_DDR4_TWTR_S_CYC</ipxact:name>
           <ipxact:displayName>tWTR_S</ipxact:displayName>
-          <ipxact:value>3</ipxact:value>
+          <ipxact:value>4</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TFAW_NS" type="real">
           <ipxact:name>MEM_DDR4_TFAW_NS</ipxact:name>
@@ -5195,7 +5195,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_TCCD_L_CYC" type="int">
           <ipxact:name>MEM_DDR4_TCCD_L_CYC</ipxact:name>
           <ipxact:displayName>tCCD_L</ipxact:displayName>
-          <ipxact:value>6</ipxact:value>
+          <ipxact:value>7</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TCCD_S_CYC" type="int">
           <ipxact:name>MEM_DDR4_TCCD_S_CYC</ipxact:name>
@@ -5205,7 +5205,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_TRFC_DLR_NS" type="real">
           <ipxact:name>MEM_DDR4_TRFC_DLR_NS</ipxact:name>
           <ipxact:displayName>tRFC_dlr</ipxact:displayName>
-          <ipxact:value>90.0</ipxact:value>
+          <ipxact:value>190.0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TFAW_DLR_CYC" type="int">
           <ipxact:name>MEM_DDR4_TFAW_DLR_CYC</ipxact:name>
@@ -5235,7 +5235,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_TINIT_CK" type="int">
           <ipxact:name>MEM_DDR4_TINIT_CK</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TINIT_CK_NAME</ipxact:displayName>
-          <ipxact:value>600000</ipxact:value>
+          <ipxact:value>666667</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TDQSCK_DERV_PS" type="int">
           <ipxact:name>MEM_DDR4_TDQSCK_DERV_PS</ipxact:name>
@@ -5260,52 +5260,52 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDR4_TRAS_CYC" type="int">
           <ipxact:name>MEM_DDR4_TRAS_CYC</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TRAS_CYC_NAME</ipxact:displayName>
-          <ipxact:value>39</ipxact:value>
+          <ipxact:value>43</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TRCD_CYC" type="int">
           <ipxact:name>MEM_DDR4_TRCD_CYC</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TRCD_CYC_NAME</ipxact:displayName>
-          <ipxact:value>16</ipxact:value>
+          <ipxact:value>18</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TRP_CYC" type="int">
           <ipxact:name>MEM_DDR4_TRP_CYC</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TRP_CYC_NAME</ipxact:displayName>
-          <ipxact:value>16</ipxact:value>
+          <ipxact:value>18</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TRFC_CYC" type="int">
           <ipxact:name>MEM_DDR4_TRFC_CYC</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TRFC_CYC_NAME</ipxact:displayName>
-          <ipxact:value>660</ipxact:value>
+          <ipxact:value>734</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TWR_CYC" type="int">
           <ipxact:name>MEM_DDR4_TWR_CYC</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TWR_CYC_NAME</ipxact:displayName>
-          <ipxact:value>18</ipxact:value>
+          <ipxact:value>20</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TRTP_CYC" type="int">
           <ipxact:name>MEM_DDR4_TRTP_CYC</ipxact:name>
           <ipxact:displayName>tRTP</ipxact:displayName>
-          <ipxact:value>9</ipxact:value>
+          <ipxact:value>10</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TFAW_CYC" type="int">
           <ipxact:name>MEM_DDR4_TFAW_CYC</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TFAW_CYC_NAME</ipxact:displayName>
-          <ipxact:value>36</ipxact:value>
+          <ipxact:value>40</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TREFI_CYC" type="int">
           <ipxact:name>MEM_DDR4_TREFI_CYC</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TREFI_CYC_NAME</ipxact:displayName>
-          <ipxact:value>9360</ipxact:value>
+          <ipxact:value>10400</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_WRITE_CMD_LATENCY" type="int">
           <ipxact:name>MEM_DDR4_WRITE_CMD_LATENCY</ipxact:name>
           <ipxact:displayName>Write CMD latency for CRC/DM enable</ipxact:displayName>
-          <ipxact:value>5</ipxact:value>
+          <ipxact:value>6</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_TRFC_DLR_CYC" type="int">
           <ipxact:name>MEM_DDR4_TRFC_DLR_CYC</ipxact:name>
           <ipxact:displayName>PARAM_MEM_DDR4_TRFC_DLR_CYC_NAME</ipxact:displayName>
-          <ipxact:value>108</ipxact:value>
+          <ipxact:value>254</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDR4_CFG_GEN_SBE" type="bit">
           <ipxact:name>MEM_DDR4_CFG_GEN_SBE</ipxact:name>
@@ -6190,7 +6190,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_LPDDR3_R_ODTN_1X1" type="string">
           <ipxact:name>MEM_LPDDR3_R_ODTN_1X1</ipxact:name>
           <ipxact:displayName>Read Target</ipxact:displayName>
-          <ipxact:value>Rank 0</ipxact:value>
+          <ipxact:value>Rank,0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_R_ODT0_1X1" type="string">
           <ipxact:name>MEM_LPDDR3_R_ODT0_1X1</ipxact:name>
@@ -6200,7 +6200,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_LPDDR3_W_ODTN_1X1" type="string">
           <ipxact:name>MEM_LPDDR3_W_ODTN_1X1</ipxact:name>
           <ipxact:displayName>Write Target</ipxact:displayName>
-          <ipxact:value>Rank 0</ipxact:value>
+          <ipxact:value>Rank,0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_W_ODT0_1X1" type="string">
           <ipxact:name>MEM_LPDDR3_W_ODT0_1X1</ipxact:name>
@@ -6290,52 +6290,52 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_LPDDR3_R_DERIVED_ODTN" type="string">
           <ipxact:name>MEM_LPDDR3_R_DERIVED_ODTN</ipxact:name>
           <ipxact:displayName>Read Target</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_R_DERIVED_ODT0" type="string">
           <ipxact:name>MEM_LPDDR3_R_DERIVED_ODT0</ipxact:name>
           <ipxact:displayName>ODT0 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_R_DERIVED_ODT1" type="string">
           <ipxact:name>MEM_LPDDR3_R_DERIVED_ODT1</ipxact:name>
           <ipxact:displayName>ODT1 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_R_DERIVED_ODT2" type="string">
           <ipxact:name>MEM_LPDDR3_R_DERIVED_ODT2</ipxact:name>
           <ipxact:displayName>ODT2 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_R_DERIVED_ODT3" type="string">
           <ipxact:name>MEM_LPDDR3_R_DERIVED_ODT3</ipxact:name>
           <ipxact:displayName>ODT3 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_W_DERIVED_ODTN" type="string">
           <ipxact:name>MEM_LPDDR3_W_DERIVED_ODTN</ipxact:name>
           <ipxact:displayName>Write Target</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_W_DERIVED_ODT0" type="string">
           <ipxact:name>MEM_LPDDR3_W_DERIVED_ODT0</ipxact:name>
           <ipxact:displayName>ODT0 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_W_DERIVED_ODT1" type="string">
           <ipxact:name>MEM_LPDDR3_W_DERIVED_ODT1</ipxact:name>
           <ipxact:displayName>ODT1 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_W_DERIVED_ODT2" type="string">
           <ipxact:name>MEM_LPDDR3_W_DERIVED_ODT2</ipxact:name>
           <ipxact:displayName>ODT2 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_W_DERIVED_ODT3" type="string">
           <ipxact:name>MEM_LPDDR3_W_DERIVED_ODT3</ipxact:name>
           <ipxact:displayName>ODT3 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_LPDDR3_SEQ_ODT_TABLE_LO" type="int">
           <ipxact:name>MEM_LPDDR3_SEQ_ODT_TABLE_LO</ipxact:name>
@@ -7315,7 +7315,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDRT_R_ODTN_1X1" type="string">
           <ipxact:name>MEM_DDRT_R_ODTN_1X1</ipxact:name>
           <ipxact:displayName>Read Target</ipxact:displayName>
-          <ipxact:value>Rank 0</ipxact:value>
+          <ipxact:value>Rank,0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_R_ODT0_1X1" type="string">
           <ipxact:name>MEM_DDRT_R_ODT0_1X1</ipxact:name>
@@ -7325,7 +7325,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDRT_W_ODTN_1X1" type="string">
           <ipxact:name>MEM_DDRT_W_ODTN_1X1</ipxact:name>
           <ipxact:displayName>Write Target</ipxact:displayName>
-          <ipxact:value>Rank 0</ipxact:value>
+          <ipxact:value>Rank,0</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_W_ODT0_1X1" type="string">
           <ipxact:name>MEM_DDRT_W_ODT0_1X1</ipxact:name>
@@ -7445,27 +7445,27 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDRT_R_DERIVED_ODTN" type="string">
           <ipxact:name>MEM_DDRT_R_DERIVED_ODTN</ipxact:name>
           <ipxact:displayName>Read Target</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_R_DERIVED_ODT0" type="string">
           <ipxact:name>MEM_DDRT_R_DERIVED_ODT0</ipxact:name>
           <ipxact:displayName>ODT0 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_R_DERIVED_ODT1" type="string">
           <ipxact:name>MEM_DDRT_R_DERIVED_ODT1</ipxact:name>
           <ipxact:displayName>ODT1 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_R_DERIVED_ODT2" type="string">
           <ipxact:name>MEM_DDRT_R_DERIVED_ODT2</ipxact:name>
           <ipxact:displayName>ODT2 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_R_DERIVED_ODT3" type="string">
           <ipxact:name>MEM_DDRT_R_DERIVED_ODT3</ipxact:name>
           <ipxact:displayName>ODT3 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_R_DERIVED_BODTN" type="string">
           <ipxact:name>MEM_DDRT_R_DERIVED_BODTN</ipxact:name>
@@ -7485,27 +7485,27 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="MEM_DDRT_W_DERIVED_ODTN" type="string">
           <ipxact:name>MEM_DDRT_W_DERIVED_ODTN</ipxact:name>
           <ipxact:displayName>Write Target</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_W_DERIVED_ODT0" type="string">
           <ipxact:name>MEM_DDRT_W_DERIVED_ODT0</ipxact:name>
           <ipxact:displayName>ODT0 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_W_DERIVED_ODT1" type="string">
           <ipxact:name>MEM_DDRT_W_DERIVED_ODT1</ipxact:name>
           <ipxact:displayName>ODT1 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_W_DERIVED_ODT2" type="string">
           <ipxact:name>MEM_DDRT_W_DERIVED_ODT2</ipxact:name>
           <ipxact:displayName>ODT2 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_W_DERIVED_ODT3" type="string">
           <ipxact:name>MEM_DDRT_W_DERIVED_ODT3</ipxact:name>
           <ipxact:displayName>ODT3 Value</ipxact:displayName>
-          <ipxact:value>,,</ipxact:value>
+          <ipxact:value>,</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="MEM_DDRT_W_DERIVED_BODTN" type="string">
           <ipxact:name>MEM_DDRT_W_DERIVED_BODTN</ipxact:name>
@@ -8120,7 +8120,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="BOARD_DDR4_IS_SKEW_WITHIN_DQS_DESKEWED" type="bit">
           <ipxact:name>BOARD_DDR4_IS_SKEW_WITHIN_DQS_DESKEWED</ipxact:name>
           <ipxact:displayName>Package deskewed with board layout (DQS group)</ipxact:displayName>
-          <ipxact:value>true</ipxact:value>
+          <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="BOARD_DDR4_BRD_SKEW_WITHIN_DQS_NS" type="real">
           <ipxact:name>BOARD_DDR4_BRD_SKEW_WITHIN_DQS_NS</ipxact:name>
@@ -8245,7 +8245,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="BOARD_DDR4_SKEW_WITHIN_DQS_NS" type="real">
           <ipxact:name>BOARD_DDR4_SKEW_WITHIN_DQS_NS</ipxact:name>
           <ipxact:displayName>PARAM_BOARD_DDR4_SKEW_WITHIN_DQS_NS_NAME</ipxact:displayName>
-          <ipxact:value>0.02</ipxact:value>
+          <ipxact:value>0.12000000000000001</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="BOARD_DDR4_SKEW_WITHIN_AC_NS" type="real">
           <ipxact:name>BOARD_DDR4_SKEW_WITHIN_AC_NS</ipxact:name>
@@ -9255,7 +9255,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="CTRL_MMR_EN" type="bit">
           <ipxact:name>CTRL_MMR_EN</ipxact:name>
           <ipxact:displayName>PARAM_CTRL_MMR_EN_NAME</ipxact:displayName>
-          <ipxact:value>true</ipxact:value>
+          <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="CTRL_AUTO_PRECHARGE_EN" type="bit">
           <ipxact:name>CTRL_AUTO_PRECHARGE_EN</ipxact:name>
@@ -9460,7 +9460,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="CTRL_DDR4_MMR_EN" type="bit">
           <ipxact:name>CTRL_DDR4_MMR_EN</ipxact:name>
           <ipxact:displayName>Enable Memory-Mapped Configuration and Status Register (MMR) Interface</ipxact:displayName>
-          <ipxact:value>true</ipxact:value>
+          <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="CTRL_DDR4_MAJOR_MODE_EN" type="bit">
           <ipxact:name>CTRL_DDR4_MAJOR_MODE_EN</ipxact:name>
@@ -10045,12 +10045,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="DIAG_EXPORT_PLL_REF_CLK_OUT" type="bit">
           <ipxact:name>DIAG_EXPORT_PLL_REF_CLK_OUT</ipxact:name>
           <ipxact:displayName>PARAM_DIAG_EXPORT_PLL_REF_CLK_OUT_NAME</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_EXPORT_PLL_LOCKED" type="bit">
           <ipxact:name>DIAG_EXPORT_PLL_LOCKED</ipxact:name>
           <ipxact:displayName>Export PLL lock signal</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_HMC_HRC" type="string">
           <ipxact:name>DIAG_HMC_HRC</ipxact:name>
@@ -10075,7 +10075,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="DIAG_EXPORT_SEQ_AVALON_SLAVE" type="string">
           <ipxact:name>DIAG_EXPORT_SEQ_AVALON_SLAVE</ipxact:name>
           <ipxact:displayName>Quartus Prime EMIF Debug Toolkit/On-Chip Debug Port</ipxact:displayName>
-          <ipxact:value></ipxact:value>
+          <ipxact:value>CAL_DEBUG_EXPORT_MODE_DISABLED</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_EXPORT_SEQ_AVALON_MASTER" type="bit">
           <ipxact:name>DIAG_EXPORT_SEQ_AVALON_MASTER</ipxact:name>
@@ -10085,7 +10085,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="DIAG_EXPORT_SEQ_AVALON_HEAD_OF_CHAIN" type="bit">
           <ipxact:name>DIAG_EXPORT_SEQ_AVALON_HEAD_OF_CHAIN</ipxact:name>
           <ipxact:displayName>First EMIF Instance in the Avalon Chain</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_EX_DESIGN_NUM_OF_SLAVES" type="int">
           <ipxact:name>DIAG_EX_DESIGN_NUM_OF_SLAVES</ipxact:name>
@@ -10170,7 +10170,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="DIAG_SIM_VERBOSE_LEVEL" type="int">
           <ipxact:name>DIAG_SIM_VERBOSE_LEVEL</ipxact:name>
           <ipxact:displayName>PARAM_DIAG_SIM_VERBOSE_LEVEL_NAME</ipxact:displayName>
-          <ipxact:value>0</ipxact:value>
+          <ipxact:value>5</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_FAST_SIM" type="bit">
           <ipxact:name>DIAG_FAST_SIM</ipxact:name>
@@ -10185,7 +10185,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="DIAG_TG2_TEST_DURATION" type="string">
           <ipxact:name>DIAG_TG2_TEST_DURATION</ipxact:name>
           <ipxact:displayName>TG2 default traffic duration</ipxact:displayName>
-          <ipxact:value></ipxact:value>
+          <ipxact:value>SHORT</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_USE_TG_HBM" type="bit">
           <ipxact:name>DIAG_USE_TG_HBM</ipxact:name>
@@ -10195,17 +10195,17 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="DIAG_EXPORT_TG_CFG_AVALON_SLAVE" type="string">
           <ipxact:name>DIAG_EXPORT_TG_CFG_AVALON_SLAVE</ipxact:name>
           <ipxact:displayName>TG2 Configuration Interface Mode</ipxact:displayName>
-          <ipxact:value></ipxact:value>
+          <ipxact:value>TG_CFG_AMM_EXPORT_MODE_JTAG</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_ENABLE_DEFAULT_MODE" type="bit">
           <ipxact:name>DIAG_ENABLE_DEFAULT_MODE</ipxact:name>
           <ipxact:displayName>Enable default traffic pattern (pattern configured during compile-time)</ipxact:displayName>
-          <ipxact:value>true</ipxact:value>
+          <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_ENABLE_USER_MODE" type="bit">
           <ipxact:name>DIAG_ENABLE_USER_MODE</ipxact:name>
           <ipxact:displayName>Enable user-configured traffic pattern (pattern configured during run-time)</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_ENABLE_SOFT_M20K" type="bit">
           <ipxact:name>DIAG_ENABLE_SOFT_M20K</ipxact:name>
@@ -10380,12 +10380,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="DIAG_DDR3_CA_LEVEL_EN" type="bit">
           <ipxact:name>DIAG_DDR3_CA_LEVEL_EN</ipxact:name>
           <ipxact:displayName>Enable address/command leveling calibration</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_DDR3_CA_DESKEW_EN" type="bit">
           <ipxact:name>DIAG_DDR3_CA_DESKEW_EN</ipxact:name>
           <ipxact:displayName>Enable address/command deskew calibration</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_DDR3_CAL_ADDR0" type="int">
           <ipxact:name>DIAG_DDR3_CAL_ADDR0</ipxact:name>
@@ -10495,12 +10495,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="DIAG_DDR4_ENABLE_DEFAULT_MODE" type="bit">
           <ipxact:name>DIAG_DDR4_ENABLE_DEFAULT_MODE</ipxact:name>
           <ipxact:displayName>Enable default traffic pattern (pattern configured during compile-time)</ipxact:displayName>
-          <ipxact:value>true</ipxact:value>
+          <ipxact:value>false</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_DDR4_ENABLE_USER_MODE" type="bit">
           <ipxact:name>DIAG_DDR4_ENABLE_USER_MODE</ipxact:name>
           <ipxact:displayName>Enable user-configured traffic pattern (pattern configured during run-time)</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_DDR4_EXPORT_TG_CFG_AVALON_SLAVE" type="string">
           <ipxact:name>DIAG_DDR4_EXPORT_TG_CFG_AVALON_SLAVE</ipxact:name>
@@ -10555,7 +10555,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="DIAG_DDR4_SIM_VERBOSE" type="bit">
           <ipxact:name>DIAG_DDR4_SIM_VERBOSE</ipxact:name>
           <ipxact:displayName>Show verbose simulation debug messages</ipxact:displayName>
-          <ipxact:value>false</ipxact:value>
+          <ipxact:value>true</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="DIAG_DDR4_SKIP_CA_LEVEL" type="bit">
           <ipxact:name>DIAG_DDR4_SKIP_CA_LEVEL</ipxact:name>
@@ -12150,12 +12150,12 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="AUTO_DEVICE" type="string">
           <ipxact:name>AUTO_DEVICE</ipxact:name>
           <ipxact:displayName>Auto DEVICE</ipxact:displayName>
-          <ipxact:value>AGFB014R24A2E2V</ipxact:value>
+          <ipxact:value>AGIB027R29A1E1VB</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="AUTO_DEVICE_SPEEDGRADE" type="string">
           <ipxact:name>AUTO_DEVICE_SPEEDGRADE</ipxact:name>
           <ipxact:displayName>Auto DEVICE_SPEEDGRADE</ipxact:displayName>
-          <ipxact:value>2</ipxact:value>
+          <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="AUTO_BOARD" type="string">
           <ipxact:name>AUTO_BOARD</ipxact:name>
@@ -12174,7 +12174,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="device" type="string">
           <ipxact:name>device</ipxact:name>
           <ipxact:displayName>Device</ipxact:displayName>
-          <ipxact:value>AGFB014R24A2E2V</ipxact:value>
+          <ipxact:value>AGIB027R29A1E1VB</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="deviceFamily" type="string">
           <ipxact:name>deviceFamily</ipxact:name>
@@ -12184,7 +12184,7 @@ Altera and sold by Altera or its authorized distributors.-->
         <ipxact:parameter parameterId="deviceSpeedGrade" type="string">
           <ipxact:name>deviceSpeedGrade</ipxact:name>
           <ipxact:displayName>Device Speed Grade</ipxact:displayName>
-          <ipxact:value>2</ipxact:value>
+          <ipxact:value>1</ipxact:value>
         </ipxact:parameter>
         <ipxact:parameter parameterId="generationId" type="int">
           <ipxact:name>generationId</ipxact:name>
@@ -12271,7 +12271,7 @@ Altera and sold by Altera or its authorized distributors.-->
                     &lt;name&gt;mem_bg&lt;/name&gt;
                     &lt;role&gt;mem_bg&lt;/role&gt;
                     &lt;direction&gt;Input&lt;/direction&gt;
-                    &lt;width&gt;1&lt;/width&gt;
+                    &lt;width&gt;2&lt;/width&gt;
                     &lt;lowerBound&gt;0&lt;/lowerBound&gt;
                     &lt;vhdlType&gt;STD_LOGIC_VECTOR&lt;/vhdlType&gt;
                     &lt;terminationValue&gt;0&lt;/terminationValue&gt;
@@ -12289,7 +12289,7 @@ Altera and sold by Altera or its authorized distributors.-->
                     &lt;name&gt;mem_cs_n&lt;/name&gt;
                     &lt;role&gt;mem_cs_n&lt;/role&gt;
                     &lt;direction&gt;Input&lt;/direction&gt;
-                    &lt;width&gt;2&lt;/width&gt;
+                    &lt;width&gt;1&lt;/width&gt;
                     &lt;lowerBound&gt;0&lt;/lowerBound&gt;
                     &lt;vhdlType&gt;STD_LOGIC_VECTOR&lt;/vhdlType&gt;
                     &lt;terminationValue&gt;0&lt;/terminationValue&gt;
@@ -12334,7 +12334,7 @@ Altera and sold by Altera or its authorized distributors.-->
                     &lt;name&gt;mem_dqs&lt;/name&gt;
                     &lt;role&gt;mem_dqs&lt;/role&gt;
                     &lt;direction&gt;Bidir&lt;/direction&gt;
-                    &lt;width&gt;4&lt;/width&gt;
+                    &lt;width&gt;8&lt;/width&gt;
                     &lt;lowerBound&gt;0&lt;/lowerBound&gt;
                     &lt;vhdlType&gt;STD_LOGIC_VECTOR&lt;/vhdlType&gt;
                     &lt;terminationValue&gt;0&lt;/terminationValue&gt;
@@ -12343,7 +12343,7 @@ Altera and sold by Altera or its authorized distributors.-->
                     &lt;name&gt;mem_dqs_n&lt;/name&gt;
                     &lt;role&gt;mem_dqs_n&lt;/role&gt;
                     &lt;direction&gt;Bidir&lt;/direction&gt;
-                    &lt;width&gt;4&lt;/width&gt;
+                    &lt;width&gt;8&lt;/width&gt;
                     &lt;lowerBound&gt;0&lt;/lowerBound&gt;
                     &lt;vhdlType&gt;STD_LOGIC_VECTOR&lt;/vhdlType&gt;
                     &lt;terminationValue&gt;0&lt;/terminationValue&gt;
@@ -12352,7 +12352,7 @@ Altera and sold by Altera or its authorized distributors.-->
                     &lt;name&gt;mem_dq&lt;/name&gt;
                     &lt;role&gt;mem_dq&lt;/role&gt;
                     &lt;direction&gt;Bidir&lt;/direction&gt;
-                    &lt;width&gt;32&lt;/width&gt;
+                    &lt;width&gt;64&lt;/width&gt;
                     &lt;lowerBound&gt;0&lt;/lowerBound&gt;
                     &lt;vhdlType&gt;STD_LOGIC_VECTOR&lt;/vhdlType&gt;
                     &lt;terminationValue&gt;0&lt;/terminationValue&gt;
@@ -12361,7 +12361,7 @@ Altera and sold by Altera or its authorized distributors.-->
                     &lt;name&gt;mem_dbi_n&lt;/name&gt;
                     &lt;role&gt;mem_dbi_n&lt;/role&gt;
                     &lt;direction&gt;Bidir&lt;/direction&gt;
-                    &lt;width&gt;4&lt;/width&gt;
+                    &lt;width&gt;8&lt;/width&gt;
                     &lt;lowerBound&gt;0&lt;/lowerBound&gt;
                     &lt;vhdlType&gt;STD_LOGIC_VECTOR&lt;/vhdlType&gt;
                     &lt;terminationValue&gt;0&lt;/terminationValue&gt;
