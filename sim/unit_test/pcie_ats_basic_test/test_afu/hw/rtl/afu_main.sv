@@ -108,6 +108,7 @@ module afu_main
    `else
      ,ofs_jtag_if.sink           remote_stp_jtag_if
    `endif
+     ,input pr_freeze_to_afu     // optional for pr_freeze usage in afu   
    );
 
     //----------------------------------------------
